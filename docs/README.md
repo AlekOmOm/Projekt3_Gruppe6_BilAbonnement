@@ -14,6 +14,6 @@ Hello, this is the `README.md` for the Bil Abonnement system.
 
 &nbsp;
 
-Inspirational image of Artifact relationships:
+Inspirational image
 
 ![Home Screen Image](../src/main/resources/static/images/home_screen_car.png)
