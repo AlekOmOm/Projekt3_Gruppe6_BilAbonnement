@@ -45,3 +45,6 @@
 * [References](References.md)
   * [Link to GitHub Repository](https://github.com/example/bilabonnement)
   * [Further Reading and Resources](References.md)
+
+* [gang of 4 - Gruppe 6](https://en.wikipedia.org/wiki/Gang_of_Four)
+[]: # (END)
