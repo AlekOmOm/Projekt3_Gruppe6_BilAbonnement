@@ -26,6 +26,7 @@ public class ModelBil {
     public ModelBil() {
     }
 
+
     // set and get methods for all variables
     public String getVognNummer() {
         return vognNummer;

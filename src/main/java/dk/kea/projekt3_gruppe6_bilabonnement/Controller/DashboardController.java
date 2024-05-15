@@ -1,5 +1,4 @@
-package dk.kea.projekt3_gruppe6_bilabonnement;
-
+package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.ModelBil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
     @GetMapping("/dashboard")
     public String Showdashboard(Model model) {
-        model.addAttribute("bil", bil);
+        model.addAttribute("bil", ModelBil);
         model.addAttribute("alleBiler", alleBiler);
         model.addAttribute("samletIntjening", samletIntjening);
         return "dashboard";
-    }
 
+    }
 }
 
