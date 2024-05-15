@@ -1,6 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 
-public class ModelBil {
+public class Bil {
 
     private String vognNummer;
     private String stelNummer;
@@ -12,7 +12,7 @@ public class ModelBil {
 
    // constructor
 
-    public ModelBil(String vognNummer, String stelNummer, String model, String maerke, String udstyrsNiaveu, int kilometer, String status) {
+    public Bil(String vognNummer, String stelNummer, String model, String maerke, String udstyrsNiaveu, int kilometer, String status) {
         this.vognNummer = vognNummer;
         this.stelNummer = stelNummer;
         this.model = model;
@@ -23,7 +23,7 @@ public class ModelBil {
     }
 
     //empty constructor
-    public ModelBil() {
+    public Bil() {
     }
 
     // set and get methods for all variables
