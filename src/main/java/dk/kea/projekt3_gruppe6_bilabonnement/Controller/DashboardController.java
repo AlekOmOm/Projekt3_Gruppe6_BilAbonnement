@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
         model.addAttribute("alleBiler", alleBiler);
         model.addAttribute("samletIntjening", samletIntjening);
         return "dashboard";
-
     }
 }
 
+// antal udlejede biler - stream alle biler og sorter after status
+// samlet intjening - stream alle leje aftaler og sort efter status og get alle prisoverlag.
