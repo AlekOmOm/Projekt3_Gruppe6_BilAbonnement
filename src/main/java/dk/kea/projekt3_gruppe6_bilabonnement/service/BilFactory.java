@@ -18,15 +18,30 @@ public class BilFactory {
         this.bilConfig = bilConfig;
     }
 
+    // create for each Bil model med empty og fuld instans variabler
     public Bil createCitroenC1() {
         return bilConfig.initializeModelConfig(new CitroenC1());
     }
+
+    public Bil createCitroenC1(String vognNummer, String stelNummer, String udstyrsNiveau, int kilometerKoert, String status) {
+        return bilConfig.initializeModelConfig(new CitroenC1(vognNummer, stelNummer, udstyrsNiveau, kilometerKoert, status));
+    }
+
 
     public Bil createPeugeot108() {
         return bilConfig.initializeModelConfig(new Peugeot108());
     }
 
+    public Bil createPeugeot108(String vognNummer, String stelNummer, String udstyrsNiveau, int kilometerKoert, String status) {
+        return bilConfig.initializeModelConfig(new Peugeot108(vognNummer, stelNummer, udstyrsNiveau, kilometerKoert, status));
+    }
+
+
     public Bil createOpelCorsaCosmo() {
         return bilConfig.initializeModelConfig(new OpelCorsaCosmo());
+    }
+
+    public Bil createOpelCorsaCosmo(String vognNummer, String stelNummer, String udstyrsNiveau, int kilometerKoert, String status) {
+        return bilConfig.initializeModelConfig(new OpelCorsaCosmo(vognNummer, stelNummer, udstyrsNiveau, kilometerKoert, status));
     }
 }

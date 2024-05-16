@@ -54,6 +54,15 @@ public class Bil implements IBil {
         this.status = status;
     }
 
+    public Bil(String vognNummer, String stelNummer, String udstyrsNiveau, int kilometerKoert, String status) {
+
+        this.vognNummer = vognNummer;
+        this.stelNummer = stelNummer;
+        this.udstyrsNiveau = udstyrsNiveau;
+        this.kilometerKoert = kilometerKoert;
+        this.status = status;
+    }
+
     //empty constructor
     public Bil() {
 
