@@ -24,7 +24,7 @@ public class Bil {
     //empty constructor
     public Bil() {
     }
-    
+
     // set and get methods for all variables
     public String getVognNummer() {
         return vognNummer;
@@ -68,4 +68,6 @@ public class Bil {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
 }
