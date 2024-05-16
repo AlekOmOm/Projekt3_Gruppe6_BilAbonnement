@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/headerFooter.css">
-    <link rel="stylesheet" href="/static/LejeInput.css">
+    <link rel="stylesheet" href="../static/headerFooter.css">
+    <link rel="stylesheet" href="../static/LejeInput.css">
 
 
     <title>Leje Input</title>
@@ -22,20 +22,23 @@
     </div>
     <div class="content">
         <div class="inputForm">
-        <h2>L</h2>
+        <h2>Vælg </h2>
         <table>
             <form action="/LejeAftale" method="post">
                 <div class="inputRow">
                     <label for="bil">Bil:</label>
-                    <input type="text" id="bil" name="bil" required>
+                   <!-- <input type="text" id="bil" name="bil" placeholder="Vælg Bil" required> -->
+                    <select id="vælgBil" name="bil" required>
+                        <option value="">Vælg Bil</option>
+                        <option th:each="car : ${cars}" th:value="${car}" th:text="${car}"></option>
+                    </select>
                 </div>
                 <div class="inputRow">
                     <label for="dato">Dato:</label>
                     <input type="date" id="dato" name="dato" required>
                 </div>
 
-
-            <button type="submit" class="button" id="opretLeje">Afslut</button>
+            <button type="submit" class="button" id="opretLeje"> Afslut </button>
         </form>
         </table>
         </div>

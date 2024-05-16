@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/headerFooter.css">
-    <link rel="stylesheet" href="/static/LejeAftale.css">
+    <link rel="stylesheet" href="../static/headerFooter.css">
+    <link rel="stylesheet" href="../static/LejeAftale.css">
     <title>Leje Aftale</title>
+
+
 </head>
 <body>
 <div class="header">
-    <img src="../static/images/img.png" height="37" width="300"/>
+    <img src="../static/images/img.png" height="37" width="300" alt="logo"/>
     <p>BilAbonnement A/S</p>
 </div>
 
@@ -17,7 +19,9 @@
 
 <div class = "content">
     <div class="opretLeje">
-        <button class="button" id="opretLeje" href="/AftaleDetaljer">Opret Leje Aftale</button>
+        <a href="/LejeInput">
+            <button class="button" id="opretLeje">Opret Leje Aftale</button>
+        </a>
     </div>
 
     <div class="archive">

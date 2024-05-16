@@ -35,6 +35,16 @@
     padding: 5px 10px; /* Add padding to the button */
     margin-left: 0; /* Add some space from the left */
 }
+
+#opretLeje{
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+
+}
 /* Archive styles */
 .archive {
     width: 25%; /* Adjust as needed */

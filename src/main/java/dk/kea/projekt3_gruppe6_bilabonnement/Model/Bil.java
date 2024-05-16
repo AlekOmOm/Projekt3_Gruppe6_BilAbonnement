@@ -1,5 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model;
+import javax.persistence.Entity;
 
+@Entity
 public class Bil {
 
     private String vognNummer;
