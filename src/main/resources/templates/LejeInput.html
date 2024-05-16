@@ -22,13 +22,19 @@
     </div>
     <div class="content">
         <div class="inputForm">
-        <h2>Leje Input</h2>
+        <h2>L</h2>
         <table>
             <form action="/LejeAftale" method="post">
-            <label for="bil">Bil:</label>
-            <input type="text" id="bil" name="bil" required>
-            <label for="dato">Dato:</label>
-            <input type="date" id="dato" name="dato" required>
+                <div class="inputRow">
+                    <label for="bil">Bil:</label>
+                    <input type="text" id="bil" name="bil" required>
+                </div>
+                <div class="inputRow">
+                    <label for="dato">Dato:</label>
+                    <input type="date" id="dato" name="dato" required>
+                </div>
+
+
             <button type="submit" class="button" id="opretLeje">Afslut</button>
         </form>
         </table>
