@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/headerFooter.css">
+    <link rel="stylesheet" href="/static/LejeInput.css">
+
+
+    <title>Leje Input</title>
+</head>
+<body>
+    <div class="header">
+        <img src="../static/images/img.png" height="37" width="300" alt="logo"/>
+        <p>BilAbonnement A/S</p>
+    </div>
+    <div>
+        <a href="/LejeAftale" >
+            <button  class="button" id="tilbageButton">Anuller</button>
+        </a>
+    </div>
+    <div class="content">
+        <div class="inputForm">
+        <h2>Leje Input</h2>
+        <table>
+            <form action="/LejeAftale" method="post">
+            <label for="bil">Bil:</label>
+            <input type="text" id="bil" name="bil" required>
+            <label for="dato">Dato:</label>
+            <input type="date" id="dato" name="dato" required>
+            <button type="submit" class="button" id="opretLeje">Afslut</button>
+        </form>
+        </table>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <p>© 2021 Bilabonnement A/S</p>
+    </div>
+</body>
+</html>

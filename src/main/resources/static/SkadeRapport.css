@@ -1,26 +1,17 @@
-
 .content {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
     padding-left: 50px; /* Add more padding to move content to the right */
     margin-left: 20px; /* Add margin to the left */
     width: calc(100% - 70px);
 }
-.button {
-    cursor: pointer;
-    margin-left: 10px;
-}
+
 
 #tilbageButton {
     align-self: flex-start; /* Align to the start of the container */
-    left: 20px;
-    top: 50px;
-    position: fixed;
-    margin-top: 40px; /* Add some space from the top */
-    margin-left: 40px; /* Add some space from the left */
-    width: 100px;
-    height: 25px;
+    margin-top: 10px; /* Add some space from the top */
+    margin-left: 10px; /* Add some space from the left */
 }
 
 #searchInput {
@@ -33,24 +24,35 @@
 /* Search button styles */
 #searchButton {
     padding: 5px 10px; /* Add padding to the button */
-    margin-left: 0; /* Add some space from the left */
+    margin-left: 0px; /* Add some space from the left */
 }
+
+
+/* Table styles */
+table {
+    border-collapse: collapse;
+    width: 500px; /* Set the width of the table */
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+
 /* Archive styles */
 .archive {
-    width: 25%; /* Adjust as needed */
-    height: 500px;
-    background-color: #c4c4c4;
+    width: 20%; /* Adjust as needed */
+    background-color: #f2f2f2;
     padding: 10px;
-    position: relative;
-    left: 20%;
-    top: 130px;
-    overflow: auto; /* Add a scrollbar when the content exceeds the box's height */
+    margin-left: 10px; /* Adjust margin to move the archive */
+    position: relative; /* Add position relative */
+    left: -60px; /* Add negative left offset to counteract the margin */
 }
 .archive h2 {
-    top: 0;
-}
-.archive table {
-    width: 100%; /* Set the width of the table */
+    margin-top: 0;
 }
 .archive ul {
     list-style-type: none;
