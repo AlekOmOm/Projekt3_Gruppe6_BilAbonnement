@@ -9,7 +9,6 @@ import java.util.List;
 @Service
 public class DashboardService {
 
-
     public final BilRepository bilRepository;
     public final LejeAftaleRepository lejeaftaleRepository;
 

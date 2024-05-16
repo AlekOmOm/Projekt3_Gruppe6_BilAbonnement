@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 @Controller
 public class DashboardController {
 
@@ -20,8 +19,6 @@ public class DashboardController {
         model.addAttribute("totalRentalIncome", dashboardService.calculateTotalRentalIncome());
         return "dashboard";
     }
-
-
 }
 
 // antal udlejede biler - stream alle biler og sorter after status
