@@ -3,13 +3,13 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.config.BilConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class Bil implements IBil {
+public class Bil implements IBil {
 
 
     // ------------------- Fields -------------------
 
     //1: Identifikation
-    private long id;
+    private int id;
 
     // 2: Bil model data - 'configuration' data
         // for hver bil model vil disse blive initialiseret fra en konfigurationsklasse, hvor de er sat som konstanter
@@ -44,7 +44,7 @@ public abstract class Bil implements IBil {
     // ------------------- Constructors -------------------
 
     // constructor
-    public Bil(long id, String vognNummer, String stelNummer, String udstyrsNiveau, int kilometerKoert, String status) {
+    public Bil(int id, String vognNummer, String stelNummer, String udstyrsNiveau, int kilometerKoert, String status) {
 
         this.id = id;
         this.vognNummer = vognNummer;
@@ -62,6 +62,9 @@ public abstract class Bil implements IBil {
     // ------------------- interface implementation methods -------------------
     public String getStatus() {
         return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setSomTilgaengelig() {
@@ -85,7 +88,7 @@ public abstract class Bil implements IBil {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
