@@ -36,7 +36,7 @@ class BilConfigTest {
         assertEquals("Benzin", bil.getFuelType());
         assertEquals(99, bil.getCo2Emission());
         assertEquals(20.8, bil.getFuelConsumption());
-        // Add more assertions for other fields
+
     }
 
     @Test
@@ -48,7 +48,7 @@ class BilConfigTest {
         assertEquals("Benzin", bil.getFuelType());
         assertEquals(111, bil.getCo2Emission());
         assertEquals(20.4, bil.getFuelConsumption());
-        // Add more assertions for other fields
+
     }
 
     @Test
@@ -60,6 +60,6 @@ class BilConfigTest {
         assertEquals("Benzin", bil.getFuelType());
         assertEquals(123, bil.getCo2Emission());
         assertEquals(18.2, bil.getFuelConsumption());
-        // Add more assertions for other fields
+
     }
 }
