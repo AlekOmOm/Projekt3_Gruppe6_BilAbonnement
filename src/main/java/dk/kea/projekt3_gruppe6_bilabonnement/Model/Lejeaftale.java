@@ -2,7 +2,7 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 
 import java.time.LocalDate;
 
-public class ModelLejeaftale {
+public class Lejeaftale {
 
     int lejeaftaleID;
     int brugerID;
@@ -16,7 +16,7 @@ public class ModelLejeaftale {
     LocalDate slutDato;
 
     // constructor lejeaftale
-    public ModelLejeaftale(int lejeaftaleID, int brugerID, String koeretoejsNummer, String abonnementsType, String kundeID, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+    public Lejeaftale(int lejeaftaleID, int brugerID, String koeretoejsNummer, String abonnementsType, String kundeID, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
         this.lejeaftaleID = lejeaftaleID;
         this.brugerID = brugerID;
         this.koeretoejsNummer = koeretoejsNummer;
@@ -30,7 +30,7 @@ public class ModelLejeaftale {
     }
 
     //empty constructor
-    public ModelLejeaftale() {
+    public Lejeaftale() {
     }
 
     // getters and setters

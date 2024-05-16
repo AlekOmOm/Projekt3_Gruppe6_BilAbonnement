@@ -1,19 +1,27 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.ModelBil;
+import dk.kea.projekt3_gruppe6_bilabonnement.Service.DashboardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 @Controller
-    public class DashboardController {
+public class DashboardController {
+
+    private final DashboardService dashboardService;
+
+    public DashboardController(DashboardService dashboardService) {
+        this.dashboardService = dashboardService;
+    }
 
     @GetMapping("/dashboard")
-    public String Showdashboard(Model model) {
-        model.addAttribute("bil", ModelBil);
-        model.addAttribute("alleBiler", alleBiler);
-        model.addAttribute("samletIntjening", samletIntjening);
+    public String showDashboard(Model model) {
+        model.addAttribute("rentedCarsCount", dashboardService.countRentedCars());
+        model.addAttribute("totalRentalIncome", dashboardService.calculateTotalRentalIncome());
         return "dashboard";
     }
+
+
 }
 
 // antal udlejede biler - stream alle biler og sorter after status
