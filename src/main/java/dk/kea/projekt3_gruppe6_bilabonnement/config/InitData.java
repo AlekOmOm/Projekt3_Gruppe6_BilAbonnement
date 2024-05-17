@@ -1,6 +1,5 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.config;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
