@@ -50,11 +50,11 @@ public class LejeAftale {
         this.brugerID = brugerID;
     }
 
-    public String getKoeretoejsNummer() {
+    public String getVognNummer() {
         return koeretoejsNummer;
     }
 
-    public void setKoeretoejsNummer(String koeretoejsNummer) {
+    public void setVognNummer(String koeretoejsNummer) {
         this.koeretoejsNummer = koeretoejsNummer;
     }
 

@@ -1,6 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Service;// DashboardService.java
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Lejeaftale;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repo.BilRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repo.LejeAftaleRepository;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class DashboardService {
 
     public int calculateTotalRentalIncome() {
         List<Bil> rentedCars = bilRepository.findByStatus("Udlejet");
-        List<String> koeretoejsNummer = rentedCars.stream().map(Bil::getVognNummer).toList();
-        return lejeaftaleRepository.findByKoeretoejsNummerIn(koeretoejsNummer).stream().mapToInt(Lejeaftale::getPrisoverslag).sum();
+        List<String> vognNummer = rentedCars.stream().map(Bil::getVognNummer).toList();
+        return lejeaftaleRepository.findByvognNummer(vognNummer).stream().mapToInt(LejeAftale::getPrisoverslag).sum();
     }
 }
