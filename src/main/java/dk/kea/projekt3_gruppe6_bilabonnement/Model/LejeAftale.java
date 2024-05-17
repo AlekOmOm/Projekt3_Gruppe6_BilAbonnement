@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class LejeAftale {
 
-    int lejeaftaleID;
+    int id;
     int brugerID;
     String koeretoejsNummer;
     String abonnementsType;
@@ -16,8 +16,8 @@ public class LejeAftale {
     LocalDate slutDato;
 
     // constructor lejeaftale
-    public LejeAftale(int lejeaftaleID, int brugerID, String koeretoejsNummer, String abonnementsType, String kundeID, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
-        this.lejeaftaleID = lejeaftaleID;
+    public LejeAftale(int id, int brugerID, String koeretoejsNummer, String abonnementsType, String kundeID, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+        this.id = id;
         this.brugerID = brugerID;
         this.koeretoejsNummer = koeretoejsNummer;
         this.abonnementsType = abonnementsType;
@@ -34,12 +34,12 @@ public class LejeAftale {
     }
 
     // getters and setters
-    public int getLejeaftaleID() {
-        return lejeaftaleID;
+    public int getId() {
+        return id;
     }
 
-    public void setLejeaftaleID(int lejeaftaleID) {
-        this.lejeaftaleID = lejeaftaleID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getBrugerID() {

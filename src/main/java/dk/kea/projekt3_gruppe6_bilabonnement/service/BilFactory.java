@@ -8,6 +8,8 @@ import dk.kea.projekt3_gruppe6_bilabonnement.config.BilConfig;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @Component
 public class BilFactory {
 
@@ -16,6 +18,14 @@ public class BilFactory {
     @Autowired
     public BilFactory(BilConfig bilConfig) {
         this.bilConfig = bilConfig;
+    }
+
+    // convert Bil to CitroenC1, Peugeot108, OpelCorsaCosmo with the instance variables
+
+
+
+    public Bil initialize(Bil bil) {
+        return bilConfig.initializeModelConfig(bil);
     }
 
     // create for each Bil model med empty og fuld instans variabler
@@ -43,5 +53,14 @@ public class BilFactory {
 
     public Bil createOpelCorsaCosmo(String vognNummer, String stelNummer, String udstyrsNiveau, int kilometerKoert, String status) {
         return bilConfig.initializeModelConfig(new OpelCorsaCosmo(vognNummer, stelNummer, udstyrsNiveau, kilometerKoert, status));
+    }
+
+    public List<Bil> initializeList(List<Bil> all) {
+
+        for (Bil bil : all) {
+            initialize(bil);
+        }
+        return all;
+
     }
 }

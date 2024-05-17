@@ -1,11 +1,9 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Repository;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.IBil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -63,13 +61,32 @@ public class BilRepository {
         return bil;
     }
 
+    public List<Bil> findAll() {
+        String sql = "SELECT * FROM Bil";
+
+        return template.query(sql, getBilRowMapper());
+    }
+
+    public Bil findBil(int id) {
+        String sql = "SELECT * FROM Bil WHERE ID = ?";
+
+        List<Bil> biler = template.query(sql, getBilRowMapper(), id);
+
+        return biler.isEmpty() ? null : biler.get(0);
+
+    }
 
     public Bil findByVognNummer(String vognNummer) {
 
-
         String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
 
-        List<Bil> biler = template.query(sql, new RowMapper<Bil>() {
+        List<Bil> biler = template.query(sql, getBilRowMapper(), vognNummer);
+
+        return biler.isEmpty() ? null : biler.get(0);
+    }
+
+    private RowMapper<Bil> getBilRowMapper() {
+        return new RowMapper<Bil>() {
             @Override
             public Bil mapRow(ResultSet resultSet, int i) throws SQLException {
                 Bil bil = new Bil();
@@ -83,12 +100,9 @@ public class BilRepository {
                 bil.setStatus(resultSet.getString("Status"));
                 return bil;
             }
-        }, vognNummer);
-
-        return biler.isEmpty() ? null : biler.get(0);
-
-
+        };
     }
+
 }
 
 /*

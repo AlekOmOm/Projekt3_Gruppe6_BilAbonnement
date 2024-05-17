@@ -3,8 +3,7 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.config.BilConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class Bil implements IBil {
-
+public class Bil {
 
     // ------------------- Fields -------------------
 
