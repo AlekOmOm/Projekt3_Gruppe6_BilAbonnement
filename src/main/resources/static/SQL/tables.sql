@@ -34,7 +34,7 @@ CREATE TABLE Lejeaftale (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     BrugerID INT, -- foreign key
-    BilID BIGINT, -- foreign key
+    BilID INT, -- foreign key
     KundeInfoID INT, -- foreign key
 
     Abonnementstype VARCHAR(255) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE Lejeaftale (
 CREATE TABLE SkadeRapport (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     BrugerID INT,
-    BilID BIGINT,
+    BilID INT,
     KundeInfoID INT,
     KilometerKoert INT,
     Reparationsomkostninger INT,

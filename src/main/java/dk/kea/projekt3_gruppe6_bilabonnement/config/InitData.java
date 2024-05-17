@@ -67,7 +67,7 @@ public class InitData implements ApplicationRunner {
             biler.set(i, bilRepository.save(biler.get(i)));
         }
 
-
+        // LejeAftale og SkadeRapport test data kan tilføjes når nødvendigt (kræver repo og klar instantiering)
 
 //        // Create Lejeaftale objects
 //        LejeAftale lejeaftale1 = new Lejeaftale();
