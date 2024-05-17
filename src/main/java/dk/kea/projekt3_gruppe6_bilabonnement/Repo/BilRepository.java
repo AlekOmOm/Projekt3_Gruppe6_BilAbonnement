@@ -1,5 +1,5 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Repo;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,8 +22,8 @@ public class BilRepository {
             bil.setStelNummer(rs.getString("stelNummer"));
             bil.setModel(rs.getString("model"));
             bil.setMaerke(rs.getString("maerke"));
-            bil.setUdstyrsNiaveu(rs.getString("udstyrsNiaveu"));
-            bil.setKilometer(rs.getInt("kilometer"));
+            bil.setUdstyrsNiveau(rs.getString("udstyrsNiaveu"));
+            bil.setKilometerKoert(rs.getInt("kilometer"));
             bil.setStatus(rs.getString("status"));
             return bil;
         }
