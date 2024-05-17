@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class DashboardController {
-
     private final DashboardService dashboardService;
 
     public DashboardController(DashboardService dashboardService) {
@@ -15,8 +14,8 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
-        model.addAttribute("rentedCarsCount", dashboardService.countRentedCars());
-        model.addAttribute("totalRentalIncome", dashboardService.calculateTotalRentalIncome());
+        model.addAttribute("rentedCarsCount", dashboardService.seAntalUdlejdeBiler());
+        model.addAttribute("totalRentalIncome", dashboardService.seTotalIndkomst());
         return "dashboard";
     }
 }

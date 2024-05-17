@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Car Rental Dashboard</title>
+    <title>BilAbonemment Dashboard</title>
 </head>
 <body>
 <div class="header"></div>
 
-<div class="content">
-    <div class="grid-container">
-        <div>SamletPris: <span th:text="${alleBiler}"></span></div>
-        <div>SamletPris: <span th:text="${samletPris}"></span></div>
+
+<div class="dashboard">
+    <div class="stats">
+        <h2>Statistics</h2>
+        <div>Rented Cars: <span th:text="${seAntalUdlejdeBiler}"></span></div>
+        <div>Total Rental Income: $<span th:text="${SeTotalInkomst}"></span></div>
     </div>
 </div>
 

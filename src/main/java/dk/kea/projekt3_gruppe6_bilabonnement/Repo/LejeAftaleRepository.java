@@ -1,11 +1,9 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Repo;
-
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -34,9 +32,9 @@ public class LejeAftaleRepository {
         }
     }
 
-    public List<LejeAftale> findByKoeretoejsNummerIn(List<String> koeretoejsNummerList) {
-        String sql = "SELECT * FROM Lejeaftale WHERE koeretoejsNummer IN (?)";
-        String joined = String.join(",", koeretoejsNummerList);
+    public List<LejeAftale> findByVognNummer(List<String> vognNummerList) {
+        String sql = "SELECT * FROM Lejeaftale WHERE vognNummer IN (?)";
+        String joined = String.join(",", vognNummerList);
         return jdbcTemplate.query(sql, new Object[]{joined}, new LejeaftaleRowMapper());
     }
 

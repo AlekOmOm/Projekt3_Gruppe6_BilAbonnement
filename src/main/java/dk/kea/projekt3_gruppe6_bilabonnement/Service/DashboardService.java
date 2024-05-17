@@ -17,13 +17,13 @@ public class DashboardService {
         this.lejeaftaleRepository = lejeaftaleRepository;
     }
 
-    public long countRentedCars() {
+    public long seAntalUdlejdeBiler() {
         return bilRepository.findByStatus("Udlejet").size();
     }
 
-    public int calculateTotalRentalIncome() {
+    public int seTotalIndkomst(){
         List<Bil> rentedCars = bilRepository.findByStatus("Udlejet");
         List<String> vognNummer = rentedCars.stream().map(Bil::getVognNummer).toList();
-        return lejeaftaleRepository.findByvognNummer(vognNummer).stream().mapToInt(LejeAftale::getPrisoverslag).sum();
+        return lejeaftaleRepository.findByVognNummer(vognNummer).stream().mapToInt(LejeAftale::getPrisoverslag).sum();
     }
 }
