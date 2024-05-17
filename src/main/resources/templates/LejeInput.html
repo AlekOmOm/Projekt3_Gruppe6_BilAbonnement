@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
     <link rel="stylesheet" href="../static/LejeInput.css" th:href="@{/LejeInput.css}">
-
-
     <title>Leje Input</title>
 </head>
 <body>
@@ -35,25 +33,42 @@
                     <label for="dato">Dato: </label>
                     <input type="date" id="dato" name="dato" required>
                 </div>
-                <button type="submit" class="button" id="opretLeje"> Afslut </button>
+                <button type="submit" class="button" id="opretLeje"> Næste </button>
             </form>
         </div>
         <div class="car-container">
             <div class="car-box">
-                <img src="../static/images/cars/citroen.png" alt="Car Image">
-                <p>Car Information</p>
+                <img src="../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Citroen" class="citroen-img">
+                <p>Opel Corsa</p>
+                <div class="text-box">
+                    <p>Model: Citroen C1</p>
+                    <p>Årgang: 2021</p>
+                    <p>Farve: Hvid</p>
+                    <p>Pris: 1500 kr. pr. dag</p>
+                </div>
             </div>
             <div class="car-box">
-                <img src="path_to_car_image" alt="Car Image">
+                <img src="../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}"  alt="Car Image">
                 <p>Car Information</p>
+                <div class="text-box">
+                    <p>Model: Citroen C1</p>
+                    <p>Årgang: 2021</p>
+                    <p>Farve: Hvid</p>
+                    <p>Pris: 1500 kr. pr. dag</p>
+                </div>
             </div>
             <div class="car-box">
-                <img src="path_to_car_image" alt="Car Image">
-                <p>Car Information</p>
+                <img src="../static/images/cars/peugeot108.png" th:src="@{/images/cars/peugeot108.png}"  alt="Peugeot" class="peugeot-img">
+                <p class="peugeot-text">Peugeot 108</p>
+                <div class="text-box">
+                    <p>Model: Peugeot 108</p>
+                    <p>Årgang: 2021</p>
+                    <p>Farve: Sort</p>
+                    <p>Pris: 2000 kr. pr. dag</p>
+                </div>
             </div>
         </div>
     </div>
-
 
     <div class="footer">
         <p>© 2021 Bilabonnement A/S</p>
