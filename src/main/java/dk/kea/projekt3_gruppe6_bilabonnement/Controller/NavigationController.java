@@ -11,13 +11,4 @@ public class NavigationController {
         return "LejeAftale";
     }
 
-    @GetMapping("/LejeInput")
-    public String LejeInput() {
-        return "LejeInput";
-    }
-
-    @PostMapping("/LejeInput")
-    public String LejeInputPost() {
-        return "LejeInput";
-    }
 }
