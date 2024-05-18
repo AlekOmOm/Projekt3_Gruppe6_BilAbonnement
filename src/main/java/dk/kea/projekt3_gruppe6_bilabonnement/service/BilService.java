@@ -20,13 +20,32 @@ public class BilService {
     }
 
 
-    // CRUD Bil methods with BilFactory to convert Bil from Repo to create CitroenC1, Peugeot108, OpelCorsaCosmo with the instance variables
 
+    // ------------------- CRUD -------------------
 
+    public Bil saveBil(Bil nyBil) {
+        System.out.println("DEBUG: BilService.saveBil");
 
-    public Bil createBil(Bil bil) {
-        return bilRepository.save(bil);
+        System.out.println(" nyBil: "+nyBil);
+        Bil existingBil = bilRepository.findByVognNummer(nyBil.getVognNummer());
+        System.out.println(" existingBil: "+existingBil);
+
+        if (existingBil != null) {
+            System.out.println(" 1: exists");
+
+            // opdater existingBil (DB bilen) med nyBil
+            update(nyBil, existingBil);
+
+            // opdater DB bilen
+            return bilRepository.update(existingBil);
+        } else {
+            System.out.println(" 2: does not exist");
+            System.out.println("----DEBUG: saveBil end");
+            return bilRepository.save(nyBil);
+        }
     }
+
+
 
     public List<Bil> getAlleBiler() {
         return bilFactory.initializeList(bilRepository.findAll());
@@ -38,6 +57,33 @@ public class BilService {
 
     public Bil getBilByVognNummer(String vognNummer) {
         return bilFactory.initialize(bilRepository.findByVognNummer(vognNummer));
+    }
+
+    public Bil update(Bil bil) {
+        return bilRepository.update(bil);
+    }
+
+    public void delete(Bil bil) {
+        bilRepository.delete(bil);
+    }
+
+
+
+    // ------------------- Helper methods -------------------
+
+    private boolean exists(Bil bil) {
+        return bilRepository.exists(bil);
+    }
+
+    private Bil update(Bil bil, Bil existingBil) {
+        existingBil.setVognNummer(bil.getVognNummer());
+        existingBil.setStelNummer(bil.getStelNummer());
+        existingBil.setModel(bil.getModel());
+
+        existingBil.setUdstyrsNiveau(bil.getUdstyrsNiveau());
+        existingBil.setKilometerKoert(bil.getKilometerKoert());
+        existingBil.setStatus(bil.getStatus());
+        return existingBil;
     }
 
 
