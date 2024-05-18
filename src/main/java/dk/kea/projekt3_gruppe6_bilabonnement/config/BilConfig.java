@@ -7,19 +7,16 @@ import org.springframework.stereotype.Service;
 public class BilConfig {
 
     public Bil loadModelConfigData(Bil bil) {
-        System.out.println("DEBUG: BilConfig.initializeModelConfig");
-
         if (bil == null) {
             return null;
         }
 
-
         String model = bil.getModel();
 
-
-        System.out.println(" modelClass: " + model);
-        System.out.println(" bil: " + bil);
-        System.out.println();
+//        System.out.println("DEBUG: BilConfig.initializeModelConfig");
+//        System.out.println(" modelClass: " + model);
+//        System.out.println(" bil: " + bil);
+//        System.out.println();
         return load(model, bil);
     }
 

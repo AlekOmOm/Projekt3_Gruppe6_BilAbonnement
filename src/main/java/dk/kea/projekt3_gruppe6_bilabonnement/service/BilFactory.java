@@ -29,13 +29,13 @@ public class BilFactory {
             return null;
         }
 
-        System.out.println("DEBUG: BilFactory.initialize");
-        System.out.println(" bil: "+bil);
+//        System.out.println("DEBUG: BilFactory.initialize");
+//        System.out.println(" bil: "+bil);
         Bil initBil = bilConfig.loadModelConfigData(bil);
-        System.out.println(" initBil: "+initBil);
+//        System.out.println(" initBil: "+initBil);
 
         initBil.setId(bil.getId());
-        System.out.println(" initBil.getId(): "+initBil.getId());
+//        System.out.println(" initBil.getId(): "+initBil.getId());
         return initBil;
     }
 
@@ -82,7 +82,7 @@ public class BilFactory {
     public Bil createTestCitroenC1() {
         testCounter++;
         System.out.println();
-        System.out.println(" testCounter: "+testCounter);
+//        System.out.println(" testCounter: "+testCounter);
         return bilConfig.loadModelConfigData(new CitroenC1("VognNummer1"+testCounter, "StelNummer1"+testCounter, "UdstyrsNiveau1"+testCounter, 1000+testCounter, "Tilgaengelig"));
     }
 

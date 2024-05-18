@@ -4,7 +4,8 @@ USE Bil_Abonnement;
 
 CREATE TABLE Bruger (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Brugernavn VARCHAR(255) NOT NULL,
+    Brugernavn VARCHAR(255) NOT NULL UNIQUE,
+    Password VARCHAR(255) NOT NULL,
     Rolle VARCHAR(255) NOT NULL
 );
 

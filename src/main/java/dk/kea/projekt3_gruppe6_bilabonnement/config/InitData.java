@@ -1,7 +1,10 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.config;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
+import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.service.BilFactory;
@@ -20,22 +23,68 @@ public class InitData implements ApplicationRunner {
 
     private final BilFactory bilFactory;
     private final BilRepository bilRepository;
+    private final BrugerRepository brugerRepository;
     private final LejeAftaleRepository lejeaftaleRepository;
     private final SkadeRapportRepository skadeRapportRepository;
 
+    private static List<Bruger> brugere = new ArrayList<>();
+    private static List<Bil> biler = new ArrayList<>();
+    private static List<LejeAftale> lejeAftaler = new ArrayList<>();
+    private static List<SkadeRapport> skadeRapporter = new ArrayList<>();
+//    List<ForretningsRapport> forretningsRapporter = new ArrayList<>();
+
     @Autowired
-    public InitData(BilFactory bilFactory, BilRepository bilRepository, LejeAftaleRepository lejeaftaleRepository, SkadeRapportRepository skadeRapportRepository){
+    public InitData(BilFactory bilFactory, BilRepository bilRepository, BrugerRepository brugerRepository, LejeAftaleRepository lejeaftaleRepository, SkadeRapportRepository skadeRapportRepository){
         this.bilFactory = bilFactory;
         this.bilRepository = bilRepository;
+        this.brugerRepository = brugerRepository;
         this.lejeaftaleRepository = lejeaftaleRepository;
         this.skadeRapportRepository = skadeRapportRepository;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // Bil test data: tre biler Citroen, Peugeot og Opel
-        List<Bil> biler = new ArrayList<>();
 
+        // ------------------- Bil test data -------------------
+
+        bilTestData(); // Bil test data - tre biler: Citroen, Peugeot og Opel
+
+        // ------------------- Bruger test data -------------------
+
+        brugerTestData(); // Bruger test data - tre brugere: dataregistrering, skade- og udbedring og forretningsudvikling
+
+
+        // ------------------- LejeAftale test data -------------------
+
+        // ------------------- SkadeRapport test data -------------------
+
+
+    }
+
+    private void brugerTestData() {
+
+        // tilfældige værdier er givet ved oprettelse af brugere
+        brugere.addAll(Arrays.asList(
+                new Bruger("dataregistrering", "1234", "DATA_REGISTRERING"),
+                new Bruger("skade-og-udbedring", "1234", "SKADE_OG_UDBEDRING"),
+                new Bruger("forretningsudvikling", "1234", "FORRETNINGS_UDVIKLING")
+        ));
+
+        // tjek om brugere allerede findes i database og fjern dem fra listen
+        for(Iterator<Bruger> iterator = brugere.iterator(); iterator.hasNext();) {
+
+            Bruger bruger = iterator.next();
+            if (brugerRepository.exists(bruger)) {
+                iterator.remove();
+            }
+        }
+
+        for (Bruger bruger : brugere) {
+            brugerRepository.save(bruger);
+        }
+    }
+
+    private void bilTestData() {
         biler.addAll(Arrays.asList(
                 bilFactory.createCitroenC1(),
                 bilFactory.createPeugeot108(),
@@ -43,7 +92,7 @@ public class InitData implements ApplicationRunner {
         ));
 
 
-        // set random values for each bil
+        // tilfældige værdier for hver bil
         for (int i = 0; i<biler.size(); i++) {
             Bil bil = biler.get(i);
             if (bil != null) {
@@ -55,31 +104,41 @@ public class InitData implements ApplicationRunner {
             }
         }
 
-        // Iterator bruges på biler for at undgå ConcurrentModificationException, dvs. listen håndteres samtidig med at elementer fjernes
-        // iterator med for loop fungerer her ved at iterator.remove() kaldes, når et element fjernes
+        // tjek om biler allerede findes i database og fjern dem fra listen
         for (Iterator<Bil> iterator = biler.iterator(); iterator.hasNext();) {
+            // Iterator bruges på biler for at undgå ConcurrentModificationException, dvs. listen håndteres samtidig med at elementer fjernes
+            // iterator med for loop fungerer her ved at iterator.remove() kaldes, når et element fjernes
+
             Bil bil = iterator.next();
-            if (bilRepository.findByVognNummer(bil.getVognNummer()) != null) {
+            if (bilRepository.exists(bil)) {
                 iterator.remove();
             }
         }
-        // iterator.remove removes from list, and list is 'automatically' updated
 
-        // Save biler (if any remaining) to database
+
+        // Save biler (hvis nye) til database
         for (int i = 0; i<biler.size(); i++) {
             biler.set(i, bilRepository.save(biler.get(i)));
         }
-
-        // LejeAftale og SkadeRapport test data kan tilføjes når nødvendigt (kræver repo og klar instantiering)
-
-//        // Create Lejeaftale objects
-//        LejeAftale lejeaftale1 = new Lejeaftale();
-//        // set properties for lejeaftale1
-//        lejeaftaleRepository.save(lejeaftale1);
-//
-//        // Create SkadeRapport objects
-//        SkadeRapport skadeRapport1 = new SkadeRapport();
-//        // set properties for skadeRapport1
-//        skadeRapportRepository.save(skadeRapport1);
     }
+
+    // ------------------- get Data objects -------------------
+    public static List<Bruger> getBrugere() {
+        return brugere;
+    }
+
+    public List<Bil> getBiler() {
+        return biler;
+    }
+
+    public List<LejeAftale> getLejeAftaler() {
+        return lejeAftaler;
+    }
+
+    public List<SkadeRapport> getSkadeRapporter() {
+        return skadeRapporter;
+    }
+
+
+
 }

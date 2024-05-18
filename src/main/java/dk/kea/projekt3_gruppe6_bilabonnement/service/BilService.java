@@ -24,14 +24,13 @@ public class BilService {
     // ------------------- CRUD -------------------
 
     public Bil saveBil(Bil nyBil) {
-        System.out.println("DEBUG: BilService.saveBil");
-
-        System.out.println(" nyBil: "+nyBil);
+//        System.out.println("DEBUG: BilService.saveBil");
+//        System.out.println(" nyBil: "+nyBil);
         Bil existingBil = bilRepository.findByVognNummer(nyBil.getVognNummer());
-        System.out.println(" existingBil: "+existingBil);
+//        System.out.println(" existingBil: "+existingBil);
 
         if (existingBil != null) {
-            System.out.println(" 1: exists");
+//            System.out.println(" 1: exists");
 
             // opdater existingBil (DB bilen) med nyBil
             update(nyBil, existingBil);
@@ -39,8 +38,8 @@ public class BilService {
             // opdater DB bilen
             return bilRepository.update(existingBil);
         } else {
-            System.out.println(" 2: does not exist");
-            System.out.println("----DEBUG: saveBil end");
+//            System.out.println(" 2: does not exist");
+//            System.out.println("----DEBUG: saveBil end");
             return bilRepository.save(nyBil);
         }
     }
