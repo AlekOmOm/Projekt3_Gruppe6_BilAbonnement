@@ -139,7 +139,7 @@ public class BrugerService {
     }
 
     public Bruger konverter(BrugerDto brugerDto) {
-        return new Bruger(brugerDto.id(), brugerDto.brugerNavn(), brugerDto.password(), brugerDto.rolle());
+        return new Bruger(brugerDto.getId(), brugerDto.getBrugerNavn(), brugerDto.getPassword(), brugerDto.getRolle());
     }
 
 }
