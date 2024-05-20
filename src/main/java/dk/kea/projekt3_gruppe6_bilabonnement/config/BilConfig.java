@@ -1,27 +1,35 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.config;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.CitroenC1;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class BilConfig {
 
-    public Bil initializeModelConfig(Bil bil) {
-        String modelClass = bil.getClass().getSimpleName();
-        return initialize(modelClass, bil);
+    public Bil loadModelConfigData(Bil bil) {
+        System.out.println("DEBUG: BilConfig.initializeModelConfig");
+
+        if (bil == null) {
+            return null;
+        }
+
+
+        String model = bil.getModel();
+
+
+        System.out.println(" modelClass: " + model);
+        System.out.println(" bil: " + bil);
+        System.out.println();
+        return load(model, bil);
     }
 
-    private Bil initialize(String modelClass, Bil bil) {
-        switch (modelClass) {
-            case "CitroenC1":
+    private Bil load(String model, Bil bil) {
+        switch (model) {
+            case "Citroen C1 Triumph":
                 return CitroenC1Config.initialize(bil);
-            case "Peugeot108":
+            case "Peugeot 108":
                 return Peugeot108Config.initialize(bil);
-            case "OpelCorsaCosmo":
+            case "Opel Corsa Cosmo":
                 return OpelCorsaCosmoConfig.initialize(bil);
         }
         return null;
@@ -29,11 +37,8 @@ public class BilConfig {
 
     static class CitroenC1Config {
 
-        protected static final String MODEL_CLASS = "CitroenC1";
-
         protected static Bil initialize(Bil bil) {
-            bil.setModel(MODEL);
-            bil.setMaerke(MAERKE);
+
             bil.setGearType(GEAR_TYPE);
             bil.setFuelType(FUEL_TYPE);
             bil.setCo2Emission(CO2_EMISSION);
@@ -52,8 +57,7 @@ public class BilConfig {
             return bil;
         }
 
-        private static final String MODEL = "C1 Triumph";
-        private static final String MAERKE = "Citroen";
+
         private static final String GEAR_TYPE = "Manuelt";
         private static final String FUEL_TYPE = "Benzin";
         private static final double CO2_EMISSION = 99;
@@ -75,11 +79,7 @@ public class BilConfig {
 
     static class Peugeot108Config {
 
-        protected static final String MODEL_CLASS = "Peugeot108";
-
         protected static Bil initialize(Bil bil) {
-            bil.setModel(MODEL);
-            bil.setMaerke(MAERKE);
             bil.setGearType(GEAR_TYPE);
             bil.setFuelType(FUEL_TYPE);
             bil.setCo2Emission(CO2_EMISSION);
@@ -96,8 +96,8 @@ public class BilConfig {
             return bil;
         }
 
-        private static final String MODEL = "108";
-        private static final String MAERKE = "Peugeot";
+
+
         private static final String GEAR_TYPE = "Manuelt";
         private static final String FUEL_TYPE = "Benzin";
         private static final double CO2_EMISSION = 111;
@@ -119,11 +119,10 @@ public class BilConfig {
 
     static class OpelCorsaCosmoConfig {
 
-        protected static final String MODEL_CLASS = "OpelCorsaCosmo";
+
 
         protected static Bil initialize(Bil bil) {
-            bil.setModel(MODEL);
-            bil.setMaerke(MAERKE);
+
             bil.setGearType(GEAR_TYPE);
             bil.setFuelType(FUEL_TYPE);
             bil.setCo2Emission(CO2_EMISSION);
@@ -140,8 +139,8 @@ public class BilConfig {
             return bil;
         }
 
-        private static final String MODEL = "Corsa Cosmo";
-        private static final String MAERKE = "Opel";
+
+
         private static final String GEAR_TYPE = "Manuelt";
         private static final String FUEL_TYPE = "Benzin";
         private static final double CO2_EMISSION = 123;
