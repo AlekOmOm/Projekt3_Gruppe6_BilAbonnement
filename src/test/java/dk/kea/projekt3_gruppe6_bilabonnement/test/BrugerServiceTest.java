@@ -156,8 +156,6 @@ public class BrugerServiceTest {
 
         assertTrue(opdateretBruger.equalsWithoutId(nyTestBruger));
         assert opdateretBruger.equals(nyTestBruger);
-
-
     }
 
     @Test

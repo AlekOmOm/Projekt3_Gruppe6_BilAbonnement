@@ -1,19 +1,19 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 
-import java.util.Arrays;
-
 public class Bruger {
     private int id;
     private String brugerNavn;
     private String password;
     private Rolle rolle; // dataregistrering, skade- og udbedring eller forretningsudvikling
 
-
-
     public enum Rolle {
         DATA_REGISTRERING,
         SKADE_OG_UDBEDRING,
-        FORRETNINGS_UDVIKLING
+        FORRETNINGS_UDVIKLING;
+
+        boolean equals(Rolle rolle) { // tjek om korrekt rolle
+            return this.name().equals(rolle.name());
+        }
     }
 
     // ------------------- Constructors -------------------
@@ -60,15 +60,23 @@ public class Bruger {
     }
 
     public void setRolle(String rolle) {
-        try {
-            this.rolle = Rolle.valueOf(rolle.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Ikke valid rolle: " + rolle + ". De valide roller er: " + Arrays.toString(Rolle.values()));
+        switch (rolle) {
+            case "DATA_REGISTRERING":
+                this.rolle = Rolle.DATA_REGISTRERING;
+                break;
+            case "SKADE_OG_UDBEDRING":
+                this.rolle = Rolle.SKADE_OG_UDBEDRING;
+                break;
+            case "FORRETNINGS_UDVIKLING":
+                this.rolle = Rolle.FORRETNINGS_UDVIKLING;
+                break;
+            default:
+                throw new IllegalArgumentException("Rolle ikke gyldig");
         }
     }
 
-    public String getRolle() {
-        return rolle.toString();
+    public Rolle getRolle() {
+        return rolle;
     }
 
 
@@ -77,6 +85,8 @@ public class Bruger {
 
     public boolean equals(Bruger bruger) {
         Bruger thisBruger = this;
+
+        if (bruger == null) { return false; }
 
         return thisBruger.getId() == bruger.getId()
                 && thisBruger.getBrugerNavn().equals(bruger.getBrugerNavn())

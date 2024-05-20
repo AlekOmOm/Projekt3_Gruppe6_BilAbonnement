@@ -1,6 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.service;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BrugerDto;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,44 @@ public class BrugerService {
     public BrugerService(BrugerRepository brugerRepository) {
         this.brugerRepository = brugerRepository;
     }
+
+    // ------------------- Services -------------------
+
+    public BrugerDto login(BrugerDto brugerDTO) {
+        if (brugerDTO == null) {
+            return null;
+        }
+
+        Bruger brugerLogin = konverter(brugerDTO);
+        Bruger brugerDB = brugerRepository.findByBrugernavn(brugerDTO.getBrugerNavn());
+
+        // Tjek om: 1. brugerDB findes, 2. brugerDB er lig brugerLogin
+        if (brugerDB == null || !brugerDB.equalsWithoutId(brugerLogin)) {
+            return null;
+        }
+
+        // returner brugerDTO
+        return konverter(brugerDB);
+    }
+
+
+    public BrugerDto registrer(BrugerDto brugerDTO) {
+        if (brugerDTO == null) {
+            return null;
+        }
+
+        Bruger brugerRegistrer = konverter(brugerDTO);
+        Bruger brugerDB = opretBruger(brugerRegistrer);
+
+        // Tjek om: 1. brugerDB oprettet, 2. brugerDB er lig brugerLogin
+        if (brugerDB == null || !brugerDB.equalsWithoutId(brugerRegistrer)) {
+            return null;
+        }
+
+        return konverter(brugerDB);
+    }
+
+
 
     // ------------------- CRUD -------------------
 
@@ -92,5 +131,15 @@ public class BrugerService {
         }
     }
 
+
+    // ------------------- DTO -------------------
+
+    public BrugerDto konverter(Bruger bruger) {
+        return new BrugerDto(bruger.getId(), bruger.getBrugerNavn(), bruger.getPassword(), bruger.getRolle().name());
+    }
+
+    public Bruger konverter(BrugerDto brugerDto) {
+        return new Bruger(brugerDto.id(), brugerDto.brugerNavn(), brugerDto.password(), brugerDto.rolle());
+    }
 
 }
