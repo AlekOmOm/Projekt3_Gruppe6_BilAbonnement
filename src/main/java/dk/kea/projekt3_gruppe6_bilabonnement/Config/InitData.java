@@ -1,5 +1,5 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.config;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
+package dk.kea.projekt3_gruppe6_bilabonnement.Config;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository;

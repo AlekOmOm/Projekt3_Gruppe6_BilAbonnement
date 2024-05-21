@@ -12,7 +12,7 @@ public class DashboardController {
         this.dashboardService = dashboardService;
     }
     @GetMapping("/dashboard")
-    public String showDashboard(Model model) {
+    public String seDashboard(Model model) {
         model.addAttribute("AntalUdlejedeBiler", dashboardService.seAntalUdlejdeBiler());
         model.addAttribute("SamletIndkomstForBiler", dashboardService.seTotalIndkomst());
         return "dashboard";

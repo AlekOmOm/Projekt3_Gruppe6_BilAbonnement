@@ -1,4 +1,4 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil;
+package dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses;
 
 public class CitroenC1 extends Bil {
 

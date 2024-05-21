@@ -1,6 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Repository;
 
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
