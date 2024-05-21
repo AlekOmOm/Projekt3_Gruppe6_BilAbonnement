@@ -1,4 +1,5 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses;
+import dk.kea.projekt3_gruppe6_bilabonnement.config.BilConfig;
 
 public class OpelCorsaCosmo extends Bil {
 

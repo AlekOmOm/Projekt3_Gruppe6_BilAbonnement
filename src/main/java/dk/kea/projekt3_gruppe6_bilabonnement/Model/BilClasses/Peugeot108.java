@@ -1,5 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses;
 
+import dk.kea.projekt3_gruppe6_bilabonnement.config.BilConfig;
+
 public class Peugeot108 extends Bil {
 
     private static final String MODEL = "Peugeot 108";
