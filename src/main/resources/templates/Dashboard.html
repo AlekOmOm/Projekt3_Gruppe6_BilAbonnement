@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
     <title>BilAbonemment Dashboard</title>
 </head>
 <body>
@@ -11,8 +13,8 @@
 <div class="dashboard">
     <div class="stats">
         <h2>Statistics</h2>
-        <div>Rented Cars: <span th:text="${seAntalUdlejdeBiler}"></span></div>
-        <div>Total Rental Income: $<span th:text="${SeTotalInkomst}"></span></div>
+        <div>Rented Cars: <span th:text="${AntalUdlejedeBiler}"></span></div>
+        <div>Total Rental Income: $<span th:text="${SamletIndkomstForBiler}"></span></div>
     </div>
 </div>
 

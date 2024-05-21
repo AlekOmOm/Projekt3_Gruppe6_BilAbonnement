@@ -81,7 +81,7 @@ public class BilRepository {
     public Bil findByVognNummer(String vognNummer) {
         System.out.println("DEBUG: BilRepository.findByVognNummer");
         System.out.println(" vognNummer: "+vognNummer);
-        String sql = "SELECT * FROM Bil WHERE vognNummer = ?";
+        String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
         List<Bil> biler = jdbcTemplate.query(sql, new BilRowMapper(), vognNummer);
         return biler.isEmpty() ? null : biler.get(0);
     }

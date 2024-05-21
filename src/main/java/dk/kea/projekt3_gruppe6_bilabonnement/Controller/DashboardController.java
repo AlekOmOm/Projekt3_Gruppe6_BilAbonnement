@@ -11,14 +11,10 @@ public class DashboardController {
     public DashboardController(DashboardService dashboardService) {
         this.dashboardService = dashboardService;
     }
-
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
-        model.addAttribute("rentedCarsCount", dashboardService.seAntalUdlejdeBiler());
-        model.addAttribute("totalRentalIncome", dashboardService.seTotalIndkomst());
+        model.addAttribute("AntalUdlejedeBiler", dashboardService.seAntalUdlejdeBiler());
+        model.addAttribute("SamletIndkomstForBiler", dashboardService.seTotalIndkomst());
         return "dashboard";
     }
 }
-
-// antal udlejede biler - stream alle biler og sorter after status
-// samlet intjening - stream alle leje aftaler og sort efter status og get alle prisoverlag.
