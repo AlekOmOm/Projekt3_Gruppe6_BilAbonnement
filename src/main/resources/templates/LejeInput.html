@@ -14,7 +14,7 @@
     </div>
     <div>
         <a href="/LejeAftale">
-            <button  class="button" id="tilbageButton">Anuller</button>
+            <button class="button" id="anullerButton">Anuller</button>
             <input type="hidden" >
         </a>
     </div>
@@ -33,7 +33,7 @@
                     <label for="dato">Dato: </label>
                     <input type="date" id="dato" name="dato" required>
                 </div>
-                <button type="submit" class="button" id="opretLeje"> Næste </button>
+                <button type="submit" class="button" id="opretLeje"> Bekræft Valg </button> <!-- Kan man lave funktion sådan så "Næste" knappen både submitter og sender videre til næste -->
             </form>
         </div>
         <div class="car-container">
@@ -68,6 +68,9 @@
                 </div>
             </div>
         </div>
+        <a href="/LejeAbonnement">
+            <button type="submit" class="button" id="næsteButton"> Næste </button>
+        </a>
     </div>
 
     <div class="footer">

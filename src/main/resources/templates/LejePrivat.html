@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <title>Leje Privat</title>
+</head>
+<body>
+<div class="header">
+    <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+    <p>BilAbonnement A/S</p>
+</div>
+<div class="content">
+    <form action="/submitCustomerInfo" method="post">
+        <div class="inputRow">
+            <label for="navn">Navn:</label>
+            <input type="text" id="navn" name="navn" required>
+        </div>
+        <div class="inputRow">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="inputRow">
+            <label for="tlfnr">Telefon Nr:</label>
+            <input type="tel" id="tlfnr" name="tlfnr" required>
+        </div>
+        <div class="inputRow">
+            <label for="addresse">Addresse:</label>
+            <input type="text" id="addresse" name="addresse" required>
+        </div>
+        <div class="inputRow">
+            <label for="CPR">CPR:</label>
+            <input type="text" id="CPR" name="CPR" required>
+        </div>
+        <button type="submit" class="button" id="bekraeftKundeInfo">Bekræft</button>
+    </form>
+</div>
+<div class="footer">
+    <p>© 2021 Bilabonnement A/S</p>
+</div>
+</body>
+</html>

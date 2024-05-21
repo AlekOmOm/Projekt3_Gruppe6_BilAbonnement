@@ -4,7 +4,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 .inputForm{
@@ -12,10 +11,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: baseline;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-left: 50px;
     font-size: 18px;
     font-weight: bold;
+}
+.inputForm h2 {
+    top: 50px;
 }
 .inputRow {
     display: flex;
@@ -60,6 +62,17 @@
 .button {
     cursor: pointer;
     margin-left: 10px;
+}
+
+#anullerButton {
+    align-self: flex-start; /* Align to the start of the container */
+    left: 20px;
+    top: 50px;
+    position: fixed;
+    margin-top: 40px; /* Add some space from the top */
+    margin-left: 40px; /* Add some space from the left */
+    width: 100px;
+    height: 25px;
 }
 
 #tilbageButton {
