@@ -32,27 +32,6 @@ CREATE TABLE KundeInfo
     MobilNummer VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE LejeAftale
-(
-    ID              INT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    BrugerID        INT, -- foreign key
-    BilID           INT, -- foreign key
-    KundeInfoID     INT, -- foreign key
-    SkadeRapportID  INT, -- foreign key
-
-    Abonnementstype VARCHAR(255) NOT NULL,
-    Prisoverslag    INT,
-    Afhentningssted VARCHAR(255),
-    leveringssted   VARCHAR(255),
-    StartDato       DATE,
-    SlutDato        DATE,
-
-    FOREIGN KEY (BrugerID) REFERENCES Bruger (ID),
-    FOREIGN KEY (BilID) REFERENCES Bil (ID),
-    FOREIGN KEY (KundeInfoID) REFERENCES KundeInfo (ID),
-    FOREIGN KEY (SkadeRapportID) REFERENCES SkadeRapport (ID)
-);
-
 CREATE TABLE SkadeRapport
 (
     ID                      INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,4 +56,25 @@ CREATE TABLE Forretningsrapport
     DatoGenereret     DATE NOT NULL,
     TotalBilerUdlejet INT  NOT NULL,
     SamletPris        INT  NOT NULL
+);
+
+CREATE TABLE LejeAftale
+(
+    ID              INT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    BrugerID        INT, -- foreign key
+    BilID           INT, -- foreign key
+    KundeInfoID     INT, -- foreign key
+    SkadeRapportID  INT, -- foreign key
+
+    Abonnementstype VARCHAR(255) NOT NULL,
+    Prisoverslag    INT,
+    Afhentningssted VARCHAR(255),
+    leveringssted   VARCHAR(255),
+    StartDato       DATE,
+    SlutDato        DATE,
+
+    FOREIGN KEY (BrugerID) REFERENCES Bruger (ID),
+    FOREIGN KEY (BilID) REFERENCES Bil (ID),
+    FOREIGN KEY (KundeInfoID) REFERENCES KundeInfo (ID),
+    FOREIGN KEY (SkadeRapportID) REFERENCES SkadeRapport (ID)
 );
