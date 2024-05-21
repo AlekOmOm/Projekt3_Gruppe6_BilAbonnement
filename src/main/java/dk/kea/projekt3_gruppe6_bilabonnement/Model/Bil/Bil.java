@@ -1,12 +1,12 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil;
 
-import dk.kea.projekt3_gruppe6_bilabonnement.config.BilConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-
-public class Bil implements IBil {
-
+public class Bil {
 
     // ------------------- Fields -------------------
+
+    // 0: Model class
+    protected String modelClass;
+
 
     //1: Identifikation
     private int id;
@@ -14,7 +14,6 @@ public class Bil implements IBil {
     // 2: Bil model data - 'configuration' data
         // for hver bil model vil disse blive initialiseret fra en konfigurationsklasse, hvor de er sat som konstanter
     private String model;
-    private String maerke;
     private String gearType;
     private String fuelType;
     private double co2Emission;
@@ -45,7 +44,6 @@ public class Bil implements IBil {
 
     // constructor
     public Bil(int id, String vognNummer, String stelNummer, String udstyrsNiveau, int kilometerKoert, String status) {
-
         this.id = id;
         this.vognNummer = vognNummer;
         this.stelNummer = stelNummer;
@@ -93,7 +91,9 @@ public class Bil implements IBil {
 
 
     // ------------------- Get & Set -------------------
-    public long getId() {
+
+
+    public int getId() {
         return id;
     }
 
@@ -141,14 +141,6 @@ public class Bil implements IBil {
 
     public void setModel(String model) {
         this.model = model;
-    }
-
-    public String getMaerke() {
-        return maerke;
-    }
-
-    public void setMaerke(String maerke) {
-        this.maerke = maerke;
     }
 
     public String getGearType() {
@@ -269,6 +261,21 @@ public class Bil implements IBil {
 
     public void setSelvrisiko(int selvrisiko) {
         this.selvrisiko = selvrisiko;
+    }
+
+
+    // ------------------- toString -------------------
+    @Override
+    public String toString() {
+        return "Bil{" +
+                "id=" + id +
+                ", vognNummer='" + vognNummer + '\'' +
+                ", stelNummer='" + stelNummer + '\'' +
+                ", udstyrsNiveau='" + udstyrsNiveau + '\'' +
+                ", kilometerKoert=" + kilometerKoert +
+                ", status='" + status + '\'' +
+                '}';
+
     }
 
 }
