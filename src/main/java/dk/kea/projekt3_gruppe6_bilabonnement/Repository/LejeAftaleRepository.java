@@ -33,7 +33,7 @@ public class LejeAftaleRepository {
     }
 
     public List<LejeAftale> findByVognNummer(List<String> vognNummerList) {
-        String sql = "SELECT * FROM Lejeaftale WHERE vognNummer IN (?)";
+        String sql = "SELECT * FROM Lejeaftale WHERE VognNummer = ?";
         String joined = String.join(",", vognNummerList);
         return jdbcTemplate.query(sql, new Object[]{joined}, new LejeaftaleRowMapper());
     }
