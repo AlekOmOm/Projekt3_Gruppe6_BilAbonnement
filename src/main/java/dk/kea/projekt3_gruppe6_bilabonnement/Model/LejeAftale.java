@@ -6,13 +6,9 @@ import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "lejeaftale")
 public class LejeAftale {
 
-    @Id
     int id;
-
     int brugerID;
     String koeretoejsNummer;
     String abonnementsType;

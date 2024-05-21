@@ -1,4 +1,4 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil;
+package dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses;
 
 public class Bil {
 
@@ -19,7 +19,7 @@ public class Bil {
     private int udbetaling;
     private int mdlYdelse;
     private int bindingMdr;
-    private int samletYdelse36Måneder;
+    private int samletYdelse36Maaneder;
     private String leveringTid;
     private String leveringsstedStandard;
     private int koerselPrMd;
@@ -205,11 +205,11 @@ public class Bil {
     }
 
     public int getSamletYdelse36Maaneder() {
-        return samletYdelse36Måneder;
+        return samletYdelse36Maaneder;
     }
 
     public void setSamletYdelse36Maaneder(int samletYdelse36Måneder) {
-        this.samletYdelse36Måneder = samletYdelse36Måneder;
+        this.samletYdelse36Maaneder = samletYdelse36Måneder;
     }
 
     public String getLeveringTid() {
