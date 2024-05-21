@@ -1,11 +1,9 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Repository;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.IBil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
