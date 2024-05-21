@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
-    <link rel="stylesheet" href="../static/LejeInput.css" th:href="@{/LejeInput.css}">
+    <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../../static/VaelgBil.css" th:href="@{/VaelgBil.css}">
     <title>Leje Input</title>
 </head>
 <body>
     <div class="header">
-        <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
         <p>BilAbonnement A/S</p>
     </div>
     <div>
@@ -21,25 +21,25 @@
     <div class="content">
         <div class="inputForm">
         <h2>Vælg Bil</h2>
-            <form action="/LejeAftale" method="post">
+            <form action="/LejeAftale/Abonnement" method="get">
                 <div class="inputRow">
                     <label for="bil">Bil:</label>
-                    <select id="vælgBil" name="bil" required>
+                    <select id="vaelgBil" name="bil" required>
                         <option value="">Vælg Bil</option>
-                        <option th:each="car : ${cars}" th:value="${car.maerke}" th:text="${car.model}"></option>
+                        <option th:each="car : ${cars}" th:value="${car.model}" th:text="${car.model}"></option>
                     </select>
                 </div>
-                <div class="inputRow">
-                    <label for="dato">Dato: </label>
-                    <input type="date" id="dato" name="dato" required>
-                </div>
+<!--                <div class="inputRow">-->
+<!--                    <label for="dato">Dato: </label>-->
+<!--                    <input type="date" id="dato" name="dato" required>-->       <!-- SKAL RYKKES TIL AFHENTNING -->
+<!--                </div>-->
                 <button type="submit" class="button" id="opretLeje"> Bekræft Valg </button> <!-- Kan man lave funktion sådan så "Næste" knappen både submitter og sender videre til næste -->
             </form>
         </div>
         <div class="car-container">
             <div class="car-box">
-                <img src="../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Citroen" class="citroen-img">
-                <p>Opel Corsa</p>
+                <img src="../../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Citroen" class="citroen-img">
+                <p>Bil Information</p>
                 <div class="text-box">
                     <p>Model: Citroen C1</p>
                     <p>Årgang: 2021</p>
@@ -48,8 +48,8 @@
                 </div>
             </div>
             <div class="car-box">
-                <img src="../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}"  alt="Car Image">
-                <p>Car Information</p>
+                <img src="../../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Car Image">
+                <p>Bil Information</p>
                 <div class="text-box">
                     <p>Model: Citroen C1</p>
                     <p>Årgang: 2021</p>
@@ -58,8 +58,8 @@
                 </div>
             </div>
             <div class="car-box">
-                <img src="../static/images/cars/peugeot108.png" th:src="@{/images/cars/peugeot108.png}"  alt="Peugeot" class="peugeot-img">
-                <p class="peugeot-text">Peugeot 108</p>
+                <img src="../../static/images/cars/peugeot108.png" th:src="@{/images/cars/peugeot108.png}" alt="Peugeot" class="peugeot-img">
+                <p class="peugeot-text">Bil Information</p>
                 <div class="text-box">
                     <p>Model: Peugeot 108</p>
                     <p>Årgang: 2021</p>
@@ -68,9 +68,6 @@
                 </div>
             </div>
         </div>
-        <a href="/LejeAbonnement">
-            <button type="submit" class="button" id="næsteButton"> Næste </button>
-        </a>
     </div>
 
     <div class="footer">

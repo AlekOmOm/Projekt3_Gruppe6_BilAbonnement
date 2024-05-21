@@ -24,7 +24,8 @@ public class LejeAftale {
     LocalDate slutDato;
 
     // constructor lejeaftale
-    public LejeAftale(int id, int brugerID, String koeretoejsNummer, String abonnementsType, String kundeID, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+    public LejeAftale(int id, int brugerID, String koeretoejsNummer, String abonnementsType, String kundeID,
+                      int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
         this.id = id;
         this.brugerID = brugerID;
         this.koeretoejsNummer = koeretoejsNummer;

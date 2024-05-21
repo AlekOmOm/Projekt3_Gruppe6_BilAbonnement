@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class BilController {
         cars.add(bilFactory.createPeugeot108("Vogn2", "Stel2", "UdstyrsNiveau2", 20000, "Status2"));
         cars.add(bilFactory.createOpelCorsaCosmo("Vogn3", "Stel3", "UdstyrsNiveau3", 30000, "Status3"));
         model.addAttribute("cars", cars);
-        return "LejeInput";
+        return "VaelgBil";
 
 
     }

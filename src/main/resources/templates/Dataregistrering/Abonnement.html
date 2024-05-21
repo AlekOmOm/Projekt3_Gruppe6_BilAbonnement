@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
-    <link rel="stylesheet" href="../static/LejeAbonnement.css" th:href="@{/LejeAbonnement.css}">
+    <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../../static/Abonnemment.css" th:href="@{/Abonnemment.css}">
     <title>LejeAbonnement</title>
 </head>
 <body>
     <div class="header">
-        <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
         <p>BilAbonnement A/S</p>
     </div>
-    <a href="LejeInput.html">
+    <a href="VaelgBil.html">
         <button class="button" id="tilbageButton">Tilbage</button>
     </a>
     <div class="content">
-        <form action="/bekraeftAbonemment" method="post">
+        <form action="/bekraeftAbonemment" method="get">
             <div class="inputRow">
                 <label for="subscriptionType">Abonemment Type:</label>
                 <select id="abonemmentType" name="abonnementType" required>
