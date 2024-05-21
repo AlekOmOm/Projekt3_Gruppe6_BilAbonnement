@@ -3,17 +3,14 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil;
 public class Bil {
 
     // ------------------- Fields -------------------
-
-    // 0: Model class
-    protected String modelClass;
-
+    private String model;
 
     //1: Identifikation
     private int id;
 
     // 2: Bil model data - 'configuration' data
         // for hver bil model vil disse blive initialiseret fra en konfigurationsklasse, hvor de er sat som konstanter
-    private String model;
+
     private String gearType;
     private String fuelType;
     private double co2Emission;

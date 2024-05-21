@@ -6,23 +6,19 @@ import java.util.List;
 
 public class OpelCorsaCosmo extends Bil {
 
-    private static final String MODEL = "Opel Corsa Cosmo";
 
     public OpelCorsaCosmo() {
-        modelClass = "OpelCorsaCosmo";
+        setModel("OpelCorsaCosmo");
     }
 
     public OpelCorsaCosmo(String vognNummer, String stelNummer, String udstyrsNiveau, int kilometerKoert, String status) {
         super(vognNummer, stelNummer, udstyrsNiveau, kilometerKoert, status);
-        modelClass = "OpelCorsaCosmo";
+        setModel("OpelCorsaCosmo");
     }
 
     public OpelCorsaCosmo(int id, String vognNummer, String stelNummer, String udstyrsNiveau, int kilometerKoert, String status) {
         super(id, vognNummer, stelNummer, udstyrsNiveau, kilometerKoert, status);
+        setModel("OpelCorsaCosmo");
     }
 
-    @Override
-    public String getModel() {
-        return MODEL;
-    }
 }
