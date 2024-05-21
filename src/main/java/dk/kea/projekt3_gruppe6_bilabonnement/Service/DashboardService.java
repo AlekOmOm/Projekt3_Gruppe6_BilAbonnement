@@ -17,10 +17,12 @@ public class DashboardService {
         this.lejeaftaleRepository = lejeaftaleRepository;
     }
 
+    //Antal udlejde biler
     public long seAntalUdlejdeBiler() {
         return bilRepository.findByStatus("Udlejet").size();
     }
 
+    //Samlet indkomst fra udlejede biler
     public int seTotalIndkomst(){
         List<Bil> udlejedeBiler = bilRepository.findByStatus("Udlejet");
         List<String> vognNummer = udlejedeBiler.stream().map(Bil::getVognNummer).toList();
