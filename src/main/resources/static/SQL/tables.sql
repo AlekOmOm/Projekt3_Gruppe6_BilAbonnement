@@ -2,14 +2,12 @@ DROP DATABASE IF EXISTS Bil_Abonnement;
 CREATE DATABASE Bil_Abonnement;
 USE Bil_Abonnement;
 
-
 CREATE TABLE Bruger
 (
     ID         INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Brugernavn VARCHAR(255) NOT NULL,
     Rolle      VARCHAR(255) NOT NULL
 );
-
 
 CREATE TABLE Bil
 (
@@ -21,7 +19,6 @@ CREATE TABLE Bil
     KilometerKoert INT,
     Status         VARCHAR(255) NOT NULL
 );
-
 
 CREATE TABLE KundeInfo
 (
@@ -35,7 +32,6 @@ CREATE TABLE KundeInfo
     MobilNummer VARCHAR(255) NOT NULL
 );
 
-
 CREATE TABLE SkadeRapport
 (
     ID                      INT AUTO_INCREMENT PRIMARY KEY,
@@ -44,7 +40,6 @@ CREATE TABLE SkadeRapport
     Reparationsomkostninger INT,
     FOREIGN KEY (BrugerID) REFERENCES Bruger (ID)
 );
-
 
 CREATE TABLE Skader
 (
@@ -55,7 +50,6 @@ CREATE TABLE Skader
     FOREIGN KEY (SkadeRapportID) REFERENCES SkadeRapport (ID)
 );
 
-
 CREATE TABLE Forretningsrapport
 (
     ID                INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -63,7 +57,6 @@ CREATE TABLE Forretningsrapport
     TotalBilerUdlejet INT  NOT NULL,
     SamletPris        INT  NOT NULL
 );
-
 
 CREATE TABLE LejeAftale
 (
@@ -73,14 +66,12 @@ CREATE TABLE LejeAftale
     KundeInfoID     INT, -- foreign key
     SkadeRapportID  INT, -- foreign key
 
-
     Abonnementstype VARCHAR(255) NOT NULL,
     Prisoverslag    INT,
     Afhentningssted VARCHAR(255),
     leveringssted   VARCHAR(255),
     StartDato       DATE,
     SlutDato        DATE,
-
 
     FOREIGN KEY (BrugerID) REFERENCES Bruger (ID),
     FOREIGN KEY (BilID) REFERENCES Bil (ID),
