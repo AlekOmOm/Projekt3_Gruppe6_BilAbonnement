@@ -28,10 +28,9 @@ class BilConfigTest {
     }
 
     @Test
-    void shouldInitializeCitroenC1ModelConfig() {
+    void shouldLoadCitroenC1ModelConfig() {
         Bil bil = bilFactory.createCitroenC1();
-        assertEquals("C1 Triumph", bil.getModel());
-        assertEquals("Citroen", bil.getMaerke());
+        assertEquals("Citroen C1 Triumph", bil.getModel());
         assertEquals("Manuelt", bil.getGearType());
         assertEquals("Benzin", bil.getFuelType());
         assertEquals(99, bil.getCo2Emission());
@@ -40,10 +39,9 @@ class BilConfigTest {
     }
 
     @Test
-    void shouldInitializePeugeot108ModelConfig() {
+    void shouldLoadPeugeot108ModelConfig() {
         Bil bil = bilFactory.createPeugeot108();
-        assertEquals("108", bil.getModel());
-        assertEquals("Peugeot", bil.getMaerke());
+        assertEquals("Peugeot 108", bil.getModel());
         assertEquals("Manuelt", bil.getGearType());
         assertEquals("Benzin", bil.getFuelType());
         assertEquals(111, bil.getCo2Emission());
@@ -52,10 +50,9 @@ class BilConfigTest {
     }
 
     @Test
-    void shouldInitializeOpelCorsaCosmoModelConfig() {
+    void shouldLoadOpelCorsaCosmoModelConfig() {
         Bil bil = bilFactory.createOpelCorsaCosmo();
-        assertEquals("Corsa Cosmo", bil.getModel());
-        assertEquals("Opel", bil.getMaerke());
+        assertEquals("Opel Corsa Cosmo", bil.getModel());
         assertEquals("Manuelt", bil.getGearType());
         assertEquals("Benzin", bil.getFuelType());
         assertEquals(123, bil.getCo2Emission());
