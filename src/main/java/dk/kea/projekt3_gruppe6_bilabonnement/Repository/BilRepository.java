@@ -48,13 +48,12 @@ public class BilRepository {
     }
 
     public Bil update (Bil bil) {
-        System.out.println("DEBUG: BilRepository.update");
-
         String sql = "UPDATE Bil SET VognNummer = ?, StelNummer = ?, Model = ?, UdstyrsNiveau = ?, KilometerKoert = ?, Status = ? WHERE ID = ?";
 
         template.update(sql, bil.getVognNummer(), bil.getStelNummer(), bil.getModel(), bil.getUdstyrsNiveau(), bil.getKilometerKoert(), bil.getStatus(), bil.getId());
 
-        System.out.println(" updatedBil: "+bil);
+//        System.out.println("DEBUG: BilRepository.update");
+//        System.out.println(" updatedBil: "+bil);
         return bil;
     }
 
@@ -74,18 +73,16 @@ public class BilRepository {
     }
 
     public Bil findByVognNummer(String vognNummer) {
-
-        System.out.println("DEBUG: BilRepository.findByVognNummer");
-
-        System.out.println(" vognNummer: "+vognNummer);
+//        System.out.println("DEBUG: BilRepository.findByVognNummer");
+//        System.out.println(" vognNummer: "+vognNummer);
 
         String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
 
         List<Bil> biler = new ArrayList<>();
         biler.addAll(template.query(sql, getBilRowMapper(), vognNummer));
 
-        System.out.println(" biler: "+biler);
-        System.out.println();
+//        System.out.println(" biler: "+biler);
+//        System.out.println();
 
         return biler.isEmpty() ? null : biler.get(0);
     }
@@ -128,6 +125,9 @@ public class BilRepository {
     }
 
 }
+
+
+
 
 /*
 CREATE TABLE Bil (

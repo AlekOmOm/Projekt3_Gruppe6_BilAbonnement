@@ -20,8 +20,6 @@ public class LejeAftale {
     LocalDate startDato;
     LocalDate slutDato;
 
-
-
     // constructor lejeaftale
     //empty constructor
     public LejeAftale() {

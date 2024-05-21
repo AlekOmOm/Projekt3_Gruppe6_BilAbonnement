@@ -2,7 +2,7 @@ package dk.kea.projekt3_gruppe6_bilabonnement.test;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.config.BilConfig;
-import dk.kea.projekt3_gruppe6_bilabonnement.service.BilFactory;
+import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
