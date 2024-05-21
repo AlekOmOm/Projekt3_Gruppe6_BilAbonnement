@@ -45,11 +45,14 @@ public class InitData implements ApplicationRunner {
 
         // set random values for each bil
         for (int i = 0; i<biler.size(); i++) {
-            biler.get(i).setVognNummer("VognNummer" + i);
-            biler.get(i).setStelNummer("StelNummer" + i);
-            biler.get(i).setUdstyrsNiveau("UdstyrsNiveau" + i);
-            biler.get(i).setKilometerKoert(1000 * i);
-            biler.get(i).setSomTilgaengelig();
+            Bil bil = biler.get(i);
+            if (bil != null) {
+                bil.setVognNummer("VognNummer" + i);
+                bil.setStelNummer("StelNummer" + i);
+                bil.setUdstyrsNiveau("UdstyrsNiveau" + i);
+                bil.setKilometerKoert(1000 * i);
+                bil.setSomTilgaengelig();
+            }
         }
 
         // Iterator bruges på biler for at undgå ConcurrentModificationException, dvs. listen håndteres samtidig med at elementer fjernes
