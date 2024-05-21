@@ -32,14 +32,10 @@ public class LejeAftaleRepository {
         }
     }
 
+
     public List<LejeAftale> findByVognNummer(List<String> vognNummerList) {
-        String sql = "SELECT * FROM Lejeaftale WHERE VognNummer = ?";
+        String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
         String joined = String.join(",", vognNummerList);
         return jdbcTemplate.query(sql, new Object[]{joined}, new LejeaftaleRowMapper());
-    }
-
-    public List<LejeAftale> findAll() {
-        String sql = "SELECT * FROM Lejeaftale";
-        return jdbcTemplate.query(sql, new LejeaftaleRowMapper());
     }
 }

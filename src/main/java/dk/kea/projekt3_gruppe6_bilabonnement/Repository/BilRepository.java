@@ -88,7 +88,6 @@ public class BilRepository {
 
     public void delete(Bil bil) {
         String sql = "DELETE FROM Bil WHERE ID = ?";
-
         jdbcTemplate.update(sql, bil.getId());
     }
 
@@ -101,7 +100,6 @@ public class BilRepository {
                 if (resultSet == null) {
                     return null;
                 }
-
                 bil.setId(resultSet.getInt("ID"));
                 bil.setVognNummer(resultSet.getString("VognNummer"));
                 bil.setStelNummer(resultSet.getString("StelNummer"));
@@ -113,17 +111,18 @@ public class BilRepository {
             }
         };
     }
+
+
     public List<Bil> findByStatus(String status) {
         String sql = "SELECT * FROM BIL WHERE status = ?";
         return jdbcTemplate.query(sql, new BilRowMapper(), status);
     }
 
+
     public boolean exists(Bil bil) {
         String sql = "SELECT COUNT(*) FROM Bil WHERE VognNummer = ?";
-
         return jdbcTemplate.queryForObject(sql, Integer.class, bil.getVognNummer()) > 0;
     }
-
 }
 
 
