@@ -1,8 +1,8 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Service;// DashboardService.java
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
-import dk.kea.projekt3_gruppe6_bilabonnement.Repo.BilRepository;
-import dk.kea.projekt3_gruppe6_bilabonnement.Repo.LejeAftaleRepository;
+import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
+import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
