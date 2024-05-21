@@ -126,6 +126,9 @@ public class BilRepository {
 
 }
 
+
+
+
 /*
 CREATE TABLE Bil (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

@@ -1,4 +1,4 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.service;
+package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
@@ -10,8 +10,8 @@ import java.util.List;
 @Service
 public class BilService {
 
-    private BilFactory bilFactory;
-    private BilRepository bilRepository;
+    private final BilFactory bilFactory;
+    private final BilRepository bilRepository;
 
     @Autowired
     public BilService(BilFactory bilFactory, BilRepository bilRepository) {
@@ -70,8 +70,11 @@ public class BilService {
 
     // ------------------- Helper methods -------------------
 
-    private boolean exists(Bil bil) {
-        return bilRepository.exists(bil);
+    public boolean exists(Bil bil) {
+        if (bil != null && (bil.getVognNummer() != null || bil.getId() != 0)){
+            return bilRepository.exists(bil);
+        }
+        return false;
     }
 
     private Bil update(Bil bil, Bil existingBil) {

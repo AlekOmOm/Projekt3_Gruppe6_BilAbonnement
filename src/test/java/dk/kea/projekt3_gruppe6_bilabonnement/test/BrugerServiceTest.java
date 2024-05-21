@@ -3,7 +3,7 @@ package dk.kea.projekt3_gruppe6_bilabonnement.test;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.config.InitData;
-import dk.kea.projekt3_gruppe6_bilabonnement.service.BrugerService;
+import dk.kea.projekt3_gruppe6_bilabonnement.Service.BrugerService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

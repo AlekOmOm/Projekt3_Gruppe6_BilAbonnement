@@ -1,4 +1,4 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.service;
+package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.CitroenC1;

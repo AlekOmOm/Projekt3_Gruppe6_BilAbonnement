@@ -1,7 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 
 public class Bruger {
-    private int id;
+    private int id = 0;
     private String brugerNavn;
     private String password;
     private Rolle rolle; // dataregistrering, skade- og udbedring eller forretningsudvikling
@@ -77,6 +77,10 @@ public class Bruger {
 
     public Rolle getRolle() {
         return rolle;
+    }
+
+    public String getRolleString() {
+        return rolle.name();
     }
 
 

@@ -1,4 +1,4 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.service;
+package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BrugerDto;
@@ -72,10 +72,11 @@ public class BrugerService {
         }
 
         if (bruger.getId()>0) {
-            if (brugerRepository.idOccupied(bruger)) {
+            if (brugerRepository.idAlreadyInUse(bruger)) {
                 System.out.println("Bruger id er allerede i brug");
                 return null;
             }
+
             System.out.println(" bruger oprettet");
             return brugerRepository.saveWithId(bruger);
         }
@@ -116,19 +117,11 @@ public class BrugerService {
     }
 
     public void sletBruger(Bruger bruger) {
-        System.out.println("DEBUG - BrugerService - sletBruger - bruger: " + bruger.getBrugerNavn());
+        boolean deleted = brugerRepository.delete(bruger) ||
+                brugerRepository.deleteByBrugerNavn(bruger.getBrugerNavn());
 
-        if (bruger == null) {
-            return;
-        }
-
-        if (brugerRepository.delete(bruger)) {
-            System.out.println("Bruger slettet");
-        } else if (brugerRepository.deleteByBrugerNavn(bruger.getBrugerNavn())) {
-            System.out.println("Bruger slettet");
-        } else {
-            return;
-        }
+        // TODO: omdan sout til notifaction message for user
+        System.out.println("DEBUG - BrugerService - sletBruger - bruger: " + bruger.getBrugerNavn() + (deleted ? " slettet" : " ikke slettet"));
     }
 
 

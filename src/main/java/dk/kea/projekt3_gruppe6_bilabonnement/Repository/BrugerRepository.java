@@ -12,23 +12,26 @@ import java.util.List;
 @Repository
 public class BrugerRepository {
 
-    private JdbcTemplate template;
+    private final JdbcTemplate template;
 
     public BrugerRepository(JdbcTemplate template) {
         this.template = template;
     }
 
     public Bruger save(Bruger bruger) {
-        String sql = "INSERT INTO bruger (brugerNavn, password, rolle) VALUES (?, ?, ?)";
-
-        template.update(sql, bruger.getBrugerNavn(), bruger.getPassword(), bruger.getRolle());
-
-
+        String sql;
+        if (bruger.getId() == 0) {
+            sql = "INSERT INTO bruger (Brugernavn, Password, Rolle) VALUES (?, ?, ?)";
+            template.update(sql, bruger.getBrugerNavn(), bruger.getPassword(), bruger.getRolleString());
+        } else {
+            sql = "INSERT INTO bruger (ID, Brugernavn, Password, Rolle) VALUES (?, ?, ?, ?)";
+            template.update(sql, bruger.getId(), bruger.getBrugerNavn(), bruger.getPassword(), bruger.getRolleString());
+        }
         return findByBrugernavn(bruger.getBrugerNavn());
     }
 
     public Bruger findById(int id) {
-        String sql = "SELECT * FROM bruger WHERE id = ?";
+        String sql = "SELECT * FROM bruger WHERE ID = ?";
 
         return template.queryForObject(sql, getBrugerRowMapper(), id);
     }
@@ -89,7 +92,7 @@ public class BrugerRepository {
     public Bruger update(Bruger bruger) {
         String sql = "UPDATE bruger SET brugerNavn = ?, password = ?, rolle = ? WHERE id = ?";
 
-        template.update(sql, bruger.getBrugerNavn(), bruger.getPassword(), bruger.getRolle(), bruger.getId());
+        template.update(sql, bruger.getBrugerNavn(), bruger.getPassword(), bruger.getRolleString(), bruger.getId());
 
         return findByBrugernavn(bruger.getBrugerNavn());
     }
@@ -97,7 +100,7 @@ public class BrugerRepository {
     public Bruger saveWithId(Bruger bruger) {
         String sql = "INSERT INTO bruger (id, brugerNavn, password, rolle) VALUES (?, ?, ?, ?)";
 
-        template.update(sql, bruger.getId(), bruger.getBrugerNavn(), bruger.getPassword(), bruger.getRolle());
+        template.update(sql, bruger.getId(), bruger.getBrugerNavn(), bruger.getPassword(), bruger.getRolleString());
 
         return findByBrugernavn(bruger.getBrugerNavn());
     }
@@ -105,7 +108,7 @@ public class BrugerRepository {
     // ------------------- service -------------------
 
     // id occupied
-    public boolean idOccupied(Bruger bruger) {
+    public boolean idAlreadyInUse(Bruger bruger) {
         String sql = "SELECT COUNT(*) FROM bruger WHERE id = ?";
 
         return template.queryForObject(sql, Integer.class, bruger.getId()) > 0;
