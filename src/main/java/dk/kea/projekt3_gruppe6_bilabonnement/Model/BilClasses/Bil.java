@@ -4,10 +4,6 @@ public class Bil {
 
     // ------------------- Fields -------------------
 
-    // 0: Model class
-    protected String modelClass;
-
-
     //1: Identifikation
     private int id;
 
