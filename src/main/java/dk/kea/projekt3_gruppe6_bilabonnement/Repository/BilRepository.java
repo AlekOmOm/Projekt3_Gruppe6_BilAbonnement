@@ -107,7 +107,6 @@ public class BilRepository {
                 bil.setVognNummer(resultSet.getString("VognNummer"));
                 bil.setStelNummer(resultSet.getString("StelNummer"));
                 bil.setModel(resultSet.getString("Model"));
-
                 bil.setUdstyrsNiveau(resultSet.getString("UdstyrsNiveau"));
                 bil.setKilometerKoert(resultSet.getInt("KilometerKoert"));
                 bil.setStatus(resultSet.getString("Status"));
@@ -115,8 +114,6 @@ public class BilRepository {
             }
         };
     }
-
-
     public List<Bil> findByStatus(String status) {
         String sql = "SELECT * FROM BIL WHERE status = ?";
         return jdbcTemplate.query(sql, new BilRowMapper(), status);
