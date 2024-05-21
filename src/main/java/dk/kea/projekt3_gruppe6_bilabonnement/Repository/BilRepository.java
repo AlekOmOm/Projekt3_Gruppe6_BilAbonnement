@@ -3,16 +3,13 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Repository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import java.math.BigInteger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -29,7 +26,6 @@ public class BilRepository {
             bil.setVognNummer(rs.getString("vognNummer"));
             bil.setStelNummer(rs.getString("stelNummer"));
             bil.setModel(rs.getString("model"));
-            bil.setMaerke(rs.getString("maerke"));
             bil.setUdstyrsNiveau(rs.getString("udstyrsNiveau"));
             bil.setKilometerKoert(rs.getInt("kilometer"));
             bil.setStatus(rs.getString("status"));
@@ -42,12 +38,11 @@ public class BilRepository {
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        template.update(connection -> {
+        jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sqlStatement, new String[] {"ID"});
             ps.setString(1, bil.getVognNummer());
             ps.setString(2, bil.getStelNummer());
             ps.setString(3, bil.getModel());
-
             ps.setString(4, bil.getUdstyrsNiveau());
             ps.setInt(5, bil.getKilometerKoert());
             ps.setString(6, bil.getStatus());
@@ -63,54 +58,39 @@ public class BilRepository {
 
     public Bil update (Bil bil) {
         System.out.println("DEBUG: BilRepository.update");
-
         String sql = "UPDATE Bil SET VognNummer = ?, StelNummer = ?, Model = ?, UdstyrsNiveau = ?, KilometerKoert = ?, Status = ? WHERE ID = ?";
-
-        template.update(sql, bil.getVognNummer(), bil.getStelNummer(), bil.getModel(), bil.getUdstyrsNiveau(), bil.getKilometerKoert(), bil.getStatus(), bil.getId());
-
+        jdbcTemplate.update(sql, bil.getVognNummer(), bil.getStelNummer(), bil.getModel(), bil.getUdstyrsNiveau(), bil.getKilometerKoert(), bil.getStatus(), bil.getId());
         System.out.println(" updatedBil: "+bil);
         return bil;
     }
 
     public List<Bil> findAll() {
         String sql = "SELECT * FROM Bil";
-
-        return template.query(sql, getBilRowMapper());
+        return jdbcTemplate.query(sql, getBilRowMapper());
     }
 
     public Bil findBil(int id) {
         String sql = "SELECT * FROM Bil WHERE ID = ?";
 
-        List<Bil> biler = template.query(sql, getBilRowMapper(), id);
+        List<Bil> biler = jdbcTemplate.query(sql, getBilRowMapper(), id);
 
         return biler.isEmpty() ? null : biler.get(0);
 
     }
 
     public Bil findByVognNummer(String vognNummer) {
-
         System.out.println("DEBUG: BilRepository.findByVognNummer");
-
         System.out.println(" vognNummer: "+vognNummer);
-
         String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
         List<Bil> biler = jdbcTemplate.query(sql, new BilRowMapper(), vognNummer);
         return biler.isEmpty() ? null : biler.get(0);
     }
 
-        List<Bil> biler = new ArrayList<>();
-        biler.addAll(template.query(sql, getBilRowMapper(), vognNummer));
-
-        System.out.println(" biler: "+biler);
-        System.out.println();
-
-        return biler.isEmpty() ? null : biler.get(0);
-    }
 
     public void delete(Bil bil) {
         String sql = "DELETE FROM Bil WHERE ID = ?";
 
-        template.update(sql, bil.getId());
+        jdbcTemplate.update(sql, bil.getId());
     }
 
     private RowMapper<Bil> getBilRowMapper() {
@@ -142,16 +122,15 @@ public class BilRepository {
         return jdbcTemplate.query(sql, new BilRowMapper(), status);
     }
 
-    public List<Bil> findAll() {
-        String sql = "SELECT * FROM BIL";
-        return jdbcTemplate.query(sql, new BilRowMapper());
     public boolean exists(Bil bil) {
         String sql = "SELECT COUNT(*) FROM Bil WHERE VognNummer = ?";
 
-        return template.queryForObject(sql, Integer.class, bil.getVognNummer()) > 0;
+        return jdbcTemplate.queryForObject(sql, Integer.class, bil.getVognNummer()) > 0;
     }
 
 }
+
+
 
 /*
 CREATE TABLE Bil (

@@ -18,7 +18,7 @@ public class LejeAftaleRepository {
         @Override
         public LejeAftale mapRow(ResultSet rs, int rowNum) throws SQLException {
             LejeAftale lejeaftale = new LejeAftale();
-            lejeaftale.setLejeaftaleID(rs.getInt("lejeaftaleID"));
+            lejeaftale.setId(rs.getInt("lejeaftaleID"));
             lejeaftale.setBrugerID(rs.getInt("brugerID"));
             lejeaftale.setVognNummer(rs.getString("vognNummer"));
             lejeaftale.setAbonnementsType(rs.getString("abonnementsType"));
