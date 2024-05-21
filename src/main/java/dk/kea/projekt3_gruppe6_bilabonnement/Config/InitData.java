@@ -1,9 +1,9 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Config;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository;
-import dk.kea.projekt3_gruppe6_bilabonnement.service.BilFactory;
+import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
