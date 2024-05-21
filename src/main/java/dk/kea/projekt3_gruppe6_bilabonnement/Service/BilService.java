@@ -1,6 +1,6 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.service;
+package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

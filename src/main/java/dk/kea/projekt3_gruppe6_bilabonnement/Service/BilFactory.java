@@ -1,10 +1,10 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.service;
+package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.CitroenC1;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.OpelCorsaCosmo;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Peugeot108;
-import dk.kea.projekt3_gruppe6_bilabonnement.config.BilConfig;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.CitroenC1;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.OpelCorsaCosmo;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Peugeot108;
+import dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
