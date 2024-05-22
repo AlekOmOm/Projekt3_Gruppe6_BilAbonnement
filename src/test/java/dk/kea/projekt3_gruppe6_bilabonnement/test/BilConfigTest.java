@@ -1,10 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.test;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.CitroenC1;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Peugeot108;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.OpelCorsaCosmo;
-import dk.kea.projekt3_gruppe6_bilabonnement.config.BilConfig;
 import dk.kea.projekt3_gruppe6_bilabonnement.service.BilFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
