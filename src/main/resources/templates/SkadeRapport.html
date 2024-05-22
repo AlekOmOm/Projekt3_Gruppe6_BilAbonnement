@@ -2,19 +2,150 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Skade Rapport</title>
+    <title>Skade- og Udbedring</title>
+    <link rel="stylesheet" href="/SkadeRapport.css">
+    <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
+    <style>
+
+    </style>
 </head>
 <body>
-<div class="header-">
-
+<div class="header">
+    <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300"/>
+    <p>BilAbonnement A/S</p>
 </div>
+
+<button id="tilbageButton">Tilbage</button>
 
 <div class = "content">
 
+
+
+    <br>
+    <br>
+    <br>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Bil</th>
+            <th>Dato</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr>
+            <td>Vehicle 1</td>
+            <td>2024-05-14</td>
+            <td><button>Generer Rapport</button></td>
+        </tr>
+        <tr>
+            <td>Vehicle 2</td>
+            <td>2024-05-15</td>
+            <td><button>Generer Rapport</button> </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+
+    <div class="archive">
+        <input type="text" id="searchInput" placeholder="Søg efter dato...">
+        <button id="searchButton">Search</button>
+        <h2 class="ArkivTitel">Arkiv</h2>
+        <table class="ArkivTabel">
+            <thead>
+            <th>BilNR</th>
+            <th>Dato</th>
+            <th>Se rapport</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
 </div>
 
 <div class="footer">
-
+    <p>© 2021 Bilabonnement A/S</p>
 </div>
+
+
 </body>
 </html>
