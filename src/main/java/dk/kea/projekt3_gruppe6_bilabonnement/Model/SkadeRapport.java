@@ -1,64 +1,87 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 
-public class SkadeRapport {
-    int id;
-    int brugerID;
-    String koeretoejsNummer;
-    String kundeID;
-    int kilometerKoert;
-    int reparationsomkostninger;
+import java.util.List;
 
-    public SkadeRapport(int id, int brugerID, String koeretoejsNummer, String kundeID, int kilometerKoert, int reparationsomkostninger) {
-        this.id = id;
+public class SkadeRapport {
+    int ID;
+    int brugerID;
+    int lejeAftaleID;
+    int kilometerKoertOver;
+    int reparationsomkostninger;
+    List<Skade> skader;
+
+
+    public SkadeRapport(int ID, int brugerID, int lejeAftaleID,  int kilometerKoertOver, int reparationsomkostninger){
+        this.ID = ID;
         this.brugerID = brugerID;
-        this.kundeID = kundeID;
-        this.koeretoejsNummer = koeretoejsNummer;
-        this.kilometerKoert = kilometerKoert;
+        this.lejeAftaleID = lejeAftaleID;
+        this.kilometerKoertOver = kilometerKoertOver;
+        this.reparationsomkostninger = reparationsomkostninger;
+
+    }
+
+
+    public SkadeRapport(int brugerID, int lejeAftaleID,  int kilometerKoertOver, int reparationsomkostninger){
+        this.brugerID = brugerID;
+        this.lejeAftaleID = lejeAftaleID;
+        this.kilometerKoertOver = kilometerKoertOver;
         this.reparationsomkostninger = reparationsomkostninger;
     }
 
-    public int getId() {
-        return id;
+    public SkadeRapport(int ID, int brugerID, int lejeAftaleID,  int kilometerKoertOver, int reparationsomkostninger, List<Skade> skader){
+        this.ID = ID;
+        this.brugerID = brugerID;
+        this.lejeAftaleID = lejeAftaleID;
+        this.kilometerKoertOver = kilometerKoertOver;
+        this.reparationsomkostninger = reparationsomkostninger;
+        this.skader = skader;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public SkadeRapport() {
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public List<Skade> getSkader(){
+        return skader;
     }
 
     public int getBrugerID() {
         return brugerID;
     }
 
-    public void setBrugerID(int brugerID) {
-        this.brugerID = brugerID;
+    public int getLejeAftaleID() {
+        return lejeAftaleID;
     }
 
-    public String getKoeretoejsNummer() {
-        return koeretoejsNummer;
-    }
-
-    public void setKoeretoejsNummer(String koeretoejsNummer) {
-        this.koeretoejsNummer = koeretoejsNummer;
-    }
-
-    public String getKundeID() {
-        return kundeID;
-    }
-
-    public void setKundeID(String kundeID) {
-        this.kundeID = kundeID;
-    }
-
-    public int getKilometerKoert() {
-        return kilometerKoert;
-    }
-
-    public void setKilometerKoert(int kilometerKoert) {
-        this.kilometerKoert = kilometerKoert;
+    public int getKilometerKoertOver() {
+        return kilometerKoertOver;
     }
 
     public int getReparationsomkostninger() {
         return reparationsomkostninger;
+    }
+    public void setID(int skadeRapportID) {
+        this.ID = ID;
+    }
+
+    public void setSkader(List<Skade> skader){
+        this.skader =  skader;
+    }
+
+    public void setBrugerID(int brugerID) {
+        this.brugerID = brugerID;
+    }
+
+    public void setLejeAftaleID(int bilID) {
+        this.lejeAftaleID = bilID;
+    }
+
+
+    public void setKilometerKoertOver(int kilometerKoertOver) {
+        this.kilometerKoertOver = kilometerKoertOver;
     }
 
     public void setReparationsomkostninger(int reparationsomkostninger) {

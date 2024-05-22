@@ -4,16 +4,14 @@ public class Bil {
 
     // ------------------- Fields -------------------
 
-    // 0: Model class
-    protected String modelClass;
-
+    private String model;
 
     //1: Identifikation
     private int id;
 
     // 2: Bil model data - 'configuration' data
         // for hver bil model vil disse blive initialiseret fra en konfigurationsklasse, hvor de er sat som konstanter
-    private String model;
+
     private String gearType;
     private String fuelType;
     private double co2Emission;
@@ -22,7 +20,7 @@ public class Bil {
     private int udbetaling;
     private int mdlYdelse;
     private int bindingMdr;
-    private int samletYdelse36Måneder;
+    private int samletYdelse36Maaneder;
     private String leveringTid;
     private String leveringsstedStandard;
     private int koerselPrMd;
@@ -208,11 +206,11 @@ public class Bil {
     }
 
     public int getSamletYdelse36Maaneder() {
-        return samletYdelse36Måneder;
+        return samletYdelse36Maaneder;
     }
 
     public void setSamletYdelse36Maaneder(int samletYdelse36Måneder) {
-        this.samletYdelse36Måneder = samletYdelse36Måneder;
+        this.samletYdelse36Maaneder = samletYdelse36Måneder;
     }
 
     public String getLeveringTid() {

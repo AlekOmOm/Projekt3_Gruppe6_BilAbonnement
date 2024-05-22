@@ -1,22 +1,19 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "lejeaftale")
+
 public class LejeAftale {
 
-    @Id
     int id;
 
     int brugerID;
-    String koeretoejsNummer;
+    int bilID;
+    int kundeInfoID;
+    int skadeRapportID;
+
     String abonnementsType;
-    String kundeID;
     int prisoverslag;
     String afhentningssted;
     String afleveringssted;
@@ -24,12 +21,18 @@ public class LejeAftale {
     LocalDate slutDato;
 
     // constructor lejeaftale
-    public LejeAftale(int id, int brugerID, String koeretoejsNummer, String abonnementsType, String kundeID, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+    //empty constructor
+    public LejeAftale() {
+    }
+
+    public LejeAftale(int id, int brugerID, int bilID, int kundeInfoID, int skadeRapportID, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
         this.id = id;
         this.brugerID = brugerID;
-        this.koeretoejsNummer = koeretoejsNummer;
+        this.bilID = bilID;
+        this.kundeInfoID = kundeInfoID;
+        this.skadeRapportID = skadeRapportID;
+
         this.abonnementsType = abonnementsType;
-        this.kundeID = kundeID;
         this.prisoverslag = prisoverslag;
         this.afhentningssted = afhentningssted;
         this.afleveringssted = afleveringssted;
@@ -37,16 +40,32 @@ public class LejeAftale {
         this.slutDato = slutDato;
     }
 
-    //empty constructor
-    public LejeAftale() {
+
+    public LejeAftale(int id, int brugerID, int bilID, int kundeID, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+        this.id = id;
+        this.brugerID = brugerID;
+        this.bilID = bilID;
+        this.kundeInfoID = kundeID;
+
+        this.abonnementsType = abonnementsType;
+        this.prisoverslag = prisoverslag;
+        this.afhentningssted = afhentningssted;
+        this.afleveringssted = afleveringssted;
+        this.startDato = startDato;
+        this.slutDato = slutDato;
+
     }
 
-    // getters and setters
-    public int getId() {
+
+
+
+    // ------------------- Get & Set -------------------
+
+    public int getID() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
@@ -58,12 +77,12 @@ public class LejeAftale {
         this.brugerID = brugerID;
     }
 
-    public String getKoeretoejsNummer() {
-        return koeretoejsNummer;
+    public int getBilID() {
+        return bilID;
     }
 
-    public void setKoeretoejsNummer(String koeretoejsNummer) {
-        this.koeretoejsNummer = koeretoejsNummer;
+    public void setBilID(int bilID) {
+        this.bilID = bilID;
     }
 
     public String getAbonnementsType() {
@@ -74,12 +93,12 @@ public class LejeAftale {
         this.abonnementsType = abonnementsType;
     }
 
-    public String getKundeID() {
-        return kundeID;
+    public int getKundeInfoID() {
+        return kundeInfoID;
     }
 
-    public void setKundeID(String kundeID) {
-        this.kundeID = kundeID;
+    public void setKundeInfoID(int kundeInfoID) {
+        this.kundeInfoID = kundeInfoID;
     }
 
     public int getPrisoverslag() {
@@ -119,8 +138,14 @@ public class LejeAftale {
     }
 
     public void setSlutDato(LocalDate slutDato) {
-
         this.slutDato = slutDato;
     }
 
+    public int getSkadeRapportID() {
+        return skadeRapportID;
+    }
+
+    public void setSkadeRapportID(int skadeRapportID) {
+        this.skadeRapportID = skadeRapportID;
+    }
 }
