@@ -20,6 +20,8 @@ public class DashboardController {
 
 
 
-
-
+    @GetMapping("/ForretningsRapport")
+        public String seForretningsRapport(Model model) {
+            return "ForretningsRapport";
+        }
 }
