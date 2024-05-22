@@ -19,6 +19,11 @@ public class BilService {
         this.bilRepository = bilRepository;
     }
 
+    // --------------------------------------------
+    public Bil getBilById(int id){
+        return BilRepository.findBilById(id);
+    }
+
 
 
     // ------------------- CRUD -------------------

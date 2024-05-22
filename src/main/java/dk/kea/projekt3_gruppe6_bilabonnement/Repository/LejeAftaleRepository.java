@@ -6,5 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class LejeAftaleRepository {
+    // metode til at gemme lejeaftale
+    public void save(LejeAftale lejeAftale) {
+
+    }
 
 }

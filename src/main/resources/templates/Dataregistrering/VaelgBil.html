@@ -21,11 +21,11 @@
     <div class="content">
         <div class="inputForm">
         <h2>Vælg Bil</h2>
-            <form action="/LejeAftale/Abonnement" method="get">
+            <form action="/Abonnement" method="get">
                 <div class="inputRow">
                     <label for="bil">Bil:</label>
                     <select id="vaelgBil" name="bil" required>
-                        <option value="">Vælg Bil</option>
+                        <option value=""> Vælg Bil </option>
                         <option th:each="car : ${cars}" th:value="${car.model}" th:text="${car.model}"></option>
                     </select>
                 </div>
@@ -47,11 +47,11 @@
                     <p>Pris: 1500 kr. pr. dag</p>
                 </div>
             </div>
-            <div class="car-box">
+            <div class="car-box" th:title="${car.model}">
                 <img src="../../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Car Image">
                 <p>Bil Information</p>
                 <div class="text-box">
-                    <p>Model: Citroen C1</p>
+                    <p th:text="'Model: ' + ${car.model}"></p>
                     <p>Årgang: 2021</p>
                     <p>Farve: Hvid</p>
                     <p>Pris: 1500 kr. pr. dag</p>

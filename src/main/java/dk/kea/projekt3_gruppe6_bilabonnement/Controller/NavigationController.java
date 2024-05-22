@@ -1,5 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
+import dk.kea.projekt3_gruppe6_bilabonnement.service.LejeAftaleService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,11 @@ public class NavigationController {
     private static final String KUNDEINFO_PAGE = "Kunde";
     private static final String AFHENTNINGSSTED_PAGE = "LejeAfhentningsSted";
     private static final String REDIRECT_TO_START = "redirect:/LejeAftale/";
+    private final LejeAftaleService lejeAftaleService;
+
+    public NavigationController(LejeAftaleService lejeAftaleService) {
+        this.lejeAftaleService = lejeAftaleService;
+    }
 
     @GetMapping("/")
     public String index() {
@@ -30,10 +36,8 @@ public class NavigationController {
 
     @GetMapping("/VaelgBil")
     public String getVaelgbilPage(@ModelAttribute("bil") String bil, HttpSession session) {
-
         // data til siden:
         session.setAttribute("valgtBil", bil);
-
 
         return VAELGBIL_PAGE;
     }
@@ -43,23 +47,18 @@ public class NavigationController {
         //
         session.setAttribute("valgtAbonomment", abonnemment);
 
-//        // henter valgt bil fra session
-//        String valgtBil = (String) session.getAttribute("valgtBil");
-//
-//        // tilføj valgt bil til model
-//        model.addAttribute("valgtBil", valgtBil);
-
         return ABONNEMENT_PAGE;
     }
+
 
     @GetMapping("/PrisOverslag")
     public String LejeKundeInfo(@ModelAttribute("PrisOverslag") String prisOverslag, HttpSession session, Model model) {
         // henter data fra session
         session.setAttribute("valgtPrisOverslag", prisOverslag);
 
-
         return PRISOVERSLAG_PAGE;
     }
+
 
     @GetMapping("/KundeInfo")
     public String getKundeinfoPage(@ModelAttribute("KundeInfo") String kundeInfo, HttpSession session, Model model) {
@@ -67,6 +66,7 @@ public class NavigationController {
 
         return KUNDEINFO_PAGE;
     }
+
 
     @GetMapping("/AfhentningsSted")
     public String getAfhentningsstedPage(@ModelAttribute("AfhentningsSted") String afhentningsSted, HttpSession session, Model model) {
@@ -88,15 +88,17 @@ public class NavigationController {
 
         // opretter en lejeaftale med den indsamlede data
         LejeAftale lejeAftale = new LejeAftale(); // TODO: constructor parameters missing
-        lejeAftale.setBil(valgtBil);
-        lejeAftale.setAbonnement(valgtAbonnement);
-        lejeAftale.setPrisOverslag(valgtPrisOverslag);
-        lejeAftale.setKundeInfo(valgtKundeInfo);
-        lejeAftale.setAfhentningsSted(valgtAfhentningsSted);
+        lejeAftale.setBil(valgtBil); // er object
+        lejeAftale.setAbonnement(valgtAbonnement); // blir gemt i leje aftale
+        lejeAftale.setPrisOverslag(valgtPrisOverslag); // blir gemt i leje aftale
+        lejeAftale.setKundeInfo(valgtKundeInfo); // er object
+        lejeAftale.setAfhentningsSted(valgtAfhentningsSted); // blir gemt i leje aftale
 
-        // gemmer lejeaftalen i databasen
+        // gem obejekter i databasen først og tag deres ID og smid det i en lejeaftale
 
-        // lejeAftaleService.save(lejeAftale);
+
+        // gemmer lejeaftalen i databasen via service
+        lejeAftaleService.saveLejeAftale(lejeAftale);
 
         return REDIRECT_TO_START;
     }

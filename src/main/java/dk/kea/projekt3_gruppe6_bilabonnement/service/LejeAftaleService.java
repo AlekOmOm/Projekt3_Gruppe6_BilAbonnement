@@ -15,4 +15,7 @@ public class LejeAftaleService {
         this.lejeAftaleRepository = lejeAftaleRepository;
     }
 
+    public void saveLejeAftale(LejeAftale lejeAftale) {
+        lejeAftaleRepository.save(lejeAftale);
+    }
 }

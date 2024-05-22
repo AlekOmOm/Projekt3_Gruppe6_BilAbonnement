@@ -1,5 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -22,6 +23,13 @@ public class LejeAftale {
     String afleveringssted;
     LocalDate startDato;
     LocalDate slutDato;
+    //-------------------------------------------
+    private Bil bil;
+    private KundeInfo kundeInfo;
+    private String abonnement;
+    private String prisOverslag;
+    private String afhentningsSted;
+    //-------------------------------------------
 
     // constructor lejeaftale
     public LejeAftale(int id, int brugerID, String koeretoejsNummer, String abonnementsType, String kundeID,
@@ -124,4 +132,21 @@ public class LejeAftale {
         this.slutDato = slutDato;
     }
 
+    //-------------------------------------------
+    public void setBil(Bil bil) {
+        this.bil = bil;
+    }
+    public void setKundeInfo(KundeInfo kundeInfo) {
+        this.kundeInfo = kundeInfo;
+    }
+    public void setAbonnement(String abonnement) {
+        this.abonnement = abonnement;
+    }
+    public void setPrisOverslag(String prisOverslag) {
+        this.prisOverslag = prisOverslag;
+    }
+    public void setAfhentningsSted(String afhentningsSted) {
+        this.afhentningsSted = afhentningsSted;
+    }
+    //-------------------------------------------
 }
