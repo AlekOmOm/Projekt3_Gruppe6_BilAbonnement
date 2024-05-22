@@ -3,6 +3,7 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,39 +20,53 @@ public class BilService {
         this.bilRepository = bilRepository;
     }
 
+    // ------------------- Bil CRUD -------------------
 
-
-    // ------------------- CRUD -------------------
-
-    public Bil saveBil(Bil nyBil) {
-//        System.out.println("DEBUG: BilService.saveBil");
-//        System.out.println(" nyBil: "+nyBil);
-        Bil existingBil = bilRepository.findByVognNummer(nyBil.getVognNummer());
-//        System.out.println(" existingBil: "+existingBil);
-
-        if (existingBil != null) {
-//            System.out.println(" 1: exists");
-
-            // opdater existingBil (DB bilen) med nyBil
-            update(nyBil, existingBil);
-
-            // opdater DB bilen
-            return bilRepository.update(existingBil);
-        } else {
-//            System.out.println(" 2: does not exist");
-//            System.out.println("----DEBUG: saveBil end");
-            return bilRepository.save(nyBil);
-        }
+    public Bil create(String model) {
+        return bilFactory.create(model);
     }
 
 
+    // ------------------- Business Operations -------------------
+
+    public Bil book(Bil bil) {
+        return bilRepository.book(bil);
+    }
+
+    public Bil setSomTilgaengelig(Bil bil) {
+        return bilRepository.setSomTilgaengelig(bil);
+    }
+
+    public Bil setSomTilService(Bil bil) {
+        return bilRepository.setSomTilService(bil);
+    }
+
+
+
+    // ------------------- DB CRUD -------------------
+
+    public Bil saveBil(Bil nyBil) {
+
+        if (bilRepository.exists(nyBil)) {
+            return bilRepository.update(nyBil);
+        }
+
+        return bilRepository.save(nyBil);
+    }
+
+    public Bil getBil(Bil bil) {
+        return bilFactory.initialize(bilRepository.find(bil));
+    }
+    public Bil getBil(int id) {
+        return bilFactory.initialize(bilRepository.findByID(id));
+    }
 
     public List<Bil> getAlleBiler() {
         return bilFactory.initializeList(bilRepository.findAll());
     }
 
-    public Bil getBil(int id) {
-        return bilFactory.initialize(bilRepository.findBil(id));
+    public List<Bil> getBilerByStatus(String status) {
+        return bilFactory.initializeList(bilRepository.findByStatus(status));
     }
 
     public Bil getBilByVognNummer(String vognNummer) {
@@ -62,8 +77,13 @@ public class BilService {
         return bilRepository.update(bil);
     }
 
-    public void delete(Bil bil) {
-        bilRepository.delete(bil);
+    public boolean delete(Bil bil) {
+        try {
+            bilRepository.delete(bil);
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
+        return false;
     }
 
 
@@ -76,19 +96,6 @@ public class BilService {
         }
         return false;
     }
-
-    private Bil update(Bil bil, Bil existingBil) {
-        existingBil.setVognNummer(bil.getVognNummer());
-        existingBil.setStelNummer(bil.getStelNummer());
-        existingBil.setModel(bil.getModel());
-
-        existingBil.setUdstyrsNiveau(bil.getUdstyrsNiveau());
-        existingBil.setKilometerKoert(bil.getKilometerKoert());
-        existingBil.setStatus(bil.getStatus());
-        return existingBil;
-    }
-
-
 
 
 }

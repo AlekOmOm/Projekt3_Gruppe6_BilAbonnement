@@ -3,19 +3,23 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Config;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
-import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepo;
+import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService;
+import dk.kea.projekt3_gruppe6_bilabonnement.Service.BrugerService;
+import dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -28,7 +32,9 @@ public class InitData implements ApplicationRunner {
     private final BilRepository bilRepository;
     private final BrugerRepository brugerRepository;
     private final LejeAftaleRepository lejeaftaleRepository;
-    private final SkadeRapportRepo skadeRapportRepository;
+    private final SkadeRapportRepository skadeRapportRepository;
+    private final BrugerService brugerService;
+    private final LejeAftaleService lejeAftaleService;
 
     private static List<Bruger> brugere = new ArrayList<>();
     private static List<Bil> biler = new ArrayList<>();
@@ -38,13 +44,15 @@ public class InitData implements ApplicationRunner {
 //    List<ForretningsRapport> forretningsRapporter = new ArrayList<>();
 
     @Autowired
-    public InitData(BilFactory bilFactory, BilRepository bilRepository, BrugerRepository brugerRepository, LejeAftaleRepository lejeaftaleRepository, SkadeRapportRepo skadeRapportRepository, BilService bilService){
+    public InitData(BilFactory bilFactory, BilRepository bilRepository, BrugerRepository brugerRepository, LejeAftaleRepository lejeaftaleRepository, SkadeRapportRepository skadeRapportRepository, BilService bilService, BrugerService brugerService, LejeAftaleService lejeAftaleService) {
         this.bilFactory = bilFactory;
         this.bilRepository = bilRepository;
         this.brugerRepository = brugerRepository;
         this.lejeaftaleRepository = lejeaftaleRepository;
         this.skadeRapportRepository = skadeRapportRepository;
         this.bilService = bilService;
+        this.brugerService = brugerService;
+        this.lejeAftaleService = lejeAftaleService;
     }
 
     @Override
@@ -61,10 +69,14 @@ public class InitData implements ApplicationRunner {
 
         // ------------------- LejeAftale test data -------------------
 
+        lejeAftaleTestData();
+
         // ------------------- SkadeRapport test data -------------------
 
 
     }
+
+
 
     private void brugerTestData() {
 
@@ -128,6 +140,36 @@ public class InitData implements ApplicationRunner {
                 bilRepository.save(bil);
             }
         }
+    }
+
+    private void lejeAftaleTestData() {
+        brugere = brugerRepository.findAll();
+        biler = bilRepository.findAll();
+
+        lejeAftaler.addAll(Arrays.asList(
+                new LejeAftale(brugere.get(0), new KundeInfo(), biler.get(0), "AbonnementsType1", 1000, "Afhentningssted1", "Afleveringssted1", LocalDate.now(), LocalDate.now().plusDays(7)),
+                new LejeAftale(brugere.get(1), new KundeInfo(), biler.get(1), "AbonnementsType2", 2000, "Afhentningssted2", "Afleveringssted2", LocalDate.now(), LocalDate.now().plusDays(7)),
+                new LejeAftale(brugere.get(2), new KundeInfo(), biler.get(2), "AbonnementsType3", 3000, "Afhentningssted3", "Afleveringssted3", LocalDate.now(), LocalDate.now().plusDays(7))
+        ));
+
+        // tjek om biler allerede findes i database og fjern dem fra listen
+        for (Iterator<LejeAftale> iterator = lejeAftaler.iterator(); iterator.hasNext();) {
+
+            LejeAftale lejeAftale = iterator.next();
+            if (lejeAftaleService.exists(lejeAftale)) {
+                iterator.remove();
+            }
+        }
+
+
+        // Save biler (hvis nye) til database
+        for (int i = 0; i<biler.size(); i++) {
+            Bil bil = biler.get(i);
+            if (bil != null) {
+                bilRepository.save(bil);
+            }
+        }
+
     }
 
     // ------------------- get Data objects -------------------

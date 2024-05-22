@@ -13,6 +13,8 @@ import java.util.List;
 @Component
 public class BilFactory {
 
+    // ------------------- Dependency Injection -------------------
+
     private final BilConfig bilConfig;
 
     @Autowired
@@ -20,8 +22,16 @@ public class BilFactory {
         this.bilConfig = bilConfig;
     }
 
-    // convert Bil to CitroenC1, Peugeot108, OpelCorsaCosmo with the instance variables
+    // ------------------- Main Operations - Create and Initialize -------------------
 
+    public Bil create(String model) {
+        return switch (model) {
+            case "CitroenC1" -> createCitroenC1();
+            case "Peugeot108" -> createPeugeot108();
+            case "OpelCorsaCosmo" -> createOpelCorsaCosmo();
+            default -> null;
+        };
+    }
 
 
     public Bil initialize(Bil bil) {
@@ -38,6 +48,8 @@ public class BilFactory {
 //        System.out.println(" initBil.getId(): "+initBil.getId());
         return initBil;
     }
+
+    // ------------------- Create Biler -------------------
 
     // create for each Bil model med empty og fuld instans variabler
     public Bil createCitroenC1() {

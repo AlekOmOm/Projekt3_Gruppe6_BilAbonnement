@@ -9,22 +9,23 @@ import java.util.List;
 @Service
 public class DashboardService {
 
-    public final BilRepository bilRepository;
+    public final BilService bilService;
     public final LejeAftaleRepository lejeaftaleRepository;
 
-    public DashboardService(BilRepository bilRepository, LejeAftaleRepository lejeaftaleRepository) {
-        this.bilRepository = bilRepository;
+    public DashboardService(BilService bilService, LejeAftaleRepository lejeaftaleRepository) {
+        this.bilService = bilService;
         this.lejeaftaleRepository = lejeaftaleRepository;
     }
 
     //Antal udlejde biler
     public long seAntalUdlejdeBiler() {
-        return bilRepository.findByStatus("Udlejet").size();
+
+        return bilService.getBilerByStatus("Udlejet").size();
     }
 
     //Samlet indkomst fra udlejede biler
     public int seTotalIndkomst(){
-        List<Bil> udlejedeBiler = bilRepository.findByStatus("Udlejet");
+        List<Bil> udlejedeBiler = bilService.getBilerByStatus("Udlejet");
         List<String> vognNummer = udlejedeBiler.stream().map(Bil::getVognNummer).toList();
         return lejeaftaleRepository.findByVognNummer(vognNummer).stream().mapToInt(LejeAftale::getPrisoverslag).sum();
     }

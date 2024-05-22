@@ -58,7 +58,7 @@ public class BilServiceTest {
     }
 
     @Test
-    public void testUpdateBil() {
+    public void testUpdate() {
         Bil createdBil = bilService.saveBil(testBil);
         createdBil.setKilometerKoert(2000);
         Bil updatedBil = bilService.update(createdBil);

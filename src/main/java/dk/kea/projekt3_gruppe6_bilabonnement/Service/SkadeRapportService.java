@@ -2,7 +2,7 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Skade;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
-import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepo;
+import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +14,17 @@ public class SkadeRapportService {
     private static final double PRIS_PR_KILOMETER_KOERT_OVER = 0.75;
 
     @Autowired
-    private SkadeRapportRepo skadeRapportRepo;
+    private SkadeRapportRepository skadeRapportRepository;
 
     @Autowired
     SkadeService skadeService;
 
     public List<SkadeRapport> findAlle(){
-        return skadeRapportRepo.findAlle();
+        return skadeRapportRepository.findAlle();
     }
 
     public SkadeRapport findVedID(int id){
-        SkadeRapport skadeRapportTom = skadeRapportRepo.findVedID(id);
+        SkadeRapport skadeRapportTom = skadeRapportRepository.findVedID(id);
 
         List<Skade> valgteSkader = skadeService.getSkader(skadeRapportTom);
 
@@ -36,21 +36,21 @@ public class SkadeRapportService {
     }
 
     public SkadeRapport findMedLejeAftaleID(int id){
-        return skadeRapportRepo.findMedLejeAftaleID(id);
+        return skadeRapportRepository.findMedLejeAftaleID(id);
     }
 
     public SkadeRapport gem(SkadeRapport skadeRapport){
-        skadeRapportRepo.gem(skadeRapport);
+        skadeRapportRepository.gem(skadeRapport);
 
         return findMedLejeAftaleID(skadeRapport.getLejeAftaleID());
     }
 
     public void opdater(SkadeRapport skadeRapport){
-        skadeRapportRepo.opdater(skadeRapport);
+        skadeRapportRepository.opdater(skadeRapport);
     }
 
     public void sletVedID(int id){
-        skadeRapportRepo.sletVedID(id);
+        skadeRapportRepository.sletVedID(id);
     }
 
     public int udregnReparationsomkostininger(int kilometerkoertOver, List<Skade> valgteSkader){

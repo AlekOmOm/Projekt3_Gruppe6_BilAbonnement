@@ -46,7 +46,7 @@ public class SkadeRapportController {
         //Data for View: skadeRapporter & lejeAftaler med manglende SkadeRapporter (lejeAftaler = udløbet + mangler SkadeRapport)
 
         List<SkadeRapport> skadeRappoter = skadeRapportService.findAlle();
-        //List<LejeAftaleKortInfoDto> lejeAftalerUdenRapport = lejeAftaleService.getLejeAftalerUdenRapport();
+        //List<LejeAftaleKortInfoDto> lejeAftalerUdenRapport = lejeAftaleService.findALlUdenRapport();
 
         // TODO: lejeAftaler med Manglende SkadeRapporter (LejeAftaleService.getLejeAftalerUdenRapporter())
         // model.addAttribute("ManglendeSkadeRapporter", manglendeSkadeRapporter); data der skal vises: BilID, SlutDato (måske opret LejeAftaleDTO med disse to felter)

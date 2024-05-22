@@ -13,7 +13,7 @@ CREATE TABLE Bruger
 CREATE TABLE Bil
 (
     ID             INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    VognNummer     VARCHAR(255) NOT NULL,
+    VognNummer     VARCHAR(255) NOT NULL UNIQUE,
     StelNummer     VARCHAR(255) NOT NULL UNIQUE,
     Model          VARCHAR(255) NOT NULL,
     UdstyrsNiveau  VARCHAR(255),
@@ -70,7 +70,7 @@ CREATE TABLE LejeAftale
     Abonnementstype VARCHAR(255) NOT NULL,
     Prisoverslag    INT,
     Afhentningssted VARCHAR(255),
-    leveringssted   VARCHAR(255),
+    afleveringssted   VARCHAR(255),
     StartDato       DATE,
     SlutDato        DATE,
 
