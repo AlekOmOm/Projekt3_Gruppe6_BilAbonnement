@@ -8,7 +8,7 @@ import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
-import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository;
+import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepo;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class InitData implements ApplicationRunner {
     private final BilRepository bilRepository;
     private final BrugerRepository brugerRepository;
     private final LejeAftaleRepository lejeaftaleRepository;
-    private final SkadeRapportRepository skadeRapportRepository;
+    private final SkadeRapportRepo skadeRapportRepository;
 
     private static List<Bruger> brugere = new ArrayList<>();
     private static List<Bil> biler = new ArrayList<>();
@@ -38,7 +38,7 @@ public class InitData implements ApplicationRunner {
 //    List<ForretningsRapport> forretningsRapporter = new ArrayList<>();
 
     @Autowired
-    public InitData(BilFactory bilFactory, BilRepository bilRepository, BrugerRepository brugerRepository, LejeAftaleRepository lejeaftaleRepository, SkadeRapportRepository skadeRapportRepository, BilService bilService){
+    public InitData(BilFactory bilFactory, BilRepository bilRepository, BrugerRepository brugerRepository, LejeAftaleRepository lejeaftaleRepository, SkadeRapportRepo skadeRapportRepository, BilService bilService){
         this.bilFactory = bilFactory;
         this.bilRepository = bilRepository;
         this.brugerRepository = brugerRepository;

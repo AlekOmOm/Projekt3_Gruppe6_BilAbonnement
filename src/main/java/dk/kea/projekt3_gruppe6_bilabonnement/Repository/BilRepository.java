@@ -1,5 +1,4 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Repository;
-
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -89,7 +89,7 @@ public class BilRepository {
 
         String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
 
-        List<Bil> biler = new ArrayList<>();
+        List<Bil> biler = new ArrayList<Bil>();
         biler.addAll(template.query(sql, getBilRowMapper(), vognNummer));
 
 //        System.out.println(" biler: "+biler);

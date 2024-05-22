@@ -24,11 +24,11 @@ public class LejeAftaleRepository {
         @Override
         public LejeAftale mapRow(ResultSet rs, int rowNum) throws SQLException {
             LejeAftale lejeaftale = new LejeAftale();
-            lejeaftale.setId(rs.getInt("lejeaftaleID"));
+            lejeaftale.setID(rs.getInt("lejeaftaleID"));
             lejeaftale.setBrugerID(rs.getInt("brugerID"));
-            lejeaftale.setVognNummer(rs.getString("vognNummer"));
+            lejeaftale.setBilID(rs.getInt("BilID"));
             lejeaftale.setAbonnementsType(rs.getString("abonnementsType"));
-            lejeaftale.setKundeID(rs.getString("kundeID"));
+            lejeaftale.setKundeInfoID(rs.getInt("kundeInfoID"));
             lejeaftale.setPrisoverslag(rs.getInt("prisoverslag"));
             lejeaftale.setAfhentningssted(rs.getString("afhentningssted"));
             lejeaftale.setAfleveringssted(rs.getString("afleveringssted"));
@@ -59,7 +59,7 @@ public class LejeAftaleRepository {
         lejeaftale.setSlutDato(rs.getDate("slutDato").toLocalDate());
         return lejeaftale;
     }
-}
+
 
     public List<LejeAftale> findByVognNummer(List<String> vognNummerList) {
         String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
