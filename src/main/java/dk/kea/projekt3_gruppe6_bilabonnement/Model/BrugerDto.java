@@ -64,6 +64,12 @@ public class BrugerDto implements Serializable {
     }
 
 
+    // ------------------- Services -------------------
+
+    public void clearPassword() {
+        this.password = null;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
@@ -72,4 +78,6 @@ public class BrugerDto implements Serializable {
                 "password = " + password + ", " +
                 "rolle = " + rolle + ")";
     }
+
+
 }

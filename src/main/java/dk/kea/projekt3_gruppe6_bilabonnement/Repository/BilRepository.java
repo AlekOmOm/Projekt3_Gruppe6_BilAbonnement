@@ -29,7 +29,7 @@ public class BilRepository {
             bil.setStelNummer(rs.getString("stelNummer"));
             bil.setModel(rs.getString("model"));
             bil.setUdstyrsNiveau(rs.getString("udstyrsNiveau"));
-            bil.setKilometerKoert(rs.getInt("kilometer"));
+            bil.setKilometerKoert(rs.getInt("kilometerKoert"));
             bil.setStatus(rs.getString("status"));
             return bil;
         }

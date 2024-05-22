@@ -35,7 +35,10 @@ public class BrugerController {
     public String index() {
         return HOME_PAGE;
     }
-
+    @GetMapping("/home")
+    public String home() {
+        return HOME_PAGE;
+    }
     @GetMapping("/login")
     public String login() {
         return HOME_PAGE;
@@ -64,14 +67,21 @@ public class BrugerController {
             return HOME_PAGE;
         }
 
+
+
         // login lykkedes
-        session.invalidate(); // session reset
+        // -> clean up
+        clearSessionAttributes(session);
+        loginBruger.clearPassword();
+
+        // -> set new session state
+        session.setAttribute("loggedInBruger", loginBruger);
         session.setAttribute("loggedIn", true);
-        session.setAttribute("loggedInBrugerNavn", loginBruger.getBrugerNavn()); // brugernavn og rolle gemmes separat, i stedet for hele Dto objektet, for at undgå at password gemmes i Session
-        session.setAttribute("loggedInBrugerRolle", loginBruger.getRolle());
 
         return omdirigerBruger(loginBruger.getRolle());
     }
+
+
 
     // ------------------- Register -------------------
 
@@ -119,5 +129,12 @@ public class BrugerController {
             case "FORRETNINGS_UDVIKLING" -> REDIRECT_FORRETNINGS_UDVIKLING;
             default -> HOME_PAGE;
         };
+    }
+
+    private void clearSessionAttributes(HttpSession session) {
+        session.removeAttribute("bruger");
+        session.removeAttribute("brugerRegistreret");
+        session.removeAttribute("visRegistrering");
+
     }
 }
