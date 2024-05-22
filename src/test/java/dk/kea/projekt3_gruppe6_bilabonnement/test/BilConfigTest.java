@@ -1,13 +1,10 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.test;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.service.BilFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BilConfigTest {
