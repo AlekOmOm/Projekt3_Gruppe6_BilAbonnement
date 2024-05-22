@@ -1,0 +1,86 @@
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: 50px; /* Add more padding to move content to the right */
+    margin-left: 20px; /* Add margin to the left */
+    width: calc(100% - 70px);
+}
+
+
+#tilbageButton {
+    align-self: flex-start; /* Align to the start of the container */
+    margin-top: 10px; /* Add some space from the top */
+    margin-left: 10px; /* Add some space from the left */
+}
+
+#searchInput {
+    width: calc(100% - 80px); /* Adjust width to accommodate button */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    padding: 5px; /* Add some padding */
+    margin-bottom: 10px; /* Add some space at the bottom */
+}
+
+/* Search button styles */
+#searchButton {
+    padding: 5px 10px; /* Add padding to the button */
+    margin-left: 0px; /* Add some space from the left */
+}
+
+
+/* Table styles */
+table {
+    border-collapse: collapse;
+    width: 500px; /* Set the width of the table */
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+
+/* Archive styles */
+.archive {
+    width: 20%; /* Adjust as needed */
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-left: 10px; /* Adjust margin to move the archive */
+    position: relative; /* Add position relative */
+    left: -60px; /* Add negative left offset to counteract the margin */
+    max-height: calc(100vh - 95px); /* Set the maximum height */
+    overflow-y: auto;
+}
+.archive h2 {
+    margin-top: 0;
+}
+.archive ul {
+    list-style-type: none;
+    padding: 0;
+}
+.archive li {
+    margin-bottom: 5px;
+}
+.ArkivTabel {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.ArkivTabel th,
+.ArkivTabel td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.ArkivTabel th {
+    background-color: #f2f2f2;
+}
+
+.ArkivTabel button {
+    padding: 5px 10px; /* Adjust padding as needed */
+}
