@@ -1,6 +1,5 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
-import dk.kea.projekt3_gruppe6_bilabonnement.service.LejeAftaleService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
