@@ -3,6 +3,7 @@
     --secondary-color: #ffffff; /* White */
     --table-cell-color: #e9ecef; /* A light grey for table cells */
     --button-hover-color: #0056b3; /* A darker blue for button hover state */
+    --background-linear-gradient: linear-gradient(to bottom, lightblue, cornflowerblue); /* A light grey gradient, blue */
 
     --error-message-color: #a94442; /* A lighter red for error messages */
     --error-message-background-color: #f8d7da;
@@ -13,18 +14,29 @@
     --success-message-border-color: #d6e9c6;
 }
 
+
 body {
+    font-family: sans-serif;
+
+    /* ------------------- body positioning -------------------
+     */
     margin: 0;
     padding: 0;
-    padding-top: 5vh;  /* Adjust according to your actual header height in viewport percentages */
-    display: flex;
-    flex-direction: row; /* Change from column to row */
-    align-items: flex-start; /* Align items to the top */
-    justify-content: center;
+    padding-top: 5vh;
     min-height: 100vh;
+
+    /* ------------------- content positioning -------------------
+    */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+
+    /* ------------------- color -------------------
+    */
+
     color: var(--primary-color);
-    /* background-color: lightblue; */
-    background: linear-gradient(to bottom, lightblue, cornflowerblue); /* A light grey gradient, blue */
+    background: var(--background-linear-gradient);
 
 }
 
