@@ -1,4 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
+
+import dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -87,11 +89,11 @@ public class NavigationController {
 
         // opretter en lejeaftale med den indsamlede data
         LejeAftale lejeAftale = new LejeAftale(); // TODO: constructor parameters missing
-        lejeAftale.setBil(valgtBil); // er object
-        lejeAftale.setAbonnement(valgtAbonnement); // blir gemt i leje aftale
-        lejeAftale.setPrisOverslag(valgtPrisOverslag); // blir gemt i leje aftale
-        lejeAftale.setKundeInfo(valgtKundeInfo); // er object
-        lejeAftale.setAfhentningsSted(valgtAfhentningsSted); // blir gemt i leje aftale
+        lejeAftale.setBilID(Integer.parseInt(valgtBil)); // er object
+        lejeAftale.setAbonnementsType(valgtAbonnement); // blir gemt i leje aftale
+        lejeAftale.setPrisoverslag(Integer.parseInt(valgtPrisOverslag)); // blir gemt i leje aftale
+        lejeAftale.setKundeInfoID(Integer.parseInt(valgtKundeInfo)); // er object
+        lejeAftale.setAfhentningssted(valgtAfhentningsSted); // blir gemt i leje aftale
 
         // gem obejekter i databasen først og tag deres ID og smid det i en lejeaftale
 
