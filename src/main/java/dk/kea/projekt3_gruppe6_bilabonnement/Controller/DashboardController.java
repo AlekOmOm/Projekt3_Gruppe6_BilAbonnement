@@ -17,4 +17,9 @@ public class DashboardController {
         model.addAttribute("SamletIndkomstForBiler", dashboardService.seTotalIndkomst());
         return "dashboard";
     }
+
+
+
+
+
 }

@@ -1,0 +1,43 @@
+.tables-tyling{
+    border-collapse: collapse; /* Fjerner mellemrum mellem celler */
+    width: 100%; /* Gør så hele containeren er fyldt ud */
+    margin: 0 auto; /* Centrerer tabellen */
+    max-width: 60vw; /* Sætter max bredden til 60 procent af device skærm */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Tilføjer boks skygge */
+}
+
+.tables-tyling td, .tables-tyling th {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.tables-tyling tr:nth-child(even) {
+    background-color: #f2f2f2; /* tilføjer boks skygge til hver anden række */
+}
+
+.content{
+    display: flex;
+    flex-direction: column; /* sætter knappen under table*/
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    overflow: hidden;
+}
+
+.redirect-button {
+    font-size:2vh; /* Ændrer skrift størelse */
+    padding: 15px 30px; /* Plads rundt om teksten */
+    border-radius: 50px; /* Rund knap */
+    background-color: black; /* baggrund */
+    border: none; /* Fjerner border */
+    color: white; /* Tekst farve ændres */
+    cursor: pointer; /* Ændrer mussen */
+    transition: all 0.3s ease 0s; /* Animation */
+    margin-top: 5vh; /* Plads over knappen */
+}

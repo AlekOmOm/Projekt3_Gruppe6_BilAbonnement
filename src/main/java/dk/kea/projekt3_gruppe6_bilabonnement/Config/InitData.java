@@ -105,7 +105,7 @@ public class InitData implements ApplicationRunner {
                 bil.setStelNummer("StelNummer" + i);
                 bil.setUdstyrsNiveau("UdstyrsNiveau" + i);
                 bil.setKilometerKoert(1000 * i);
-                bil.setSomTilgaengelig();
+                bil.setSomUdlejet();
             }
         }
 

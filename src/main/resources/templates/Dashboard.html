@@ -4,22 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../static/DashBoard.css" th:href="@{/DashBoard.css}">
     <title>BilAbonemment Dashboard</title>
 </head>
+
 <body>
-<div class="header"></div>
+
+<div class="header">
+    <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300"/>
+    <p>BilAbonnement A/S</p>
+</div>
+<div class = "content">
 
 
-<div class="dashboard">
-    <div class="stats">
-        <div>Antal udlejede Biler: <span th:text="${AntalUdlejedeBiler}"></span></div>
-        <div>Toltale samlede indkomst: <span th:text="${SamletIndkomstForBiler}"></span></div>
-    </div>
+    <table class="tables-tyling">
+        <tr>
+        <td>Antal udlejede Biler</td>
+        <td>Den totale indkomst for udlejede biler</td>
+        </tr>
+
+        <tr>
+        <td><span id="field2" th:text="${AntalUdlejedeBiler}"></span></td>
+        <td><span id="field4" th:text="${SamletIndkomstForBiler}"></span></td>
+        </tr>
+    </table>
+
+    <button class="redirect-button" onclick="window.location.href='ForretningsRapport.html'">Generer Rapport</button>
+
+
+
+
 </div>
 
+<div class="footer">
+    <p>© 2021 Bilabonnement A/S</p>
+</div>
 
-
-
-<div class="footer"></div>
 </body>
 </html>
