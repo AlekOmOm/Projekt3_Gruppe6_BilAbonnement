@@ -3,32 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!--                                   CSS files                                                 -->
-    <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
-    <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
-
-    <link rel="stylesheet" href="/LejeAftale.css" th:href="@{/LejeAftale.css}">
+    <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../static/LejeAftale.css" th:href="@{/LejeAftale.css}">
     <title>Leje Aftale</title>
+
 </head>
 <body>
 <div class="header">
-    <img src="../static/images/img.png" height="37" width="300"/>
+    <img src="../static/images/img.png" height="37" width="300" alt="logo"/>
     <p>BilAbonnement A/S</p>
 </div>
 
-<div class = "content">
+<button class="button" id="tilbageButton">Tilbage</button>
 
+<div class = "content">
+    <div class="opretLeje">
+        <a href="VaelgBil.html">
+            <button class="button" id="opretLeje">Opret Leje Aftale</button>
+        </a>
+    </div>
 
     <div class="archive">
         <input type="text" id="searchInput" placeholder="Søg efter dato...">
-        <button id="searchButton">Search</button>
+        <button class="button" id="searchButton">Search</button>
         <h2>Arkiv</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Bil</th>
+                    <th>Dato</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Vehicle 1</td>
+                    <td>2024-05-14</td>
+                    <td><button class="button">Generer Rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Vehicle 2</td>
+                    <td>2024-05-15</td>
+                    <td><button class="button">Generer Rapport</button> </td>
+                </tr>
+            </tbody>
         <ul>
-            <li>Vehicle 1 + Dato<button>View Report</button></li>
-            <li>Vehicle 2 + Dato<button>View Report</button></li>
-            <li>Vehicle 3 + Dato<button>View Report</button></li>
+            <li>Vehicle 1 + Dato<button class="button">View Report</button></li>
+            <li>Vehicle 2 + Dato<button class="button">View Report</button></li>
+            <li>Vehicle 3 + Dato<button class="button">View Report</button></li>
         </ul>
+        </table>
     </div>
 </div>
 

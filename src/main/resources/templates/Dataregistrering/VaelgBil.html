@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../../static/VaelgBil.css" th:href="@{/VaelgBil.css}">
+    <title>Leje Input</title>
+</head>
+<body>
+    <div class="header">
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+        <p>BilAbonnement A/S</p>
+    </div>
+    <div>
+        <a href="/LejeAftale.html">
+            <button class="button" id="anullerButton">Anuller</button>
+            <input type="hidden" >
+        </a>
+    </div>
+    <div class="content">
+        <h2>1. Vælg Bil</h2>
+        <div class="inputForm">
+            <form action="/Abonnement" method="get">
+                <div class="inputRow">
+                    <label for="bil">Bil:</label>
+                    <select id="vaelgBil" name="bil" required>
+                        <option value=""> Vælg Bil </option>
+                        <option th:each="car : ${cars}" th:value="${car.model}" th:text="${car.model}"></option>
+                    </select>
+                </div>
+<!--                <div class="inputRow">-->
+<!--                    <label for="dato">Dato: </label>-->
+<!--                    <input type="date" id="dato" name="dato" required>-->       <!-- SKAL RYKKES TIL AFHENTNING -->
+<!--                </div>-->
+                <button type="submit" class="button" id="opretLeje"> Bekræft Valg </button> <!-- Kan man lave funktion sådan så "Næste" knappen både submitter og sender videre til næste -->
+            </form>
+        </div>
+        <div class="car-container">
+            <div class="car-box">
+                <img src="../../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Citroen" class="citroen-img">
+                <p>Bil Information</p>
+                <div class="text-box">
+                    <p>Model: Citroen C1</p>
+                    <p>Årgang: 2021</p>
+                    <p>Farve: Hvid</p>
+                    <p>Pris: 1500 kr. pr. dag</p>
+                </div>
+            </div>
+            <div class="car-box" th:title="${car.model}">
+                <img src="../../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Car Image">
+                <p>Bil Information</p>
+                <div class="text-box">
+                    <p th:text="'Model: ' + ${car.model}"></p>
+                    <p>Årgang: 2021</p>
+                    <p>Farve: Hvid</p>
+                    <p>Pris: 1500 kr. pr. dag</p>
+                </div>
+            </div>
+            <div class="car-box">
+                <img src="../../static/images/cars/peugeot108.png" th:src="@{/images/cars/peugeot108.png}" alt="Peugeot" class="peugeot-img">
+                <p class="peugeot-text">Bil Information</p>
+                <div class="text-box">
+                    <p>Model: Peugeot 108</p>
+                    <p>Årgang: 2021</p>
+                    <p>Farve: Sort</p>
+                    <p>Pris: 2000 kr. pr. dag</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2021 Bilabonnement A/S</p>
+    </div>
+</body>
+</html>
