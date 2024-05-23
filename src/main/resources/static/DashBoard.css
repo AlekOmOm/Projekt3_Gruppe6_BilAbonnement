@@ -32,7 +32,7 @@ body{
 
 .redirect-button {
     font-size:2vh; /* Ændrer skrift størelse */
-    padding: 15px 30px; /* Plads rundt om teksten */
+    padding: 10px 30px; /* Plads rundt om teksten */
     border-radius: 50px; /* Rund knap */
     background-color: black; /* baggrund */
     border: none; /* Fjerner border */

@@ -3,7 +3,6 @@
 
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
@@ -13,12 +12,13 @@
 <body>
 <div class="header">
     <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300"/>
+    <link rel="stylesheet" href="../static/DashBoard.css" th:href="@{/DashBoard.css}">
     <p>BilAbonnement A/S</p>
 </div>
 
 
 <div class = "content">
-    <table>
+    <table>  <table class="tables-tyling">
         <tr>
             <td>Antal udlejede Biler</td>
             <td>Den totale indkomst for udlejede biler</td>
@@ -28,7 +28,6 @@
             <td><span id="field2" th:text="${AntalUdlejedeBiler}"></span></td>
             <td><span id="field4" th:text="${SamletIndkomstForBiler}"></span></td>
         </tr>
-
     </table>
 </div>
 
