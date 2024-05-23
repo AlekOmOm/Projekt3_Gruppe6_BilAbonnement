@@ -18,7 +18,7 @@ public class DashboardService {
     }
 
     //Antal udlejde biler
-    public long seAntalUdlejdeBiler() {
+    public int seAntalUdlejdeBiler() {
         return bilRepository.findByStatus("Udlejet").size();
     }
 

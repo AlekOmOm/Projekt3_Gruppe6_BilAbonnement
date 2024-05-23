@@ -13,11 +13,11 @@ public class ForretningsRapportService {
         this.forretningsRapportRepository = forretningsRapportRepository;
     }
 
-    public void lavRapport(int totalBilerUdlejet, int samletPris) {
+    public void NyRapport(int totalBilerUdlejet, int samletPris) {
         forretningsRapportRepository.NyRapport(totalBilerUdlejet, samletPris);
     }
 
-    public List<ForretningsRapport> gerAllReports() {
+    public List<ForretningsRapport> getAllReports() {
         return forretningsRapportRepository.seAlleRapporter();
     }
 
