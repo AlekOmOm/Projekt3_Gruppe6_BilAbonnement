@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--                                   CSS files                                                 -->
+    <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
+    <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
+
+    <link rel="stylesheet" href="/Home.css" th:href="@{/Home.css}">
+    <link rel="stylesheet" href="/loginpage.css" th:href="@{/loginpage.css}">
+    <link rel="stylesheet" href="/registrer.css" th:href="@{/registrer.css}">
+
+    <title>Login</title>
+</head>
+<body>
+<div class="header">
+    <p>BilAbonnement.dk</p>
+</div>
+
+    <div class = "content">
+        <div class = "one-container">
+
+            <div class = "login" th:unless="${visRegistrering}">
+                <h1>Login</h1>
+
+                <form action="/login" method="post">
+                    <label for="brugernavn">Brugernavn:</label><br>
+                    <input type="text" id="brugernavn" name="brugerNavn" required><br>
+
+                    <label for="password">Kodeord:</label><br>
+                    <input type="password" id="password" name="password" required><br>
+
+                    <!-- bruger typer: DATA_REGISTRERING, SKADE_OG_UDBEDRING, FORRETNINGS_UDVIKLING; -->
+                    <label for="rolle">Brugertype:</label><br>
+
+                    <select id="rolle" name="rolle">
+                        <option value="DATA_REGISTRERING">Data registrering</option>
+                        <option value="SKADE_OG_UDBEDRING">Skade og udbedring</option>
+                        <option value="FORRETNINGS_UDVIKLING">Forretnings udvikling</option>
+                    </select>
+
+                    <input type="submit" value="Login">
+                </form>
+
+                <p>Har du ikke en bruger? <a href="/registrer">Opret en her</a></p>
+            </div>
+
+            <div class="register" th:if="${visRegistrering}"> <!-- Registrerings form vises kun hvis både at registrer attribute er == 1. tilstede OG 2. true -->
+                <h1>Registrer</h1>
+
+                <form action="/registrer" method="post">
+                    <label for="brugernavnReg">Brugernavn:</label><br>
+                    <input type="text" id="brugernavnReg" name="brugerNavn" required><br>
+
+                    <label for="passwordReg">Kodeord:</label><br>
+                    <input type="password" id="passwordReg" name="password" required><br>
+
+                    <!-- bruger typer: DATA_REGISTRERING, SKADE_OG_UDBEDRING, FORRETNINGS_UDVIKLING; -->
+                    <label for="rolle">Brugertype:</label><br>
+
+                    <select id="rolleReg" name="rolle">
+                        <option value="DATA_REGISTRERING">Data registrering</option>
+                        <option value="SKADE_OG_UDBEDRING">Skade og udbedring</option>
+                        <option value="FORRETNINGS_UDVIKLING">Forretnings udvikling</option>
+                    </select>
+
+                    <input type="submit" value="Opret ny bruger">
+                </form>
+
+                <input type="submit" value="Opret ny bruger">
+            </div>
+
+        </div>
+    </div>
+
+
+<div class="footer">
+    <p>© 2021 Bilabonnement A/S</p>
+</div>
+</body>
+</html>

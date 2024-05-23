@@ -1,0 +1,42 @@
+:root {
+    --primary-color: #007bff; /* A bright blue similar to Ønskeskyen */
+    --secondary-color: #ffffff; /* White */
+    --table-cell-color: #e9ecef; /* A light grey for table cells */
+    --button-hover-color: #0056b3; /* A darker blue for button hover state */
+    --background-linear-gradient: linear-gradient(to bottom, lightblue, cornflowerblue); /* A light grey gradient, blue */
+
+    --error-message-color: #a94442; /* A lighter red for error messages */
+    --error-message-background-color: #f8d7da;
+    --error-message-border-color: #f5c6cb;
+
+    --success-message-color: #3c763d; /* A lighter green for success messages */
+    --success-message-background-color: #dff0d8;
+    --success-message-border-color: #d6e9c6;
+}
+
+
+body {
+    font-family: sans-serif;
+
+    /* ------------------- body positioning -------------------
+     */
+    margin: 0;
+    padding: 0;
+    padding-top: 5vh;
+    min-height: 100vh;
+
+    /* ------------------- content positioning -------------------
+    */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+
+    /* ------------------- color -------------------
+    */
+
+    color: var(--primary-color);
+    background: var(--background-linear-gradient);
+
+}
+

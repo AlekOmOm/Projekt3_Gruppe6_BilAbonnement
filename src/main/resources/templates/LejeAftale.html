@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
     <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
     <link rel="stylesheet" href="../static/LejeAftale.css" th:href="@{/LejeAftale.css}">
+
     <title>Leje Aftale</title>
 
 </head>
@@ -18,40 +21,100 @@
 
 <div class = "content">
     <div class="opretLeje">
-        <a href="/LejeInput">
+        <a href="VaelgBil.html">
             <button class="button" id="opretLeje">Opret Leje Aftale</button>
         </a>
     </div>
 
     <div class="archive">
         <input type="text" id="searchInput" placeholder="Søg efter dato...">
-        <button class="button" id="searchButton">Search</button>
-        <h2>Arkiv</h2>
-        <table>
+        <button id="searchButton">Search</button>
+        <h2 class="ArkivTitel">Arkiv</h2>
+        <table class="ArkivTabel">
             <thead>
-                <tr>
-                    <th>Bil</th>
-                    <th>Dato</th>
-                    <th></th>
-                </tr>
+            <th>BilNR</th>
+            <th>Dato</th>
+            <th>Se rapport</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>Vehicle 1</td>
-                    <td>2024-05-14</td>
-                    <td><button class="button">Generer Rapport</button></td>
-                </tr>
-                <tr>
-                    <td>Vehicle 2</td>
-                    <td>2024-05-15</td>
-                    <td><button class="button">Generer Rapport</button> </td>
-                </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+
             </tbody>
-        <ul>
-            <li>Vehicle 1 + Dato<button class="button">View Report</button></li>
-            <li>Vehicle 2 + Dato<button class="button">View Report</button></li>
-            <li>Vehicle 3 + Dato<button class="button">View Report</button></li>
-        </ul>
+
         </table>
     </div>
 </div>

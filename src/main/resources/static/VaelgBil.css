@@ -4,7 +4,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 .inputForm{
@@ -12,11 +11,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: baseline;
-    margin-top: 50px;
-    margin-left: 50px;
+    margin: 10px;
     font-size: 18px;
     font-weight: bold;
 }
+
 .inputRow {
     display: flex;
     align-items: center;
@@ -60,6 +59,18 @@
 .button {
     cursor: pointer;
     margin-left: 10px;
+    border-radius: 50px; /* Rund knap */
+}
+
+#anullerButton {
+    align-self: flex-start; /* Align to the start of the container */
+    left: 20px;
+    top: 50px;
+    position: fixed;
+    margin-top: 40px; /* Add some space from the top */
+    margin-left: 40px; /* Add some space from the left */
+    width: 100px;
+    height: 25px;
 }
 
 #tilbageButton {
@@ -72,9 +83,7 @@
     width: 100px;
     height: 25px;
 }
-#vælgBil {
 
-}
 
 label[for="bil"] {
     margin-right: 10px;

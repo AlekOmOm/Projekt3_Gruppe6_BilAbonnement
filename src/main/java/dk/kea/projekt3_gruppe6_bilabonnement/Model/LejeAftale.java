@@ -1,35 +1,42 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "lejeaftale")
+
 public class LejeAftale {
 
-    @Id
     int id;
 
-    int brugerID;
-    String koeretoejsNummer;
+    // Instance relations:
+        // 1. composition instances er 'nødvendigt' forbundet med LejeAftale livscyklysen
+    Bruger bruger; // Composition
+    KundeInfo kundeInfo; // Composition
+        // 2. aggregation instances er 'ikke nødvendigt' forbundet med LejeAftale livscyklysen
+    Bil bil; // Aggregation
+    SkadeRapport skadeRapport = null; // Aggregation
+
     String abonnementsType;
-    String kundeID;
     int prisoverslag;
     String afhentningssted;
     String afleveringssted;
     LocalDate startDato;
     LocalDate slutDato;
 
+
     // constructor lejeaftale
-    public LejeAftale(int id, int brugerID, String koeretoejsNummer, String abonnementsType, String kundeID, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
-        this.id = id;
-        this.brugerID = brugerID;
-        this.koeretoejsNummer = koeretoejsNummer;
+    //empty constructor
+    public LejeAftale() {
+    }
+
+    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+        this.bruger = bruger;
+        this.bil = bil;
+        this.kundeInfo = kundeInfo;
+        this.skadeRapport = skadeRapport;
         this.abonnementsType = abonnementsType;
-        this.kundeID = kundeID;
         this.prisoverslag = prisoverslag;
         this.afhentningssted = afhentningssted;
         this.afleveringssted = afleveringssted;
@@ -37,33 +44,86 @@ public class LejeAftale {
         this.slutDato = slutDato;
     }
 
-    //empty constructor
-    public LejeAftale() {
+    // uden skadeRapport med bil
+    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+        this.bruger = bruger;
+        this.bil = bil;
+        this.kundeInfo = kundeInfo;
+        this.abonnementsType = abonnementsType;
+        this.prisoverslag = prisoverslag;
+        this.afhentningssted = afhentningssted;
+        this.afleveringssted = afleveringssted;
+        this.startDato = startDato;
+        this.slutDato = slutDato;
     }
 
-    // getters and setters
-    public int getId() {
+    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+        this.bruger = bruger;
+        this.kundeInfo = kundeInfo;
+        this.abonnementsType = abonnementsType;
+        this.prisoverslag = prisoverslag;
+        this.afhentningssted = afhentningssted;
+        this.afleveringssted = afleveringssted;
+        this.startDato = startDato;
+        this.slutDato = slutDato;
+    }
+
+    public LejeAftale(int id, Bruger bruger, Bil bil, KundeInfo kundeInfo, SkadeRapport skadeRapport, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+        this.id = id;
+        this.bruger = bruger;
+        this.bil = bil;
+        this.kundeInfo = kundeInfo;
+        this.skadeRapport = skadeRapport;
+        this.abonnementsType = abonnementsType;
+        this.prisoverslag = prisoverslag;
+        this.afhentningssted = afhentningssted;
+        this.afleveringssted = afleveringssted;
+        this.startDato = startDato;
+        this.slutDato = slutDato;
+    }
+
+
+
+    // ------------------- Get & Set -------------------
+
+    public int getID() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
-    public int getBrugerID() {
-        return brugerID;
+    public Bruger getBruger() {
+        return bruger;
     }
 
-    public void setBrugerID(int brugerID) {
-        this.brugerID = brugerID;
+    public void setBruger(Bruger bruger) {
+        this.bruger = bruger;
     }
 
-    public String getKoeretoejsNummer() {
-        return koeretoejsNummer;
+    public Bil getBil() {
+        return bil;
     }
 
-    public void setKoeretoejsNummer(String koeretoejsNummer) {
-        this.koeretoejsNummer = koeretoejsNummer;
+    public void setBil(Bil bil) {
+        this.bil = bil;
+    }
+
+    public KundeInfo getKundeInfo() {
+        return kundeInfo;
+    }
+
+    public void setKundeInfo(KundeInfo kundeInfo) {
+        this.kundeInfo = kundeInfo;
+    }
+
+    public SkadeRapport getSkadeRapport() {
+        return skadeRapport;
+    }
+
+    public void setSkadeRapport(SkadeRapport skadeRapport) {
+        this.skadeRapport = skadeRapport;
     }
 
     public String getAbonnementsType() {
@@ -72,14 +132,6 @@ public class LejeAftale {
 
     public void setAbonnementsType(String abonnementsType) {
         this.abonnementsType = abonnementsType;
-    }
-
-    public String getKundeID() {
-        return kundeID;
-    }
-
-    public void setKundeID(String kundeID) {
-        this.kundeID = kundeID;
     }
 
     public int getPrisoverslag() {
@@ -119,8 +171,20 @@ public class LejeAftale {
     }
 
     public void setSlutDato(LocalDate slutDato) {
-
         this.slutDato = slutDato;
     }
 
+
+    public boolean equalsWithoutId(LejeAftale nyLejeAftale) {
+        return  this.bruger.equals(nyLejeAftale.getBruger()) &&
+                this.bil.equals(nyLejeAftale.getBil()) &&
+                this.kundeInfo.equals(nyLejeAftale.getKundeInfo()) &&
+                this.skadeRapport.equals(nyLejeAftale.getSkadeRapport()) &&
+                this.abonnementsType.equals(nyLejeAftale.getAbonnementsType()) &&
+                this.prisoverslag == nyLejeAftale.getPrisoverslag() &&
+                this.afhentningssted.equals(nyLejeAftale.getAfhentningssted()) &&
+                this.afleveringssted.equals(nyLejeAftale.getAfleveringssted()) &&
+                this.startDato.equals(nyLejeAftale.getStartDato()) &&
+                this.slutDato.equals(nyLejeAftale.getSlutDato());
+    }
 }

@@ -2,54 +2,146 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/headerFooter.css">
-    <link rel="stylesheet" href="/static/SkadeRapport.css">
-    <title>Skade Rapport</title>
+
+
+    <!--                                   CSS files                                                 -->
+    <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
+    <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
+
+    <link rel="stylesheet" href="/SkadeRapport.css" th:href="@{/SkadeRapport.css}">
+
+    <!--                                   Title                                                  -->
+    <title>Skade- og Udbedring</title>
 </head>
 <body>
-<div class="header">
-    <img src="../static/images/img.png" height="37" width="300"/>
-    <p>BilAbonnement A/S</p>
-</div>
+    <div class="header">
+        <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300"/>
+        <p>BilAbonnement A/S</p>
+    </div>
 
 <button id="tilbageButton">Tilbage</button>
 
 <div class = "content">
+
+
+
     <br>
     <br>
     <br>
 
     <table>
         <thead>
-            <tr>
-                <th>Bil</th>
-                <th>Dato</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Bil</th>
+            <th>Dato</th>
+            <th></th>
+        </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>Vehicle 1</td>
-                <td>2024-05-14</td>
-                <td><button>Generer Rapport</button></td>
-            </tr>
-            <tr>
-                <td>Vehicle 2</td>
-                <td>2024-05-15</td>
-                <td><button>Generer Rapport</button> </td>
-            </tr>
+        <tbody >
+        <tr>
+            <td>Vehicle 1</td>
+            <td>2024-05-14</td>
+            <td><button>Generer Rapport</button></td>
+        </tr>
+        <tr>
+            <td>Vehicle 2</td>
+            <td>2024-05-15</td>
+            <td><button>Generer Rapport</button> </td>
+        </tr>
         </tbody>
+
     </table>
+
+
     <div class="archive">
         <input type="text" id="searchInput" placeholder="Søg efter dato...">
         <button id="searchButton">Search</button>
-        <h2>Arkiv</h2>
-        <ul>
-            <li>Vehicle 1 + Dato<button>View Report</button></li>
-            <li>Vehicle 2 + Dato<button>View Report</button></li>
-            <li>Vehicle 3 + Dato<button>View Report</button></li>
-        </ul>
+        <h2 class="ArkivTitel">Arkiv</h2>
+        <table class="ArkivTabel">
+            <thead>
+            <th>BilNR</th>
+            <th>Dato</th>
+            <th>Se rapport</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+            <tr>
+                <td>Bil 1</td>
+                <td>2024-05-16</td>
+                <td><button>Se rapport</button></td>
+            </tr>
+
+            </tbody>
+        </table>
     </div>
 </div>
 

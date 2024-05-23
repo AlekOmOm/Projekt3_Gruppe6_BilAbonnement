@@ -1,0 +1,27 @@
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    cursor: pointer;
+    border-radius: 50px; /* Rund knap */
+    background-color: #7c7676; /* baggrund */
+    border: none; /* Fjerner border */
+    color: white; /* Tekst farve ændres */
+    transition: all 0.3s ease 0s; /* Animation */
+    padding: 10px 30px; /* Plads rundt om teksten */
+}
+
+#tilbageButton {
+    align-self: flex-start; /* Align to the start of the container */
+    left: 20px;
+    top: 50px;
+    position: fixed;
+    margin-top: 40px; /* Add some space from the top */
+    margin-left: 40px; /* Add some space from the left */
+    width: 100px;
+}

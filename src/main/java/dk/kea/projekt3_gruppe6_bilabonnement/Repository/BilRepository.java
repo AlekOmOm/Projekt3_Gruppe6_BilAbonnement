@@ -1,24 +1,34 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Repository;
-
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
-import java.math.BigInteger;
-
-import java.sql.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class BilRepository {
 
+    // ------------------- SQL operations -------------------
+        // SQL scripts --- CRUD operations = instert, select, update, delete
+
+    private static final String INSERT = "INSERT INTO Bil (VognNummer, Stelnummer, Model, UdstyrsNiveau, KilometerKoert, Status) VALUES (?,?,?,?,?,?)";
+    private static final String SELECT = "SELECT * FROM Bil WHERE ID = ?";
+    private static final String SELECT_ALL = "SELECT * FROM Bil";
+    private static final String SELECT_BY_SECONDARY_KEY = "SELECT * FROM Bil WHERE VognNummer = ?";
+    private static final String SELECT_BY_STATUS = "SELECT * FROM Bil WHERE Status = ?";
+    private static final String SELECT_COUNT_BY_SECONDARY_KEY = "SELECT COUNT(*) FROM Bil WHERE VognNummer = ?";
+    private static final String UPDATE = "UPDATE Bil SET VognNummer = ?, StelNummer = ?, Model = ?, UdstyrsNiveau = ?, KilometerKoert = ?, Status = ? WHERE ID = ?";
+    private static final String DELETE = "DELETE FROM Bil WHERE ID = ?";
+
+
+
+
+    // ------------------- Dependencies -------------------
     private final JdbcTemplate template;
 
     @Autowired
@@ -26,108 +36,114 @@ public class BilRepository {
         this.template = template;
     }
 
-    public Bil save(Bil bil) {
-        String sqlStatement = "INSERT INTO Bil (VognNummer, Stelnummer, Model, UdstyrsNiveau, KilometerKoert, Status) VALUES (?,?,?,?,?,?)";
 
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+    // ------------------- Business Operations -------------------
 
-        template.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sqlStatement, new String[] {"ID"});
-            ps.setString(1, bil.getVognNummer());
-            ps.setString(2, bil.getStelNummer());
-            ps.setString(3, bil.getModel());
-
-            ps.setString(4, bil.getUdstyrsNiveau());
-            ps.setInt(5, bil.getKilometerKoert());
-            ps.setString(6, bil.getStatus());
-            return ps;
-        }, keyHolder);
-
-        if (keyHolder.getKey() != null) {
-            bil.setId(keyHolder.getKey().intValue());
-        }
-
-        return bil;
+    public Bil book(Bil bil) {
+        bil.setSomUdlejet();
+        return update(bil);
     }
 
-    public Bil update (Bil bil) {
-        System.out.println("DEBUG: BilRepository.update");
+    public Bil setSomTilgaengelig(Bil bil) {
+        bil.setSomTilgaengelig();
+        return update(bil);
+    }
 
-        String sql = "UPDATE Bil SET VognNummer = ?, StelNummer = ?, Model = ?, UdstyrsNiveau = ?, KilometerKoert = ?, Status = ? WHERE ID = ?";
+    public Bil setSomTilService(Bil bil) {
+        bil.setSomTilService();
+        return update(bil);
+    }
 
-        template.update(sql, bil.getVognNummer(), bil.getStelNummer(), bil.getModel(), bil.getUdstyrsNiveau(), bil.getKilometerKoert(), bil.getStatus(), bil.getId());
 
-        System.out.println(" updatedBil: "+bil);
-        return bil;
+
+
+
+    // ------------------- CRUD Operations -------------------
+
+    public Bil save(Bil bil) {
+        if (exists(bil)) {
+            return update(bil);
+        }
+
+        template.update(INSERT, bil.getVognNummer(), bil.getStelNummer(), bil.getModel(), bil.getUdstyrsNiveau(), bil.getKilometerKoert(), bil.getStatus());
+
+        return findByVognNummer(bil.getVognNummer());
+    }
+
+    public Bil find(Bil bil) {
+
+        if (bil.getId() == 0) {
+            return findByVognNummer(bil.getVognNummer());
+        }
+
+        List<Bil> biler = template.query(SELECT, this::mapRow, bil.getId());
+
+        return biler.isEmpty() ? null : biler.get(0);
+
     }
 
     public List<Bil> findAll() {
-        String sql = "SELECT * FROM Bil";
-
-        return template.query(sql, getBilRowMapper());
+        return template.query(SELECT_ALL, this::mapRow);
     }
 
-    public Bil findBil(int id) {
-        String sql = "SELECT * FROM Bil WHERE ID = ?";
-
-        List<Bil> biler = template.query(sql, getBilRowMapper(), id);
+    public Bil findByID(int bilID) {
+        List<Bil> biler = template.query(SELECT, this::mapRow, bilID);
 
         return biler.isEmpty() ? null : biler.get(0);
-
     }
 
     public Bil findByVognNummer(String vognNummer) {
-
-        System.out.println("DEBUG: BilRepository.findByVognNummer");
-
-        System.out.println(" vognNummer: "+vognNummer);
-
-        String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
-
-        List<Bil> biler = new ArrayList<>();
-        biler.addAll(template.query(sql, getBilRowMapper(), vognNummer));
-
-        System.out.println(" biler: "+biler);
-        System.out.println();
+        List<Bil> biler = (template.query(SELECT_BY_SECONDARY_KEY, this::mapRow, vognNummer));
 
         return biler.isEmpty() ? null : biler.get(0);
     }
 
-    public void delete(Bil bil) {
-        String sql = "DELETE FROM Bil WHERE ID = ?";
-
-        template.update(sql, bil.getId());
+    public List<Bil> findByStatus(String status) {
+        return template.query(SELECT_BY_STATUS, this::mapRow, status);
     }
 
-    private RowMapper<Bil> getBilRowMapper() {
-        return new RowMapper<Bil>() {
-            @Override
-            public Bil mapRow(ResultSet resultSet, int i) throws SQLException {
-                Bil bil = new Bil();
 
-                if (resultSet == null) {
-                    return null;
-                }
+    public Bil update (Bil bil) {
+        template.update(UPDATE, bil.getVognNummer(), bil.getStelNummer(), bil.getModel(), bil.getUdstyrsNiveau(), bil.getKilometerKoert(), bil.getStatus(), bil.getId());
 
-                bil.setId(resultSet.getInt("ID"));
-                bil.setVognNummer(resultSet.getString("VognNummer"));
-                bil.setStelNummer(resultSet.getString("StelNummer"));
-                bil.setModel(resultSet.getString("Model"));
-
-                bil.setUdstyrsNiveau(resultSet.getString("UdstyrsNiveau"));
-                bil.setKilometerKoert(resultSet.getInt("KilometerKoert"));
-                bil.setStatus(resultSet.getString("Status"));
-                return bil;
-            }
-        };
+        return find(bil);
     }
 
+
+    public void delete(Bil bil) throws EmptyResultDataAccessException {
+        int antalRowsSlettet = template.update(DELETE, bil.getId());
+        if (antalRowsSlettet == 0) {
+            throw new EmptyResultDataAccessException("Deletion failed: No such bil exists", 1);
+        }
+    }
+
+
+
+    // ------------------- Helper methods -------------------
 
 
     public boolean exists(Bil bil) {
-        String sql = "SELECT COUNT(*) FROM Bil WHERE VognNummer = ?";
 
-        return template.queryForObject(sql, Integer.class, bil.getVognNummer()) > 0;
+        try {
+            Integer result = template.queryForObject(SELECT_COUNT_BY_SECONDARY_KEY, Integer.class, bil.getVognNummer());
+            return result != null && result > 0;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
+    }
+
+
+
+    private Bil mapRow (ResultSet rs, int rowNum) throws SQLException {
+        Bil bil = new Bil();
+        bil.setId(rs.getInt("ID"));
+        bil.setVognNummer(rs.getString("VognNummer"));
+        bil.setStelNummer(rs.getString("StelNummer"));
+        bil.setModel(rs.getString("Model"));
+        bil.setUdstyrsNiveau(rs.getString("UdstyrsNiveau"));
+        bil.setKilometerKoert(rs.getInt("KilometerKoert"));
+        bil.setStatus(rs.getString("Status"));
+        return bil;
     }
 
 }

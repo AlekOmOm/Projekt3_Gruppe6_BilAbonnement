@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../../static/Abonnement.css" th:href="@{/Abonnement.css}">
+    <title>LejeAbonnement</title>
+</head>
+<body>
+    <div class="header">
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+        <p>BilAbonnement A/S</p>
+    </div>
+    <a href="VaelgBil.html">
+        <button class="button" id="tilbageButton">Tilbage</button>
+    </a>
+    <div class="content">
+        <!-- <h2>2. Vælg Abonnement</h2> -->
+
+
+        <h2>2. Vælg Abonnement</h2>
+        <div class="inputForm">
+            <form action="/LejeAftale/PrisOverslag" method="get" th:object="${nyBrugerValgDTO}">
+                <label>
+                    <!--
+                    <select th:field="*{bilModel}" class="inputField">
+                        <option value=""> Vælg Bil </option>
+                        <option th:each="bil : ${biler}" th:value="${bil.model}" th:text="${bil.model}">
+                        </option>
+                    </select>
+
+                    select for each field of the page
+                    -->
+
+                </label>
+                <button type="submit" class="button"> Næste </button>
+            </form>
+        </div>
+
+
+        <div class="info-saved-in-DTO">
+            <p>Valgt bil: <span th:text="${nyBrugerValgDTO.bilModel}"></span></p>
+            <p>Valgt abonnement: <span th:text="${nyBrugerValgDTO.abonnementType}"></span></p>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2021 Bilabonnement A/S</p>
+    </div>
+</body>
+</html>

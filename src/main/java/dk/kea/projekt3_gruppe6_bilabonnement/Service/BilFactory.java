@@ -1,10 +1,10 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.service;
+package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.CitroenC1;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.OpelCorsaCosmo;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bil.Peugeot108;
-import dk.kea.projekt3_gruppe6_bilabonnement.config.BilConfig;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.CitroenC1;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.OpelCorsaCosmo;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Peugeot108;
+import dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +13,8 @@ import java.util.List;
 @Component
 public class BilFactory {
 
+    // ------------------- Dependency Injection -------------------
+
     private final BilConfig bilConfig;
 
     @Autowired
@@ -20,8 +22,16 @@ public class BilFactory {
         this.bilConfig = bilConfig;
     }
 
-    // convert Bil to CitroenC1, Peugeot108, OpelCorsaCosmo with the instance variables
+    // ------------------- Main Operations - Create and Initialize -------------------
 
+    public Bil create(String model) {
+        return switch (model) {
+            case "CitroenC1" -> createCitroenC1();
+            case "Peugeot108" -> createPeugeot108();
+            case "OpelCorsaCosmo" -> createOpelCorsaCosmo();
+            default -> null;
+        };
+    }
 
 
     public Bil initialize(Bil bil) {
@@ -29,15 +39,17 @@ public class BilFactory {
             return null;
         }
 
-        System.out.println("DEBUG: BilFactory.initialize");
-        System.out.println(" bil: "+bil);
+//        System.out.println("DEBUG: BilFactory.initialize");
+//        System.out.println(" bil: "+bil);
         Bil initBil = bilConfig.loadModelConfigData(bil);
-        System.out.println(" initBil: "+initBil);
+//        System.out.println(" initBil: "+initBil);
 
         initBil.setId(bil.getId());
-        System.out.println(" initBil.getId(): "+initBil.getId());
+//        System.out.println(" initBil.getId(): "+initBil.getId());
         return initBil;
     }
+
+    // ------------------- Create Biler -------------------
 
     // create for each Bil model med empty og fuld instans variabler
     public Bil createCitroenC1() {
@@ -82,7 +94,7 @@ public class BilFactory {
     public Bil createTestCitroenC1() {
         testCounter++;
         System.out.println();
-        System.out.println(" testCounter: "+testCounter);
+//        System.out.println(" testCounter: "+testCounter);
         return bilConfig.loadModelConfigData(new CitroenC1("VognNummer1"+testCounter, "StelNummer1"+testCounter, "UdstyrsNiveau1"+testCounter, 1000+testCounter, "Tilgaengelig"));
     }
 
