@@ -16,15 +16,25 @@
         <button class="button" id="tilbageButton">Tilbage</button>
     </a>
     <div class="content">
-        <form action="/PrisOverslag" method="get">
-            <div th:each="type : ${abonnementTyper}">
-                <input type="checkbox" th:id="${type}" th:value="${type}" name="abonnementType" />
-                <label th:for="${type}" th:text="${type}"></label>
-            </div>
-            <br>
+        <!-- <h2>2. Vælg Abonnement</h2> -->
 
-            <button type="submit" class="button" id="submitSubscription">Næste</button>
-        </form>
+        <div class="car-choosen">
+            <h4 th:text="'Du har valgt bilen: ' + ${nyBrugerValgDTO.getBilModel()}"></h4>
+
+        </div>
+
+        <div class="inputForm">
+            <h2>2. Vælg Abonnement</h2>
+            <form action="/PrisOverslag" method="get">
+                <div th:each="type : ${abonnementTyper}">
+                    <input type="checkbox" th:id="${type}" th:value="${type}" name="abonnementType" />
+                    <label th:for="${type}" th:text="${type}"></label>
+                </div>
+                <br>
+
+                <button type="submit" class="button" id="submitSubscription">Næste</button>
+            </form>
+        </div>
 
     </div>
     <div class="footer">

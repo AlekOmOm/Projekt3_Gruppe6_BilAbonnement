@@ -21,7 +21,7 @@ public class NavigationController {
 
     // pages
     private static final String START_PAGE = "LejeAfale";
-    private static final String VAELGBIL_PAGE = "Dataregistrering/VaelgBil";
+    private static final String VAELGBIL_PAGE = "Dataregistrering/VaelgBil"; // url: /LejeAftale/VaelgBil
     private static final String ABONNEMENT_PAGE = "Dataregistrering/Abonnement";
     private static final String PRISOVERSLAG_PAGE = "Dataregistrering/PrisOverslag";
     private static final String KUNDEINFO_PAGE = "Dataregistrering/Kunde";
@@ -43,7 +43,7 @@ public class NavigationController {
 
 
     @GetMapping("/VaelgBil")
-    public String getVaelgbilPage(@ModelAttribute BrugerValgDTO nyBrugerValgDTO,HttpSession session, Model model) {
+    public String getVaelgbilPage(BrugerValgDTO nyBrugerValgDTO,HttpSession session, Model model) {
         // data til siden:
 
 
@@ -52,24 +52,23 @@ public class NavigationController {
         model.addAttribute("peugeot", bilService.getBilTyper().get(1));
         model.addAttribute("opel", bilService.getBilTyper().get(2));
 
-        session.setAttribute("valgtBil", nyBrugerValgDTO);
+        session.setAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
 
 
 
 
 
         // ------------------- Load data -------------------
-
+        model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        oldBrugerValgDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
-
+        session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
         return VAELGBIL_PAGE;
     }
 
     @GetMapping("/Abonnement")
-    public String LejeAbonnement(@ModelAttribute BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
+    public String LejeAbonnement(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
 
-
+        System.out.println("nyBrugerValgDTO: " + nyBrugerValgDTO);
 
         // ------------- gemmer data i session -------------
         session.setAttribute("valgtAbonnement", nyBrugerValgDTO);
@@ -77,11 +76,11 @@ public class NavigationController {
 
 
 
+
         // ------------------- Load data -------------------
-
+        model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        oldBrugerValgDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
-
+        session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
         return ABONNEMENT_PAGE;
     }
 
@@ -94,9 +93,9 @@ public class NavigationController {
 
 
         // ------------------- Load data -------------------
+        model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        oldBrugerValgDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
-
+        session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
         return PRISOVERSLAG_PAGE;
     }
 
@@ -108,9 +107,9 @@ public class NavigationController {
 
 
         // ------------------- Load data -------------------
+        model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        oldBrugerValgDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
-
+        session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
         return KUNDEINFO_PAGE;
     }
 
@@ -122,9 +121,9 @@ public class NavigationController {
 
 
         // ------------------- Load data -------------------
+        model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        oldBrugerValgDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
-
+        session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
         return AFHENTNINGSSTED_PAGE;
     }
 
@@ -145,6 +144,7 @@ public class NavigationController {
 
         // steps: check values in nyBrugerValgDTO
         //       1. if value is null, then dont load int oldBrugerValgDTO
+
 
 
 

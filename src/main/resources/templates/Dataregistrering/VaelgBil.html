@@ -21,15 +21,16 @@
     <div class="content">
         <h2>1. Vælg Bil</h2>
         <div class="inputForm">
-            <form action="/Abonnement" method="get">
-                <div class="inputRow">
-                    <label for="bil">Bil:</label>
-                    <select id="vaelgBil" th:name="bilModel" required>
-                        <option value=""> Vælg Bil </option>
-                        <option th:each="bil : ${biler}" th:value="${bil.model}" th:text="${bil.model}">
-                        </option>
-                    </select>
-                </div>
+            <form action="/LejeAftale/Abonnement" method="get" th:object="${nyBrugerValgDTO}">
+
+                    <label>
+                        <select th:field="*{bilModel}" class="inputField">
+                            <option value=""> Vælg Bil </option>
+                            <option th:each="bil : ${biler}" th:value="${bil.model}" th:text="${bil.model}">
+                            </option>
+                        </select>
+                    </label>
+
                 <button type="submit" class="button"> Vælg Bil </button>
             </form>
         </div>
@@ -39,7 +40,7 @@
 
             <div class="car-box" th:title="${citroen.model}">
                 <img src="../../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Citroen" class="citroen-img">
-                <p id="bilInformation">Bil Information</p>
+                <p id="citroenBilInformation">Bil Information</p>
                 <div class="text-box">
                     <p th:text="'Model: ' + ${citroen.model}"></p>
                     <p>Årgang: 2021</p>
@@ -49,7 +50,7 @@
             </div>
             <div class="car-box" th:title="${opel.model}">
                 <img src="../../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Car Image">
-                <p id="bilInformation">Bil Information</p>
+                <p id="opelBilInformation">Bil Information</p>
                 <div class="text-box">
                     <p th:text="'Model: ' + ${opel.model}"></p>
                     <p>Årgang: 2021</p>
@@ -59,7 +60,7 @@
             </div>
             <div class="car-box" th:title="${peugeot.model}">
                 <img src="../../static/images/cars/peugeot108.png" th:src="@{/images/cars/peugeot108.png}" alt="Peugeot" class="peugeot-img">
-                <p class="peugeot-text" id="bilInformation">Bil Information</p>
+                <p class="peugeot-text" id="peugeotBilInformation">Bil Information</p>
                 <div class="text-box">
                     <p th:text="'Model: ' + ${peugeot.model}"></p>
                     <p>Årgang: 2021</p>
