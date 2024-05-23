@@ -1,5 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Skade;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepo;
@@ -19,6 +20,9 @@ public class SkadeRapportService {
     @Autowired
     SkadeService skadeService;
 
+    @Autowired
+    LejeAftaleService lejeAftaleService;
+
     public List<SkadeRapport> findAlle(){
         return skadeRapportRepo.findAlle();
     }
@@ -35,9 +39,14 @@ public class SkadeRapportService {
 
     }
 
-    public SkadeRapport findMedLejeAftaleID(int id){
-        return skadeRapportRepo.findMedLejeAftaleID(id);
+    public SkadeRapport findMedLejeAftaleID(int lejeAftaleID){
+        LejeAftale lejeAftale = lejeAftaleService.findMedID(lejeAftaleID);
+        if (lejeAftale != null){
+            return findVedID(lejeAftale.getSkadeRapportID());
+        }
+        return null;
     }
+
 
     public SkadeRapport gem(SkadeRapport skadeRapport){
         skadeRapportRepo.gem(skadeRapport);

@@ -1,5 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
 
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Skade;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,13 +48,18 @@ public class SkadeRapportController {
         //Data for View: skadeRapporter & lejeAftaler med manglende SkadeRapporter (lejeAftaler = udløbet + mangler SkadeRapport)
 
         List<SkadeRapport> skadeRappoter = skadeRapportService.findAlle();
+        List<LejeAftale> lejeAftalerUdenRapport = lejeAftaleService.getLejeAftaleUdenRapport();
+        List<LejeAftale> lefeAftaleMedRapport = lejeAftaleService.getLejeAftaleMedRapport();
         //List<LejeAftaleKortInfoDto> lejeAftalerUdenRapport = lejeAftaleService.getLejeAftalerUdenRapport();
 
         // TODO: lejeAftaler med Manglende SkadeRapporter (LejeAftaleService.getLejeAftalerUdenRapporter())
+
+
         // model.addAttribute("ManglendeSkadeRapporter", manglendeSkadeRapporter); data der skal vises: BilID, SlutDato (måske opret LejeAftaleDTO med disse to felter)
 
         model.addAttribute("SkadeRapporter", skadeRappoter);
-        //model.addAttribute("LejeAftalerUdenRapport", lejeAftalerUdenRapport);
+        model.addAttribute("LejeAftalerUdenRapport", lejeAftalerUdenRapport);
+        model.addAttribute("LejeAftaleMedRapport", lefeAftaleMedRapport);
 
         return SKADERAPPORT_PAGE;
     }
@@ -129,9 +136,9 @@ public class SkadeRapportController {
     }
 
 
-    @GetMapping("/se/{id}")
-    public String seRapport(Model model, @PathVariable int id){
-        SkadeRapport skadeRapport = skadeRapportService.findVedID(id);
+    @GetMapping("/se/{lejeAftaleID}")
+    public String seRapport(Model model, @PathVariable int lejeAftaleID){
+        SkadeRapport skadeRapport = skadeRapportService.findMedLejeAftaleID(lejeAftaleID);
 
         model.addAttribute("SkadeRapport", skadeRapport);
 

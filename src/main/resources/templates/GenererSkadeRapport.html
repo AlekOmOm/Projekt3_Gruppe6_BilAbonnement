@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrer Skade</title>
     <link rel="stylesheet" href="/static/SkadeRapport.css">
+    <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
     <link rel="stylesheet" href="/static/GenererSkadeRapport.css">
 </head>
 <body>
+<div class="header">
+    <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300"/>
+    <p>BilAbonnement A/S</p>
+</div>
 
 <div class = "content">
 
@@ -62,6 +67,10 @@
             <input type="submit" value="Submit"/>
         </form>
     </div>
+</div>
+
+<div class="footer">
+    <p>© 2021 Bilabonnement A/S</p>
 </div>
 
 

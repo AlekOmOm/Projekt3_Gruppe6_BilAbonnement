@@ -16,6 +16,7 @@ public class SkadeRapportRepo {
     private JdbcTemplate jdbcTemplate;
 
 
+
     public List<SkadeRapport> findAlle(){
         String sql = "SELECT * FROM SkadeRapport";
         return jdbcTemplate.query(sql, this::mapRowToSkadeRapport);
@@ -54,9 +55,5 @@ public class SkadeRapportRepo {
                 rs.getInt("kilometerKørtOver"),
                 rs.getInt("reparationsomkostninger")
         );
-    }
-
-    public SkadeRapport findMedLejeAftaleID(int id) {
-        return null;
     }
 }

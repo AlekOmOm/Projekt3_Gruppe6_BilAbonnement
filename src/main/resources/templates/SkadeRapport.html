@@ -33,16 +33,15 @@
             <th></th>
         </tr>
         </thead>
-        <tbody >
-        <tr>
-            <td>Vehicle 1</td>
-            <td>2024-05-14</td>
-            <td><button>Generer Rapport</button></td>
-        </tr>
-        <tr>
-            <td>Vehicle 2</td>
-            <td>2024-05-15</td>
-            <td><button>Generer Rapport</button> </td>
+        <tbody>
+        <tr th:each="lejeAftale : ${LejeAftalerUdenRapport}">
+            <td th:text="${lejeAftale.bilID}">BilID</td>
+            <td th:text="${#dates.format(lejeAftale.slutDato, 'yyyy-MM-dd')}">SlutDato</td>
+            <td>
+                <a th:href='@{/SkadeRapport/opret(lejeAftaleID=${lejeAftale.id})}'>
+                    <button>Generer Rapport</button>
+                </a>
+            </td>
         </tr>
         </tbody>
 
@@ -60,80 +59,15 @@
             <th>Se rapport</th>
             </thead>
             <tbody>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
+            <tr th:each="lejeAftale : ${LejeAftaleMedRapport}">
+                <td th:text="${lejeAftale.bilID}">BilID</td>
+                <td th:text="${#dates.format(lejeAftale.slutDato, 'yyyy-MM-dd')}">SlutDato</td>
+                <td>
+                    <a th:href='@{/SkadeRapport/se(id=${lejeAftale.skadeRapportID})}'>
+                        <button >Se rapport</button>
+                    </a>
+                </td>
+
             </tr>
 
             </tbody>

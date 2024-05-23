@@ -14,7 +14,6 @@ public class SkadeRapport {
     public SkadeRapport(int ID, int brugerID, int lejeAftaleID,  int kilometerKoertOver, int reparationsomkostninger){
         this.ID = ID;
         this.brugerID = brugerID;
-        this.lejeAftaleID = lejeAftaleID;
         this.kilometerKoertOver = kilometerKoertOver;
         this.reparationsomkostninger = reparationsomkostninger;
 
@@ -74,11 +73,6 @@ public class SkadeRapport {
     public void setBrugerID(int brugerID) {
         this.brugerID = brugerID;
     }
-
-    public void setLejeAftaleID(int bilID) {
-        this.lejeAftaleID = bilID;
-    }
-
 
     public void setKilometerKoertOver(int kilometerKoertOver) {
         this.kilometerKoertOver = kilometerKoertOver;

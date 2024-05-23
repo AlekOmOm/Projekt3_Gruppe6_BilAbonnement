@@ -38,9 +38,19 @@ public class LejeAftaleRepository {
         }
     }
 
+    public LejeAftale findMedID(int id){
+        String sql = "SELECT * FROM LejeAftale WHERE ID = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, this::mapRow);
+    }
+
 
     public List<LejeAftale> getLejeAftalerUdenRapport() {
-        String sql = "SELECT * FROM LejeAftale WHERE SkadeRapportID IS NULL";
+        String sql = "SELECT BilID, SlutDato FROM LejeAftale WHERE SkadeRapportID IS NULL";
+        return jdbcTemplate.query(sql, this::mapRow);
+    }
+
+    public List<LejeAftale> getLejeAftaleMedRapport(){
+        String sql = "SELECT BilID, SlutDato FROM lejeAftale WHERE SkadeRapportID IS NOT NULL";
         return jdbcTemplate.query(sql, this::mapRow);
     }
 

@@ -2,27 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Se Skade Rapport</title>
+    <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
 </head>
+
 <body>
+<div class="header">
+    <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300"/>
+    <p>BilAbonnement A/S</p>
+</div>
 
 <div class="container mt-3">
     <div class="card text-center">
         <div class="card-body">
             <div class="row">
                 <div class="col-8">
-                    <a>
-                        heyo
-                    </a>
+                    <h2>Skade Rapport Detaljer</h2>
+                    <p><strong>ID:</strong> <span th:text="${skadeRapport.id}"></span> </p>
+                    <p><strong>BrugerID:</strong><span th:text="${skadeRapport.brugerID}"></span></p>
+                    <p><strong>Kilometer Kørt Over:</strong><span th:text="${skadeRapport.kilometerKoertOver}"></span></p>
+                    <p><strong>Reparationsomkostninger:</strong><span th:text="${skadeRapport.reparationsomkostninger}"></span></p>
+
+                    <h3>Skader</h3>
+                    <ul>
+                        <li th:each="skade : ${skadeRapport.skader}">
+                            <span th:text="${skade.navn}"></span> - <span th:text="${skade.pris}"></span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-4">
-                    <a>
-                        heyo
-                    </a>
-                </div>
+                <form th:action="@{/SkadeRapport}">
+                    <button type="submit">Tilbage til oversigt</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+<div class="footer">
+    <p>© 2021 Bilabonnement A/S</p>
 </div>
 
 </body>
