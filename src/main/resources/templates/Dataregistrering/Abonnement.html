@@ -22,7 +22,11 @@
         <h2>2. Vælg Abonnement</h2>
         <div class="inputForm">
             <form action="/LejeAftale/PrisOverslag" method="get" th:object="${nyBrugerValgDTO}">
-                <label>
+                <div th:each="packageDeal : ${packageDeals}">
+                    <input type="checkbox" th:field="*{packageDeals}" th:value="${packageDeal.packageName}"></input>
+                    <label th:text="${packageDeal.packageDescription}"></label>
+                </div>
+                <button type="submit" class="button" id="naesteButton"> Næste </button>
                     <!--
                     <select th:field="*{bilModel}" class="inputField">
                         <option value=""> Vælg Bil </option>
@@ -32,9 +36,7 @@
 
                     select for each field of the page
                     -->
-
-                </label>
-                <button type="submit" class="button"> Næste </button>
+                <button type="submit" class="button" id="naesteButton"> Næste </button>
             </form>
         </div>
 

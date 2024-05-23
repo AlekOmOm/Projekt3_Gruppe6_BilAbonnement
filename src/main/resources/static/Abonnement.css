@@ -13,7 +13,7 @@
     border: none; /* Fjerner border */
     color: white; /* Tekst farve ændres */
     transition: all 0.3s ease 0s; /* Animation */
-    padding: 10px 30px; /* Plads rundt om teksten */
+    padding: 5px 30px; /* Plads rundt om teksten */
 }
 
 #tilbageButton {
@@ -24,4 +24,14 @@
     margin-top: 40px; /* Add some space from the top */
     margin-left: 40px; /* Add some space from the left */
     width: 100px;
+    height: 25px;
+}
+#tilbageButton:active {
+    background-color: #413c3c; /* Adjust as needed */
+}
+#naesteButton {
+
+}
+#naesteButton:active {
+    background-color: #413c3c; /* Adjust as needed */
 }

@@ -142,6 +142,9 @@ public class NavigationController {
     @PostMapping("/Opret")
     public String opret( HttpSession session) {
 
+        // Hvordan trækker vi
+        // session.setAttribute("selectedPackageDeals", brugerValgDTO.getPackageDeals());
+
         // gemmer lejeaftalen i databasen via service
         lejeAftaleService.opret((BrugerValgDTO) session.getAttribute("BrugerValgDTO"));
 

@@ -10,6 +10,12 @@
 .button {
     cursor: pointer;
     margin-left: 10px;
+    background-color: #7c7676; /* baggrund */
+    transition: all 0.3s ease 0s; /* Animation */
+    border: none; /* Fjerner border */
+    color: white; /* Tekst farve ændres */
+    border-radius: 50px; /* Rund knap */
+    padding: 5px 30px; /* Plads rundt om teksten */
 }
 
 #tilbageButton {
@@ -21,6 +27,9 @@
     margin-left: 40px; /* Add some space from the left */
     width: 100px;
     height: 25px;
+}
+#tilbageButton:active {
+    background-color: #413c3c; /* Adjust as needed */
 }
 
 #searchInput {
@@ -42,7 +51,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 20px;
 
 }
 /* Archive styles */

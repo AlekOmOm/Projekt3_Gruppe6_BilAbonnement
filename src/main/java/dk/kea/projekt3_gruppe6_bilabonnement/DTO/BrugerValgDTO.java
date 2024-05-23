@@ -1,5 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
 
+import java.util.List;
+
 public class BrugerValgDTO {
     // 0. bil valg
     String bilModel; // bil modeller: CitroenC1, Peugeot108, OpelCorsaCosmo
@@ -141,4 +143,15 @@ public class BrugerValgDTO {
                 ", afhentningssted='" + afhentningssted + '\'' +
                 '}';
     }
+
+    // ------------------- test til packagedeals -------------------
+
+    private List<String> packageDeals;
+    public List<String> getPackageDeals() {
+        return packageDeals;
+    }
+    public void setPackageDeals(List<String> packageDeals) {
+        this.packageDeals = packageDeals;
+    }
+
 }
