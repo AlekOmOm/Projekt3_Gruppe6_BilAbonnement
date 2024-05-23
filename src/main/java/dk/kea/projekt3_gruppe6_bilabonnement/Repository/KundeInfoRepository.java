@@ -20,6 +20,7 @@ public class KundeInfoRepository {
     private static final String UPDATE = "UPDATE KundeInfo SET CPR_NR = ?, Fornavn = ?, Efternavn = ?, Adresse = ?, PostNummer = ?, Email = ?, MobilNummer = ? WHERE ID = ?";
     private static final String DELETE = "DELETE FROM KundeInfo WHERE ID = ?";
 
+    // ------------------- Dependencies -------------------
     private final JdbcTemplate template;
 
     public KundeInfoRepository(JdbcTemplate template) {
@@ -42,6 +43,10 @@ public class KundeInfoRepository {
 
     public KundeInfo findByID(int kundeInfoID) {
         return template.queryForObject(SELECT_BY_PRIMARYKEY, this::mapRow, kundeInfoID);
+    }
+
+    public List<KundeInfo> findAll() {
+        return template.query(SELECT_ALL, this::mapRow);
     }
 
     public KundeInfo update(KundeInfo kundeInfo) {

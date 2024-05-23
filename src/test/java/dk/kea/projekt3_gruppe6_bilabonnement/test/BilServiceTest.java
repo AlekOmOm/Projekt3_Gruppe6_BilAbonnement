@@ -29,7 +29,7 @@ public class BilServiceTest {
     }
 
     @Test
-    public void testCreateBil() {
+    public void testCreateBilInstanceBil() {
         Bil createdBil = bilService.saveBil(testBil);
 
         assertNotNull(createdBil);

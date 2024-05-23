@@ -23,10 +23,12 @@ public class DashboardService {
         return bilService.getBilerByStatus("Udlejet").size();
     }
 
-    //Samlet indkomst fra udlejede biler
+    // Samlet indkomst fra udlejede biler
     public int seTotalIndkomst(){
         List<Bil> udlejedeBiler = bilService.getBilerByStatus("Udlejet");
         List<String> vognNummer = udlejedeBiler.stream().map(Bil::getVognNummer).toList();
-        return lejeaftaleRepository.findByVognNummer(vognNummer).stream().mapToInt(LejeAftale::getPrisoverslag).sum();
+        // TODO: LejeAftaleService.getTotalIndkomst(List<Bil> udlejedeBiler)
+        // return lejeaftaleRepository.findByVognNummer(vognNummer).stream().mapToInt(LejeAftale::getPrisoverslag).sum();
+        return 0; // TODO: Implement this
     }
 }

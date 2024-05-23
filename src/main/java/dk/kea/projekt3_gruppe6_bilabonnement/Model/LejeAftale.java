@@ -1,90 +1,80 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 
-
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 
 import java.time.LocalDate;
 
-
 public class LejeAftale {
 
-    int id;
+    private int id;
+    private Bruger bruger; // Composition
+    private KundeInfo kundeInfo; // Composition
+    private SkadeRapport skadeRapport = null; // Aggregation
 
-    // Instance relations:
-        // 1. composition instances er 'nødvendigt' forbundet med LejeAftale livscyklysen
-    Bruger bruger; // Composition
-    KundeInfo kundeInfo; // Composition
-        // 2. aggregation instances er 'ikke nødvendigt' forbundet med LejeAftale livscyklysen
-    Bil bil; // Aggregation
-    SkadeRapport skadeRapport = null; // Aggregation
+    // 1. Bil valg
+    private Bil bil; // Composition
 
-    String abonnementsType;
-    int prisoverslag;
-    String afhentningssted;
-    String afleveringssted;
-    LocalDate startDato;
-    LocalDate slutDato;
+    // 2. Abonnement side
+    private String farve;
+    private boolean afleveringsforsikring;
+    private boolean selvrisiko;
+    private boolean daekpakke;
+    private boolean vejhjaelp;
+    private boolean udleveringVedFDM;
 
+    // 3. Prisoverslag
+    private int abonnementslaengde;
+    private int kmPrMdr;
+
+    // 4. Afhentningssted
+    private String afhentningssted;
+
+    // LejeAftale længde
+    private LocalDate startDato;
+    private LocalDate slutDato;
 
     // constructor lejeaftale
-    //empty constructor
     public LejeAftale() {
     }
 
-    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
-        this.bruger = bruger;
-        this.bil = bil;
-        this.kundeInfo = kundeInfo;
-        this.skadeRapport = skadeRapport;
-        this.abonnementsType = abonnementsType;
-        this.prisoverslag = prisoverslag;
-        this.afhentningssted = afhentningssted;
-        this.afleveringssted = afleveringssted;
-        this.startDato = startDato;
-        this.slutDato = slutDato;
-    }
-
-    // uden skadeRapport med bil
-    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
-        this.bruger = bruger;
-        this.bil = bil;
-        this.kundeInfo = kundeInfo;
-        this.abonnementsType = abonnementsType;
-        this.prisoverslag = prisoverslag;
-        this.afhentningssted = afhentningssted;
-        this.afleveringssted = afleveringssted;
-        this.startDato = startDato;
-        this.slutDato = slutDato;
-    }
-
-    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
-        this.bruger = bruger;
-        this.kundeInfo = kundeInfo;
-        this.abonnementsType = abonnementsType;
-        this.prisoverslag = prisoverslag;
-        this.afhentningssted = afhentningssted;
-        this.afleveringssted = afleveringssted;
-        this.startDato = startDato;
-        this.slutDato = slutDato;
-    }
-
-    public LejeAftale(int id, Bruger bruger, Bil bil, KundeInfo kundeInfo, SkadeRapport skadeRapport, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+    public LejeAftale(int id, Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport) {
         this.id = id;
         this.bruger = bruger;
-        this.bil = bil;
         this.kundeInfo = kundeInfo;
+        this.bil = bil;
         this.skadeRapport = skadeRapport;
-        this.abonnementsType = abonnementsType;
-        this.prisoverslag = prisoverslag;
+    }
+
+    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String roed, boolean b, boolean b1, boolean b2, boolean b3, boolean b4, int i, int i1, String s, LocalDate now, LocalDate localDate) {
+        setAllInstances(bruger, kundeInfo, bil, skadeRapport);
+        setAllInstanceVariables(roed, b, b1, b2, b3, b4, i, i1, s, now, localDate);
+    }
+
+
+    // set all instances and set all instance variables
+    public void setAllInstances(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport) {
+        this.bruger = bruger;
+        this.kundeInfo = kundeInfo;
+        this.bil = bil;
+        this.skadeRapport = skadeRapport;
+    }
+
+    public void setAllInstanceVariables(String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, LocalDate startDato, LocalDate slutDato) {
+        this.farve = farve;
+        this.afleveringsforsikring = afleveringsforsikring;
+        this.selvrisiko = selvrisiko;
+        this.daekpakke = daekpakke;
+        this.vejhjaelp = vejhjaelp;
+        this.udleveringVedFDM = udleveringVedFDM;
+        this.abonnementslaengde = abonnementslaengde;
+        this.kmPrMdr = kmPrMdr;
         this.afhentningssted = afhentningssted;
-        this.afleveringssted = afleveringssted;
         this.startDato = startDato;
         this.slutDato = slutDato;
     }
 
+    // ------------------- Getters & Setters -------------------
 
-
-    // ------------------- Get & Set -------------------
 
     public int getID() {
         return id;
@@ -102,20 +92,20 @@ public class LejeAftale {
         this.bruger = bruger;
     }
 
-    public Bil getBil() {
-        return bil;
-    }
-
-    public void setBil(Bil bil) {
-        this.bil = bil;
-    }
-
     public KundeInfo getKundeInfo() {
         return kundeInfo;
     }
 
     public void setKundeInfo(KundeInfo kundeInfo) {
         this.kundeInfo = kundeInfo;
+    }
+
+    public Bil getBil() {
+        return bil;
+    }
+
+    public void setBil(Bil bil) {
+        this.bil = bil;
     }
 
     public SkadeRapport getSkadeRapport() {
@@ -126,20 +116,68 @@ public class LejeAftale {
         this.skadeRapport = skadeRapport;
     }
 
-    public String getAbonnementsType() {
-        return abonnementsType;
+    public String getFarve() {
+        return farve;
     }
 
-    public void setAbonnementsType(String abonnementsType) {
-        this.abonnementsType = abonnementsType;
+    public void setFarve(String farve) {
+        this.farve = farve;
     }
 
-    public int getPrisoverslag() {
-        return prisoverslag;
+    public boolean isAfleveringsforsikring() {
+        return afleveringsforsikring;
     }
 
-    public void setPrisoverslag(int prisoverslag) {
-        this.prisoverslag = prisoverslag;
+    public void setAfleveringsforsikring(boolean afleveringsforsikring) {
+        this.afleveringsforsikring = afleveringsforsikring;
+    }
+
+    public boolean isSelvrisiko() {
+        return selvrisiko;
+    }
+
+    public void setSelvrisiko(boolean selvrisiko) {
+        this.selvrisiko = selvrisiko;
+    }
+
+    public boolean isDaekpakke() {
+        return daekpakke;
+    }
+
+    public void setDaekpakke(boolean daekpakke) {
+        this.daekpakke = daekpakke;
+    }
+
+    public boolean isVejhjaelp() {
+        return vejhjaelp;
+    }
+
+    public void setVejhjaelp(boolean vejhjaelp) {
+        this.vejhjaelp = vejhjaelp;
+    }
+
+    public boolean isUdleveringVedFDM() {
+        return udleveringVedFDM;
+    }
+
+    public void setUdleveringVedFDM(boolean udleveringVedFDM) {
+        this.udleveringVedFDM = udleveringVedFDM;
+    }
+
+    public int getAbonnementslaengde() {
+        return abonnementslaengde;
+    }
+
+    public void setAbonnementslaengde(int abonnementslaengde) {
+        this.abonnementslaengde = abonnementslaengde;
+    }
+
+    public int getKmPrMdr() {
+        return kmPrMdr;
+    }
+
+    public void setKmPrMdr(int kmPrMdr) {
+        this.kmPrMdr = kmPrMdr;
     }
 
     public String getAfhentningssted() {
@@ -148,14 +186,6 @@ public class LejeAftale {
 
     public void setAfhentningssted(String afhentningssted) {
         this.afhentningssted = afhentningssted;
-    }
-
-    public String getAfleveringssted() {
-        return afleveringssted;
-    }
-
-    public void setAfleveringssted(String afleveringssted) {
-        this.afleveringssted = afleveringssted;
     }
 
     public LocalDate getStartDato() {
@@ -174,17 +204,4 @@ public class LejeAftale {
         this.slutDato = slutDato;
     }
 
-
-    public boolean equalsWithoutId(LejeAftale nyLejeAftale) {
-        return  this.bruger.equals(nyLejeAftale.getBruger()) &&
-                this.bil.equals(nyLejeAftale.getBil()) &&
-                this.kundeInfo.equals(nyLejeAftale.getKundeInfo()) &&
-                this.skadeRapport.equals(nyLejeAftale.getSkadeRapport()) &&
-                this.abonnementsType.equals(nyLejeAftale.getAbonnementsType()) &&
-                this.prisoverslag == nyLejeAftale.getPrisoverslag() &&
-                this.afhentningssted.equals(nyLejeAftale.getAfhentningssted()) &&
-                this.afleveringssted.equals(nyLejeAftale.getAfleveringssted()) &&
-                this.startDato.equals(nyLejeAftale.getStartDato()) &&
-                this.slutDato.equals(nyLejeAftale.getSlutDato());
-    }
 }

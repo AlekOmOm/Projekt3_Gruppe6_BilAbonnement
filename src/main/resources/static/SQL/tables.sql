@@ -61,21 +61,26 @@ CREATE TABLE Forretningsrapport
 
 CREATE TABLE LejeAftale
 (
-    ID              INT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    BrugerID        INT, -- foreign key
-    BilID           INT, -- foreign key
-    KundeInfoID     INT, -- foreign key
-    SkadeRapportID  INT, -- foreign key
+    ID                    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    BrugerID              INT, -- foreign key
+    KundeInfoID           INT, -- foreign key
+    BilID                 INT, -- foreign key
+    SkadeRapportID        INT, -- foreign key
 
-    Abonnementstype VARCHAR(255) NOT NULL,
-    Prisoverslag    INT,
-    Afhentningssted VARCHAR(255),
-    afleveringssted   VARCHAR(255),
-    StartDato       DATE,
-    SlutDato        DATE,
+    Farve                 VARCHAR(255),
+    Afleveringsforsikring BOOLEAN,
+    Selvrisiko            BOOLEAN,
+    Daekpakke             BOOLEAN,
+    Vejhjaelp             BOOLEAN,
+    UdleveringVedFDM      BOOLEAN,
+    Abonnementslaengde    INT,
+    KmPrMdr               INT,
+    Afhentningssted       VARCHAR(255),
+    StartDato             DATE,
+    SlutDato              DATE,
 
     FOREIGN KEY (BrugerID) REFERENCES Bruger (ID),
-    FOREIGN KEY (BilID) REFERENCES Bil (ID),
     FOREIGN KEY (KundeInfoID) REFERENCES KundeInfo (ID),
+    FOREIGN KEY (BilID) REFERENCES Bil (ID),
     FOREIGN KEY (SkadeRapportID) REFERENCES SkadeRapport (ID)
 );

@@ -22,7 +22,7 @@ public class BilService {
 
     // ------------------- Bil CRUD -------------------
 
-    public Bil create(String model) {
+    public Bil createBilInstance(String model) {
         return bilFactory.create(model);
     }
 
@@ -30,7 +30,11 @@ public class BilService {
     // ------------------- Business Operations -------------------
 
     public Bil book(Bil bil) {
-        return bilRepository.book(bil);
+        if (exists(bil)) {
+            return bilRepository.book(bil);
+        }
+
+        return saveBil(bil);
     }
 
     public Bil setSomTilgaengelig(Bil bil) {
@@ -40,7 +44,6 @@ public class BilService {
     public Bil setSomTilService(Bil bil) {
         return bilRepository.setSomTilService(bil);
     }
-
 
 
     // ------------------- DB CRUD -------------------

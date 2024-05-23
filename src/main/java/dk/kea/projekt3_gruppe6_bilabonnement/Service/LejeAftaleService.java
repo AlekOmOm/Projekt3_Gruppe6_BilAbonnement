@@ -36,7 +36,7 @@ public class LejeAftaleService {
         }
 
         // Save Bil
-        Bil savedBil = bilService.saveBil(nyLejeAftale.getBil());
+        Bil savedBil = bilService.book(nyLejeAftale.getBil());
         if (savedBil == null) {
             throw new RuntimeException("Failed to save Bil");
         }
@@ -126,7 +126,7 @@ public class LejeAftaleService {
     // ------------------- Helper methods -------------------
 
     private LejeAftale integrate(BrugerValgDTO brugerValgDTO, LejeAftale lejeAftale) {
-        Bil bil = bilService.create(brugerValgDTO.getBilModel());
+        Bil bil = bilService.createBilInstance(brugerValgDTO.getBilModel());
 
 
 

@@ -63,7 +63,8 @@ public class LejeAftaleServiceTest {
 
     @Test
     public void testOpretLejeAftale() {
-        nyLejeAftale = new LejeAftale(brugere.get(0), kundeInfo, biler.get(0), "AbonnementsType1", 1000, "Afhentningssted1", "Afleveringssted1", LocalDate.now(), LocalDate.now().plusDays(7));
+        // LejeAftale fields: Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, LocalDate startDato, LocalDate slutDato
+        nyLejeAftale = new LejeAftale(brugere.get(0), kundeInfo, biler.get(0), null, "Rød", true, true, true, true, true, 12, 10000, "Testvej 1", LocalDate.now(), LocalDate.now().plusMonths(12));
 
         LejeAftale oprettetLejeAftale = lejeAftaleService.save(nyLejeAftale);
 

@@ -4,6 +4,8 @@ import dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.KundeInfoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class KundeInfoService {
 
@@ -38,6 +40,10 @@ public class KundeInfoService {
         return kundeInfoRepository.find(kundeInfo);
     }
 
+    public List<KundeInfo> findAll () {
+        return kundeInfoRepository.findAll();
+    }
+
     public KundeInfo update(KundeInfo kundeInfo) {
         if (notHaveNecessaryVariables(kundeInfo)) {
             System.out.println("KundeInfoService.update() - Missing necessary variables");
@@ -52,7 +58,7 @@ public class KundeInfoService {
 
     // ------------------- Helper methods -------------------
 
-    private boolean exists(KundeInfo kundeInfo) {
+    public boolean exists(KundeInfo kundeInfo) {
         return kundeInfoRepository.exists(kundeInfo);
     }
 

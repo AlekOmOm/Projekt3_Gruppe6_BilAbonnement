@@ -10,10 +10,7 @@ import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository;
-import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory;
-import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService;
-import dk.kea.projekt3_gruppe6_bilabonnement.Service.BrugerService;
-import dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService;
+import dk.kea.projekt3_gruppe6_bilabonnement.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -35,16 +32,18 @@ public class InitData implements ApplicationRunner {
     private final SkadeRapportRepository skadeRapportRepository;
     private final BrugerService brugerService;
     private final LejeAftaleService lejeAftaleService;
+    private final KundeInfoService kundeInfoService;
 
     private static List<Bruger> brugere = new ArrayList<>();
     private static List<Bil> biler = new ArrayList<>();
+    private static List<KundeInfo> kundeInfos = new ArrayList<>();
     private static List<LejeAftale> lejeAftaler = new ArrayList<>();
     private static List<SkadeRapport> skadeRapporter = new ArrayList<>();
     private final BilService bilService;
 //    List<ForretningsRapport> forretningsRapporter = new ArrayList<>();
 
     @Autowired
-    public InitData(BilFactory bilFactory, BilRepository bilRepository, BrugerRepository brugerRepository, LejeAftaleRepository lejeaftaleRepository, SkadeRapportRepository skadeRapportRepository, BilService bilService, BrugerService brugerService, LejeAftaleService lejeAftaleService) {
+    public InitData(BilFactory bilFactory, BilRepository bilRepository, BrugerRepository brugerRepository, LejeAftaleRepository lejeaftaleRepository, SkadeRapportRepository skadeRapportRepository, BilService bilService, BrugerService brugerService, LejeAftaleService lejeAftaleService, KundeInfoService kundeInfoService) {
         this.bilFactory = bilFactory;
         this.bilRepository = bilRepository;
         this.brugerRepository = brugerRepository;
@@ -53,6 +52,7 @@ public class InitData implements ApplicationRunner {
         this.bilService = bilService;
         this.brugerService = brugerService;
         this.lejeAftaleService = lejeAftaleService;
+        this.kundeInfoService = kundeInfoService;
     }
 
     @Override
@@ -66,6 +66,8 @@ public class InitData implements ApplicationRunner {
 
         brugerTestData(); // Bruger test data - tre brugere: dataregistrering, skade- og udbedring og forretningsudvikling
 
+        // ------------------- KundeInfo test data -------------------
+        kundeInfoTestData();
 
         // ------------------- LejeAftale test data -------------------
 
@@ -142,14 +144,41 @@ public class InitData implements ApplicationRunner {
         }
     }
 
+    private void kundeInfoTestData() {
+        kundeInfos.addAll(Arrays.asList(
+                new KundeInfo("212286-1234", "Test", "Testesen", "Testvej 1", 1234, "test@mail.com", 12345678),
+                new KundeInfo("212286-1235", "Test2", "Testesen2", "Testvej 2", 1235, "test2@mail.com", 12345679),
+                new KundeInfo("212286-1236", "Test3", "Testesen3", "Testvej 3", 1236, "test3@mail.com", 12345680)
+        ));
+
+        // tjek om kundeInfo allerede findes i database og fjern dem fra listen
+        for (Iterator<KundeInfo> iterator = kundeInfos.iterator(); iterator.hasNext();) {
+
+            KundeInfo kundeInfo = iterator.next();
+            if (kundeInfoService.exists(kundeInfo)) {
+                iterator.remove();
+            }
+        }
+
+        // Save kundeInfo (hvis nye) til database
+        for (int i = 0; i<kundeInfos.size(); i++) {
+            KundeInfo kundeInfo = kundeInfos.get(i);
+            if (kundeInfo != null) {
+                kundeInfoService.save(kundeInfo);
+            }
+        }
+    }
+
     private void lejeAftaleTestData() {
         brugere = brugerRepository.findAll();
         biler = bilRepository.findAll();
+        kundeInfos = kundeInfoService.findAll();
 
         lejeAftaler.addAll(Arrays.asList(
-                new LejeAftale(brugere.get(0), new KundeInfo(), biler.get(0), "AbonnementsType1", 1000, "Afhentningssted1", "Afleveringssted1", LocalDate.now(), LocalDate.now().plusDays(7)),
-                new LejeAftale(brugere.get(1), new KundeInfo(), biler.get(1), "AbonnementsType2", 2000, "Afhentningssted2", "Afleveringssted2", LocalDate.now(), LocalDate.now().plusDays(7)),
-                new LejeAftale(brugere.get(2), new KundeInfo(), biler.get(2), "AbonnementsType3", 3000, "Afhentningssted3", "Afleveringssted3", LocalDate.now(), LocalDate.now().plusDays(7))
+                // LejeAftale fields: Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, LocalDate startDato, LocalDate slutDato
+                new LejeAftale(brugere.get(0), kundeInfos.get(0), biler.get(0), null, "Rød", true, true, true, true, true, 12, 10000, "Testvej 1", LocalDate.now(), LocalDate.now().plusMonths(12)),
+                new LejeAftale(brugere.get(1), kundeInfos.get(1), biler.get(1), null, "Blå", true, true, true, true, true, 12, 10000, "Testvej 2", LocalDate.now(), LocalDate.now().plusMonths(12)),
+                new LejeAftale(brugere.get(2), kundeInfos.get(2), biler.get(2), null, "Grøn", true, true, true, true, true, 12, 10000, "Testvej 3", LocalDate.now(), LocalDate.now().plusMonths(12))
         ));
 
         // tjek om biler allerede findes i database og fjern dem fra listen

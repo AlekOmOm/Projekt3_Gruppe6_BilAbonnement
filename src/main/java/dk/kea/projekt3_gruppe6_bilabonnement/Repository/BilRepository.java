@@ -61,6 +61,8 @@ public class BilRepository {
     // ------------------- CRUD Operations -------------------
 
     public Bil save(Bil bil) {
+        bil.setSomUdlejet();
+
         if (exists(bil)) {
             return update(bil);
         }
