@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -98,4 +101,37 @@ public class BilService {
     }
 
 
+    public List<Bil> getBilTestData() {
+        List<Bil> biler = new ArrayList<>();
+
+        biler.addAll(Arrays.asList(
+                bilFactory.createCitroenC1(),
+                bilFactory.createPeugeot108(),
+                bilFactory.createOpelCorsaCosmo()
+        ));
+
+
+        // tilfældige værdier for hver bil
+        for (int i = 0; i<biler.size(); i++) {
+            Bil bil = biler.get(i);
+            if (bil != null) {
+                bil.setVognNummer("VognNummer" + i);
+                bil.setStelNummer("StelNummer" + i);
+                bil.setUdstyrsNiveau("UdstyrsNiveau" + i);
+                bil.setKilometerKoert(1000 * i);
+                bil.setSomTilgaengelig();
+            }
+        }
+
+
+        return biler;
+    }
+
+    public List<Bil> getBilTyper() {
+        List<Bil> biler = new ArrayList<>();
+        biler.add(bilFactory.createCitroenC1());
+        biler.add(bilFactory.createPeugeot108());
+        biler.add(bilFactory.createOpelCorsaCosmo());
+        return biler;
+    }
 }

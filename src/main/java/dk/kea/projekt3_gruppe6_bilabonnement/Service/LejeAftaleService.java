@@ -29,6 +29,17 @@ public class LejeAftaleService {
 
     // ------------------- Operations (CRUD) -------------------
 
+    public void opret(BrugerValgDTO brugerValgDTO) {
+
+
+        LejeAftale lejeAftale = new LejeAftale();
+        lejeAftale = integrate(brugerValgDTO, lejeAftale);
+        save(lejeAftale);
+    }
+
+
+    // ------------------- Operations (CRUD) -------------------
+
 
     public LejeAftale save(LejeAftale nyLejeAftale) {
         if (exists(nyLejeAftale)) {
@@ -69,6 +80,9 @@ public class LejeAftaleService {
         if (savedLejeAftale == null) {
             throw new RuntimeException("Failed to save LejeAftale");
         }
+
+        // book bil
+        bilService.book(savedBil);
 
         return savedLejeAftale;
     }
@@ -134,5 +148,4 @@ public class LejeAftaleService {
         return lejeAftale;
 
     }
-
 }

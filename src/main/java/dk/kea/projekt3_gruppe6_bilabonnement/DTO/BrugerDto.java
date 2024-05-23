@@ -1,4 +1,6 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.Model;
+package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
+
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 
 import java.io.Serializable;
 
