@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
+    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}">
     <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
     <link rel="stylesheet" href="../static/LejeAftale.css" th:href="@{/LejeAftale.css}">
 
@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="header">
-    <img src="../static/images/img.png" height="37" width="300" alt="logo"/>
+    <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
     <p>BilAbonnement A/S</p>
 </div>
 
@@ -21,9 +21,12 @@
 
 <div class = "content">
     <div class="opretLeje">
-        <a href="VaelgBil.html">
-            <button class="button" id="opretLeje">Opret Leje Aftale</button>
-        </a>
+        <form action="/LejeAftale/VaelgBil" method="get">
+            <button type="submit" class="button" id="opretLeje">Opret Lejeaftale</button>
+        </form>
+<!--        <a href="/LejeAftale/VaelgBil">-->
+<!--            <button class="button" id="opretLeje">Opret Lejeaftale</button>-->
+<!--        </a>-->
     </div>
 
     <div class="archive">
