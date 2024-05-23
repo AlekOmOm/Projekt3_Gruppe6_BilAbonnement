@@ -20,7 +20,7 @@ public class SkadeRapport {
     }
 
 
-    public SkadeRapport(int brugerID, int lejeAftaleID,  int kilometerKoertOver, int reparationsomkostninger){
+    public SkadeRapport(int brugerID, int lejeAftaleID, int kilometerKoertOver, int reparationsomkostninger, List<Skade> valgteSkader){
         this.brugerID = brugerID;
         this.lejeAftaleID = lejeAftaleID;
         this.kilometerKoertOver = kilometerKoertOver;

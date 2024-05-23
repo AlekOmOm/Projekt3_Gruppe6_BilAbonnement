@@ -24,7 +24,7 @@ public class SkadeRapportController {
     // web sider:
     private static final String SKADERAPPORT_PAGE = "SkadeRapport";
     private static final String OPRET_RAPPORT_PAGE = "GenererSkadeRapport";
-    private static final String REDIRECT_OPRET = "redirect:/SkadeRapport/Opret";
+    private static final String REDIRECT_OPRET = "redirect:/SkadeRapport/opret";
     private static final String SE_RAPPORT_PAGE = "SeSkadeRapport";
     private static final String REDIRECT_SE = "redirect:/SkadeRapport/Se";
 
@@ -68,6 +68,8 @@ public class SkadeRapportController {
     @GetMapping("/opret")
     public String opretRapport(Model model, HttpSession session, @RequestParam int lejeAftaleID){ // input *hidden* for LejeAftaleID
         Map<String, Integer> skadeCheckliste = skadeService.getSkadeCheckliste();
+
+        model.addAttribute("skadeCheckliste", skadeCheckliste);
 
         // hvis == null -> ny session
         if (session.getAttribute("skaderValgt") == null) {
@@ -113,9 +115,21 @@ public class SkadeRapportController {
             //lejeAftaleID = Udløbet lejeaftaler
             //kilometerKørtOver = input felt
             //reparationsomkostninger = smalet pris for skader & kilometerKoertOver SkadeRapporter
-
-
         List<Skade> valgteSkader = skadeService.genererSkadeListe(skaderValgt);
+        int brugerID = (int) session.getAttribute("brugerID");
+        int lejeAftaleID = (int) session.getAttribute("lejeAftaleID");
+        int reparationsomkostionger = skadeService.udregnReparationsomkostninger(kilometerKoertOver, valgteSkader);
+
+        SkadeRapport skadeRapport = new SkadeRapport(brugerID, lejeAftaleID, kilometerKoertOver, reparationsomkostionger, valgteSkader);
+        SkadeRapport gemtSkadeRapport = skadeRapportService.gem(skadeRapport);
+
+        if(gemtSkadeRapport == null){
+            return REDIRECT_OPRET;
+        }
+        session.removeAttribute("lejeAftaleID");
+        return REDIRECT_SE + gemtSkadeRapport.getLejeAftaleID();
+
+        /*List<Skade> valgteSkader = skadeService.genererSkadeListe(skaderValgt);
         int brugerID = (int) session.getAttribute("brugerID");
 
 
@@ -133,17 +147,15 @@ public class SkadeRapportController {
         session.removeAttribute("skaderIkkeValgt");
 
         return REDIRECT_SE + gemtRapport.getID();
+    }*/
+
+
     }
-
-
     @GetMapping("/se/{lejeAftaleID}")
-    public String seRapport(Model model, @PathVariable int lejeAftaleID){
+    public String seRapport(Model model, @PathVariable int lejeAftaleID) {
         SkadeRapport skadeRapport = skadeRapportService.findMedLejeAftaleID(lejeAftaleID);
-
         model.addAttribute("SkadeRapport", skadeRapport);
-
         return SE_RAPPORT_PAGE;
     }
-
 }
 

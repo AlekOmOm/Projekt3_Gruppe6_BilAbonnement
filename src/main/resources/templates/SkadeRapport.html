@@ -36,9 +36,9 @@
         <tbody>
         <tr th:each="lejeAftale : ${LejeAftalerUdenRapport}">
             <td th:text="${lejeAftale.bilID}">BilID</td>
-            <td th:text="${#dates.format(lejeAftale.slutDato, 'yyyy-MM-dd')}">SlutDato</td>
+            <td th:text="${#temporals.format(lejeAftale.slutDato, 'yyyy-MM-dd')}">SlutDato</td>
             <td>
-                <a th:href='@{/SkadeRapport/opret(lejeAftaleID=${lejeAftale.id})}'>
+                <a th:href='@{/SkadeRapport/opret(lejeAftaleID=${lejeAftale.ID})}'>
                     <button>Generer Rapport</button>
                 </a>
             </td>

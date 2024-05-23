@@ -24,18 +24,19 @@ public class LejeAftaleRepository {
         @Override
         public LejeAftale mapRow(ResultSet rs, int rowNum) throws SQLException {
             LejeAftale lejeaftale = new LejeAftale();
-            lejeaftale.setID(rs.getInt("lejeaftaleID"));
+            lejeaftale.setID(rs.getInt("ID"));
             lejeaftale.setBrugerID(rs.getInt("brugerID"));
             lejeaftale.setBilID(rs.getInt("BilID"));
             lejeaftale.setAbonnementsType(rs.getString("abonnementsType"));
             lejeaftale.setKundeInfoID(rs.getInt("kundeInfoID"));
             lejeaftale.setPrisoverslag(rs.getInt("prisoverslag"));
             lejeaftale.setAfhentningssted(rs.getString("afhentningssted"));
-            lejeaftale.setAfleveringssted(rs.getString("afleveringssted"));
+            lejeaftale.setAfleveringssted(rs.getString("leveringssted"));
             lejeaftale.setStartDato(rs.getDate("startDato").toLocalDate());
             lejeaftale.setSlutDato(rs.getDate("slutDato").toLocalDate());
             return lejeaftale;
         }
+
     }
 
     public LejeAftale findMedID(int id){
@@ -45,18 +46,18 @@ public class LejeAftaleRepository {
 
 
     public List<LejeAftale> getLejeAftalerUdenRapport() {
-        String sql = "SELECT BilID, SlutDato FROM LejeAftale WHERE SkadeRapportID IS NULL";
+        String sql = "SELECT * FROM LejeAftale WHERE SkadeRapportID IS NULL";
         return jdbcTemplate.query(sql, this::mapRow);
     }
 
     public List<LejeAftale> getLejeAftaleMedRapport(){
-        String sql = "SELECT BilID, SlutDato FROM lejeAftale WHERE SkadeRapportID IS NOT NULL";
+        String sql = "SELECT * FROM lejeAftale WHERE SkadeRapportID IS NOT NULL";
         return jdbcTemplate.query(sql, this::mapRow);
     }
 
     public LejeAftale mapRow(ResultSet rs, int rowNum) throws SQLException {
         LejeAftale lejeaftale = new LejeAftale();
-        lejeaftale.setID(rs.getInt("lejeaftaleID"));
+        lejeaftale.setID(rs.getInt("ID"));
         lejeaftale.setBrugerID(rs.getInt("brugerID"));
         lejeaftale.setBilID(rs.getInt("bilID"));
         lejeaftale.setKundeInfoID(rs.getInt("kundeInfoID"));
@@ -64,11 +65,12 @@ public class LejeAftaleRepository {
         lejeaftale.setAbonnementsType(rs.getString("abonnementsType"));
         lejeaftale.setPrisoverslag(rs.getInt("prisoverslag"));
         lejeaftale.setAfhentningssted(rs.getString("afhentningssted"));
-        lejeaftale.setAfleveringssted(rs.getString("afleveringssted"));
+        lejeaftale.setAfleveringssted(rs.getString("leveringssted"));
         lejeaftale.setStartDato(rs.getDate("startDato").toLocalDate());
         lejeaftale.setSlutDato(rs.getDate("slutDato").toLocalDate());
         return lejeaftale;
     }
+
 
 
     public List<LejeAftale> findByVognNummer(List<String> vognNummerList) {

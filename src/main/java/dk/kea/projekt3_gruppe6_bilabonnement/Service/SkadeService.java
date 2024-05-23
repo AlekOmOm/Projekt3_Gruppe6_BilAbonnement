@@ -29,6 +29,7 @@ public class SkadeService {
             "Bilbelysning", 1000
     );
 
+
     public List<Skade> genererSkadeListe(List<String> skaderValgt) {
         List<Skade> skader = new ArrayList<>();
         for (String type : skaderValgt) {
@@ -46,6 +47,12 @@ public class SkadeService {
 
     public List<Skade> getSkader(SkadeRapport skadeRapport){
         return skadeRepository.findAlleSkader(skadeRapport.getID());
+    }
+
+    public int udregnReparationsomkostninger(int kilometerKoertOver, List<Skade> skader){
+        int totalPris = skader.stream().mapToInt(Skade::getPris).sum();
+        int kilometerPris = kilometerKoertOver * 1;
+        return totalPris + kilometerPris;
     }
 
 
