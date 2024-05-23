@@ -1,4 +1,5 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
+import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerValgDTO;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.PackageDeals;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory;
@@ -16,6 +17,7 @@ import java.util.List;
 public class BilController {
     @Autowired
     private BilFactory bilFactory;
+    private BrugerValgDTO brugerValgDTO;
 
     @GetMapping("/VaelgBil")
     public String showForm(Model model) {
@@ -43,7 +45,8 @@ public class BilController {
                 new PackageDeals("Aflveringsforsikring", 119, "Tilvalg af afleveringsforsikring"),
                 new PackageDeals("Lav selvrisiko", 89, ""),
                 new PackageDeals("Vejhjaelp", 49, "I samarbejde med Viking kan du få vejhjaelp til kun 49 kr. pr. maaned. Som Bilabonnement-kunde er du daekket under de vilkaar du finder under spoergsmaal og svar."),
-                new PackageDeals("Udlevering ved FDM", 599, "Udlevering til FDM er et engangsgebyr på 599 kr."
-        );
+                new PackageDeals("Udlevering ved FDM", 599, "Udlevering til FDM er et engangsgebyr på 599 kr.");
+        model.addAttribute("packageDeals", packageDeals);
+        return "Abonnement";
     }
 }

@@ -48,14 +48,30 @@
 /* Archive styles */
 .archive {
     width: 25%; /* Adjust as needed */
-    height: 500px;
+    max-height: calc(100vh - 95px);
     background-color: #c4c4c4;
     padding: 10px;
+    margin-left: 10px;
     position: relative;
     left: 20%;
-    top: 130px;
-    overflow: auto; /* Add a scrollbar when the content exceeds the box's height */
+    top: 10%;
+    overflow-y: auto; /* Add a scrollbar when the content exceeds the box's height */
 }
+.ArkivTabel th,
+.ArkivTabel td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.ArkivTabel th {
+    background-color: #f2f2f2;
+}
+
+.ArkivTabel button {
+    padding: 5px 10px; /* Adjust padding as needed */
+}
+
 .archive h2 {
     top: 0;
 }
