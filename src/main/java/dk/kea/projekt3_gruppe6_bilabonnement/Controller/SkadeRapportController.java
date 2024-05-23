@@ -87,24 +87,26 @@ public class SkadeRapportController {
 
     // purpose of refresh method: opdater session med valgte data fra form submit
     @GetMapping("/refresh")
-    public String refresh(HttpSession session, Model model, @RequestParam(required = false) List<String> skaderValgt){
+    public String refresh(HttpSession session, Model model, @RequestParam int lejeAftaleID, @RequestParam(required = false) List<String> skaderValgt){
         Map<String, Integer> skadeCheckliste = skadeService.getSkadeCheckliste();
-        List<String> skadeTyper = new ArrayList<>(skadeCheckliste.keySet());
+        //List<String> skadeTyper = new ArrayList<>(skadeCheckliste.keySet());
+        model.addAttribute("skadeCheckliste", skadeCheckliste);
 
         // hvis == null, så er der ingen valg -> restart side
         if(skaderValgt == null){
-            return REDIRECT_OPRET;
+            skaderValgt = new ArrayList<>();
         }
 
         // hvis != null, så er der ændringer -> opdater session
-        List<String> skaderIkkeValgt = new ArrayList<>(skadeTyper);
+        List<String> skaderIkkeValgt = new ArrayList<>(skadeCheckliste.keySet());
         skaderIkkeValgt.removeAll(skaderValgt);
 
         // session opdateres
         session.setAttribute("skaderValgt", skaderValgt);
         session.setAttribute("skaderIkkeValgt", skaderIkkeValgt);
 
-        return REDIRECT_OPRET;
+
+        return REDIRECT_OPRET + "?lejeAftale=" + lejeAftaleID;
     }
 
     @PostMapping("/opret")
@@ -124,9 +126,12 @@ public class SkadeRapportController {
         SkadeRapport gemtSkadeRapport = skadeRapportService.gem(skadeRapport);
 
         if(gemtSkadeRapport == null){
-            return REDIRECT_OPRET;
+            return REDIRECT_OPRET + "?lejeAftale=" + lejeAftaleID;
         }
         session.removeAttribute("lejeAftaleID");
+        session.removeAttribute("skaderValgt");
+        session.removeAttribute("skaderIkkeValgt");
+
         return REDIRECT_SE + gemtSkadeRapport.getLejeAftaleID();
 
         /*List<Skade> valgteSkader = skadeService.genererSkadeListe(skaderValgt);

@@ -7,7 +7,7 @@
     <title>Registrer Skade</title>
     <link rel="stylesheet" href="/static/SkadeRapport.css">
     <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
-    <link rel="stylesheet" href="/static/GenererSkadeRapport.css">
+    <link rel="stylesheet">
 </head>
 <body>
 <div class="header">
@@ -20,6 +20,7 @@
 
     <div class="three-container">
         <form action="#" th:action="@{/SkadeRapport/refresh}" method="get">
+            <input type="hidden" name="lejeAftaleID" th:value="${lejeAftaleID}"/>
             <table>
                 <thead>
                 <tr>
@@ -31,7 +32,7 @@
                 <tr th:each="entry : ${skadeCheckliste}">
                     <td>
                         <label>
-                            <input type="checkbox" th:value="${entry.key}" name="selectedSkader"/>
+                            <input type="checkbox" th:value="${entry.key}" name="skaderValgt" th:checked="${session.skaderValgt.contains(entry.key)}"/>
                             <span th:text="${entry.key}"></span>
                         </label>
                     </td>
@@ -43,6 +44,7 @@
         </form>
 
         <form action="#" th:action="@{/SkadeRapport/opret}" method="post">
+            <input type="hidden" name="lejeAftaleID" th:value="${lejeAftaleID}"/>
             <table>
                 <thead>
                 <tr>
@@ -51,7 +53,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="skade : ${session.skaderValgt}">
-                    <td><input type="checkbox" th:value="${skade}" th:name="selectedSkader" checked/></td>
+                    <td><input type="checkbox" th:value="${skade}" th:name="skaderValgt" checked/></td>
                     <td th:text="${skade}"></td>
                 </tr>
                 </tbody>
