@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 public class LejeAftaleService {
 
     public void saveLejeAftale(LejeAftale lejeAftale) {
+
     }
 
 }

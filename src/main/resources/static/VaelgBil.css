@@ -11,14 +11,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: baseline;
-    margin-top: 20px;
-    margin-left: 50px;
+    margin: 10px;
     font-size: 18px;
     font-weight: bold;
 }
-.inputForm h2 {
-    top: 50px;
-}
+
 .inputRow {
     display: flex;
     align-items: center;
@@ -62,6 +59,7 @@
 .button {
     cursor: pointer;
     margin-left: 10px;
+    border-radius: 50px; /* Rund knap */
 }
 
 #anullerButton {

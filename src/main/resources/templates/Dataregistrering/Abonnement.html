@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
-    <link rel="stylesheet" href="../../static/Abonnemment.css" th:href="@{/Abonnemment.css}">
+    <link rel="stylesheet" href="../../static/Abonnement.css" th:href="@{/Abonnement.css}">
     <title>LejeAbonnement</title>
 </head>
 <body>
@@ -17,15 +17,12 @@
     </a>
     <div class="content">
         <form action="/PrisOverslag" method="get">
-            <div class="inputRow">
-                <label for="subscriptionType">Abonemment Type:</label>
-                <select id="abonemmentType" name="abonnementType" required>
-                    <option value="">Vælg Abonnement</option>
-                    <option value="månedlig">Månedlig</option>
-                    <option value="kvartal">Kvartal</option>
-                    <option value="aarlig">Årlig</option>
-                </select>
+            <div th:each="type : ${abonnementTyper}">
+                <input type="checkbox" th:id="${type}" th:value="${type}" name="abonnementType" />
+                <label th:for="${type}" th:text="${type}"></label>
             </div>
+            <br>
+
             <button type="submit" class="button" id="submitSubscription">Næste</button>
         </form>
 

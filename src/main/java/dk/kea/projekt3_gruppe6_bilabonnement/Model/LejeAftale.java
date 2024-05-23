@@ -1,6 +1,8 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 
 
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
+
 import java.time.LocalDate;
 
 
@@ -8,10 +10,10 @@ public class LejeAftale {
 
     int id;
 
-    int brugerID;
-    int bilID;
-    int kundeInfoID;
-    int skadeRapportID;
+    Bruger bruger;
+    Bil bil;
+    KundeInfo kundeInfo;
+    SkadeRapport skadeRapport;
 
     String abonnementsType;
     int prisoverslag;
@@ -25,12 +27,12 @@ public class LejeAftale {
     public LejeAftale() {
     }
 
-    public LejeAftale(int id, int brugerID, int bilID, int kundeInfoID, int skadeRapportID, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+    public LejeAftale(int id, Bruger bruger, Bil bil, KundeInfo kundeInfo, SkadeRapport skadeRapport, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
         this.id = id;
-        this.brugerID = brugerID;
-        this.bilID = bilID;
-        this.kundeInfoID = kundeInfoID;
-        this.skadeRapportID = skadeRapportID;
+        this.bruger = bruger;
+        this.bil = bil;
+        this.kundeInfo = kundeInfo;
+        this.skadeRapport = skadeRapport;
 
         this.abonnementsType = abonnementsType;
         this.prisoverslag = prisoverslag;
@@ -41,11 +43,12 @@ public class LejeAftale {
     }
 
 
-    public LejeAftale(int id, int brugerID, int bilID, int kundeID, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+    public LejeAftale(int id, Bruger bruger, Bil bil, KundeInfo kundeInfo, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
         this.id = id;
-        this.brugerID = brugerID;
-        this.bilID = bilID;
-        this.kundeInfoID = kundeID;
+        this.bruger = bruger;
+        this.bil = bil;
+        this.kundeInfo = kundeInfo;
+
 
         this.abonnementsType = abonnementsType;
         this.prisoverslag = prisoverslag;
@@ -55,7 +58,6 @@ public class LejeAftale {
         this.slutDato = slutDato;
 
     }
-
 
 
 
@@ -69,20 +71,20 @@ public class LejeAftale {
         this.id = id;
     }
 
-    public int getBrugerID() {
-        return brugerID;
+    public Bruger getBruger() {
+        return bruger;
     }
 
-    public void setBrugerID(int brugerID) {
-        this.brugerID = brugerID;
+    public void setBrugerID(Bruger bruger) {
+        this.bruger = bruger;
     }
 
-    public int getBilID() {
-        return bilID;
+    public Bil getBil() {
+        return bil;
     }
 
-    public void setBilID(int bilID) {
-        this.bilID = bilID;
+    public void setBil(Bil bil) {
+        this.bil = bil;
     }
 
     public String getAbonnementsType() {
@@ -93,12 +95,12 @@ public class LejeAftale {
         this.abonnementsType = abonnementsType;
     }
 
-    public int getKundeInfoID() {
-        return kundeInfoID;
+    public KundeInfo getKundeInfo() {
+        return kundeInfo;
     }
 
-    public void setKundeInfoID(int kundeInfoID) {
-        this.kundeInfoID = kundeInfoID;
+    public void setKundeInfo(KundeInfo kundeInfo) {
+        this.kundeInfo = kundeInfo;
     }
 
     public int getPrisoverslag() {
@@ -141,12 +143,31 @@ public class LejeAftale {
         this.slutDato = slutDato;
     }
 
-    public int getSkadeRapportID() {
-        return skadeRapportID;
+    public SkadeRapport getSkadeRapport() {
+        return skadeRapport;
     }
 
-    public void setSkadeRapportID(int skadeRapportID) {
-        this.skadeRapportID = skadeRapportID;
+    public void setSkadeRapport(SkadeRapport skadeRapport) {
+        this.skadeRapport = skadeRapport;
     }
+
+    // -----------------------------------------
+//    public void setBruger(Bruger bruger) {
+//        this.bruger = bruger;
+//    }
+
+//    public void setBil(Bil bil) {
+//        this.bil = bil;
+//    }
+
+//    public void setKundeInfo(KundeInfo kundeInfo) {
+//        this.kundeInfo = kundeInfo;
+//    }
+
+    // skal den være her?
+//    public void setSkadeRapport(SkadeRapport skadeRapport) {
+//        this.skadeRapport = skadeRapport;
+//    }
+    // -----------------------------------------
 
 }

@@ -44,9 +44,9 @@ public class NavigationController {
     }
 
     @GetMapping("/Abonnement")
-    public String LejeAbonnement(@ModelAttribute("Abonnement") String abonnemment, HttpSession session, Model model) {
+    public String LejeAbonnement(@ModelAttribute("Abonnement") String abonnement, HttpSession session, Model model) {
         //
-        session.setAttribute("valgtAbonomment", abonnemment);
+        session.setAttribute("valgtAbonoment", abonnement);
 
         return ABONNEMENT_PAGE;
     }
