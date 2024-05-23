@@ -22,15 +22,13 @@
         <h2>1. Vælg Bil</h2>
         <div class="inputForm">
             <form action="/LejeAftale/Abonnement" method="get" th:object="${nyBrugerValgDTO}">
-
-                    <label>
-                        <select th:field="*{bilModel}" class="inputField">
-                            <option value=""> Vælg Bil </option>
-                            <option th:each="bil : ${biler}" th:value="${bil.model}" th:text="${bil.model}">
-                            </option>
-                        </select>
-                    </label>
-
+                <label>
+                    <select th:field="*{bilModel}" class="inputField">
+                        <option value=""> Vælg Bil </option>
+                        <option th:each="bil : ${biler}" th:value="${bil.model}" th:text="${bil.model}">
+                        </option>
+                    </select>
+                </label>
                 <button type="submit" class="button"> Vælg Bil </button>
             </form>
         </div>

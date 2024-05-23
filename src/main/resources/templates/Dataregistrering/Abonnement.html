@@ -18,24 +18,31 @@
     <div class="content">
         <!-- <h2>2. Vælg Abonnement</h2> -->
 
-        <div class="car-choosen">
-            <h4 th:text="'Du har valgt bilen: ' + ${nyBrugerValgDTO.getBilModel()}"></h4>
 
-        </div>
-
+        <h2>2. Vælg Abonnement</h2>
         <div class="inputForm">
-            <h2>2. Vælg Abonnement</h2>
-            <form action="/PrisOverslag" method="get">
-                <div th:each="type : ${abonnementTyper}">
-                    <input type="checkbox" th:id="${type}" th:value="${type}" name="abonnementType" />
-                    <label th:for="${type}" th:text="${type}"></label>
-                </div>
-                <br>
+            <form action="/LejeAftale/PrisOverslag" method="get" th:object="${nyBrugerValgDTO}">
+                <label>
+                    <!--
+                    <select th:field="*{bilModel}" class="inputField">
+                        <option value=""> Vælg Bil </option>
+                        <option th:each="bil : ${biler}" th:value="${bil.model}" th:text="${bil.model}">
+                        </option>
+                    </select>
 
-                <button type="submit" class="button" id="submitSubscription">Næste</button>
+                    select for each field of the page
+                    -->
+
+                </label>
+                <button type="submit" class="button"> Næste </button>
             </form>
         </div>
 
+
+        <div class="info-saved-in-DTO">
+            <p>Valgt bil: <span th:text="${nyBrugerValgDTO.bilModel}"></span></p>
+            <p>Valgt abonnement: <span th:text="${nyBrugerValgDTO.abonnementType}"></span></p>
+        </div>
     </div>
     <div class="footer">
         <p>© 2021 Bilabonnement A/S</p>
