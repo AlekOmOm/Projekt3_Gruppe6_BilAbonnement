@@ -31,6 +31,3 @@ public class DashboardController {
 
 }
 
-
-//Right now the privius page look okay, right now my dashboard.html redirects to the forretningsrapport html.
-//I have a my sql table that is a rapport that contains "ID" wich is an int and primary key , "DatoGenereret" wich is a date, TotalBilerUdlejet wich also is and int, and last a SamletPris wich is also and int.
