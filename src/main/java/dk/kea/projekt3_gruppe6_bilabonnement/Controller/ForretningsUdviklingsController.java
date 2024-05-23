@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
-public class DashboardController {
+public class ForretningsUdviklingsController {
     private final DashboardService dashboardService;
 
-    public DashboardController(DashboardService dashboardService) {
+    public ForretningsUdviklingsController(DashboardService dashboardService) {
         this.dashboardService = dashboardService;
     }
 
