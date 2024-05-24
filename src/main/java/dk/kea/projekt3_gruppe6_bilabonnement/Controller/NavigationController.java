@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -42,30 +42,32 @@ public class NavigationController {
 
 
     @GetMapping("/VaelgBil")
-    public String getVaelgbilPage(BrugerValgDTO nyBrugerValgDTO,HttpSession session, Model model) {
-        // data til siden:
+    public String getVaelgbilPage(BrugerValgDTO brugerValgDTO,HttpSession session, Model model) {
+        // reset session
+        resetLejeAftaleSession(session);
 
+        // data til siden:
 
         model.addAttribute("biler", bilService.getBilTyper()); // TODO: ændre til getAlleTilgaengeligeBiler senere
         model.addAttribute("citroen", bilService.getBilTyper().get(0));
         model.addAttribute("peugeot", bilService.getBilTyper().get(1));
         model.addAttribute("opel", bilService.getBilTyper().get(2));
 
-        session.setAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
 
 
 
 
 
         // ------------------- Load, Save and return next -------------------
-        BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        BrugerValgDTO loadedDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
 
-        session.setAttribute("BrugerValgDTO", loadedDTO);
-        model.addAttribute("nyBrugerValgDTO", loadedDTO);
+
+        session.setAttribute("BrugerValgDTO", brugerValgDTO);
+        model.addAttribute("nyBrugerValgDTO", brugerValgDTO);
+        System.out.println("VaelgBil BrugerValgDTO: "+ brugerValgDTO.toString());
 
         return VAELGBIL_PAGE;
     }
+
 
     @GetMapping("/Abonnement")
     public String LejeAbonnement(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
@@ -88,14 +90,22 @@ public class NavigationController {
         session.setAttribute("BrugerValgDTO", loadedDTO);
         model.addAttribute("nyBrugerValgDTO", loadedDTO);
 
+        System.out.println("Abonnement Session data:");
+        System.out.println(" - oldBrugerValgDTO: "+ oldBrugerValgDTO.toString());
+        System.out.println(" - nyBrugerValgDTO: "+ nyBrugerValgDTO.toString());
+        System.out.println(" - loadedDTO: "+ loadedDTO.toString());
+
         return ABONNEMENT_PAGE;
     }
 
-
     @GetMapping("/PrisOverslag")
     public String getPrisoverslagPage(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
+        // ------------------- data for view -------------------
 
-
+        List<Integer> monthSequence = Arrays.asList(3, 36);
+        List<Integer> kmSequnce = Arrays.asList(1000, 2500, 5000, 10000);
+        model.addAttribute("monthSequence", monthSequence);
+        model.addAttribute("kmSequence", kmSequnce);
 
 
 
@@ -108,10 +118,10 @@ public class NavigationController {
 
         session.setAttribute("BrugerValgDTO", loadedDTO);
         model.addAttribute("nyBrugerValgDTO", loadedDTO);
+        System.out.println("Prisoverslag BrugerValgDTO: "+ loadedDTO.toString());
 
         return PRISOVERSLAG_PAGE;
     }
-
 
     @GetMapping("/KundeInfo")
     public String getKundeinfoPage(HttpSession session, Model model, BrugerValgDTO nyBrugerValgDTO) {
@@ -128,14 +138,16 @@ public class NavigationController {
 
         session.setAttribute("BrugerValgDTO", loadedDTO);
         model.addAttribute("nyBrugerValgDTO", loadedDTO);
+        System.out.println("KundeInfo BrugerValgDTO: "+ loadedDTO.toString());
 
         return KUNDEINFO_PAGE;
     }
 
-
     @GetMapping("/AfhentningsSted")
     public String getAfhentningsstedPage(HttpSession session, Model model, BrugerValgDTO nyBrugerValgDTO) {
-        session.setAttribute("valgtAfhentningsSted", nyBrugerValgDTO);
+
+
+
 
 
 
@@ -148,6 +160,7 @@ public class NavigationController {
 
         return AFHENTNINGSSTED_PAGE;
     }
+
 
 
     @PostMapping("/Opret")
@@ -168,6 +181,7 @@ public class NavigationController {
 
     // ------------------- Helper methods -------------------
 
+
     private BrugerValgDTO load(BrugerValgDTO oldBrugerValgDTO, BrugerValgDTO nyBugerValgDTO){
 
         // ------------------- null check -------------------
@@ -182,31 +196,16 @@ public class NavigationController {
         // steps: check værdier i nyBrugerValgDTO
         //       - hvis værdi er sat, så load i oldBrugerValgDTO
 
-        if (nyBugerValgDTO.getBilModel() == null){
+        if (nyBugerValgDTO.getBilModel() != null){
             oldBrugerValgDTO.setBilModel(nyBugerValgDTO.getBilModel());
         }
-        if (nyBugerValgDTO.getFarve() == null){
-            oldBrugerValgDTO.setFarve(nyBugerValgDTO.getFarve());
+        if (nyBugerValgDTO.getSelectedPackageDeals() != null){
+            oldBrugerValgDTO.setSelectedPackageDeals(nyBugerValgDTO.getSelectedPackageDeals());
         }
-        if (!nyBugerValgDTO.isAfleveringsforsikring()){
-            oldBrugerValgDTO.setAfleveringsforsikring(nyBugerValgDTO.isAfleveringsforsikring());
-        }
-        if (!nyBugerValgDTO.isSelvrisiko()){
-            oldBrugerValgDTO.setSelvrisiko(true);
-        }
-        if (!nyBugerValgDTO.isDaekpakke()){
-            oldBrugerValgDTO.setDaekpakke(true);
-        }
-        if (!nyBugerValgDTO.isVejhjaelp()){
-            oldBrugerValgDTO.setVejhjaelp(true);
-        }
-        if (!nyBugerValgDTO.isUdleveringVedFDM()){
-            oldBrugerValgDTO.setUdleveringVedFDM(true);
-        }
-        if (nyBugerValgDTO.getAbonnementslaengde() == 0){
+        if (nyBugerValgDTO.getAbonnementslaengde() != 0){
             oldBrugerValgDTO.setAbonnementslaengde(nyBugerValgDTO.getAbonnementslaengde());
         }
-        if (nyBugerValgDTO.getKmPrMdr() == 0){
+        if (nyBugerValgDTO.getKmPrMdr() != 0){
             oldBrugerValgDTO.setKmPrMdr(nyBugerValgDTO.getKmPrMdr());
         }
 
@@ -216,4 +215,9 @@ public class NavigationController {
 
     }
 
+
+    private void resetLejeAftaleSession(HttpSession session) {
+        session.removeAttribute("BrugerValgDTO");
+        session.removeAttribute("nyBrugerValgDTO");
+    }
 }

@@ -23,7 +23,8 @@
         <div class="inputForm">
             <form action="/LejeAftale/Abonnement" method="get" th:object="${nyBrugerValgDTO}">
                 <label>
-                    <select th:field="*{bilModel}" class="inputField">
+                    <select th:name="${'bilModel'}" class="inputField">
+
                         <option value=""> Vælg Bil </option>
                         <option th:each="bil : ${biler}" th:value="${bil.model}" th:text="${bil.model}">
                         </option>

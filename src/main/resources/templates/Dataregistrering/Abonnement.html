@@ -12,7 +12,7 @@
         <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
         <p>BilAbonnement A/S</p>
     </div>
-    <a href="VaelgBil.html">
+    <a href="/LejeAftale/VaelgBil" >
         <button class="button" id="tilbageButton">Tilbage</button>
     </a>
     <div class="content">
@@ -27,12 +27,12 @@
                 <label>
                     <!-- map input packageName to List<String> selectedPackageDeals in nyBrugerValgDTO
                     -->
-
                     <input type="checkbox" th:name="${'selectedPackageDeals'}" th:value="${packageDeal.packageName}">
                 </label>
                 <label class="package-label" th:text="${packageDeal.packageName}"></label>
                 <label class="package-label" th:text="${'Pris: ' + packageDeal.packagePrice + ' kr.'}"></label>
             </div>
+                <input type="hidden" th:field="${nyBrugerValgDTO.selectedPackageDeals}">   <!-- hidden input field to bind the form to the DTO -->
             <button class="button" id = "opretAbonnement">Opret Abonnement</button>
             </form>
         </div>
