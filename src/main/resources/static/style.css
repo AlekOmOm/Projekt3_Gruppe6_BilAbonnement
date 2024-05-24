@@ -1,6 +1,7 @@
 :root {
     --primary-color: #000000; /* A bright blue similar to Ønskeskyen */
     --secondary-color: #ffffff; /* White */
+    --tertiary-color: #0056b3; /* A darker blue similar to Ønskeskyen */
     --table-cell-color: #e9ecef; /* A light grey for table cells */
     --button-hover-color: #0056b3; /* A darker blue for button hover state */
     --background-linear-gradient: linear-gradient(to bottom, lightblue, cornflowerblue); /* A light grey gradient, blue */
@@ -28,7 +29,7 @@ body {
     */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+
     justify-content: center;
 
     /* ------------------- color -------------------
@@ -39,3 +40,83 @@ body {
 
 }
 
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.three-containers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+}
+.three-containers-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+    .top-container-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+    }
+    .center-container-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        padding-bottom: 5%;
+    }
+    .bottom-container-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+    }
+
+
+/*
+small button for the log out button
+ */
+.small-button {
+    /*     small text size */
+    font-size: 10px;
+}
+
+.left-side-container {
+    width: 25%;
+    padding-left: 5%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-container {
+    width: 40%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.right-side-container {
+    width: 25%;
+    padding-right: 5%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

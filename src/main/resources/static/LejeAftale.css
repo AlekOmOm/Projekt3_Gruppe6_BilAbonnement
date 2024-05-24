@@ -19,14 +19,17 @@
 }
 
 #tilbageButton {
-    align-self: flex-start; /* Align to the start of the container */
+    /*
+    align-self: flex-start;
     left: 20px;
     top: 50px;
     position: fixed;
-    margin-top: 40px; /* Add some space from the top */
-    margin-left: 40px; /* Add some space from the left */
+
+
     width: 100px;
     height: 25px;
+    */
+
 }
 #tilbageButton:active {
     background-color: #413c3c; /* Adjust as needed */
@@ -60,8 +63,7 @@
     max-height: calc(100vh - 95px);
     background-color: #c4c4c4;
     padding: 10px;
-    margin-left: 10px;
-    position: relative;
+
     left: 20%;
     top: 10%;
     overflow-y: auto; /* Add a scrollbar when the content exceeds the box's height */

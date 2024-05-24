@@ -3,24 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
     <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
     <link rel="stylesheet" href="../../static/Kunde.css" th:href="@{/Kunde.css}">
     <title>KundeValg</title>
 </head>
 <body>
 <div class="header">
-    <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
-    <p>BilAbonnement A/S</p>
+    <div class="left-header">
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+    </div>
+    <div class="center-header">
+        <p>BilAbonnement A/S</p>
+    </div>
+    <div class="right-header">
+
+        <div class="show-if-not-loggedIn" th:unless="${session.loggedIn}">
+            <h6 class = "not-logged-in-yet-line"> Not Logged in yet
+            </h6>
+            <div class="login-button-line">
+                <a href="/logout" class="small-button">
+                    <button class="button" id="logOutButton"> Log in </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="show-if-loggedIn" th:if="${session.loggedIn}">
+
+            <h7 class="logged-in-as-line">
+                Logged in as:
+            </h7>
+
+            <div class="user-name-line">
+                <h4 th:text="${session.loggedInBruger.brugerNavn}">
+                </h4>
+            </div>
+            <div class="logout-button-line">
+                <a href="/home" class="small-button">
+                    <button class="button"> Log out </button>
+                </a>
+            </div>
+
+        </div>
+    </div>
 </div>
-<div>
-    <a href="/PrisOverslag">
-        <button class="button" id="tilbageButton">Tilbage</button>
-        <input type="hidden" >
-    </a>
-</div>
+
 <div class="content">
+    <div class = "three-containers">
+        <div class = "left-side-container">
+            <a href="/LejeAftale/PrisOverslag">
+                <button class="button" >Tilbage</button>
+                <input type="hidden" >
+            </a>
+        </div>
+
+        <div class="center-container">
+
+            <h2>3. Kunde Information </h2>
+
+            <div class="inputForm">
+                <form action="/LejeAftale/AfhentningsSted" method="get" th:object="${nyBrugerValgDTO}">
+                    <label>
+                        <!--
+                        KundeInfo
+                            String CPR_NR;
+                            String Fornavn;
+                            String Efternavn;
+                            String Adresse;
+                            int PostNummer;
+                            String Email;
+                            int MobilNummer;
+                        --->
 
 
+
+                        <input type="text" th:name="${'CPR_NR'}" placeholder="CPR nummer" class="inputField">
+                        <input type="text" th:name="${'Fornavn'}" placeholder="Fornavn" class="inputField">
+                        <input type="text" th:name="${'Efternavn'}" placeholder="Efternavn" class="inputField">
+                        <input type="text" th:name="${'Adresse'}" placeholder="Adresse" class="inputField">
+                        <input type="text" th:name="${'PostNummer'}" placeholder="Postnummer" class="inputField">
+                        <input type="text" th:name="${'Email'}" placeholder="Email" class="inputField">
+                        <input type="text" th:name="${'MobilNummer'}" placeholder="Mobilnummer" class="inputField">
+
+                    </label>
+                    <button type="submit" class="button"> Vælg Bil </button>
+                </form>
+            </div>
+
+
+
+
+
+
+            <div class="info-saved-in-DTO">
+                <p style="font-weight: bold;" >Valgt bil: <span th:text="${nyBrugerValgDTO.bilModel}"></span></p>
+                <p style="font-weight: bold;" >Valgt abonnement: <span th:text="${nyBrugerValgDTO.selectedPackageDeals}"></span></p>
+                <p style="font-weight: bold;" >Valgt antal måneder: <span th:text="${nyBrugerValgDTO.abonnementslaengde}"></span></p>
+                <p style="font-weight: bold;" >Valgt km pr. måned: <span th:text="${nyBrugerValgDTO.kmPrMdr}"></span></p>
+            </div>
+        </div>
+
+        <div class = "right-side-container">
+
+        </div>
+
+    </div>
 </div>
 
 <div class="footer">

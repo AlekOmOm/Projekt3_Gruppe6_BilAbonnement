@@ -19,6 +19,16 @@ public class BrugerValgDTO {
     int abonnementslaengde = 0;
     int kmPrMdr = 0;
 
+    // 3. Kunde Info // instance variables of KundeInfo obj
+    String CPR_NR;
+    String Fornavn;
+    String Efternavn;
+    String Adresse;
+    int PostNummer;
+    String Email;
+    int MobilNummer;
+
+
     // 4. afhentningssted
     String afhentningssted;
 
@@ -45,13 +55,21 @@ public class BrugerValgDTO {
 //        this.totalPris = totalPris;
 //    }
 
-    public BrugerValgDTO(String bilModel, List<String> selectedPackageDeals, int abonnementslaengde, int kmPrMdr, String afhentningssted, int totalPris) {
+
+    public BrugerValgDTO(String bilModel, List<String> selectedPackageDeals, int abonnementslaengde, int kmPrMdr, String afhentningssted, int totalPris, String CPR_NR, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer) {
         this.bilModel = bilModel;
         this.selectedPackageDeals = selectedPackageDeals;
         this.abonnementslaengde = abonnementslaengde;
         this.kmPrMdr = kmPrMdr;
         this.afhentningssted = afhentningssted;
         this.totalPris = totalPris;
+        this.CPR_NR = CPR_NR;
+        this.Fornavn = fornavn;
+        this.Efternavn = efternavn;
+        this.Adresse = adresse;
+        this.PostNummer = postNummer;
+        this.Email = email;
+        this.MobilNummer = mobilNummer;
     }
 
 

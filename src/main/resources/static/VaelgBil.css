@@ -1,19 +1,29 @@
 
-.content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .inputForm{
     display: flex;
-    flex-direction: column;
+
     justify-content: center;
     align-items: baseline;
     margin: 10px;
     font-size: 18px;
     font-weight: bold;
+
+}
+.inputForm-margin-only{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    margin: 2%;
+}
+.annuller-button-container{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    margin: 1%;
 }
 
 .inputRow {
@@ -21,9 +31,18 @@
     align-items: center;
     padding-bottom: 10px;
 }
+.center-container-column {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    padding-bottom: 5%;
+}
 .car-container {
     display: flex;
     justify-content: center;
+    padding-bottom: 5%;
 }
 .car-box {
     border: 1px solid #000;
@@ -66,18 +85,18 @@
     transition: all 0.3s ease 0s; /* Animation */
     padding: 5px 30px; /* Plads rundt om teksten */
 }
-
+/*
 #anullerButton {
-    align-self: flex-start; /* Align to the start of the container */
+    align-self: flex-start;
     left: 20px;
     top: 50px;
     position: fixed;
-    margin-top: 40px; /* Add some space from the top */
-    margin-left: 40px; /* Add some space from the left */
+    margin-top: 40px;
+    margin-left: 40px;
     width: 100px;
     height: 25px;
 }
-
+*/
 #tilbageButton {
     align-self: flex-start; /* Align to the start of the container */
     left: 20px;

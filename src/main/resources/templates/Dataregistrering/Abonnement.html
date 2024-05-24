@@ -3,15 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
     <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
     <link rel="stylesheet" href="../../static/Abonnement.css" th:href="@{/Abonnement.css}">
     <title>LejeAbonnement</title>
 </head>
 <body>
-    <div class="header">
+<div class="header">
+    <div class="left-header">
         <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+    </div>
+    <div class="center-header">
         <p>BilAbonnement A/S</p>
     </div>
+    <div class="right-header">
+
+        <div class="show-if-not-loggedIn" th:unless="${session.loggedIn}">
+            <h6 class = "not-logged-in-yet-line"> Not Logged in yet
+            </h6>
+            <div class="login-button-line">
+                <a href="/logout" class="small-button">
+                    <button class="button" id="logOutButton"> Log in </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="show-if-loggedIn" th:if="${session.loggedIn}">
+
+            <h7 class="logged-in-as-line">
+                Logged in as:
+            </h7>
+
+            <div class="user-name-line">
+                <h4 th:text="${session.loggedInBruger.brugerNavn}">
+                </h4>
+            </div>
+            <div class="logout-button-line">
+                <a href="/home" class="small-button">
+                    <button class="button"> Log out </button>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
     <a href="/LejeAftale/VaelgBil" >
         <button class="button" id="tilbageButton">Tilbage</button>
     </a>
