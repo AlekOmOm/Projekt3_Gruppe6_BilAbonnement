@@ -1,5 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
 
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.PackageDeals;
+
 import java.util.List;
 
 public class BrugerValgDTO {
@@ -146,11 +148,11 @@ public class BrugerValgDTO {
 
     // ------------------- test til packagedeals -------------------
 
-    private List<String> packageDeals;
-    public List<String> getPackageDeals() {
+    private List<PackageDeals> packageDeals;
+    public List<PackageDeals> getPackageDeals() {
         return packageDeals;
     }
-    public void setPackageDeals(List<String> packageDeals) {
+    public void setPackageDeals(List<PackageDeals> packageDeals) {
         this.packageDeals = packageDeals;
     }
 

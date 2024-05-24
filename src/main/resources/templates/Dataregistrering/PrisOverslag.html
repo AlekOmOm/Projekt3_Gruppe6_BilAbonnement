@@ -14,7 +14,24 @@
 </div>
 
 <div class="content">
+    <h2>Prisoverslag</h2>
+    <div class="drop-downs-pris">
+        <form action="/LejeAftale/KundeInfo" method="get" th:object="${nyBrugerValgDTO}">
+            <select th:field="*{abonnementslaengde}" class="inputField">
+                <option value=""> Vælg antal måneder </option>
+                <option th:each="month : ${#numbers.sequence(3, 36)}" th:value="${month}" th:text="${month}">
+                </option>
+            </select>
 
+            <select th:field="*{kmPrMdr}" class="inputField">
+                <option value=""> Vælg km-antal pr. måned </option>
+                <option th:each="km : ${#numbers.sequence(1000, 2500, 5000, 10000)}" th:value="${km}" th:text="${km}">
+                </option>
+            </select>
+            <button type="submit" class="button" id="naesteButton"> Næste </button>
+        </form>
+    </div>
+<!--    <p> Total Pris: <span th:text="${totalPris + ' kr.'}"></span></p>-->
 </div>
 
 <div class="footer">

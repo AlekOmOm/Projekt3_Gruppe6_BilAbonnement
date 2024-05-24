@@ -24,7 +24,8 @@
             <form action="/LejeAftale/PrisOverslag" method="get" th:object="${nyBrugerValgDTO}">
                 <div th:each="packageDeal : ${packageDeals}">
                     <input type="checkbox" th:field="*{packageDeals}" th:value="${packageDeal.packageName}"></input>
-                    <label th:text="${packageDeal.packageDescription}"></label>
+                    <label class="package-label" th:text="${packageDeal.packageName}"></label>
+                    <label class="package-label" th:text="${'Pris: ' + packageDeal.packagePrice + ' kr.'}"></label>
                 </div>
                 <button type="submit" class="button" id="naesteButton"> Næste </button>
                     <!--
@@ -36,13 +37,12 @@
 
                     select for each field of the page
                     -->
-                <button type="submit" class="button" id="naesteButton"> Næste </button>
             </form>
         </div>
 
 
         <div class="info-saved-in-DTO">
-            <p>Valgt bil: <span th:text="${nyBrugerValgDTO.bilModel}"></span></p>
+            <p style="font-weight: bold;" >Valgt bil: <span th:text="${nyBrugerValgDTO.bilModel}"></span></p>
 
         </div>
     </div>

@@ -12,6 +12,7 @@
     font-weight: bold;
     font-size: 18px;
 }
+
 .header img {
     position: absolute; /* position the image absolutely within the header */
     top: 50%; /* center the image vertically */

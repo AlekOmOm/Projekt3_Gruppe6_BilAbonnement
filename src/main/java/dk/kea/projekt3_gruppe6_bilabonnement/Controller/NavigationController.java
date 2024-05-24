@@ -101,7 +101,16 @@ public class NavigationController {
         // henter data fra session
         session.setAttribute("valgtPrisOverslag", nyBrugerValgDTO);
 
-
+        // henter valgte packagedeals fra session
+        List<PackageDeals> selectedPackageDeals = (List<PackageDeals>) session.getAttribute("selectedPackageDeals");
+        // tjekker om valgte packagadeals er null, og initialiserer hvis den er
+        if (selectedPackageDeals == null){
+            selectedPackageDeals = new ArrayList<>();
+        }
+        // beregner totalpris
+        int totalPris = lejeAftaleService.beregnTotalPris(selectedPackageDeals);
+        // gemmer totalpris i session
+        model.addAttribute("totalPris", totalPris);
 
         // ------------------- Load data -------------------
         model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
@@ -157,6 +166,10 @@ public class NavigationController {
             oldBrugerValgDTO = new BrugerValgDTO();
         }
         // tjekker om oldBrugerValg er null, hvis det ikke er null, så opdateres oldBrugerValgDTO
+
+
+
+
 
         // logic for loading
         // steps: check values in nyBrugerValgDTO

@@ -35,3 +35,9 @@
 #naesteButton:active {
     background-color: #413c3c; /* Adjust as needed */
 }
+.package-label {
+    width: 200px; /* Adjust as needed */
+    text-align: right;
+    margin-right: 20px;
+    gap: 10px;
+}
