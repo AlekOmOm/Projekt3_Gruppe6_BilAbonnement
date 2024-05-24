@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrer Skade</title>
 
     <!--                                   CSS files                                                 -->
@@ -56,12 +56,12 @@
                     <th>Skader Valgt</th>
                 </tr>
                 <tr th:each="skade : ${session.skaderValgt}">
-                    <td><input type="checkbox" th:value="${skade}" th:name="skaderValgt" checked/></td>
+                    <td><input type="checkbox" th:value="${skade}" th:packageName="skaderValgt" checked/></td>
                     <td th:text="${skade}"></td>
                 </tr>
             </table>
             <label for="kilometerKoertOver">Kilometer Kørt Over:</label>
-            <input type="number" id="kilometerKoertOver" name="kilometerKoertOver" th:value="${session.kilometerKoertOver}">
+            <input type="number" id="kilometerKoertOver" packageName="kilometerKoertOver" th:value="${session.kilometerKoertOver}">
             <input type="submit" value="Submit"/>
         </form>
     </div>

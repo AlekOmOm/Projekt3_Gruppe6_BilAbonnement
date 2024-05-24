@@ -17,13 +17,13 @@ public class LejeAftaleRepository {
 
     // ------------------- SQL strings -------------------
 
+    private static final String INSERT = "INSERT INTO LejeAftale (brugerID, bilID, kundeInfoID, abonnementsType, prisoverslag, afhentningssted, afleveringssted, startDato, slutDato, totalPris) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_ALL = "SELECT * FROM LejeAftale";
     private static final String SELECT_WITHOUT_REPORT = "SELECT * FROM LejeAftale WHERE SkadeRapportID IS NULL";
     private static final String SELECT_BY_PRIMARYKEY = "SELECT * FROM LejeAftale WHERE ID = ?";
     private static final String SELECT_BY_FOREIGNKEYS = "SELECT * FROM LejeAftale WHERE brugerID = ? AND bilID = ? AND kundeInfoID = ?";
-    private static final String INSERT = "INSERT INTO LejeAftale (brugerID, bilID, kundeInfoID, abonnementsType, prisoverslag, afhentningssted, afleveringssted, startDato, slutDato) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String SELECT_LEJE_AFTALE_BY_IDS = "SELECT * FROM LejeAftale WHERE brugerID = ? AND bilID = ? AND kundeInfoID = ?";
-    private static final String UPDATE = "UPDATE LejeAftale SET abonnementsType = ?, prisoverslag = ?, afhentningssted = ?, afleveringssted = ?, startDato = ?, slutDato = ? WHERE ID = ?";
+    private static final String UPDATE = "UPDATE LejeAftale SET abonnementsType = ?, prisoverslag = ?, afhentningssted = ?, afleveringssted = ?, startDato = ?, slutDato = ?, totalPris = ? WHERE ID = ?";
     private static final String DELETE = "DELETE FROM LejeAftale WHERE ID = ?";
 
 
@@ -51,17 +51,17 @@ public class LejeAftaleRepository {
             return update(nyLejeAftale);
         }
 
-        jdbcTemplate.update(INSERT, nyLejeAftale.getBruger().getId(), nyLejeAftale.getBil().getId(), nyLejeAftale.getKundeInfo().getId(), nyLejeAftale.getAbonnementsType(), nyLejeAftale.getPrisoverslag(), nyLejeAftale.getAfhentningssted(), nyLejeAftale.getAfleveringssted(), nyLejeAftale.getStartDato(), nyLejeAftale.getSlutDato());
+        jdbcTemplate.update(INSERT, nyLejeAftale.getBruger().getId(), nyLejeAftale.getBil().getId(), nyLejeAftale.getKundeInfo().getId(), nyLejeAftale.getAbonnementsType(), nyLejeAftale.getPrisoverslag(), nyLejeAftale.getAfhentningssted(), nyLejeAftale.getAfleveringssted(), nyLejeAftale.getStartDato(), nyLejeAftale.getSlutDato(), nyLejeAftale.getTotalPris());
 
         return find(nyLejeAftale);
     }
     
     public LejeAftale find(LejeAftale lejeAftale) {
         if (lejeAftale.getID()==0) {
-            return jdbcTemplate.queryForObject(SELECT_BY_FOREIGNKEYS, objForeignKeyIDs(lejeAftale), this::mapRow);
+            return jdbcTemplate.queryForObject(SELECT_BY_FOREIGNKEYS, objForeignKeyIDs(lejeAftale), this::mapRow); // her til bruges Object[] metoden
         }
 
-        return jdbcTemplate.queryForObject(SELECT_BY_PRIMARYKEY, objPrimaryKey(lejeAftale), this::mapRow);
+        return jdbcTemplate.queryForObject(SELECT_BY_PRIMARYKEY, objPrimaryKey(lejeAftale), this::mapRow); // her til bruges Object[] metoden
     }
 
     public List<LejeAftale> findAll() {
@@ -72,15 +72,13 @@ public class LejeAftaleRepository {
         return jdbcTemplate.query(SELECT_WITHOUT_REPORT, this::mapRow);
     }
 
-
-
     public LejeAftale update(LejeAftale lejeAftale) {
-        jdbcTemplate.update(UPDATE, lejeAftale.getAbonnementsType(), lejeAftale.getPrisoverslag(), lejeAftale.getAfhentningssted(), lejeAftale.getAfleveringssted(), lejeAftale.getStartDato(), lejeAftale.getSlutDato(), lejeAftale.getID());
+        jdbcTemplate.update(UPDATE, lejeAftale.getAbonnementsType(), lejeAftale.getPrisoverslag(), lejeAftale.getAfhentningssted(), lejeAftale.getAfleveringssted(), lejeAftale.getStartDato(), lejeAftale.getSlutDato(), lejeAftale.getTotalPris(), lejeAftale.getID());
         return find(lejeAftale);
     }
 
     public boolean delete(LejeAftale lejeAftale) {
-        return jdbcTemplate.update(DELETE, objPrimaryKey(lejeAftale)) > 0;
+        return jdbcTemplate.update(DELETE, objPrimaryKey(lejeAftale)) > 0; // her kunne lejeAftale objekt bruges i stedet for Object[], man for simplicity bruges obj metoden
     }
 
     // ------------------- special operations -------------------
@@ -123,6 +121,7 @@ public class LejeAftaleRepository {
 
     // ------------------- Object[] methods -------------------
 
+    // returnering af Object[] er nødvendig for query metoderne, model klassen kan desværre ikke bruges som parameter i query metoderne
     private Object[] objForeignKeyIDs(LejeAftale lejeAftale) {
         if (lejeAftale.getSkadeRapport() == null) {
             return new Object[]{lejeAftale.getBruger().getId(), lejeAftale.getBil().getId(), lejeAftale.getKundeInfo().getId()};
@@ -176,6 +175,7 @@ public class LejeAftaleRepository {
         lejeaftale.setAfleveringssted(rs.getString("afleveringssted"));
         lejeaftale.setStartDato(rs.getDate("startDato").toLocalDate());
         lejeaftale.setSlutDato(rs.getDate("slutDato").toLocalDate());
+        lejeaftale.setTotalPris(rs.getInt("TotalPris"));
         return lejeaftale;
     }
 

@@ -1,12 +1,12 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.Model;
+package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
 
-public class PackageDeals {
+public class PackageDeal {
     private String packageName;
     private int packagePrice;
     private String packageDescription;
 
     // ------------------- Constructor -------------------
-    public PackageDeals(String packageName, int packagePrice, String packageDescription) {
+    public PackageDeal(String packageName, int packagePrice, String packageDescription) {
         this.packageName = packageName;
         this.packagePrice = packagePrice;
         this.packageDescription = packageDescription;

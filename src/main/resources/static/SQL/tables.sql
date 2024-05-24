@@ -70,9 +70,10 @@ CREATE TABLE LejeAftale
     Abonnementstype VARCHAR(255) NOT NULL,
     Prisoverslag    INT,
     Afhentningssted VARCHAR(255),
-    afleveringssted   VARCHAR(255),
+    afleveringssted VARCHAR(255),
     StartDato       DATE,
     SlutDato        DATE,
+    TotalPris       INT, -- new field
 
     FOREIGN KEY (BrugerID) REFERENCES Bruger (ID),
     FOREIGN KEY (BilID) REFERENCES Bil (ID),

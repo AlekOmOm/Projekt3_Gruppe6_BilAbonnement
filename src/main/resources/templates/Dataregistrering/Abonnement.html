@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
     <link rel="stylesheet" href="../../static/Abonnement.css" th:href="@{/Abonnement.css}">
     <title>LejeAbonnement</title>
@@ -21,29 +21,25 @@
 
         <h2>2. Vælg Abonnement</h2>
         <div class="inputForm">
-            <form action="/LejeAftale/PrisOverslag" method="get" th:object="${nyBrugerValgDTO}">
-                <div th:each="packageDeal : ${packageDeals}">
-                    <input type="checkbox" th:field="*{packageDeals}" th:value="${packageDeal.packageName}"></input>
-                    <label class="package-label" th:text="${packageDeal.packageName}"></label>
-                    <label class="package-label" th:text="${'Pris: ' + packageDeal.packagePrice + ' kr.'}"></label>
-                </div>
-                <button type="submit" class="button" id="naesteButton"> Næste </button>
-                    <!--
-                    <select th:field="*{bilModel}" class="inputField">
-                        <option value=""> Vælg Bil </option>
-                        <option th:each="bil : ${biler}" th:value="${bil.model}" th:text="${bil.model}">
-                        </option>
-                    </select>
-
-                    select for each field of the page
+            <!--- detAlekLaver -->
+            <form action="/LejeAftale/PrisOverslag" method="get" th:object="nyBrugerValgDTO">
+            <div th:each="packageDeal : ${packageDeals}">
+                <label>
+                    <!-- map input packageName to List<String> selectedPackageDeals in nyBrugerValgDTO
                     -->
+
+                    <input type="checkbox" th:name="${'selectedPackageDeals'}" th:value="${packageDeal.packageName}">
+                </label>
+                <label class="package-label" th:text="${packageDeal.packageName}"></label>
+                <label class="package-label" th:text="${'Pris: ' + packageDeal.packagePrice + ' kr.'}"></label>
+            </div>
+            <button class="button" id = "opretAbonnement">Opret Abonnement</button>
             </form>
         </div>
 
 
         <div class="info-saved-in-DTO">
             <p style="font-weight: bold;" >Valgt bil: <span th:text="${nyBrugerValgDTO.bilModel}"></span></p>
-
         </div>
     </div>
     <div class="footer">

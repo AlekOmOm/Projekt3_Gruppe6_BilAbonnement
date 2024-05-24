@@ -1,19 +1,17 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerValgDTO;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.PackageDeals;
+import dk.kea.projekt3_gruppe6_bilabonnement.DTO.PackageDeal;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -72,8 +70,11 @@ public class NavigationController {
         System.out.println("nyBrugerValgDTO: " + nyBrugerValgDTO);
 
 
-        List<PackageDeals> packageDeals = lejeAftaleService.getPackageDeals();
-        model.addAttribute(packageDeals.get(0));
+        List<PackageDeal> packageDeals = lejeAftaleService.getPackageDeals();
+        for (PackageDeal packageDeal : packageDeals) {
+            model.addAttribute(packageDeal);
+        }
+
         model.addAttribute(packageDeals.get(1));
         model.addAttribute(packageDeals.get(2));
         model.addAttribute(packageDeals.get(3));
@@ -88,34 +89,30 @@ public class NavigationController {
 
 
 
-        // ------------------- Load data -------------------
+        // ------------------- Load and Save data -------------------
         model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
         session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
+
         return ABONNEMENT_PAGE;
     }
 
 
     @GetMapping("/PrisOverslag")
-    public String LejeKundeInfo(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
-        // henter data fra session
-        session.setAttribute("valgtPrisOverslag", nyBrugerValgDTO);
+    public String getPrisoverslagPage(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
 
-        // henter valgte packagedeals fra session
-        List<PackageDeals> selectedPackageDeals = (List<PackageDeals>) session.getAttribute("selectedPackageDeals");
-        // tjekker om valgte packagadeals er null, og initialiserer hvis den er
-        if (selectedPackageDeals == null){
-            selectedPackageDeals = new ArrayList<>();
-        }
-        // beregner totalpris
-        int totalPris = lejeAftaleService.beregnTotalPris(selectedPackageDeals);
-        // gemmer totalpris i session
-        model.addAttribute("totalPris", totalPris);
+        System.out.println("nyBrugerValgDTO: " + nyBrugerValgDTO);
 
-        // ------------------- Load data -------------------
+
+
+
+
+
+        // ------------------- Load and Save data -------------------
         model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
         session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
+
         return PRISOVERSLAG_PAGE;
     }
 
@@ -149,52 +146,57 @@ public class NavigationController {
 
 
     @PostMapping("/Opret")
-    public String opret( HttpSession session) {
+    public String opretLejeAftale(HttpSession session) {
 
-        // Hvordan trækker vi
-        // session.setAttribute("selectedPackageDeals", brugerValgDTO.getPackageDeals());
+        BrugerValgDTO fuldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
 
-        // gemmer lejeaftalen i databasen via service
-        lejeAftaleService.opret((BrugerValgDTO) session.getAttribute("BrugerValgDTO"));
+        // totalPris beregnes og gemmes i BrugerValgDTO
+        int totalPris = lejeAftaleService.beregnTotalPris(fuldBrugerValgDTO);
+        fuldBrugerValgDTO.setTotalPris(totalPris);
+
+        // ------------------- Save data -------------------
+        lejeAftaleService.opret(fuldBrugerValgDTO);
 
         return REDIRECT_TO_START;
     }
 
+
+    // ------------------- Helper methods -------------------
+
     private BrugerValgDTO load(BrugerValgDTO oldBrugerValgDTO, BrugerValgDTO nyBugerValgDTO){
 
-        if (oldBrugerValgDTO == null){
+        // ------------------- null check -------------------
+
+        if (oldBrugerValgDTO == null){  // 1. tjekker om oldBrugerValg er null, hvis det ikke er null, så opdateres oldBrugerValgDTO
             oldBrugerValgDTO = new BrugerValgDTO();
         }
-        // tjekker om oldBrugerValg er null, hvis det ikke er null, så opdateres oldBrugerValgDTO
 
+        // ------------------- Load data -------------------
 
+        // Logic for Loading
+        // steps: check værdier i nyBrugerValgDTO
+        //       - hvis værdi er sat, så load i oldBrugerValgDTO
 
-
-
-        // logic for loading
-        // steps: check values in nyBrugerValgDTO
-        //       1. if value is null, then dont load int oldBrugerValgDTO
-        //       2. if value is not null, then load in oldBrugerValgDTO
         if (nyBugerValgDTO.getBilModel() == null){
             oldBrugerValgDTO.setBilModel(nyBugerValgDTO.getBilModel());
         }
         if (nyBugerValgDTO.getFarve() == null){
             oldBrugerValgDTO.setFarve(nyBugerValgDTO.getFarve());
         }
-        if (nyBugerValgDTO.isAfleveringsforsikring() == false){
+        if (!nyBugerValgDTO.isAfleveringsforsikring()){
             oldBrugerValgDTO.setAfleveringsforsikring(nyBugerValgDTO.isAfleveringsforsikring());
         }
-        if (nyBugerValgDTO.isSelvrisiko() == false){
-            oldBrugerValgDTO.setSelvrisiko(nyBugerValgDTO.isSelvrisiko());
+        if (!nyBugerValgDTO.isSelvrisiko()){
+            oldBrugerValgDTO.setSelvrisiko(true);
         }
-        if (nyBugerValgDTO.isDaekpakke() == false){
-            oldBrugerValgDTO.setDaekpakke(nyBugerValgDTO.isDaekpakke());
+        if (!nyBugerValgDTO.isDaekpakke()){
+            oldBrugerValgDTO.setDaekpakke(true);
         }
-        if (nyBugerValgDTO.isVejhjaelp() == false){
-            oldBrugerValgDTO.setVejhjaelp(nyBugerValgDTO.isVejhjaelp());
+        if (!nyBugerValgDTO.isVejhjaelp()){
+            oldBrugerValgDTO.setVejhjaelp(true);
         }
-        if (nyBugerValgDTO.isUdleveringVedFDM() == false){
-            oldBrugerValgDTO.setUdleveringVedFDM(nyBugerValgDTO.isUdleveringVedFDM());
+        if (!nyBugerValgDTO.isUdleveringVedFDM()){
+            oldBrugerValgDTO.setUdleveringVedFDM(true);
         }
         if (nyBugerValgDTO.getAbonnementslaengde() == 0){
             oldBrugerValgDTO.setAbonnementslaengde(nyBugerValgDTO.getAbonnementslaengde());

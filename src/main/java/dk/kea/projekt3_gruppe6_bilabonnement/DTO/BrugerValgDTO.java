@@ -1,7 +1,5 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
 
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.PackageDeals;
-
 import java.util.List;
 
 public class BrugerValgDTO {
@@ -15,11 +13,11 @@ public class BrugerValgDTO {
 
     // 1. abonnements side
     String farve;
-    boolean afleveringsforsikring;
-    boolean selvrisiko;
-    boolean daekpakke;
-    boolean vejhjaelp;
-    boolean udleveringVedFDM;
+    boolean afleveringsforsikring = false; // default
+    boolean selvrisiko = false; // default
+    boolean daekpakke = false; // default
+    boolean vejhjaelp = false; // default
+    boolean udleveringVedFDM = false; // default
 
     // 2. Prisoverslag
     int abonnementslaengde;
@@ -28,12 +26,16 @@ public class BrugerValgDTO {
     // 4. afhentningssted
     String afhentningssted;
 
+    int totalPris;
+
+    private List<String> selectedPackageDeals;
+
     // ------------------- Constructors -------------------
 
     public BrugerValgDTO() {
     }
 
-    public BrugerValgDTO(String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted) {
+    public BrugerValgDTO(String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, int totalPris) {
         this.bilModel = bilModel;
         this.farve = farve;
         this.afleveringsforsikring = afleveringsforsikring;
@@ -44,6 +46,7 @@ public class BrugerValgDTO {
         this.abonnementslaengde = abonnementslaengde;
         this.kmPrMdr = kmPrMdr;
         this.afhentningssted = afhentningssted;
+        this.totalPris = totalPris;
     }
 
     // ------------------- Getters & Setters -------------------
@@ -128,6 +131,21 @@ public class BrugerValgDTO {
         this.afhentningssted = afhentningssted;
     }
 
+    public int getTotalPris() {
+        return totalPris;
+    }
+
+    public void setTotalPris(int totalPris) {
+        this.totalPris = totalPris;
+    }
+
+    public List<String> getSelectedPackageDeals() {
+        return selectedPackageDeals;
+    }
+    public void setSelectedPackageDeals(List<String> selectedPackageDeals) {
+        this.selectedPackageDeals = selectedPackageDeals;
+    }
+
     // ------------------- toString -------------------
 
     @Override
@@ -143,17 +161,12 @@ public class BrugerValgDTO {
                 ", abonnementslaengde=" + abonnementslaengde +
                 ", kmPrMdr=" + kmPrMdr +
                 ", afhentningssted='" + afhentningssted + '\'' +
+                ", totalPris=" + totalPris +
                 '}';
     }
 
     // ------------------- test til packagedeals -------------------
 
-    private List<PackageDeals> packageDeals;
-    public List<PackageDeals> getPackageDeals() {
-        return packageDeals;
-    }
-    public void setPackageDeals(List<PackageDeals> packageDeals) {
-        this.packageDeals = packageDeals;
-    }
+
 
 }

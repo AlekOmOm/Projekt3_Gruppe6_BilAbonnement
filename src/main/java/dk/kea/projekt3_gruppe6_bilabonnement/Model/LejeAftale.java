@@ -24,17 +24,16 @@ public class LejeAftale {
     String afleveringssted;
     LocalDate startDato;
     LocalDate slutDato;
+    int totalPris;
 
-
-    // constructor lejeaftale
     //empty constructor
     public LejeAftale() {
     }
 
-    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato, int totalPris) {
         this.bruger = bruger;
-        this.bil = bil;
         this.kundeInfo = kundeInfo;
+        this.bil = bil;
         this.skadeRapport = skadeRapport;
         this.abonnementsType = abonnementsType;
         this.prisoverslag = prisoverslag;
@@ -42,45 +41,22 @@ public class LejeAftale {
         this.afleveringssted = afleveringssted;
         this.startDato = startDato;
         this.slutDato = slutDato;
+        this.totalPris = totalPris;
     }
 
-    // uden skadeRapport med bil
-    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
-        this.bruger = bruger;
-        this.bil = bil;
-        this.kundeInfo = kundeInfo;
-        this.abonnementsType = abonnementsType;
-        this.prisoverslag = prisoverslag;
-        this.afhentningssted = afhentningssted;
-        this.afleveringssted = afleveringssted;
-        this.startDato = startDato;
-        this.slutDato = slutDato;
+    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato, int totalPris) {
+        this(bruger, kundeInfo, bil, null, abonnementsType, prisoverslag, afhentningssted, afleveringssted, startDato, slutDato, totalPris);
     }
 
-    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
-        this.bruger = bruger;
-        this.kundeInfo = kundeInfo;
-        this.abonnementsType = abonnementsType;
-        this.prisoverslag = prisoverslag;
-        this.afhentningssted = afhentningssted;
-        this.afleveringssted = afleveringssted;
-        this.startDato = startDato;
-        this.slutDato = slutDato;
+    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato, int totalPris) {
+        this(bruger, kundeInfo, null, null, abonnementsType, prisoverslag, afhentningssted, afleveringssted, startDato, slutDato, totalPris);
     }
 
-    public LejeAftale(int id, Bruger bruger, Bil bil, KundeInfo kundeInfo, SkadeRapport skadeRapport, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato) {
+    public LejeAftale(int id, Bruger bruger, Bil bil, KundeInfo kundeInfo, SkadeRapport skadeRapport, String abonnementsType, int prisoverslag, String afhentningssted, String afleveringssted, LocalDate startDato, LocalDate slutDato, int totalPris) {
+        this(bruger, kundeInfo, bil, skadeRapport, abonnementsType, prisoverslag, afhentningssted, afleveringssted, startDato, slutDato, totalPris);
         this.id = id;
-        this.bruger = bruger;
-        this.bil = bil;
-        this.kundeInfo = kundeInfo;
-        this.skadeRapport = skadeRapport;
-        this.abonnementsType = abonnementsType;
-        this.prisoverslag = prisoverslag;
-        this.afhentningssted = afhentningssted;
-        this.afleveringssted = afleveringssted;
-        this.startDato = startDato;
-        this.slutDato = slutDato;
     }
+
 
 
 
@@ -172,6 +148,15 @@ public class LejeAftale {
 
     public void setSlutDato(LocalDate slutDato) {
         this.slutDato = slutDato;
+    }
+
+
+    public int getTotalPris() {
+        return totalPris;
+    }
+
+    public void setTotalPris(int totalPris) {
+        this.totalPris = totalPris;
     }
 
 

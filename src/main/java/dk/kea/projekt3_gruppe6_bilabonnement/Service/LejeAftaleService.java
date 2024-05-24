@@ -4,7 +4,7 @@ import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerValgDTO;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.PackageDeals;
+import dk.kea.projekt3_gruppe6_bilabonnement.DTO.PackageDeal;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,19 +154,27 @@ public class LejeAftaleService {
 
     }
 
-    public List<PackageDeals> getPackageDeals() {
+    public List<PackageDeal> getPackageDeals() {
         return new ArrayList<>(Arrays.asList(
-                new PackageDeals("Daekpakke", 300, "Daekpakke"),
-                new PackageDeals("Aflveringsforsikring", 119, "Tilvalg af afleveringsforsikring"),
-                new PackageDeals("Lav selvrisiko", 89, ""),
-                new PackageDeals("Vejhjaelp", 49, "I samarbejde med Viking kan du få vejhjaelp til kun 49 kr. pr. maaned. Som Bilabonnement-kunde er du daekket under de vilkaar du finder under spoergsmaal og svar."),
-                new PackageDeals("Udlevering ved FDM", 599, "Udlevering til FDM er et engangsgebyr på 599 kr.")
+                new PackageDeal("Daekpakke", 300, "Daekpakke"),
+                new PackageDeal("Aflveringsforsikring", 119, "Tilvalg af afleveringsforsikring"),
+                new PackageDeal("Lav selvrisiko", 89, ""),
+                new PackageDeal("Vejhjaelp", 49, "I samarbejde med Viking kan du få vejhjaelp til kun 49 kr. pr. maaned. Som Bilabonnement-kunde er du daekket under de vilkaar du finder under spoergsmaal og svar."),
+                new PackageDeal("Udlevering ved FDM", 599, "Udlevering til FDM er et engangsgebyr på 599 kr.")
         ));
     }
-    public int beregnTotalPris(List<PackageDeals> selectedPackageDeals) {
+
+    public int beregnTotalPris(BrugerValgDTO brugerValgDTO) {
+        // detAlekLaver // TODO: fjern tag
+        List<String> selectedPackageDeals = brugerValgDTO.getSelectedPackageDeals();
+        List<PackageDeal> packageDealTypes = getPackageDeals();
+
         int totalPris = 0;
-        for (PackageDeals packageDeal : selectedPackageDeals) {
-            totalPris += packageDeal.getPackagePrice();
+
+        for (PackageDeal packageDealType : packageDealTypes) {
+            if (selectedPackageDeals.contains(packageDealType.getPackageName())) {
+                totalPris += packageDealType.getPackagePrice();
+            }
         }
         return totalPris;
     }

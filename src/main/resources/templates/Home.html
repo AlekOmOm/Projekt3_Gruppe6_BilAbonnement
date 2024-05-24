@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--                                   CSS files                                                 -->
     <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
@@ -27,15 +27,15 @@
 
                 <form action="/login" method="post">
                     <label for="brugernavn">Brugernavn:</label><br>
-                    <input type="text" id="brugernavn" name="brugerNavn" required><br>
+                    <input type="text" id="brugernavn" packageName="brugerNavn" required><br>
 
                     <label for="password">Kodeord:</label><br>
-                    <input type="password" id="password" name="password" required><br>
+                    <input type="password" id="password" packageName="password" required><br>
 
                     <!-- bruger typer: DATA_REGISTRERING, SKADE_OG_UDBEDRING, FORRETNINGS_UDVIKLING; -->
                     <label for="rolle">Brugertype:</label><br>
 
-                    <select id="rolle" name="rolle">
+                    <select id="rolle" packageName="rolle">
                         <option value="DATA_REGISTRERING">Data registrering</option>
                         <option value="SKADE_OG_UDBEDRING">Skade og udbedring</option>
                         <option value="FORRETNINGS_UDVIKLING">Forretnings udvikling</option>
@@ -52,15 +52,15 @@
 
                 <form action="/registrer" method="post">
                     <label for="brugernavnReg">Brugernavn:</label><br>
-                    <input type="text" id="brugernavnReg" name="brugerNavn" required><br>
+                    <input type="text" id="brugernavnReg" packageName="brugerNavn" required><br>
 
                     <label for="passwordReg">Kodeord:</label><br>
-                    <input type="password" id="passwordReg" name="password" required><br>
+                    <input type="password" id="passwordReg" packageName="password" required><br>
 
                     <!-- bruger typer: DATA_REGISTRERING, SKADE_OG_UDBEDRING, FORRETNINGS_UDVIKLING; -->
                     <label for="rolle">Brugertype:</label><br>
 
-                    <select id="rolleReg" name="rolle">
+                    <select id="rolleReg" packageName="rolle">
                         <option value="DATA_REGISTRERING">Data registrering</option>
                         <option value="SKADE_OG_UDBEDRING">Skade og udbedring</option>
                         <option value="FORRETNINGS_UDVIKLING">Forretnings udvikling</option>
