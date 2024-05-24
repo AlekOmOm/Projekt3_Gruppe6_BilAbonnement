@@ -212,7 +212,7 @@ public class NavigationController {
             model.addAttribute("nyBrugerValgDTO", loadedDTO);
 
 
-
+            // ------------------- Debug ------------------- // TODO: remove debug
             if (oldBrugerValgDTO != null && nyBrugerValgDTO != null) {
                 System.out.println(" - oldBrugerValgDTO: "+ oldBrugerValgDTO);
                 System.out.println(" - nyBrugerValgDTO: "+ nyBrugerValgDTO);
