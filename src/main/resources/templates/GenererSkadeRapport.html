@@ -32,7 +32,7 @@
                 <tr th:each="entry : ${skadeCheckliste}">
                     <td>
                         <label>
-                            <input type="checkbox" th:value="${entry.key}" name="skaderValgt" th:checked="${session.skaderValgt.contains(entry.key)}"/>
+                            <input type="checkbox" th:value="${entry.key}" name="skaderValgt" th:checked="${#lists.contains(session.skaderValgt, entry.key)}"/>
                             <span th:text="${entry.key}"></span>
                         </label>
                     </td>
@@ -54,7 +54,7 @@
                 <tbody>
                 <tr th:each="skade : ${session.skaderValgt}">
                     <td><input type="checkbox" th:value="${skade}" th:name="skaderValgt" checked/></td>
-                    <td th:text="${skade}"></td>
+                    <td th:text="${skadeService.getSkadeCheckliste().get(skade)}"></td>
                 </tr>
                 </tbody>
             </table>

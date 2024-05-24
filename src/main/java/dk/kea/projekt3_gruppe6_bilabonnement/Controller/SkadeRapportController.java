@@ -26,7 +26,7 @@ public class SkadeRapportController {
     private static final String OPRET_RAPPORT_PAGE = "GenererSkadeRapport";
     private static final String REDIRECT_OPRET = "redirect:/SkadeRapport/opret";
     private static final String SE_RAPPORT_PAGE = "SeSkadeRapport";
-    private static final String REDIRECT_SE = "redirect:/SkadeRapport/Se";
+    private static final String REDIRECT_SE = "redirect:/SkadeRapport/Se/";
 
     // Autowired services
     private final SkadeRapportService skadeRapportService;
@@ -68,17 +68,20 @@ public class SkadeRapportController {
     @GetMapping("/opret")
     public String opretRapport(Model model, HttpSession session, @RequestParam int lejeAftaleID){ // input *hidden* for LejeAftaleID
         Map<String, Integer> skadeCheckliste = skadeService.getSkadeCheckliste();
+        List<String> skaderValgt = (List<String>) session.getAttribute("skaderValgt");
+        if (skaderValgt == null) {
+            skaderValgt = new ArrayList<>();
+            session.setAttribute("skaderValgt", skaderValgt);
+        }
+        List<String> skaderIkkeValgt = new ArrayList<>(skadeCheckliste.keySet());
+        skaderIkkeValgt.removeAll(skaderValgt);
+
+        model.addAttribute("skadeService", skadeService);
 
         model.addAttribute("skadeCheckliste", skadeCheckliste);
-
-        // hvis == null -> ny session
-        if (session.getAttribute("skaderValgt") == null) {
-            session.setAttribute("skaderValgt", new ArrayList<>());
-            session.setAttribute("skaderIkkeValgt", new ArrayList<>(skadeCheckliste.keySet()));
-        }
-
-        model.addAttribute("skadeChecklisteNavne", skadeCheckliste.keySet());
-        model.addAttribute("skadeChecklisteVærdier", skadeCheckliste.values());
+        model.addAttribute("skaderValgt", skaderValgt);
+        model.addAttribute("skaderIkkeValgt", skaderIkkeValgt);
+        model.addAttribute("lejeAftaleID", lejeAftaleID);
 
         session.setAttribute("lejeAftaleID", lejeAftaleID);
 
@@ -104,9 +107,16 @@ public class SkadeRapportController {
         // session opdateres
         session.setAttribute("skaderValgt", skaderValgt);
         session.setAttribute("skaderIkkeValgt", skaderIkkeValgt);
+        model.addAttribute("skaderValgt", skaderValgt);
+        model.addAttribute("skaderIkkeValgt", skaderIkkeValgt);
+        model.addAttribute("lejeAftaleID", lejeAftaleID);
+
+        model.addAttribute("skadeService", skadeService);
+
+        session.setAttribute("lejeAftaleID", lejeAftaleID);
 
 
-        return REDIRECT_OPRET + "?lejeAftale=" + lejeAftaleID;
+        return REDIRECT_OPRET + "?lejeAftaleID=" + lejeAftaleID;
     }
 
     @PostMapping("/opret")
@@ -117,17 +127,25 @@ public class SkadeRapportController {
             //lejeAftaleID = Udløbet lejeaftaler
             //kilometerKørtOver = input felt
             //reparationsomkostninger = smalet pris for skader & kilometerKoertOver SkadeRapporter
+
+        //Henter valgte skader fra service
         List<Skade> valgteSkader = skadeService.genererSkadeListe(skaderValgt);
-        int brugerID = (int) session.getAttribute("brugerID");
-        int lejeAftaleID = (int) session.getAttribute("lejeAftaleID");
+
+        //Henter burgerID fra session
+        Integer brugerID = (Integer) session.getAttribute("brugerID");
+
+        //Henter lejeAftaleID fra session
+        Integer lejeAftaleID = (Integer) session.getAttribute("lejeAftaleID");
         int reparationsomkostionger = skadeService.udregnReparationsomkostninger(kilometerKoertOver, valgteSkader);
 
         SkadeRapport skadeRapport = new SkadeRapport(brugerID, lejeAftaleID, kilometerKoertOver, reparationsomkostionger, valgteSkader);
         SkadeRapport gemtSkadeRapport = skadeRapportService.gem(skadeRapport);
 
         if(gemtSkadeRapport == null){
-            return REDIRECT_OPRET + "?lejeAftale=" + lejeAftaleID;
+            return REDIRECT_OPRET + "?lejeAftaleID=" + lejeAftaleID;
         }
+
+        //Sletter attributes fra session
         session.removeAttribute("lejeAftaleID");
         session.removeAttribute("skaderValgt");
         session.removeAttribute("skaderIkkeValgt");
