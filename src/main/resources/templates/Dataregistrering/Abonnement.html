@@ -22,7 +22,7 @@
         <h2>2. Vælg Abonnement</h2>
         <div class="inputForm">
             <!--- detAlekLaver -->
-            <form action="/LejeAftale/PrisOverslag" method="get" th:object="nyBrugerValgDTO">
+            <form action="/LejeAftale/PrisOverslag" method="get" th:object="${nyBrugerValgDTO}">
             <div th:each="packageDeal : ${packageDeals}">
                 <label>
                     <!-- map input packageName to List<String> selectedPackageDeals in nyBrugerValgDTO

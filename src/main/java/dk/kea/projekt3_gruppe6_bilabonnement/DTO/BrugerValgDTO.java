@@ -5,11 +5,6 @@ import java.util.List;
 public class BrugerValgDTO {
     // 0. bil valg
     String bilModel; // bil modeller: CitroenC1, Peugeot108, OpelCorsaCosmo
-    /*
-             "CitroenC1"
-             "Peugeot108"
-             "OpelCorsaCosmo"
-     */
 
     // 1. abonnements side
     String farve;
@@ -20,8 +15,8 @@ public class BrugerValgDTO {
     boolean udleveringVedFDM = false; // default
 
     // 2. Prisoverslag
-    int abonnementslaengde;
-    int kmPrMdr;
+    int abonnementslaengde = 0;
+    int kmPrMdr = 0;
 
     // 4. afhentningssted
     String afhentningssted;

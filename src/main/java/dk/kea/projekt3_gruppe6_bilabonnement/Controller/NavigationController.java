@@ -57,42 +57,36 @@ public class NavigationController {
 
 
 
-        // ------------------- Load data -------------------
-        model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
+        // ------------------- Load, Save and return next -------------------
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
+        BrugerValgDTO loadedDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
+
+        session.setAttribute("BrugerValgDTO", loadedDTO);
+        model.addAttribute("nyBrugerValgDTO", loadedDTO);
+
         return VAELGBIL_PAGE;
     }
 
     @GetMapping("/Abonnement")
     public String LejeAbonnement(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
-
-        System.out.println("nyBrugerValgDTO: " + nyBrugerValgDTO);
-
-
+        // ------------------- data for view -------------------
         List<PackageDeal> packageDeals = lejeAftaleService.getPackageDeals();
-        for (PackageDeal packageDeal : packageDeals) {
-            model.addAttribute(packageDeal);
-        }
 
-        model.addAttribute(packageDeals.get(1));
-        model.addAttribute(packageDeals.get(2));
-        model.addAttribute(packageDeals.get(3));
-        model.addAttribute(packageDeals.get(4));
         model.addAttribute("packageDeals", packageDeals);
 
 
-        // ------------- gemmer data i session -------------
-        session.setAttribute("valgtAbonnement", nyBrugerValgDTO);
 
 
 
 
 
-        // ------------------- Load and Save data -------------------
-        model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
+
+        // ------------------- Load, Save and return next -------------------
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
+        BrugerValgDTO loadedDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
+
+        session.setAttribute("BrugerValgDTO", loadedDTO);
+        model.addAttribute("nyBrugerValgDTO", loadedDTO);
 
         return ABONNEMENT_PAGE;
     }
@@ -101,17 +95,19 @@ public class NavigationController {
     @GetMapping("/PrisOverslag")
     public String getPrisoverslagPage(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
 
-        System.out.println("nyBrugerValgDTO: " + nyBrugerValgDTO);
 
 
 
 
 
 
-        // ------------------- Load and Save data -------------------
-        model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
+
+        // ------------------- Load, Save and return -------------------
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
+        BrugerValgDTO loadedDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
+
+        session.setAttribute("BrugerValgDTO", loadedDTO);
+        model.addAttribute("nyBrugerValgDTO", loadedDTO);
 
         return PRISOVERSLAG_PAGE;
     }
@@ -119,14 +115,20 @@ public class NavigationController {
 
     @GetMapping("/KundeInfo")
     public String getKundeinfoPage(HttpSession session, Model model, BrugerValgDTO nyBrugerValgDTO) {
-        session.setAttribute("valgtKundeInfo", nyBrugerValgDTO);
 
 
 
-        // ------------------- Load data -------------------
-        model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
+
+
+
+
+        // ------------------- Load, Save and return -------------------
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
+        BrugerValgDTO loadedDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
+
+        session.setAttribute("BrugerValgDTO", loadedDTO);
+        model.addAttribute("nyBrugerValgDTO", loadedDTO);
+
         return KUNDEINFO_PAGE;
     }
 
@@ -137,10 +139,13 @@ public class NavigationController {
 
 
 
-        // ------------------- Load data -------------------
-        model.addAttribute("nyBrugerValgDTO", nyBrugerValgDTO);
+        // ------------------- Load, Save and return -------------------
         BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-        session.setAttribute("BrugerValgDTO", load(oldBrugerValgDTO, nyBrugerValgDTO));
+        BrugerValgDTO loadedDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
+
+        session.setAttribute("BrugerValgDTO", loadedDTO);
+        model.addAttribute("nyBrugerValgDTO", loadedDTO);
+
         return AFHENTNINGSSTED_PAGE;
     }
 

@@ -147,9 +147,9 @@ public class InitData implements ApplicationRunner {
         biler = bilRepository.findAll();
 
         lejeAftaler.addAll(Arrays.asList(
-                new LejeAftale(brugere.get(0), new KundeInfo(), biler.get(0), "AbonnementsType1", 1000, "Afhentningssted1", "Afleveringssted1", LocalDate.now(), LocalDate.now().plusDays(7)),
-                new LejeAftale(brugere.get(1), new KundeInfo(), biler.get(1), "AbonnementsType2", 2000, "Afhentningssted2", "Afleveringssted2", LocalDate.now(), LocalDate.now().plusDays(7)),
-                new LejeAftale(brugere.get(2), new KundeInfo(), biler.get(2), "AbonnementsType3", 3000, "Afhentningssted3", "Afleveringssted3", LocalDate.now(), LocalDate.now().plusDays(7))
+                new LejeAftale(brugere.get(0), new KundeInfo(), biler.get(0), "AbonnementsType1", 1000, "Afhentningssted1", "Afleveringssted1", LocalDate.now(), LocalDate.now().plusDays(7), 0),
+                new LejeAftale(brugere.get(1), new KundeInfo(), biler.get(1), "AbonnementsType2", 2000, "Afhentningssted2", "Afleveringssted2", LocalDate.now(), LocalDate.now().plusDays(7), 0),
+                new LejeAftale(brugere.get(2), new KundeInfo(), biler.get(2), "AbonnementsType3", 3000, "Afhentningssted3", "Afleveringssted3", LocalDate.now(), LocalDate.now().plusDays(7), 0)
         ));
 
         // tjek om biler allerede findes i database og fjern dem fra listen
