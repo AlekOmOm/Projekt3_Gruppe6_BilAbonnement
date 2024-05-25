@@ -12,15 +12,27 @@ import java.util.List;
 @Repository
 public class SkadeRepository {
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
 
-    private Skade MapRowToSkade(ResultSet rs, int rowNum) throws SQLException{
-        return new Skade(
-                rs.getInt("ID"),
-                rs.getString("Type"),
-                rs.getInt("Pris")
-        );
+    @Autowired
+    public SkadeRepository(JdbcTemplate jdbcTemplate){
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+
+    // ------------------- Operations (CRUD) -------------------
+
+
+    public List<Skade> saveAll(List<Skade> skader) {
+        for (Skade skade : skader) {
+            save(skade);
+        }
+        return skader;
+    }
+
+    private void save(Skade skade) {
+        String sql = "INSERT INTO Skader (Type, Pris) VALUES (?, ?)";
+        jdbcTemplate.update(sql, skade.getType(), skade.getPris());
     }
 
     public List<Skade> findAlleSkader(int SkadeRapportID){
@@ -29,4 +41,13 @@ public class SkadeRepository {
     }
 
 
+    // ------------------- Other Methods -------------------
+
+    private Skade MapRowToSkade(ResultSet rs, int rowNum) throws SQLException{
+        return new Skade(
+                rs.getInt("ID"),
+                rs.getString("Type"),
+                rs.getInt("Pris")
+        );
+    }
 }

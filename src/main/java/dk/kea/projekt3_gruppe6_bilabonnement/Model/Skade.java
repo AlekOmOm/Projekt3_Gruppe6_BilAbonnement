@@ -3,20 +3,33 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 public class Skade {
 
     private int id;
+    private int skadeRapportID; // composition
     private String type;
     private int pris;
 
-    public Skade(int id, String type, int pris){
+    public Skade(int id, int skadeRapportID, String type, int pris){
         this.id = id;
-        this.type = type;
-        this.pris = pris;
-    }
-    public Skade(String type, int pris){
-        this.id = id;
+        this.skadeRapportID = skadeRapportID;
         this.type = type;
         this.pris = pris;
     }
 
+    public Skade(int skadeRapportID, String type, int pris){
+        this.skadeRapportID = skadeRapportID;
+        this.type = type;
+        this.pris = pris;
+    }
+
+    // Getter and Setter for skadeRapportID
+    public int getSkadeRapportID() {
+        return skadeRapportID;
+    }
+
+    public void setSkadeRapportID(int skadeRapportID) {
+        this.skadeRapportID = skadeRapportID;
+    }
+
+    // Rest of the methods remain unchanged
     public int getId() {
         return id;
     }

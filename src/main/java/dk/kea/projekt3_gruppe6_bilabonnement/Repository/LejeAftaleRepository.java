@@ -55,9 +55,10 @@ public class LejeAftaleRepository {
         return jdbcTemplate.query(sql, this::mapRow);
     }
 
-    public void updaterSkadeRapportID(int lejeAftaleID, int skadeRapportID) {
+    public LejeAftale updaterSkadeRapportID(int lejeAftaleID, int skadeRapportID) {
         String sql = "UPDATE LejeAftale SET SkadeRapportID = ? WHERE ID = ?";
         jdbcTemplate.update(sql, skadeRapportID, lejeAftaleID);
+        return findMedID(lejeAftaleID);
     }
 
     public LejeAftale mapRow(ResultSet rs, int rowNum) throws SQLException {

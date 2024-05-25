@@ -27,7 +27,7 @@ public class LejeAftaleService {
         return lejeAftaleRepository.findMedID(id);
     }
 
-    public void opdaterSkadeRapportID(int lejeAftaleID, int skadeRapportID) {
-        lejeAftaleRepository.updaterSkadeRapportID(lejeAftaleID, skadeRapportID);
+    public LejeAftale opdaterSkadeRapportID(int lejeAftaleID, int skadeRapportID) {
+        return lejeAftaleRepository.updaterSkadeRapportID(lejeAftaleID, skadeRapportID);
     }
 }

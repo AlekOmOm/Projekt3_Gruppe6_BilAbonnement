@@ -4,6 +4,8 @@ import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Skade;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepo;
+import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,14 +35,23 @@ public class SkadeRapportService {
         List<Skade> valgteSkader = skadeService.getSkader(skadeRapportTom);
 
 
+
         skadeRapportTom.setSkader(valgteSkader);
 
+        System.out.println(" - skadeRapport: " + skadeRapportTom);
+        System.out.println();
         return skadeRapportTom;
 
     }
 
 
+    // Composition forhold mellem SkadeRapport og Skader
+    // implementerings effekt:
+    // - gem() i SkadeRapportService skal OGSÅ gemme Skader, fordi SkadeRapport ikke skal kunne gemmes uden Skader (note: @Transactional mulig løsning)
+    // - findVedID() i SkadeRapportService skal OGSÅ finde Skader, fordi SkadeRapport ikke skal kunne findes uden Skader
+    // - Skade table: SKAL have not null constraint på SkadeRapportID
 
+    // @Transactional
     public SkadeRapport gem(SkadeRapport skadeRapport){
         if (skadeRapport == null) {
             return null;
@@ -50,6 +61,15 @@ public class SkadeRapportService {
 
         if (gemtSkadeRapport == null) {
             return null;
+        }
+
+        // SkadeService bruges i stedet for Repository, da dette er bedre praksis ift. GRASP
+
+        List<Skade> valgteSkader = skadeService.gemSkader(skadeRapport.getSkader());
+
+        if (valgteSkader == null) {
+            // transactional rollback
+            skadeRapportRepo.sletVedID(gemtSkadeRapport.getID()); // Slettes da der ikke er gemt Skader -> SkadeRapport skal ikke gemmes pga. Composition forhold
         }
 
         return gemtSkadeRapport;

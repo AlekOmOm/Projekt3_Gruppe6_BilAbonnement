@@ -13,9 +13,6 @@ import java.util.Map;
 @Service
 public class SkadeService {
 
-    @Autowired
-    SkadeRepository skadeRepository;
-
     private static final Map<String, Integer> skadeCheckliste = Map.of(
             "Bilrude", 5000,
             "Bilhjul", 2000,
@@ -29,6 +26,31 @@ public class SkadeService {
             "Bilbelysning", 1000
     );
 
+    // ------------------- Field Injections -------------------
+    SkadeRepository skadeRepository;
+
+    @Autowired
+    public SkadeService (SkadeRepository skadeRepository){
+        this.skadeRepository = skadeRepository;
+    }
+
+
+    // ------------------- Methods for Controller -------------------
+
+
+    // ------------------- Operations (CRUD) from Repo -------------------
+
+    public List<Skade> gemSkader(List<Skade> skader){
+
+        return skadeRepository.saveAll(skader);
+    }
+
+    public List<Skade> getSkader(SkadeRapport skadeRapport){
+        return skadeRepository.findAlleSkader(skadeRapport.getID());
+    }
+
+
+    // ------------------- Other Methods -------------------
 
     public List<Skade> genererSkadeListe(List<String> skaderValgt) {
         List<Skade> skader = new ArrayList<>();
@@ -36,7 +58,7 @@ public class SkadeService {
 
             int pris = skadeCheckliste.get(type);
 
-            skader.add(new Skade(type, pris));
+            skader.add(new Skade(0, type, pris));
         }
         return skader;
     }
@@ -45,9 +67,6 @@ public class SkadeService {
         return skadeCheckliste;
     }
 
-    public List<Skade> getSkader(SkadeRapport skadeRapport){
-        return skadeRepository.findAlleSkader(skadeRapport.getID());
-    }
 
     public int udregnReparationsomkostninger(int kilometerKoertOver, List<Skade> skader){
         int totalPris = skader.stream().mapToInt(Skade::getPris).sum();
