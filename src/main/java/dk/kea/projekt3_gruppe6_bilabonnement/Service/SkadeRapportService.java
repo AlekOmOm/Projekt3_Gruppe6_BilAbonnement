@@ -16,14 +16,18 @@ public class SkadeRapportService {
 
     private static final double PRIS_PR_KILOMETER_KOERT_OVER = 0.75;
 
-    @Autowired
-    private SkadeRapportRepo skadeRapportRepo;
+
+    private final SkadeRapportRepo skadeRapportRepo;
+    private final SkadeService skadeService;
+    private final LejeAftaleService lejeAftaleService;
 
     @Autowired
-    SkadeService skadeService;
+    public SkadeRapportService(SkadeRapportRepo skadeRapportRepo, SkadeService skadeService, LejeAftaleService lejeAftaleService) {
+        this.skadeRapportRepo = skadeRapportRepo;
+        this.skadeService = skadeService;
+        this.lejeAftaleService = lejeAftaleService;
+    }
 
-    @Autowired
-    LejeAftaleService lejeAftaleService;
 
     public List<SkadeRapport> findAlle(){
         return skadeRapportRepo.findAlle();

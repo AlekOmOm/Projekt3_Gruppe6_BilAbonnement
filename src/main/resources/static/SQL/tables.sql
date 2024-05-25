@@ -45,7 +45,7 @@ CREATE TABLE SkadeRapport
 CREATE TABLE Skader
 (
     ID             INT AUTO_INCREMENT PRIMARY KEY,
-    SkadeRapportID INT,
+    SkadeRapportID INT NOT NULL,
     Type           VARCHAR(255),
     Pris           INT,
     FOREIGN KEY (SkadeRapportID) REFERENCES SkadeRapport (ID)
