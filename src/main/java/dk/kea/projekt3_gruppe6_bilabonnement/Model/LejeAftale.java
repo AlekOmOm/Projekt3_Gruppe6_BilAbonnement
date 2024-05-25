@@ -7,12 +7,13 @@ import java.time.LocalDate;
 public class LejeAftale {
 
     private int id;
-    private Bruger bruger; // Composition
+
+    private Bruger bruger;      // Composition
     private KundeInfo kundeInfo; // Composition
     private SkadeRapport skadeRapport = null; // Aggregation
 
     // 1. Bil valg
-    private Bil bil; // Composition
+    private Bil bil;            // Composition
 
     // 2. Abonnement side
     private String farve;
@@ -29,11 +30,13 @@ public class LejeAftale {
     // 4. Afhentningssted
     private String afhentningssted;
 
-    // LejeAftale længde
+    // Instance variabler sat ved Save
     private LocalDate startDato;
     private LocalDate slutDato;
+    private int totalPris;
 
-    // constructor lejeaftale
+
+    // ------------------- Constructors -------------------
     public LejeAftale() {
     }
 
@@ -45,9 +48,9 @@ public class LejeAftale {
         this.skadeRapport = skadeRapport;
     }
 
-    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String roed, boolean b, boolean b1, boolean b2, boolean b3, boolean b4, int i, int i1, String s, LocalDate now, LocalDate localDate) {
+    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String roed, boolean b, boolean b1, boolean b2, boolean b3, boolean b4, int i, int i1, String s, LocalDate now, LocalDate localDate, int totalPris) {
         setAllInstances(bruger, kundeInfo, bil, skadeRapport);
-        setAllInstanceVariables(roed, b, b1, b2, b3, b4, i, i1, s, now, localDate);
+        setAllInstanceVariables(roed, b, b1, b2, b3, b4, i, i1, s, now, localDate, totalPris);
     }
 
 
@@ -59,7 +62,7 @@ public class LejeAftale {
         this.skadeRapport = skadeRapport;
     }
 
-    public void setAllInstanceVariables(String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, LocalDate startDato, LocalDate slutDato) {
+    public void setAllInstanceVariables(String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, LocalDate startDato, LocalDate slutDato, int totalPris) {
         this.farve = farve;
         this.afleveringsforsikring = afleveringsforsikring;
         this.selvrisiko = selvrisiko;
@@ -71,7 +74,11 @@ public class LejeAftale {
         this.afhentningssted = afhentningssted;
         this.startDato = startDato;
         this.slutDato = slutDato;
+        this.totalPris = totalPris;
     }
+
+
+
 
     // ------------------- Getters & Setters -------------------
 
@@ -204,4 +211,35 @@ public class LejeAftale {
         this.slutDato = slutDato;
     }
 
+    public int getTotalPris() {
+        return totalPris;
+    }
+
+    public void setTotalPris(int totalPris) {
+        this.totalPris = totalPris;
+    }
+
+    // ------------------- toString -------------------
+    @Override
+    public String toString() {
+        return "LejeAftale{" +
+                "id=" + id +
+                ", bruger=" + bruger +
+                ", kundeInfo=" + kundeInfo +
+                ", skadeRapport=" + skadeRapport +
+                ", bil=" + bil +
+                ", farve='" + farve + '\'' +
+                ", afleveringsforsikring=" + afleveringsforsikring +
+                ", selvrisiko=" + selvrisiko +
+                ", daekpakke=" + daekpakke +
+                ", vejhjaelp=" + vejhjaelp +
+                ", udleveringVedFDM=" + udleveringVedFDM +
+                ", abonnementslaengde=" + abonnementslaengde +
+                ", kmPrMdr=" + kmPrMdr +
+                ", afhentningssted='" + afhentningssted + '\'' +
+                ", startDato=" + startDato +
+                ", slutDato=" + slutDato +
+                ", totalPris=" + totalPris +
+                '}';
+    }
 }

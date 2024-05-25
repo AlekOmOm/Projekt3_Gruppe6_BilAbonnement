@@ -18,8 +18,8 @@ public class LejeAftaleRepository {
     // ------------------- SQL strings -------------------
 
     // 1 create
-    private static final String INSERT = "INSERT INTO LejeAftale (brugerID, bilID, kundeInfoID, skadeRapportID, farve, afleveringsforsikring, selvrisiko, daekpakke, vejhjaelp, udleveringVedFDM, abonnementslaengde, kmPrMdr, afhentningssted, startDato, slutDato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String INSERT_WITHOUT_RAPPORT = "INSERT INTO LejeAftale (brugerID, bilID, kundeInfoID, farve, afleveringsforsikring, selvrisiko, daekpakke, vejhjaelp, udleveringVedFDM, abonnementslaengde, kmPrMdr, afhentningssted, startDato, slutDato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String INSERT = "INSERT INTO LejeAftale (brugerID, bilID, kundeInfoID, skadeRapportID, farve, afleveringsforsikring, selvrisiko, daekpakke, vejhjaelp, udleveringVedFDM, abonnementslaengde, kmPrMdr, afhentningssted, startDato, slutDato, totalPris) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String INSERT_WITHOUT_RAPPORT = "INSERT INTO LejeAftale (brugerID, bilID, kundeInfoID, farve, afleveringsforsikring, selvrisiko, daekpakke, vejhjaelp, udleveringVedFDM, abonnementslaengde, kmPrMdr, afhentningssted, startDato, slutDato, totalPris) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         // 2. read
     private static final String SELECT_ALL = "SELECT * FROM LejeAftale";
     private static final String SELECT_WITHOUT_REPORT = "SELECT * FROM LejeAftale WHERE SkadeRapportID IS NULL";
@@ -27,8 +27,8 @@ public class LejeAftaleRepository {
     private static final String SELECT_BY_FOREIGNKEYS = "SELECT * FROM LejeAftale WHERE brugerID = ? AND bilID = ? AND kundeInfoID = ?";
     public static final String SELECT_LEJE_AFTALE_BY_IDS = "SELECT * FROM LejeAftale WHERE brugerID = ? AND bilID = ? AND kundeInfoID = ? AND skadeRapportID = ?";
         // 3. update
-    private static final String UPDATE = "UPDATE LejeAftale SET brugerID = ?, bilID = ?, kundeInfoID = ?, skadeRapportID = ?, farve = ?, afleveringsforsikring = ?, selvrisiko = ?, daekpakke = ?, vejhjaelp = ?, udleveringVedFDM = ?, abonnementslaengde = ?, kmPrMdr = ?, afhentningssted =?, startDato = ?, slutDato = ? WHERE ID = ?";
-    private static final String UPDATE_WITHOUT_SKADERAPPORT = "UPDATE LejeAftale SET brugerID = ?, bilID = ?, kundeInfoID = ?, farve = ?, afleveringsforsikring = ?, selvrisiko = ?, daekpakke = ?, vejhjaelp = ?, udleveringVedFDM = ?, abonnementslaengde = ?, kmPrMdr = ?, afhentningssted =?, startDato = ?, slutDato = ? WHERE ID = ?";
+    private static final String UPDATE = "UPDATE LejeAftale SET brugerID = ?, bilID = ?, kundeInfoID = ?, skadeRapportID = ?, farve = ?, afleveringsforsikring = ?, selvrisiko = ?, daekpakke = ?, vejhjaelp = ?, udleveringVedFDM = ?, abonnementslaengde = ?, kmPrMdr = ?, afhentningssted =?, startDato = ?, slutDato = ?, totalPris = ? WHERE ID = ?";
+    private static final String UPDATE_WITHOUT_SKADERAPPORT = "UPDATE LejeAftale SET brugerID = ?, bilID = ?, kundeInfoID = ?, farve = ?, afleveringsforsikring = ?, selvrisiko = ?, daekpakke = ?, vejhjaelp = ?, udleveringVedFDM = ?, abonnementslaengde = ?, kmPrMdr = ?, afhentningssted =?, startDato = ?, slutDato = ?, totalPris = ? WHERE ID = ?";
         // 4. delete
     private static final String DELETE = "DELETE FROM LejeAftale WHERE ID = ?";
 
@@ -60,9 +60,9 @@ public class LejeAftaleRepository {
         }
 
         if (nyLejeAftale.getSkadeRapport() == null) {
-            jdbcTemplate.update(INSERT_WITHOUT_RAPPORT, nyLejeAftale.getBruger().getId(), nyLejeAftale.getBil().getId(), nyLejeAftale.getKundeInfo().getId(), nyLejeAftale.getFarve(), nyLejeAftale.isAfleveringsforsikring(), nyLejeAftale.isSelvrisiko(), nyLejeAftale.isDaekpakke(), nyLejeAftale.isVejhjaelp(), nyLejeAftale.isUdleveringVedFDM(), nyLejeAftale.getAbonnementslaengde(), nyLejeAftale.getKmPrMdr(), nyLejeAftale.getAfhentningssted(), nyLejeAftale.getStartDato(), nyLejeAftale.getSlutDato());
+            jdbcTemplate.update(INSERT_WITHOUT_RAPPORT, nyLejeAftale.getBruger().getId(), nyLejeAftale.getBil().getId(), nyLejeAftale.getKundeInfo().getId(), nyLejeAftale.getFarve(), nyLejeAftale.isAfleveringsforsikring(), nyLejeAftale.isSelvrisiko(), nyLejeAftale.isDaekpakke(), nyLejeAftale.isVejhjaelp(), nyLejeAftale.isUdleveringVedFDM(), nyLejeAftale.getAbonnementslaengde(), nyLejeAftale.getKmPrMdr(), nyLejeAftale.getAfhentningssted(), nyLejeAftale.getStartDato(), nyLejeAftale.getSlutDato(), nyLejeAftale.getTotalPris());
         } else {
-            jdbcTemplate.update(INSERT, nyLejeAftale.getBruger().getId(), nyLejeAftale.getBil().getId(), nyLejeAftale.getKundeInfo().getId(), nyLejeAftale.getSkadeRapport().getID(), nyLejeAftale.getFarve(), nyLejeAftale.isAfleveringsforsikring(), nyLejeAftale.isSelvrisiko(), nyLejeAftale.isDaekpakke(), nyLejeAftale.isVejhjaelp(), nyLejeAftale.isUdleveringVedFDM(), nyLejeAftale.getAbonnementslaengde(), nyLejeAftale.getKmPrMdr(), nyLejeAftale.getAfhentningssted(), nyLejeAftale.getStartDato(), nyLejeAftale.getSlutDato());
+            jdbcTemplate.update(INSERT, nyLejeAftale.getBruger().getId(), nyLejeAftale.getBil().getId(), nyLejeAftale.getKundeInfo().getId(), nyLejeAftale.getSkadeRapport().getID(), nyLejeAftale.getFarve(), nyLejeAftale.isAfleveringsforsikring(), nyLejeAftale.isSelvrisiko(), nyLejeAftale.isDaekpakke(), nyLejeAftale.isVejhjaelp(), nyLejeAftale.isUdleveringVedFDM(), nyLejeAftale.getAbonnementslaengde(), nyLejeAftale.getKmPrMdr(), nyLejeAftale.getAfhentningssted(), nyLejeAftale.getStartDato(), nyLejeAftale.getSlutDato(), nyLejeAftale.getTotalPris());
         }
 
         return find(nyLejeAftale);
@@ -134,10 +134,10 @@ public class LejeAftaleRepository {
     private void queryAllVariablesExceptID(LejeAftale lejeAftale, String sql) {
         if (lejeAftale.getSkadeRapport() == null) {
             // LejeAftale fields: bruger, bil, kundeInfo, farve, afleveringsforsikring, selvrisiko, daekpakke, vejhjaelp, udleveringVedFDM, abonnementslaengde, kmPrMdr, afhentningssted, startDato, slutDato
-            jdbcTemplate.update(sql, lejeAftale.getBruger().getId(), lejeAftale.getBil().getId(), lejeAftale.getKundeInfo().getId(),lejeAftale.getFarve(), lejeAftale.isAfleveringsforsikring(), lejeAftale.isSelvrisiko(), lejeAftale.isDaekpakke(), lejeAftale.isVejhjaelp(), lejeAftale.isUdleveringVedFDM(), lejeAftale.getAbonnementslaengde(), lejeAftale.getKmPrMdr(), lejeAftale.getAfhentningssted(), lejeAftale.getStartDato(), lejeAftale.getSlutDato(), lejeAftale.getID());
+            jdbcTemplate.update(sql, lejeAftale.getBruger().getId(), lejeAftale.getBil().getId(), lejeAftale.getKundeInfo().getId(),lejeAftale.getFarve(), lejeAftale.isAfleveringsforsikring(), lejeAftale.isSelvrisiko(), lejeAftale.isDaekpakke(), lejeAftale.isVejhjaelp(), lejeAftale.isUdleveringVedFDM(), lejeAftale.getAbonnementslaengde(), lejeAftale.getKmPrMdr(), lejeAftale.getAfhentningssted(), lejeAftale.getStartDato(), lejeAftale.getSlutDato(), lejeAftale.getTotalPris(), lejeAftale.getID());
             return;
         }
-        jdbcTemplate.update(sql, lejeAftale.getBruger().getId(), lejeAftale.getBil().getId(), lejeAftale.getKundeInfo().getId(), lejeAftale.getSkadeRapport().getID(), lejeAftale.getFarve(), lejeAftale.isAfleveringsforsikring(), lejeAftale.isSelvrisiko(), lejeAftale.isDaekpakke(), lejeAftale.isVejhjaelp(), lejeAftale.isUdleveringVedFDM(), lejeAftale.getAbonnementslaengde(), lejeAftale.getKmPrMdr(), lejeAftale.getAfhentningssted(), lejeAftale.getStartDato(), lejeAftale.getSlutDato(), lejeAftale.getID());
+        jdbcTemplate.update(sql, lejeAftale.getBruger().getId(), lejeAftale.getBil().getId(), lejeAftale.getKundeInfo().getId(), lejeAftale.getSkadeRapport().getID(), lejeAftale.getFarve(), lejeAftale.isAfleveringsforsikring(), lejeAftale.isSelvrisiko(), lejeAftale.isDaekpakke(), lejeAftale.isVejhjaelp(), lejeAftale.isUdleveringVedFDM(), lejeAftale.getAbonnementslaengde(), lejeAftale.getKmPrMdr(), lejeAftale.getAfhentningssted(), lejeAftale.getStartDato(), lejeAftale.getSlutDato(), lejeAftale.getTotalPris(), lejeAftale.getID());
     }
 
     // ------------------- Object[] methods -------------------
@@ -198,6 +198,7 @@ public class LejeAftaleRepository {
         lejeaftale.setAfhentningssted(rs.getString("afhentningssted"));
         lejeaftale.setStartDato(rs.getDate("startDato").toLocalDate());
         lejeaftale.setSlutDato(rs.getDate("slutDato").toLocalDate());
+        lejeaftale.setTotalPris(rs.getInt("totalPris"));
 
         return lejeaftale;
     }
@@ -229,6 +230,7 @@ CREATE TABLE LejeAftale
     Afhentningssted       VARCHAR(255),
     StartDato             DATE,
     SlutDato              DATE,
+    TotalPris             INT,
 
     FOREIGN KEY (BrugerID) REFERENCES Bruger (ID),
     FOREIGN KEY (KundeInfoID) REFERENCES KundeInfo (ID),

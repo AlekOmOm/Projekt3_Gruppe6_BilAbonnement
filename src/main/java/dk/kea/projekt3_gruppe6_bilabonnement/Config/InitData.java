@@ -176,9 +176,9 @@ public class InitData implements ApplicationRunner {
 
         lejeAftaler.addAll(Arrays.asList(
                 // LejeAftale fields: Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, LocalDate startDato, LocalDate slutDato
-                new LejeAftale(brugere.get(0), kundeInfos.get(0), biler.get(0), null, "Rød", true, true, true, true, true, 12, 10000, "Testvej 1", LocalDate.now(), LocalDate.now().plusMonths(12)),
-                new LejeAftale(brugere.get(1), kundeInfos.get(1), biler.get(1), null, "Blå", true, true, true, true, true, 12, 10000, "Testvej 2", LocalDate.now(), LocalDate.now().plusMonths(12)),
-                new LejeAftale(brugere.get(2), kundeInfos.get(2), biler.get(2), null, "Grøn", true, true, true, true, true, 12, 10000, "Testvej 3", LocalDate.now(), LocalDate.now().plusMonths(12))
+                new LejeAftale(brugere.get(0), kundeInfos.get(0), biler.get(0), null, "Red", true, true, true, true, true, 12, 10000, "Testvej 1", LocalDate.now(), LocalDate.now().plusMonths(12), 10000),
+                new LejeAftale(brugere.get(1), kundeInfos.get(1), biler.get(1), null, "Blue", true, true, true, true, true, 12, 10000, "Testvej 2", LocalDate.now(), LocalDate.now().plusMonths(12), 10000),
+                new LejeAftale(brugere.get(2), kundeInfos.get(2), biler.get(2), null, "Green", true, true, true, true, true, 12, 10000, "Testvej 3", LocalDate.now(), LocalDate.now().plusMonths(12), 10000)
         ));
 
         // tjek om biler allerede findes i database og fjern dem fra listen
@@ -192,10 +192,10 @@ public class InitData implements ApplicationRunner {
 
 
         // Save biler (hvis nye) til database
-        for (int i = 0; i<biler.size(); i++) {
-            Bil bil = biler.get(i);
-            if (bil != null) {
-                bilRepository.save(bil);
+        for (int i = 0; i<lejeAftaler.size(); i++) {
+            LejeAftale lejeAftale = lejeAftaler.get(i);
+            if (lejeAftale != null) {
+                lejeaftaleRepository.save(lejeAftale);
             }
         }
 

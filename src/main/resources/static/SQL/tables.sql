@@ -78,6 +78,7 @@ CREATE TABLE LejeAftale
     Afhentningssted       VARCHAR(255),
     StartDato             DATE,
     SlutDato              DATE,
+    TotalPris             INT,
 
     FOREIGN KEY (BrugerID) REFERENCES Bruger (ID),
     FOREIGN KEY (KundeInfoID) REFERENCES KundeInfo (ID),

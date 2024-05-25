@@ -1,4 +1,4 @@
-package dk.kea.projekt3_gruppe6_bilabonnement.Model;
+package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
 
 import java.time.LocalDate;
 

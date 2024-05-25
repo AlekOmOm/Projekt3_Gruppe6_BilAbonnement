@@ -31,7 +31,7 @@ public class KundeInfoService {
             System.out.println("KundeInfoService.save() - KundeInfo already exists");
             return update(kundeInfo);
         }
-        System.out.println("KundeInfoService.save() - save() called");
+
         return kundeInfoRepository.save(kundeInfo);
     }
 

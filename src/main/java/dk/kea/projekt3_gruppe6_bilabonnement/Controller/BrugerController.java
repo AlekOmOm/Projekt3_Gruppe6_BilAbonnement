@@ -1,6 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
 
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.BrugerDto;
+import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerDto;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.BrugerService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

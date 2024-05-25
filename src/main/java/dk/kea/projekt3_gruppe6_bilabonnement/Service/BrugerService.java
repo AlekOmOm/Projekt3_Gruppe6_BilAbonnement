@@ -1,7 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.BrugerDto;
+import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerDto;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
