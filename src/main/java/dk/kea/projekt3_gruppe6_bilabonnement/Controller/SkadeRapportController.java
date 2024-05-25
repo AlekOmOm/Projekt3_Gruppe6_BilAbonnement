@@ -26,7 +26,7 @@ public class SkadeRapportController {
     private static final String OPRET_RAPPORT_PAGE = "GenererSkadeRapport";
     private static final String REDIRECT_OPRET = "redirect:/SkadeRapport/opret";
     private static final String SE_RAPPORT_PAGE = "SeSkadeRapport";
-    private static final String REDIRECT_SE = "redirect:/SkadeRapport/Se/";
+    private static final String REDIRECT_SE = "redirect:/Se/";
 
     // Autowired services
     private final SkadeRapportService skadeRapportService;
@@ -69,6 +69,17 @@ public class SkadeRapportController {
     public String opretRapport(Model model, HttpSession session, @RequestParam int lejeAftaleID){ // input *hidden* for LejeAftaleID
         Map<String, Integer> skadeCheckliste = skadeService.getSkadeCheckliste();
         List<String> skaderValgt = (List<String>) session.getAttribute("skaderValgt");
+
+        Integer brugerID = (Integer) session.getAttribute("brugerID");
+
+
+        //hvis brugerID er null er er man ikke logged ind. Skal nok opdateres efter merge med login for at kunne få loggedInUser ordenligt
+        if (brugerID == null){
+            brugerID = 1;
+            session.setAttribute("brugerID", brugerID);
+        }
+           // return "redirect:/login";
+
         if (skaderValgt == null) {
             skaderValgt = new ArrayList<>();
             session.setAttribute("skaderValgt", skaderValgt);
@@ -138,6 +149,7 @@ public class SkadeRapportController {
         Integer lejeAftaleID = (Integer) session.getAttribute("lejeAftaleID");
         int reparationsomkostionger = skadeService.udregnReparationsomkostninger(kilometerKoertOver, valgteSkader);
 
+        //opret skadeRapport
         SkadeRapport skadeRapport = new SkadeRapport(brugerID, lejeAftaleID, kilometerKoertOver, reparationsomkostionger, valgteSkader);
         SkadeRapport gemtSkadeRapport = skadeRapportService.gem(skadeRapport);
 
@@ -145,33 +157,14 @@ public class SkadeRapportController {
             return REDIRECT_OPRET + "?lejeAftaleID=" + lejeAftaleID;
         }
 
-        //Sletter attributes fra session
+        lejeAftaleService.opdaterSkadeRapportID(lejeAftaleID, gemtSkadeRapport.getID());
+
+        //Sletter session variabler
         session.removeAttribute("lejeAftaleID");
         session.removeAttribute("skaderValgt");
         session.removeAttribute("skaderIkkeValgt");
 
-        return REDIRECT_SE + gemtSkadeRapport.getLejeAftaleID();
-
-        /*List<Skade> valgteSkader = skadeService.genererSkadeListe(skaderValgt);
-        int brugerID = (int) session.getAttribute("brugerID");
-
-
-        // opret skadeRapport
-        SkadeRapport skadeRapport = new SkadeRapport(); // lacks the parameters
-        SkadeRapport gemtRapport = skadeRapportService.gem(skadeRapport);
-
-        if (gemtRapport == null) {
-            return REDIRECT_OPRET;
-        }
-
-        // slet session variabler
-        session.removeAttribute("lejeAftaleID");
-        session.removeAttribute("skaderValgt");
-        session.removeAttribute("skaderIkkeValgt");
-
-        return REDIRECT_SE + gemtRapport.getID();
-    }*/
-
+        return REDIRECT_SE + gemtSkadeRapport.getID();
 
     }
     @GetMapping("/se/{lejeAftaleID}")

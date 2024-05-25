@@ -3,36 +3,36 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding-left: 50px; /* Add more padding to move content to the right */
-    margin-left: 20px; /* Add margin to the left */
+    padding-left: 50px;
+    margin-left: 20px;
     width: calc(100% - 70px);
 }
 
 
 #tilbageButton {
-    align-self: flex-start; /* Align to the start of the container */
-    margin-top: 10px; /* Add some space from the top */
-    margin-left: 10px; /* Add some space from the left */
+    align-self: flex-start;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 #searchInput {
-    width: calc(100% - 80px); /* Adjust width to accommodate button */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-    padding: 5px; /* Add some padding */
-    margin-bottom: 10px; /* Add some space at the bottom */
+    width: calc(100% - 80px);
+    box-sizing: border-box;
+    padding: 5px;
+    margin-bottom: 10px;
 }
 
 /* Search button styles */
 #searchButton {
-    padding: 5px 10px; /* Add padding to the button */
-    margin-left: 0px; /* Add some space from the left */
+    padding: 5px 10px;
+    margin-left: 0px;
 }
 
 
 /* Table styles */
 table {
     border-collapse: collapse;
-    width: 500px; /* Set the width of the table */
+    width: 500px;
 }
 th, td {
     border: 1px solid #ddd;
@@ -45,13 +45,13 @@ th {
 
 /* Archive styles */
 .archive {
-    width: 20%; /* Adjust as needed */
+    width: 20%;
     background-color: #f2f2f2;
     padding: 10px;
-    margin-left: 10px; /* Adjust margin to move the archive */
-    position: relative; /* Add position relative */
-    left: -60px; /* Add negative left offset to counteract the margin */
-    max-height: calc(100vh - 95px); /* Set the maximum height */
+    margin-left: 10px;
+    position: relative;
+    left: -60px;
+    max-height: calc(100vh - 95px);
     overflow-y: auto;
 }
 .archive h2 {
@@ -82,5 +82,5 @@ th {
 }
 
 .ArkivTabel button {
-    padding: 5px 10px; /* Adjust padding as needed */
+    padding: 5px 10px;
 }

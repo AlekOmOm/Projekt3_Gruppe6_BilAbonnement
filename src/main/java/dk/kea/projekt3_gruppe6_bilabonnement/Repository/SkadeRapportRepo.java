@@ -51,8 +51,7 @@ public class SkadeRapportRepo {
         return new SkadeRapport(
                 rs.getInt("ID"),
                 rs.getInt("brugerID"),
-                rs.getInt("LejeAftaleID"),
-                rs.getInt("kilometerKørtOver"),
+                rs.getInt("kilometerKoertOver"),
                 rs.getInt("reparationsomkostninger")
         );
     }

@@ -11,7 +11,7 @@ public class SkadeRapport {
     List<Skade> skader;
 
 
-    public SkadeRapport(int ID, int brugerID, int lejeAftaleID,  int kilometerKoertOver, int reparationsomkostninger){
+    public SkadeRapport(int ID, int brugerID, int lejeAftaleID,  int kilometerKoertOver){
         this.ID = ID;
         this.brugerID = brugerID;
         this.kilometerKoertOver = kilometerKoertOver;
