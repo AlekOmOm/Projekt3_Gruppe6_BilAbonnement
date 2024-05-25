@@ -49,14 +49,21 @@ public class SkadeRapportService {
     }
 
 
-    // Composition forhold mellem SkadeRapport og Skader
+    // Composition forhold mellem SkadeRapport og Skade
     // implementerings effekt:
-    // - gem() i SkadeRapportService skal OGSÅ gemme Skader, fordi SkadeRapport ikke skal kunne gemmes uden Skader (note: @Transactional mulig løsning)
-    // - findVedID() i SkadeRapportService skal OGSÅ finde Skader, fordi SkadeRapport ikke skal kunne findes uden Skader
-    // - Skade table: SKAL have not null constraint på SkadeRapportID
+        // - gem() i SkadeRapportService skal OGSÅ gemme Skader, fordi SkadeRapport ikke skal kunne gemmes uden Skader (note: @Transactional mulig løsning)
+        // - findVedID() i SkadeRapportService skal OGSÅ finde Skader, fordi SkadeRapport ikke skal kunne findes uden Skader
+        // - Skade table: SKAL have not null constraint på SkadeRapportID
 
-    // @Transactional
+
+    // @Transactional denne annotation kunne bruges
     public SkadeRapport gem(SkadeRapport skadeRapport){
+
+        // process Parent and Child tables (Composition forhold):
+            // SkadeRapport (parent) og Skade (child) skal gemmes i samme transaction
+            // SkadeRapport skal ikke gemmes, hvis Skade ikke kan gemmes
+            // SkadeRapport skal derfor gemmes først, hvorefter Skade forsøges gemt, og hvis dette ikke lykkes, slettes SkadeRapport
+
         if (skadeRapport == null) {
             return null;
         }
@@ -67,13 +74,11 @@ public class SkadeRapportService {
             return null;
         }
 
-        // SkadeService bruges i stedet for Repository, da dette er bedre praksis ift. GRASP
-
-        List<Skade> valgteSkader = skadeService.gemSkader(skadeRapport.getSkader());
+        List<Skade> valgteSkader = skadeService.gemSkader(skadeRapport.getSkader()); // SkadeService bruges i stedet for Repository, da dette er bedre praksis ift. GRASP
 
         if (valgteSkader == null) {
             // transactional rollback
-            skadeRapportRepo.sletVedID(gemtSkadeRapport.getID()); // Slettes da der ikke er gemt Skader -> SkadeRapport skal ikke gemmes pga. Composition forhold
+            skadeRapportRepo.sletVedID(gemtSkadeRapport.getID());
         }
 
         return gemtSkadeRapport;

@@ -41,7 +41,6 @@ public class SkadeService {
     // ------------------- Operations (CRUD) from Repo -------------------
 
     public List<Skade> gemSkader(List<Skade> skader){
-
         return skadeRepository.saveAll(skader);
     }
 

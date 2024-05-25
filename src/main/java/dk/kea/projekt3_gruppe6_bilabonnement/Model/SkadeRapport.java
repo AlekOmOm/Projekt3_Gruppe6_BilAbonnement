@@ -26,15 +26,15 @@ public class SkadeRapport {
         this.brugerID = brugerID;
         this.kilometerKoertOver = kilometerKoertOver;
         this.reparationsomkostninger = reparationsomkostninger;
+        setSkader(valgteSkader);
     }
 
     public SkadeRapport(int ID, int brugerID,  int kilometerKoertOver, int reparationsomkostninger, List<Skade> skader){
         this.ID = ID;
         this.brugerID = brugerID;
-
         this.kilometerKoertOver = kilometerKoertOver;
         this.reparationsomkostninger = reparationsomkostninger;
-        this.skader = skader;
+        setSkader(skader);
     }
 
     public SkadeRapport() {
@@ -59,11 +59,15 @@ public class SkadeRapport {
     public int getReparationsomkostninger() {
         return reparationsomkostninger;
     }
+
     public void setID(int skadeRapportID) {
         this.ID = ID;
     }
 
     public void setSkader(List<Skade> skader){
+        for (Skade skade : skader) {
+            skade.setSkadeRapportID(ID);
+        }
         this.skader =  skader;
     }
 
