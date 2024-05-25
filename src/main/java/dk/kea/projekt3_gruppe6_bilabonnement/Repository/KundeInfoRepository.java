@@ -30,13 +30,13 @@ public class KundeInfoRepository {
     // ------------------- Operations -------------------
 
     public KundeInfo save(KundeInfo kundeInfo) {
-        template.update(INSERT, kundeInfo.getCPR_NR(), kundeInfo.getFornavn(), kundeInfo.getEfternavn(), kundeInfo.getAdresse(), kundeInfo.getPostNummer(), kundeInfo.getEmail(), kundeInfo.getMobilNummer());
+        template.update(INSERT, kundeInfo.getCprNr(), kundeInfo.getFornavn(), kundeInfo.getEfternavn(), kundeInfo.getAdresse(), kundeInfo.getPostNummer(), kundeInfo.getEmail(), kundeInfo.getMobilNummer());
         return find(kundeInfo);
     }
 
     public KundeInfo find(KundeInfo kundeInfo) {
         if (kundeInfo.getId() == 0) {
-            return template.queryForObject(SELECT_BY_CPR_NR, this::mapRow, kundeInfo.getCPR_NR());
+            return template.queryForObject(SELECT_BY_CPR_NR, this::mapRow, kundeInfo.getCprNr());
         }
         return template.queryForObject(SELECT_BY_PRIMARYKEY, this::mapRow, kundeInfo.getId());
     }
@@ -50,7 +50,7 @@ public class KundeInfoRepository {
     }
 
     public KundeInfo update(KundeInfo kundeInfo) {
-        template.update(UPDATE, kundeInfo.getCPR_NR(), kundeInfo.getFornavn(), kundeInfo.getEfternavn(), kundeInfo.getAdresse(), kundeInfo.getPostNummer(), kundeInfo.getEmail(), kundeInfo.getMobilNummer(), kundeInfo.getId());
+        template.update(UPDATE, kundeInfo.getCprNr(), kundeInfo.getFornavn(), kundeInfo.getEfternavn(), kundeInfo.getAdresse(), kundeInfo.getPostNummer(), kundeInfo.getEmail(), kundeInfo.getMobilNummer(), kundeInfo.getId());
         return find(kundeInfo);
     }
 
@@ -67,7 +67,7 @@ public class KundeInfoRepository {
     private KundeInfo mapRow (ResultSet rs, int rowNum) throws SQLException {
         KundeInfo kundeInfo = new KundeInfo();
         kundeInfo.setId(rs.getInt("ID"));
-        kundeInfo.setCPR_NR(rs.getString("CPR_NR"));
+        kundeInfo.setCprNr(rs.getString("CPR_NR"));
         kundeInfo.setFornavn(rs.getString("Fornavn"));
         kundeInfo.setEfternavn(rs.getString("Efternavn"));
         kundeInfo.setAdresse(rs.getString("Adresse"));
@@ -81,7 +81,7 @@ public class KundeInfoRepository {
     public boolean exists(KundeInfo kundeInfo) {
         List<KundeInfo> result;
         if (kundeInfo.getId() == 0) {
-            result = template.query(SELECT_BY_CPR_NR, this::mapRow, kundeInfo.getCPR_NR());
+            result = template.query(SELECT_BY_CPR_NR, this::mapRow, kundeInfo.getCprNr());
         } else {
             result = template.query(SELECT_BY_PRIMARYKEY, this::mapRow, kundeInfo.getId());
         }
