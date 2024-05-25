@@ -39,19 +39,20 @@ public class SkadeRapportService {
 
     }
 
-    public SkadeRapport findMedLejeAftaleID(int lejeAftaleID){
-        LejeAftale lejeAftale = lejeAftaleService.findMedID(lejeAftaleID);
-        if (lejeAftale != null){
-            return findVedID(lejeAftale.getSkadeRapportID());
-        }
-        return null;
-    }
 
 
     public SkadeRapport gem(SkadeRapport skadeRapport){
-        skadeRapportRepo.gem(skadeRapport);
+        if (skadeRapport == null) {
+            return null;
+        }
 
-        return findMedLejeAftaleID(skadeRapport.getLejeAftaleID());
+        SkadeRapport gemtSkadeRapport = skadeRapportRepo.gem(skadeRapport);
+
+        if (gemtSkadeRapport == null) {
+            return null;
+        }
+
+        return gemtSkadeRapport;
     }
 
     public void opdater(SkadeRapport skadeRapport){

@@ -24,7 +24,14 @@ public class SkadeRapportRepo {
 
     public SkadeRapport findVedID(int id){
         String sql = "SELECT* FROM SkadeRapport WHERE ID = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, this::mapRowToSkadeRapport);
+        List<SkadeRapport> skadeRapports = jdbcTemplate.query(sql, new Object[]{id}, this::mapRowToSkadeRapport);
+        return skadeRapports.isEmpty() ? null : skadeRapports.get(0);
+    }
+
+    private SkadeRapport findVedData(SkadeRapport skadeRapport) {
+        String sql = "SELECT * FROM SkadeRapport WHERE brugerID = ? AND kilometerKoertOver = ? AND reparationsomkostninger = ?";
+        List<SkadeRapport> skadeRapports = jdbcTemplate.query(sql, new Object[]{skadeRapport.getBrugerID(), skadeRapport.getKilometerKoertOver(), skadeRapport.getReparationsomkostninger()}, this::mapRowToSkadeRapport);
+        return skadeRapports.isEmpty() ? null : skadeRapports.get(0);
     }
 
    /* public SkadeRapport findMedLejeAftaleID(int id){
@@ -32,10 +39,12 @@ public class SkadeRapportRepo {
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, this::mapRowToSkadeRapport);
     }*/
 
-    public void gem(SkadeRapport skadeRapport){
+    public SkadeRapport gem(SkadeRapport skadeRapport){
         String sql = "INSERT INTO SkadeRapport (brugerID, kilometerKoertOver, reparationsomkostninger) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, skadeRapport.getBrugerID(), skadeRapport.getKilometerKoertOver(), skadeRapport.getReparationsomkostninger());
+        return findVedData(skadeRapport);
     }
+
 
     public void opdater(SkadeRapport skadeRapport) {
         String sql = "UPDATE SkadeRapport SET brugerID = ?, kilometerKoertOver = ?, reparationsomkostninger = ? WHERE ID = ?";

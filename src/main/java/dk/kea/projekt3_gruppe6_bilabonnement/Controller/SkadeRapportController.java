@@ -22,7 +22,7 @@ import java.util.Map;
 public class SkadeRapportController {
 
     // web sider:
-    private static final String SKADERAPPORT_PAGE = "SkadeRapport";
+    private static final String SKADERAPPORT_PAGE = "SkadeRapport"; // http://localhost:8080/SkadeRapport/
     private static final String OPRET_RAPPORT_PAGE = "GenererSkadeRapport";
     private static final String REDIRECT_OPRET = "redirect:/SkadeRapport/opret";
     private static final String SE_RAPPORT_PAGE = "SeSkadeRapport";
@@ -169,8 +169,8 @@ public class SkadeRapportController {
     }
     @GetMapping("/se/{lejeAftaleID}")
     public String seRapport(Model model, @PathVariable int lejeAftaleID) {
-        SkadeRapport skadeRapport = skadeRapportService.findMedLejeAftaleID(lejeAftaleID);
-        model.addAttribute("SkadeRapport", skadeRapport);
+        // SkadeRapport skadeRapport = skadeRapportService.findMedLejeAftaleID(lejeAftaleID);
+        //model.addAttribute("SkadeRapport", skadeRapport);
         return SE_RAPPORT_PAGE;
     }
 }
