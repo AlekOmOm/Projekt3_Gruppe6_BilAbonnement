@@ -3,37 +3,37 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 public class KundeInfo {
 
     int id;
-    String CPR_NR;
-    String Fornavn;
-    String Efternavn;
-    String Adresse;
-    int PostNummer;
-    String Email;
-    int MobilNummer;
+    private String cprNr;
+    private String fornavn;
+    private String efternavn;
+    private String adresse;
+    private int postNummer;
+    private String email;
+    private int mobilNummer;
 
     //empty constructor
     public KundeInfo() {
     }
 
-    public KundeInfo(int id, String CPR_NR, String Fornavn, String Efternavn, String Adresse, int PostNummer, String Email, int MobilNummer) {
+    public KundeInfo(int id, String cprNr, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer) {
         this.id = id;
-        this.CPR_NR = CPR_NR;
-        this.Fornavn = Fornavn;
-        this.Efternavn = Efternavn;
-        this.Adresse = Adresse;
-        this.PostNummer = PostNummer;
-        this.Email = Email;
-        this.MobilNummer = MobilNummer;
+        this.cprNr = cprNr;
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
+        this.adresse = adresse;
+        this.postNummer = postNummer;
+        this.email = email;
+        this.mobilNummer = mobilNummer;
     }
 
-    public KundeInfo(String CPR_NR, String Fornavn, String Efternavn, String Adresse, int PostNummer, String Email, int MobilNummer) {
-        this.CPR_NR = CPR_NR;
-        this.Fornavn = Fornavn;
-        this.Efternavn = Efternavn;
-        this.Adresse = Adresse;
-        this.PostNummer = PostNummer;
-        this.Email = Email;
-        this.MobilNummer = MobilNummer;
+    public KundeInfo(String cprNr, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer) {
+        this.cprNr = cprNr;
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
+        this.adresse = adresse;
+        this.postNummer = postNummer;
+        this.email = email;
+        this.mobilNummer = mobilNummer;
     }
 
     public int getId() {
@@ -44,69 +44,66 @@ public class KundeInfo {
         this.id = id;
     }
 
-    // all get and set
-
-    public String getCPR_NR() {
-        return CPR_NR;
+    public String getCprNr() {
+        return cprNr;
     }
 
-    public void setCPR_NR(String CPR_NR) {
-        this.CPR_NR = CPR_NR;
+    public void setCprNr(String cprNr) {
+        this.cprNr = cprNr;
     }
 
     public String getFornavn() {
-        return Fornavn;
+        return fornavn;
     }
 
-    public void setFornavn(String Fornavn) {
-        this.Fornavn = Fornavn;
+    public void setFornavn(String fornavn) {
+        this.fornavn = fornavn;
     }
 
     public String getEfternavn() {
-        return Efternavn;
+        return efternavn;
     }
 
-    public void setEfternavn(String Efternavn) {
-        this.Efternavn = Efternavn;
+    public void setEfternavn(String efternavn) {
+        this.efternavn = efternavn;
     }
 
     public String getAdresse() {
-        return Adresse;
+        return adresse;
     }
 
-    public void setAdresse(String Adresse) {
-        this.Adresse = Adresse;
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
 
     public int getPostNummer() {
-        return PostNummer;
+        return postNummer;
     }
 
-    public void setPostNummer(int PostNummer) {
-        this.PostNummer = PostNummer;
+    public void setPostNummer(int postNummer) {
+        this.postNummer = postNummer;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getMobilNummer() {
-        return MobilNummer;
+        return mobilNummer;
     }
 
-    public void setMobilNummer(int MobilNummer) {
-        this.MobilNummer = MobilNummer;
+    public void setMobilNummer(int mobilNummer) {
+        this.mobilNummer = mobilNummer;
     }
 
     @Override
     public String toString() {
-        return "KundeInfo{" + "id=" + id + ", CPR_NR=" + CPR_NR + ", Fornavn=" + Fornavn + ", Efternavn=" + Efternavn + ", Adresse=" + Adresse + ", PostNummer=" + PostNummer + ", Email=" + Email + ", MobilNummer=" + MobilNummer + '}';
+        return "KundeInfo{" + "id=" + id + ", cprNr=" + cprNr + ", fornavn=" + fornavn + ", efternavn=" + efternavn + ", adresse=" + adresse + ", postNummer=" + postNummer + ", email=" + email + ", mobilNummer=" + mobilNummer + '}';
     }
-
 }
 
 
@@ -114,7 +111,7 @@ public class KundeInfo {
 CREATE TABLE KundeInfo
 (
     ID          INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    CPR_NR      VARCHAR(255) NOT NULL UNIQUE,
+    cpr_nr      VARCHAR(255) NOT NULL UNIQUE,
     Fornavn     VARCHAR(255) NOT NULL,
     Efternavn   VARCHAR(255) NOT NULL,
     Adresse     VARCHAR(255) NOT NULL,

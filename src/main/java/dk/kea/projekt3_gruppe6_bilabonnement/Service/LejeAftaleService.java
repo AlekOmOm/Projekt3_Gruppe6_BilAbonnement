@@ -1,6 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerValgDTO;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
@@ -8,6 +9,10 @@ import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+
+import static java.util.Objects.isNull;
 
 @Service
 public class LejeAftaleService {
@@ -18,14 +23,36 @@ public class LejeAftaleService {
     private final BilService bilService;
     private final KundeInfoService kundeInfoService;
     private final SkadeRapportService skadeRapportService;
+    private final BrugerService brugerService;
 
     @Autowired
-    public LejeAftaleService(LejeAftaleRepository lejeAftaleRepository, BilService bilService, KundeInfoService kundeInfoService, SkadeRapportService skadeRapportService) {
+    public LejeAftaleService(LejeAftaleRepository lejeAftaleRepository, BilService bilService, KundeInfoService kundeInfoService, SkadeRapportService skadeRapportService, BrugerService brugerService) {
         this.lejeAftaleRepository = lejeAftaleRepository;
         this.bilService = bilService;
         this.kundeInfoService = kundeInfoService;
         this.skadeRapportService = skadeRapportService;
+        this.brugerService = brugerService;
     }
+
+
+    // ------------------- Main Operations -------------------
+
+
+    public LejeAftale opret(BrugerValgDTO brugerValgDTO) { // opret() bliver kaldt ved slutningen af processen for LejeAftale skabelse (View <-> Controller -> nu til -> Service)
+        // LejeAftale initialiseres med alle nødvendige informationer og gemmes i databasen
+
+        // ------------------- Initialization -------------------
+        LejeAftale lejeAftale = initialize(brugerValgDTO);
+
+        // ------------------- Save and Return -------------------
+        if (lejeAftale != null) {
+            return save(lejeAftale); // return gemte LejeAftale instance, hvis den blev initialiseret korrekt og gemt korrekt
+        }
+        return null; // return null hvis lejeAftale ikke blev initialiseret korrekt
+    }
+
+
+
 
     // ------------------- Operations (CRUD) -------------------
 
@@ -125,14 +152,44 @@ public class LejeAftaleService {
 
     // ------------------- Helper methods -------------------
 
-    private LejeAftale integrate(BrugerValgDTO brugerValgDTO, LejeAftale lejeAftale) {
-        Bil bil = bilService.createBilInstance(brugerValgDTO.getBilModel());
+    private LejeAftale initialize(BrugerValgDTO brugerValgDTO) {
+        LejeAftale lejeAftale = new LejeAftale();
 
+        // ------------------- Instances -------------------
 
+            // 1. Bruger 2. Bil 3. KundeInfo 4. SkadeRapport
+        Bruger bruger = brugerService.hent(brugerValgDTO.getBrugerID()); // Bruger instance findes allerede i DB, da bruger er logget ind // TODO: tilføj BrugerID til BrugerValgDTO
+        Bil bil = bilService.getInstance(brugerValgDTO.getBilModel());
+        KundeInfo kundeInfo = kundeInfoService.getInstance(brugerValgDTO);
+        SkadeRapport nullSkadeRapport = null; // SkadeRapport skabes efter LejeAftale perioden er ovre
 
+            // Check for null
+        if (isNull(bruger, bil, kundeInfo)) {
+            return null; // return null hvis nogen af Instances er null
+        }
 
+        // ------------------- Instance variables -------------------
+        LocalDate startDato = LocalDate.now();
+        LocalDate slutDato = startDato.plusMonths(brugerValgDTO.getAbonnementslaengde());
+        int totalPris = 0; // TODO: implement totalPris udregning
+
+        // ------------------- initialize LejeAftale med Instances og Instance variable -------------------
+        lejeAftale.setAllInstances(bruger, kundeInfo, bil, nullSkadeRapport);
+        lejeAftale.setAllInstanceVariables(brugerValgDTO.getFarve(), brugerValgDTO.isAfleveringsforsikring(), brugerValgDTO.isSelvrisiko(), brugerValgDTO.isDaekpakke(), brugerValgDTO.isVejhjaelp(), brugerValgDTO.isUdleveringVedFDM(), brugerValgDTO.getAbonnementslaengde(), brugerValgDTO.getKmPrMdr(), brugerValgDTO.getAfhentningssted(), startDato, slutDato, totalPris);
+
+        // ------------------- return fully initialized LejeAftale -------------------
         return lejeAftale;
-
     }
 
+
+    // ------------------- Check -------------------
+
+    private boolean isNull(Bruger bruger, Bil bil, KundeInfo kundeInfo) {
+
+        if (bruger == null || bil == null || kundeInfo == null){
+            return true;
+        }
+
+        return false;
+    }
 }

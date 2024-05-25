@@ -86,11 +86,11 @@ public class BrugerService {
         return brugerRepository.save(bruger);
     }
 
-    public Bruger hentBruger(int id) {
+    public Bruger hent(int id) {
         return brugerRepository.findById(id);
     }
 
-    public Bruger hentBruger(String brugerNavn) {
+    public Bruger hent(String brugerNavn) {
         return brugerRepository.findByBrugernavn(brugerNavn);
     }
 

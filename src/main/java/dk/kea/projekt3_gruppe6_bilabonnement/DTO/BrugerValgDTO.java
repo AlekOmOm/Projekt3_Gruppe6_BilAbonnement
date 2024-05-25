@@ -1,35 +1,46 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
 
+import java.time.LocalDate;
+
 public class BrugerValgDTO {
-    // 0. bil valg
-    String bilModel; // bil modeller: CitroenC1, Peugeot108, OpelCorsaCosmo
-    /*
-             "CitroenC1"
-             "Peugeot108"
-             "OpelCorsaCosmo"
-     */
 
-    // 1. abonnements side
-    String farve;
-    boolean afleveringsforsikring;
-    boolean selvrisiko;
-    boolean daekpakke;
-    boolean vejhjaelp;
-    boolean udleveringVedFDM;
+    // 0. Bruger
+    private int brugerID;
 
-    // 2. Prisoverslag
-    int abonnementslaengde;
-    int kmPrMdr;
+    // 1. bil valg
+    private String bilModel; // bil modeller: CitroenC1, Peugeot108, OpelCorsaCosmo
 
-    // 4. afhentningssted
-    String afhentningssted;
+    // 2. abonnements side
+    private String farve;
+    private boolean afleveringsforsikring;
+    private boolean selvrisiko;
+    private boolean daekpakke;
+    private boolean vejhjaelp;
+    private boolean udleveringVedFDM;
+
+    // 3. Prisoverslag
+    private int abonnementslaengde;
+    private int kmPrMdr;
+
+    // 4. Kunde Info
+    private String cprNr;
+    private String fornavn;
+    private String efternavn;
+    private String adresse;
+    private int postNummer;
+    private String email;
+    private int mobilNummer;
+
+    // 5. afhentningssted
+    private String afhentningssted;
 
     // ------------------- Constructors -------------------
 
     public BrugerValgDTO() {
     }
 
-    public BrugerValgDTO(String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted) {
+    public BrugerValgDTO(int brugerID, String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String cprNr, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer, String afhentningssted) {
+        this.brugerID = brugerID;
         this.bilModel = bilModel;
         this.farve = farve;
         this.afleveringsforsikring = afleveringsforsikring;
@@ -39,10 +50,27 @@ public class BrugerValgDTO {
         this.udleveringVedFDM = udleveringVedFDM;
         this.abonnementslaengde = abonnementslaengde;
         this.kmPrMdr = kmPrMdr;
+        this.cprNr = cprNr;
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
+        this.adresse = adresse;
+        this.postNummer = postNummer;
+        this.email = email;
+        this.mobilNummer = mobilNummer;
         this.afhentningssted = afhentningssted;
     }
 
+
+
     // ------------------- Getters & Setters -------------------
+
+    public int getBrugerID() {
+        return brugerID;
+    }
+
+    public void setBrugerID(int brugerID) {
+        this.brugerID = brugerID;
+    }
 
     public String getBilModel() {
         return bilModel;
@@ -116,6 +144,64 @@ public class BrugerValgDTO {
         this.kmPrMdr = kmPrMdr;
     }
 
+    //  4. Kunde Info
+    public String getCprNr() {
+        return cprNr;
+    }
+
+    public void setCprNr(String cprNr) {
+        this.cprNr = cprNr;
+    }
+
+    public String getFornavn() {
+        return fornavn;
+    }
+
+    public void setFornavn(String fornavn) {
+        this.fornavn = fornavn;
+    }
+
+    public String getEfternavn() {
+        return efternavn;
+    }
+
+    public void setEfternavn(String efternavn) {
+        this.efternavn = efternavn;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public int getPostNummer() {
+        return postNummer;
+    }
+
+    public void setPostNummer(int postNummer) {
+        this.postNummer = postNummer;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getMobilNummer() {
+        return mobilNummer;
+    }
+
+    public void setMobilNummer(int mobilNummer) {
+        this.mobilNummer = mobilNummer;
+    }
+
+    // 5. afhentningssted
     public String getAfhentningssted() {
         return afhentningssted;
     }
@@ -141,4 +227,5 @@ public class BrugerValgDTO {
                 ", afhentningssted='" + afhentningssted + '\'' +
                 '}';
     }
+
 }

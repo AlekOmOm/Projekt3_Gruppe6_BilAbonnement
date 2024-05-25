@@ -1,5 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
+import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerValgDTO;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.KundeInfoRepository;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,19 @@ public class KundeInfoService {
         this.kundeInfoRepository = kundeInfoRepository;
     }
 
+    // ------------------- Main Operations -------------------
+
+    public KundeInfo getInstance(BrugerValgDTO brugerValgDTO) {
+        return new KundeInfo(brugerValgDTO.getCprNr(), brugerValgDTO.getFornavn(), brugerValgDTO.getEfternavn(), brugerValgDTO.getAdresse(), brugerValgDTO.getPostNummer(), brugerValgDTO.getEmail(), brugerValgDTO.getMobilNummer());
+    }
+
+
     // ------------------- Operations CRUD -------------------
 
     public KundeInfo save(KundeInfo kundeInfo) {
         if (notHaveNecessaryVariables(kundeInfo)) {
             System.out.println("KundeInfoService.save() - Missing necessary variables");
-            System.out.println(kundeInfo.toString());
+            System.out.println(kundeInfo);
             System.out.println();
             return null;
         }
@@ -65,7 +73,7 @@ public class KundeInfoService {
 
     private boolean notHaveNecessaryVariables(KundeInfo kundeInfo) {
 
-        return kundeInfo.getCPR_NR() == null || kundeInfo.getFornavn() == null || kundeInfo.getEfternavn() == null || kundeInfo.getAdresse() == null || kundeInfo.getPostNummer() == 0 || kundeInfo.getEmail() == null || kundeInfo.getMobilNummer() == 0;
+        return kundeInfo.getCprNr() == null || kundeInfo.getFornavn() == null || kundeInfo.getEfternavn() == null || kundeInfo.getAdresse() == null || kundeInfo.getPostNummer() == 0 || kundeInfo.getEmail() == null || kundeInfo.getMobilNummer() == 0;
     }
 
 

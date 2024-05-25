@@ -22,7 +22,7 @@ public class BilService {
 
     // ------------------- Bil CRUD -------------------
 
-    public Bil createBilInstance(String model) {
+    public Bil getInstance(String model) {
         return bilFactory.create(model);
     }
 

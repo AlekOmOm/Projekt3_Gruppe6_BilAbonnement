@@ -35,8 +35,8 @@ public class BrugerServiceTest {
         // 0. setUp (BeforeAll)
         // 1. testOpretBruger
         // 2. testHentAlleBrugere
-        // 3. testHentBruger
-        // 4. testHentBrugerByBrugerNavn
+        // 3. testHent
+        // 4. testHentByNavn
         // 5. testBrugerEksisterer
         // 6. testOpdaterBruger
         // 7. testSletBruger
@@ -98,9 +98,9 @@ public class BrugerServiceTest {
     }
 
     @Test
-    public void testHentBruger() {
+    public void testHent() {
         // debug
-        System.out.println("DEBUG: testHentBruger");
+        System.out.println("DEBUG: testHent");
 
         nyTestBruger = new Bruger("testHentBruger1", "password1", "DATA_REGISTRERING");
 
@@ -109,18 +109,18 @@ public class BrugerServiceTest {
 
         System.out.println(" id: " + nyTestBruger.getId());
 
-        Bruger hentetBruger = brugerService.hentBruger(nyTestBruger.getId());
+        Bruger hentetBruger = brugerService.hent(nyTestBruger.getId());
 
         assertTrue(hentetBruger.equalsWithoutId(nyTestBruger));
     }
 
     @Test
-    public void testHentBrugerByBrugerNavn() {
+    public void testHentByNavn() {
         nyTestBruger = new Bruger("testHentBrugerByBrugerNavn1", "password1", "DATA_REGISTRERING");
 
         brugerService.opretBruger(nyTestBruger);
 
-        Bruger hentetBruger = brugerService.hentBruger(nyTestBruger.getBrugerNavn());
+        Bruger hentetBruger = brugerService.hent(nyTestBruger.getBrugerNavn());
 
         assertTrue(hentetBruger.equalsWithoutId(nyTestBruger));
     }
@@ -152,7 +152,7 @@ public class BrugerServiceTest {
 
         Bruger opdateretBruger = brugerService.opdaterBruger(opdaterBruger); // testBruger burde være opdateret nu
 
-        nyTestBruger = brugerService.hentBruger(nyTestBruger.getId()); // opdaterer testBruger for klassens andre tests
+        nyTestBruger = brugerService.hent(nyTestBruger.getId()); // opdaterer testBruger for klassens andre tests
 
         assertTrue(opdateretBruger.equalsWithoutId(nyTestBruger));
         assert opdateretBruger.equals(nyTestBruger);
