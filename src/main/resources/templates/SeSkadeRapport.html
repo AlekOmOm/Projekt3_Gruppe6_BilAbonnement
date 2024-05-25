@@ -26,11 +26,11 @@
                     <h3>Skader</h3>
                     <ul>
                         <li th:each="skade : ${skadeRapport.skader}">
-                            <span th:text="${skade.navn}"></span> - <span th:text="${skade.pris}"></span>
+                            <span th:text="${skade.type}"></span> - <span th:text="${skade.pris}"></span>
                         </li>
                     </ul>
                 </div>
-                <form th:action="@{/SkadeRapport}">
+                <form th:action="@{/SkadeRapport/}">
                     <button type="submit">Tilbage til oversigt</button>
                 </form>
             </div>

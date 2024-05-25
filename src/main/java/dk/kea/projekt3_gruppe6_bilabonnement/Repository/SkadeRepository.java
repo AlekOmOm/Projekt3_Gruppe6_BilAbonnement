@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public class SkadeRepository {
 
+
     JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -25,6 +26,7 @@ public class SkadeRepository {
     private static final String SELECT_ALL = "SELECT * FROM Skader WHERE ID = ?";
     private static final String SELECT_ALL_FRA_SKADERAPPORT = "SELECT * FROM Skader WHERE SkadeRapportID = ?";
     private static final String SELECT_WITHOUT_ID = "SELECT * FROM Skader WHERE SkadeRapportID = ? AND Type = ? AND Pris = ?";
+    private static final String SELECT_ALL_WITHOUT_ID = "SELECT * FROM Skader WHERE SkadeRapportID = ? AND Type = ? AND Pris = ?";
     private static final String UPDATE = "UPDATE Skader SET SkadeRapportID = ?, Type = ?, Pris = ? WHERE ID = ?";
     private static final String DELETE = "DELETE FROM Skader WHERE ID = ?";
 
@@ -34,14 +36,23 @@ public class SkadeRepository {
 
 
     public List<Skade> saveAll(List<Skade> skader) {
+        System.out.println("DEBUG: SkadeRepository.saveAll()");
+        System.out.println(" - skader: " + skader);
         for (Skade skade : skader) {
+            System.out.println(" - skade: " + skade);
             save(skade);
         }
+        System.out.println();
         return skader;
     }
 
     private Skade save(Skade skade) {
+        if (exists(skade)) {
+            return update(skade);
+        }
+
         jdbcTemplate.update(INSERT, skade.getSkadeRapportID(), skade.getType(), skade.getPris());
+
         return find(skade);
     }
 
@@ -51,6 +62,8 @@ public class SkadeRepository {
 
     public Skade find(Skade skade) {
         if (skade.getId() == 0) {
+            System.out.println("DEBUG: SkadeRepository.find() - skade.getId() == 0");
+            System.out.println(" - skade: " + skade);
             return findNew(skade);
         } else {
             return find(skade.getId());
@@ -63,7 +76,15 @@ public class SkadeRepository {
     }
 
     private Skade findNew(Skade skade) {
-        return jdbcTemplate.queryForObject(SELECT_WITHOUT_ID, this::MapRowToSkade, skade.getSkadeRapportID(), skade.getType(), skade.getPris());
+        // query bruges, da der kan være flere rækker med samme data eller ingen rækker
+            // queryForObject kunnes ikke bruges, da den ikke kan håndtere returnering af 0
+            // queryForObject smider exception i stedet for at kunne returnerer null
+            // -> query kan returnerer null ved hjælp af list og '? :'-operator (ternary operator)
+
+        List<Skade> skader = jdbcTemplate.query(SELECT_WITHOUT_ID, this::MapRowToSkade, skade.getSkadeRapportID(), skade.getType(), skade.getPris());
+
+        System.out.println(" - skader: " + skader);
+        return skader.isEmpty() ? null : skader.get(0);
     }
 
     public Skade update(Skade skade) {
@@ -75,7 +96,17 @@ public class SkadeRepository {
         jdbcTemplate.update(DELETE, skade.getId());
     }
 
+    // ------------------- Service methods -------------------
 
+    private boolean exists(Skade skade) {
+        Skade skadeFound = find(skade);
+
+        if (skadeFound == null) {
+            return false;
+        }
+
+        return skade.equals(skadeFound);
+    }
 
     // ------------------- Other Methods -------------------
 

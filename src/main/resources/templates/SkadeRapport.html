@@ -69,9 +69,13 @@
             <tbody>
             <tr th:each="lejeAftale : ${LejeAftaleMedRapport}">
                 <td th:text="${lejeAftale.bilID}">BilID</td>
+                <!-- temporals for LocalDate rendering -->
                 <td th:text="${#temporals.format(lejeAftale.slutDato, 'yyyy-MM-dd')}">SlutDato</td>
                 <td>
-                    <a th:href='@{/SkadeRapport/se(id=${lejeAftale.skadeRapportID})}'>
+                    <!-- @GetMapping("/se/lejeAftaleID={lejeAftaleID}/skadeRapportID={skadeRapportID}") -->
+                    <!-- <a th:href='@{/SkadeRapport/se/lejeAftaleID=${lejeAftale.ID}/skadeRapportID=${lejeAftale.skadeRapportID}}'> -->
+                    <a th:href="@{'/SkadeRapport/se/lejeAftaleID=' + ${lejeAftale.ID} + '/skadeRapportID=' + ${lejeAftale.skadeRapportID}}">
+
                         <button >Se rapport</button>
                     </a>
                 </td>

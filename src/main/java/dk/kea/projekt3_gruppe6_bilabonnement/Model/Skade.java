@@ -56,4 +56,13 @@ public class Skade {
     public void setPris(int pris) {
         this.pris = pris;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "ID = " + id + ", " +
+                "skadeRapportID = " + skadeRapportID + ", " +
+                "type = " + type + ", " +
+                "pris = " + pris + ")";
+    }
 }
