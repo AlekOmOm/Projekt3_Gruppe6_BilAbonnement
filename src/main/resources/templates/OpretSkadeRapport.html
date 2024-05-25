@@ -20,7 +20,7 @@
 
     <div class="three-container">
         <form action="#" th:action="@{/SkadeRapport/refresh}" method="get">
-            <input type="hidden" name="lejeAftaleID" th:value="${lejeAftaleID}"/>
+            <input type="hidden" name="lejeAftaleID" th:value="${session.lejeAftaleID}"/>
             <table>
                 <thead>
                 <tr>
@@ -40,11 +40,11 @@
                 </tr>
                 </tbody>
             </table>
-            <input type="submit" value="Refresh"/>
+            <input type="submit" value="Refresh" />
         </form>
 
-        <form action="#" th:action="@{/SkadeRapport/opret}" method="post">
-            <input type="hidden" name="lejeAftaleID" th:value="${lejeAftaleID}"/>
+        <form action="#" th:action="@{/SkadeRapport/opretPost}" method="post">
+            <input type="hidden" name="lejeAftaleID" th:value="${session.lejeAftaleID}"/>
             <table>
                 <thead>
                 <tr>
@@ -54,7 +54,7 @@
                 <tbody>
                 <tr th:each="skade : ${session.skaderValgt}">
                     <td><input type="checkbox" th:value="${skade}" th:name="skaderValgt" checked/></td>
-                    <td th:text="${skadeService.getSkadeCheckliste().get(skade)}"></td>
+                    <td th:text="${skadeCheckliste.get(skade)}"></td>
                 </tr>
                 </tbody>
             </table>
