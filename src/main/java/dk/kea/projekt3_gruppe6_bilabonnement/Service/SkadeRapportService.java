@@ -19,13 +19,11 @@ public class SkadeRapportService {
 
     private final SkadeRapportRepository skadeRapportRepo;
     private final SkadeService skadeService;
-    private final LejeAftaleService lejeAftaleService;
 
     @Autowired
-    public SkadeRapportService(SkadeRapportRepository skadeRapportRepo, SkadeService skadeService, LejeAftaleService lejeAftaleService) {
+    public SkadeRapportService(SkadeRapportRepository skadeRapportRepo, SkadeService skadeService) {
         this.skadeRapportRepo = skadeRapportRepo;
         this.skadeService = skadeService;
-        this.lejeAftaleService = lejeAftaleService;
     }
 
 

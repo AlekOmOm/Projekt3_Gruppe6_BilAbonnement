@@ -143,7 +143,7 @@ public class BrugerController {
     private String omdirigerBruger(String rolle) {
         return switch (rolle) {
             case "DATA_REGISTRERING" -> REDIRECT_DATA_REGISTRERING;
-            case "SKADE_UDBEDRING" -> REDIRECT_SKADE_UDBEDRING;
+            case "SKADE_OG_UDBEDRING" -> REDIRECT_SKADE_UDBEDRING;
             case "FORRETNINGS_UDVIKLING" -> REDIRECT_FORRETNINGS_UDVIKLING;
             default -> HOME_PAGE;
         };
