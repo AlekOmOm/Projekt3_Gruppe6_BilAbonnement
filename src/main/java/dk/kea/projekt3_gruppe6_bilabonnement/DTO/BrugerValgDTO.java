@@ -9,7 +9,7 @@ public class BrugerValgDTO {
     // 0. Bruger
     private int brugerID;
 
-    private List<String> selectedPackageDeals;
+
     // 1. bil valg
     private String bilModel; // bil modeller: CitroenC1, Peugeot108, OpelCorsaCosmo
 
@@ -39,6 +39,8 @@ public class BrugerValgDTO {
 
     int totalPris;
 
+    private List<String> selectedPackageDeals;
+
 
 
     // ------------------- Constructors -------------------
@@ -61,11 +63,11 @@ public class BrugerValgDTO {
 //    }
 
 
-    public BrugerValgDTO(String bilModel, List<String> selectedPackageDeals, int abonnementslaengde, int kmPrMdr, String afhentningssted, int totalPris, String CPR_NR, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer) {
-    public BrugerValgDTO(int brugerID, String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String cprNr, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer, String afhentningssted) {
+
+    public BrugerValgDTO(int brugerID, String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String cprNr, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer, String afhentningssted, List<String> selectedPackageDeals) {
         this.brugerID = brugerID;
         this.bilModel = bilModel;
-        this.selectedPackageDeals = selectedPackageDeals;
+
         this.abonnementslaengde = abonnementslaengde;
         this.kmPrMdr = kmPrMdr;
         this.cprNr = cprNr;
@@ -76,6 +78,7 @@ public class BrugerValgDTO {
         this.email = email;
         this.mobilNummer = mobilNummer;
         this.afhentningssted = afhentningssted;
+        this.selectedPackageDeals = selectedPackageDeals;
     }
 
 

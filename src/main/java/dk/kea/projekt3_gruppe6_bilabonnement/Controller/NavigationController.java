@@ -65,7 +65,7 @@ public class NavigationController {
 
 
         // ------------------- Load, Save and return next -------------------
-        System.out.println("VaelgBil Session data:");
+        System.out.println("VaelgBil Session data:"); // TODO: remove debug
         loadOgSave(brugerValgDTO, session, model);
 
         return VAELGBIL_PAGE;
@@ -87,7 +87,7 @@ public class NavigationController {
 
 
         // ------------------- Load, Save and return next -------------------
-        System.out.println("Abonnement Session data:");
+        System.out.println("Abonnement Session data:"); // TODO: remove debug
         loadOgSave(nyBrugerValgDTO, session, model);
 
         return ABONNEMENT_PAGE;
@@ -110,7 +110,7 @@ public class NavigationController {
 
 
         // ------------------- Load, Save and return -------------------
-        System.out.println("Prisoverslag Session data:");
+        System.out.println("Prisoverslag Session data:"); // TODO: remove debug
         loadOgSave(nyBrugerValgDTO, session, model);
 
         return PRISOVERSLAG_PAGE;
@@ -126,7 +126,7 @@ public class NavigationController {
 
 
         // ------------------- Load, Save and return -------------------
-        System.out.println("KundeInfo Session data:");
+        System.out.println("KundeInfo Session data:"); // TODO: remove debug
         loadOgSave(nyBrugerValgDTO, session, model);
 
         return KUNDEINFO_PAGE;
@@ -141,7 +141,7 @@ public class NavigationController {
 
 
         // ------------------- Load, Save and return -------------------
-        System.out.println("AfhentningsSted Session data:");
+        System.out.println("AfhentningsSted Session data:"); // TODO: remove debug
         loadOgSave(nyBrugerValgDTO, session, model);
 
         return AFHENTNINGSSTED_PAGE;
@@ -151,7 +151,6 @@ public class NavigationController {
 
     @PostMapping("/Opret")
     public String opretLejeAftale(HttpSession session) {
-
         BrugerValgDTO fuldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
 
         // totalPris beregnes og gemmes i BrugerValgDTO
@@ -168,6 +167,31 @@ public class NavigationController {
 
 
     // ------------------- Helper methods -------------------
+
+
+
+    private void loadOgSave(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
+        try {
+            BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
+            BrugerValgDTO loadedDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
+
+            session.setAttribute("BrugerValgDTO", loadedDTO);
+            model.addAttribute("nyBrugerValgDTO", loadedDTO);
+
+
+            // ------------------- Debug ------------------- // TODO: remove debug
+            if (oldBrugerValgDTO != null && nyBrugerValgDTO != null) {
+                System.out.println(" - oldBrugerValgDTO: "+ oldBrugerValgDTO);
+                System.out.println(" - nyBrugerValgDTO: "+ nyBrugerValgDTO);
+                System.out.println(" - loadedDTO: "+ loadedDTO);
+            } else {
+                System.out.println(" -> no session data");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private BrugerValgDTO load(BrugerValgDTO oldBrugerValgDTO, BrugerValgDTO nyBugerValgDTO){
@@ -197,33 +221,7 @@ public class NavigationController {
             oldBrugerValgDTO.setKmPrMdr(nyBugerValgDTO.getKmPrMdr());
         }
 
-
-
         return oldBrugerValgDTO;
-
-    }
-
-    private void loadOgSave(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
-        try {
-            BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
-            BrugerValgDTO loadedDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
-
-            session.setAttribute("BrugerValgDTO", loadedDTO);
-            model.addAttribute("nyBrugerValgDTO", loadedDTO);
-
-
-            // ------------------- Debug ------------------- // TODO: remove debug
-            if (oldBrugerValgDTO != null && nyBrugerValgDTO != null) {
-                System.out.println(" - oldBrugerValgDTO: "+ oldBrugerValgDTO);
-                System.out.println(" - nyBrugerValgDTO: "+ nyBrugerValgDTO);
-                System.out.println(" - loadedDTO: "+ loadedDTO);
-            } else {
-                System.out.println(" -> no session data");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void nyLejeAftaleSession(HttpSession session) {

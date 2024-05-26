@@ -193,7 +193,7 @@ public class LejeAftaleService {
 
     private boolean isNull(Bruger bruger, Bil bil, KundeInfo kundeInfo) {
 
-        if (bruger == null || bil == null || kundeInfo == null){
+        if (bruger == null || bil == null || kundeInfo == null) {
             return true;
         }
 
