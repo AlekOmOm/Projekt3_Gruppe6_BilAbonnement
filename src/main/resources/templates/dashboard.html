@@ -7,37 +7,56 @@
     <link rel="stylesheet" href="../static/DashBoard.css" th:href="@{/DashBoard.css}">
     <title>BilAbonemment Dashboard</title>
 </head>
-
 <body>
 
 <div class="header">
     <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300"/>
     <p>BilAbonnement A/S</p>
 </div>
-<div class = "content">
-
-
-    <table class="tables-tyling">
-        <tr>
-        <td>Antal udlejede Biler</td>
-        <td>Den totale indkomst for udlejede biler</td>
-        </tr>
-
-        <tr>
-        <td><span id="field2" th:text="${AntalUdlejedeBiler}"></span></td>
-        <td><span id="field4" th:text="${SamletIndkomstForBiler}"></span></td>
-        </tr>
-    </table>
-
-    <form action="/forretningsrapport" method="post">
-        <button class="redirect-button" type="submit">Generer Rapport</button>
-    </form>
-
-
-
-
+<div class="content-container">
+    <div class="flex-container">
+        <div class="InformationsBarOgKNAP">
+            <table class="tables-tyling">
+                <tr>
+                    <td>Antal udlejede Biler</td>
+                    <td>Den totale indkomst for udlejede biler</td>
+                </tr>
+                <tr>
+                    <td><span th:text="${AntalUdlejedeBiler}"></span></td>
+                    <td><span th:text="${SamletIndkomstForBiler}"></span></td>
+                </tr>
+            </table>
+            <form action="/forretningsrapport" method="post">
+                <button class="redirect-button" type="submit">Generer Rapport</button>
+            </form>
+        </div>
+        <div class="archive">
+            <input type="text" id="searchInput" placeholder="Søg efter dato...">
+            <button id="searchButton">Search</button>
+            <h2 class="ArkivTitel">Arkiv</h2>
+            <table class="ArkivTabel">
+                <thead>
+                <tr>
+                    <th>Rapport ID</th>
+                    <th>Dato</th>
+                    <th>Se rapport</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="forretningsRapport : ${AlleRapporter}">
+                    <td th:text="${forretningsRapport.id}">Rapport ID</td>
+                    <td th:text="${#temporals.format(forretningsRapport.datoGenereret, 'yyyy-MM-dd')}">Dato Genereret</td>
+                    <td>
+                        <a th:href="@{/forretningsrapport/se(id=${forretningsRapport.id})}">
+                            <button>Se rapport</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-
 <div class="footer">
     <p>© 2021 Bilabonnement A/S</p>
 </div>

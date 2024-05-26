@@ -17,11 +17,11 @@ public class ForretningsRapportService {
         forretningsRapportRepository.NyRapport(totalBilerUdlejet, samletPris);
     }
 
-    public List<ForretningsRapport> getAllReports() {
+    public List<ForretningsRapport> seAlleRapporter() {
         return forretningsRapportRepository.seAlleRapporter();
     }
 
-    public ForretningsRapport getRapportById(int id) {
+    public ForretningsRapport findRapportMedID(int id) {
         return forretningsRapportRepository.VaelgRapportMedId(id);
     }
 }

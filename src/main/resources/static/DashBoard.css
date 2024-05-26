@@ -1,9 +1,41 @@
-.tables-tyling{
-    border-collapse: collapse; /* Fjerner mellemrum mellem celler */
-    width: 100%; /* Gør så hele containeren er fyldt ud */
-    margin: 0 auto; /* Centrerer tabellen */
-    max-width: 60vw; /* Sætter max bredden til 60 procent af device skærm */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Tilføjer boks skygge */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.content-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 50px); /* Adjust according to your header height */
+    box-sizing: border-box;
+}
+
+.flex-container {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.InformationsBarOgKNAP, .archive {
+    flex: 1;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    height: calc(100vh - 160px); /* Ensure it doesn't overlap the footer */
+    box-sizing: border-box;
+}
+
+.tables-tyling {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
 .tables-tyling td, .tables-tyling th {
@@ -12,32 +44,43 @@
     text-align: left;
 }
 
-.tables-tyling tr:nth-child(even) {
-    background-color: #f2f2f2; /* tilføjer boks skygge til hver anden række */
-}
-
-.content{
-    display: flex;
-    flex-direction: column; /* sætter knappen under table*/
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-}
-
-body{
-    overflow: hidden;
-}
-
 .redirect-button {
-    font-size:2vh; /* Ændrer skrift størelse */
-    padding: 10px 30px; /* Plads rundt om teksten */
-    border-radius: 50px; /* Rund knap */
-    background-color: black; /* baggrund */
-    border: none; /* Fjerner border */
-    color: white; /* Tekst farve ændres */
-    cursor: pointer; /* Ændrer mussen */
-    transition: all 0.3s ease 0s; /* Animation */
-    margin-top: 5vh; /* Plads over knappen */
+    font-size: 2vh;
+    padding: 10px 30px;
+    border-radius: 50px;
+    background-color: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    margin-top: 5vh;
+}
+
+.ArkivTitel {
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.ArkivTabel {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ArkivTabel th, .ArkivTabel td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.ArkivTabel th {
+    color: black;
+}
+
+.archive {
+    overflow-y: auto;
+}
+
+.InformationsBarOgKNAP, .archive {
+        width: 100%;
+        margin-bottom: 20px;
 }
