@@ -2,16 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-
-    <!--                                   CSS files                                                 -->
-    <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
-    <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
-
-    <link rel="stylesheet" href="/SkadeRapport.css" th:href="@{/SkadeRapport.css}">
-
-    <!--                                   Title                                                  -->
     <title>Skade- og Udbedring</title>
+    <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
+    <link rel="stylesheet" href="/SkadeRapport.css" th:href="@{/SkadeRapport.css}">
+    <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
+    <style>
+
+    </style>
 </head>
 
 <body>
@@ -76,16 +73,23 @@
             <th></th>
         </tr>
         </thead>
-        <tbody >
-        <tr>
-            <td>Vehicle 1</td>
-            <td>2024-05-14</td>
-            <td><button>Generer Rapport</button></td>
-        </tr>
-        <tr>
-            <td>Vehicle 2</td>
-            <td>2024-05-15</td>
-            <td><button>Generer Rapport</button> </td>
+        <tbody>
+        <tr th:each="lejeAftale : ${LejeAftalerUdenRapport}">
+            <td th:text="${lejeAftale.bilID}">BilID</td>
+            <td th:text="${#temporals.format(lejeAftale.slutDato, 'yyyy-MM-dd')}">SlutDato</td>
+
+            <td th:if="session.loggedIn">
+                <form action="#" th:action="@{/SkadeRapport/opret}" method="get">
+                    <input type="hidden" name="lejeAftaleID" th:value="${lejeAftale.ID}" />
+
+                    <button>Generer Rapport</button>
+                </form>
+            </td>
+            <td th:unless="session.loggedIn">
+                <button onclick="alert('Du skal være logget ind for at generere en skaderapport')">Generer Rapport</button>
+            </td>
+
+
         </tr>
         </tbody>
 
@@ -103,80 +107,19 @@
             <th>Se rapport</th>
             </thead>
             <tbody>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
-            </tr>
-            <tr>
-                <td>Bil 1</td>
-                <td>2024-05-16</td>
-                <td><button>Se rapport</button></td>
+            <tr th:each="lejeAftale : ${LejeAftaleMedRapport}">
+                <td th:text="${lejeAftale.bilID}">BilID</td>
+                <!-- temporals for LocalDate rendering -->
+                <td th:text="${#temporals.format(lejeAftale.slutDato, 'yyyy-MM-dd')}">SlutDato</td>
+                <td>
+                    <!-- @GetMapping("/se/lejeAftaleID={lejeAftaleID}/skadeRapportID={skadeRapportID}") -->
+                    <!-- <a th:href='@{/SkadeRapport/se/lejeAftaleID=${lejeAftale.ID}/skadeRapportID=${lejeAftale.skadeRapportID}}'> -->
+                    <a th:href="@{'/SkadeRapport/se/lejeAftaleID=' + ${lejeAftale.ID} + '/skadeRapportID=' + ${lejeAftale.skadeRapportID}}">
+
+                        <button >Se rapport</button>
+                    </a>
+                </td>
+
             </tr>
 
             </tbody>

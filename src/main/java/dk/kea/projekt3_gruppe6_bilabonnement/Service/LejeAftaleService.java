@@ -224,4 +224,22 @@ public class LejeAftaleService {
         }
         return totalPris;
     }
+
+
+
+    public List<LejeAftale> getLejeAftaleUdenRapport(){
+        return lejeAftaleRepository.getLejeAftalerUdenRapport();
+    }
+
+    public List<LejeAftale> getLejeAftaleMedRapport(){
+        return lejeAftaleRepository.getLejeAftaleMedRapport();
+    }
+
+    public LejeAftale findMedID(int id){
+        return lejeAftaleRepository.findMedID(id);
+    }
+
+    public LejeAftale opdaterSkadeRapportID(int lejeAftaleID, int skadeRapportID) {
+        return lejeAftaleRepository.updaterSkadeRapportID(lejeAftaleID, skadeRapportID);
+    }
 }

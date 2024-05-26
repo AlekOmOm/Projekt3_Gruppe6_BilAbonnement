@@ -5,36 +5,36 @@ import java.util.List;
 public class SkadeRapport {
     int ID;
     int brugerID;
-    int lejeAftaleID;
     int kilometerKoertOver;
     int reparationsomkostninger;
     List<Skade> skader;
 
-
-    public SkadeRapport(int ID, int brugerID, int lejeAftaleID,  int kilometerKoertOver, int reparationsomkostninger){
+    public SkadeRapport(int ID, int brugerID, int kilometerKoertOver, int reparationsomkostninger){
         this.ID = ID;
         this.brugerID = brugerID;
-        this.lejeAftaleID = lejeAftaleID;
-        this.kilometerKoertOver = kilometerKoertOver;
-        this.reparationsomkostninger = reparationsomkostninger;
-
-    }
-
-
-    public SkadeRapport(int brugerID, int lejeAftaleID,  int kilometerKoertOver, int reparationsomkostninger){
-        this.brugerID = brugerID;
-        this.lejeAftaleID = lejeAftaleID;
         this.kilometerKoertOver = kilometerKoertOver;
         this.reparationsomkostninger = reparationsomkostninger;
     }
 
-    public SkadeRapport(int ID, int brugerID, int lejeAftaleID,  int kilometerKoertOver, int reparationsomkostninger, List<Skade> skader){
-        this.ID = ID;
+    public SkadeRapport(int brugerID, int kilometerKoertOver, int reparationsomkostninger){
         this.brugerID = brugerID;
-        this.lejeAftaleID = lejeAftaleID;
         this.kilometerKoertOver = kilometerKoertOver;
         this.reparationsomkostninger = reparationsomkostninger;
-        this.skader = skader;
+    }
+
+    public SkadeRapport(int brugerID, int kilometerKoertOver, int reparationsomkostninger, List<Skade> valgteSkader){
+        this.brugerID = brugerID;
+        this.kilometerKoertOver = kilometerKoertOver;
+        this.reparationsomkostninger = reparationsomkostninger;
+        setSkader(valgteSkader);
+    }
+
+    public SkadeRapport(int ID, int brugerID,  int kilometerKoertOver, int reparationsomkostninger, List<Skade> skader){
+        this.ID = ID;
+        this.brugerID = brugerID;
+        this.kilometerKoertOver = kilometerKoertOver;
+        this.reparationsomkostninger = reparationsomkostninger;
+        setSkader(skader);
     }
 
     public SkadeRapport() {
@@ -52,10 +52,6 @@ public class SkadeRapport {
         return brugerID;
     }
 
-    public int getLejeAftaleID() {
-        return lejeAftaleID;
-    }
-
     public int getKilometerKoertOver() {
         return kilometerKoertOver;
     }
@@ -63,11 +59,15 @@ public class SkadeRapport {
     public int getReparationsomkostninger() {
         return reparationsomkostninger;
     }
+
     public void setID(int skadeRapportID) {
         this.ID = ID;
     }
 
     public void setSkader(List<Skade> skader){
+        for (Skade skade : skader) {
+            skade.setSkadeRapportID(ID);
+        }
         this.skader =  skader;
     }
 
@@ -75,16 +75,21 @@ public class SkadeRapport {
         this.brugerID = brugerID;
     }
 
-    public void setLejeAftaleID(int bilID) {
-        this.lejeAftaleID = bilID;
-    }
-
-
     public void setKilometerKoertOver(int kilometerKoertOver) {
         this.kilometerKoertOver = kilometerKoertOver;
     }
 
     public void setReparationsomkostninger(int reparationsomkostninger) {
         this.reparationsomkostninger = reparationsomkostninger;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "ID = " + ID + ", " +
+                "brugerID = " + brugerID + ", " +
+                "kilometerKoertOver = " + kilometerKoertOver + ", " +
+                "reparationsomkostninger = " + reparationsomkostninger + ", " +
+                "skader = " + skader + ")";
     }
 }

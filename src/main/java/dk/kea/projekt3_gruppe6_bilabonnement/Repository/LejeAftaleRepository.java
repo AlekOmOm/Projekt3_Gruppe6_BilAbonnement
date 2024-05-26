@@ -67,7 +67,7 @@ public class LejeAftaleRepository {
 
         return find(nyLejeAftale);
     }
-    
+
     public LejeAftale find(LejeAftale lejeAftale) {
         if (lejeAftale.getID()==0) {
             return jdbcTemplate.queryForObject(SELECT_BY_FOREIGNKEYS, objForeignKeyIDs(lejeAftale), this::mapRow); // her til bruges Object[] metoden
@@ -204,39 +204,44 @@ public class LejeAftaleRepository {
     }
 
 
-
+    public List<LejeAftale> getLejeAftalerUdenRapport() {
+        String sql = "SELECT * FROM LejeAftale WHERE SkadeRapportID IS NULL";
+        return jdbcTemplate.query(sql, this::mapRow);
+    }
 
 }
+    public List<LejeAftale> getLejeAftaleMedRapport(){
+        String sql = "SELECT * FROM lejeAftale WHERE SkadeRapportID IS NOT NULL";
+        return jdbcTemplate.query(sql, this::mapRow);
+    }
+
+    public LejeAftale updaterSkadeRapportID(int lejeAftaleID, int skadeRapportID) {
+        String sql = "UPDATE LejeAftale SET SkadeRapportID = ? WHERE ID = ?";
+        jdbcTemplate.update(sql, skadeRapportID, lejeAftaleID);
+        return findMedID(lejeAftaleID);
+    }
+
+    public LejeAftale mapRow(ResultSet rs, int rowNum) throws SQLException {
+        LejeAftale lejeaftale = new LejeAftale();
+        lejeaftale.setID(rs.getInt("ID"));
+        lejeaftale.setBrugerID(rs.getInt("brugerID"));
+        lejeaftale.setBilID(rs.getInt("bilID"));
+        lejeaftale.setKundeInfoID(rs.getInt("kundeInfoID"));
+        lejeaftale.setSkadeRapportID(rs.getInt("skadeRapportID"));
+        lejeaftale.setAbonnementsType(rs.getString("abonnementsType"));
+        lejeaftale.setPrisoverslag(rs.getInt("prisoverslag"));
+        lejeaftale.setAfhentningssted(rs.getString("afhentningssted"));
+        lejeaftale.setAfleveringssted(rs.getString("leveringssted"));
+        lejeaftale.setStartDato(rs.getDate("startDato").toLocalDate());
+        lejeaftale.setSlutDato(rs.getDate("slutDato").toLocalDate());
+        return lejeaftale;
+    }
 
 /*
 
-
-CREATE TABLE LejeAftale
-(
-    ID                    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    BrugerID              INT, -- foreign key
-    KundeInfoID           INT, -- foreign key
-    BilID                 INT, -- foreign key
-    SkadeRapportID        INT, -- foreign key
-
-    Farve                 VARCHAR(255),
-    Afleveringsforsikring BOOLEAN,
-    Selvrisiko            BOOLEAN,
-    Daekpakke             BOOLEAN,
-    Vejhjaelp             BOOLEAN,
-    UdleveringVedFDM      BOOLEAN,
-    Abonnementslaengde    INT,
-    KmPrMdr               INT,
-    Afhentningssted       VARCHAR(255),
-    StartDato             DATE,
-    SlutDato              DATE,
-    TotalPris             INT,
-
-    FOREIGN KEY (BrugerID) REFERENCES Bruger (ID),
-    FOREIGN KEY (KundeInfoID) REFERENCES KundeInfo (ID),
-    FOREIGN KEY (BilID) REFERENCES Bil (ID),
-    FOREIGN KEY (SkadeRapportID) REFERENCES SkadeRapport (ID)
-);
-
-
- */
+    public List<LejeAftale> findByVognNummer(List<String> vognNummerList) {
+        String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
+        String joined = String.join(",", vognNummerList);
+        return jdbcTemplate.query(sql, new Object[]{joined}, new LejeaftaleRowMapper());
+    }
+}
