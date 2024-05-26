@@ -24,13 +24,15 @@ public class LejeAftaleService {
     private final BilService bilService;
     private final KundeInfoService kundeInfoService;
     private final SkadeRapportService skadeRapportService;
+    private final BrugerService brugerService;
 
     @Autowired
-    public LejeAftaleService(LejeAftaleRepository lejeAftaleRepository, BilService bilService, KundeInfoService kundeInfoService, SkadeRapportService skadeRapportService) {
+    public LejeAftaleService(LejeAftaleRepository lejeAftaleRepository, BilService bilService, KundeInfoService kundeInfoService, SkadeRapportService skadeRapportService, BrugerService brugerService) {
         this.lejeAftaleRepository = lejeAftaleRepository;
         this.bilService = bilService;
         this.kundeInfoService = kundeInfoService;
         this.skadeRapportService = skadeRapportService;
+        this.brugerService = brugerService;
     }
 
     // ------------------- Operations (CRUD) -------------------
@@ -146,9 +148,9 @@ public class LejeAftaleService {
     // ------------------- Helper methods -------------------
 
     private LejeAftale integrate(BrugerValgDTO brugerValgDTO, LejeAftale lejeAftale) {
-        Bruger loggedInBruger = brugerValgDTO.getLoggedInbruger();
+        Bruger loggedInBruger = brugerService.hentBruger(brugerValgDTO.getBrugerID());
         Bil bil = bilService.create(brugerValgDTO.getBilModel());
-        KundeInfo kundeInfo = new KundeInfo(brugerValgDTO.getCPR_NR(), brugerValgDTO.getFornavn(), brugerValgDTO.getEfternavn(), brugerValgDTO.getAdresse(), brugerValgDTO.getPostNummer(), brugerValgDTO.getEmail(), brugerValgDTO.getMobilNummer());
+        KundeInfo kundeInfo = new KundeInfo(brugerValgDTO.getCprNr(), brugerValgDTO.getFornavn(), brugerValgDTO.getEfternavn(), brugerValgDTO.getAdresse(), brugerValgDTO.getPostNummer(), brugerValgDTO.getEmail(), brugerValgDTO.getMobilNummer());
         SkadeRapport skadeRapport = null;
 
         return lejeAftale;

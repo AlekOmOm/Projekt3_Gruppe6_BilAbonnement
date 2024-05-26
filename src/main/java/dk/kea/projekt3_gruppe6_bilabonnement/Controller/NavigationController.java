@@ -162,7 +162,7 @@ public class NavigationController {
         Bruger loggedInBruger = (Bruger) session.getAttribute("loggedInBruger");
 
         fuldBrugerValgDTO.setTotalPris(totalPris);
-        fuldBrugerValgDTO.setLoggedInbruger(loggedInBruger);
+        fuldBrugerValgDTO.setBrugerID(loggedInBruger.getId());
 
 
         // ------------------- -> Opret LejeAftale -------------------

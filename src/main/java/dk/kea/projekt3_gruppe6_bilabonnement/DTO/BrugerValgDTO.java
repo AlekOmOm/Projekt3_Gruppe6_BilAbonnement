@@ -1,46 +1,45 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
 
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
-
 import java.util.List;
+
+import java.time.LocalDate;
 
 public class BrugerValgDTO {
 
     // 0. Bruger
-    private Bruger loggedInbruger;
+    private int brugerID;
+
 
     // 1. bil valg
-    String bilModel; // bil modeller: CitroenC1, Peugeot108, OpelCorsaCosmo
+    private String bilModel; // bil modeller: CitroenC1, Peugeot108, OpelCorsaCosmo
 
     // 2. abonnements side
-//    String farve;
-//    boolean afleveringsforsikring = false; // default
-//    boolean selvrisiko = false; // default
-//    boolean daekpakke = false; // default
-//    boolean vejhjaelp = false; // default
-//    boolean udleveringVedFDM = false; // default
-    private List<String> selectedPackageDeals;
+    private String farve;
+    private boolean afleveringsforsikring;
+    private boolean selvrisiko;
+    private boolean daekpakke;
+    private boolean vejhjaelp;
+    private boolean udleveringVedFDM;
 
     // 3. Prisoverslag
-    int abonnementslaengde = 0;
-    int kmPrMdr = 0;
+    private int abonnementslaengde;
+    private int kmPrMdr;
 
-    // 4. Kunde Info // instance variables of KundeInfo obj
-    private String CPR_NR;
-    private String Fornavn;
-    private String Efternavn;
-    private String Adresse;
-    private int PostNummer;
-    private String Email;
-    private int MobilNummer;
-
-
-
+    // 4. Kunde Info
+    private String cprNr;
+    private String fornavn;
+    private String efternavn;
+    private String adresse;
+    private int postNummer;
+    private String email;
+    private int mobilNummer;
 
     // 5. afhentningssted
-    String afhentningssted;
+    private String afhentningssted;
 
     int totalPris;
+
+    private List<String> selectedPackageDeals;
 
 
 
@@ -64,31 +63,34 @@ public class BrugerValgDTO {
 //    }
 
 
-    public BrugerValgDTO(String bilModel, List<String> selectedPackageDeals, int abonnementslaengde, int kmPrMdr, String afhentningssted, int totalPris, String CPR_NR, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer) {
+
+    public BrugerValgDTO(int brugerID, String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String cprNr, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer, String afhentningssted, List<String> selectedPackageDeals) {
+        this.brugerID = brugerID;
         this.bilModel = bilModel;
-        this.selectedPackageDeals = selectedPackageDeals;
+
         this.abonnementslaengde = abonnementslaengde;
         this.kmPrMdr = kmPrMdr;
+        this.cprNr = cprNr;
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
+        this.adresse = adresse;
+        this.postNummer = postNummer;
+        this.email = email;
+        this.mobilNummer = mobilNummer;
         this.afhentningssted = afhentningssted;
-        this.totalPris = totalPris;
-        this.CPR_NR = CPR_NR;
-        this.Fornavn = fornavn;
-        this.Efternavn = efternavn;
-        this.Adresse = adresse;
-        this.PostNummer = postNummer;
-        this.Email = email;
-        this.MobilNummer = mobilNummer;
+        this.selectedPackageDeals = selectedPackageDeals;
     }
+
 
 
     // ------------------- Getters & Setters -------------------
 
-    public Bruger getLoggedInbruger() {
-        return loggedInbruger;
+    public int getBrugerID() {
+        return brugerID;
     }
 
-    public void setLoggedInbruger(Bruger loggedInbruger) {
-        this.loggedInbruger = loggedInbruger;
+    public void setBrugerID(int brugerID) {
+        this.brugerID = brugerID;
     }
 
     public String getBilModel() {
@@ -99,53 +101,53 @@ public class BrugerValgDTO {
         this.bilModel = bilModel;
     }
 
-//    public String getFarve() {
-//        return farve;
-//    }
-//
-//    public void setFarve(String farve) {
-//        this.farve = farve;
-//    }
-//
-//    public boolean isAfleveringsforsikring() {
-//        return afleveringsforsikring;
-//    }
-//
-//    public void setAfleveringsforsikring(boolean afleveringsforsikring) {
-//        this.afleveringsforsikring = afleveringsforsikring;
-//    }
-//
-//    public boolean isSelvrisiko() {
-//        return selvrisiko;
-//    }
-//
-//    public void setSelvrisiko(boolean selvrisiko) {
-//        this.selvrisiko = selvrisiko;
-//    }
-//
-//    public boolean isDaekpakke() {
-//        return daekpakke;
-//    }
-//
-//    public void setDaekpakke(boolean daekpakke) {
-//        this.daekpakke = daekpakke;
-//    }
-//
-//    public boolean isVejhjaelp() {
-//        return vejhjaelp;
-//    }
-//
-//    public void setVejhjaelp(boolean vejhjaelp) {
-//        this.vejhjaelp = vejhjaelp;
-//    }
-//
-//    public boolean isUdleveringVedFDM() {
-//        return udleveringVedFDM;
-//    }
-//
-//    public void setUdleveringVedFDM(boolean udleveringVedFDM) {
-//        this.udleveringVedFDM = udleveringVedFDM;
-//    }
+    public String getFarve() {
+        return farve;
+    }
+
+    public void setFarve(String farve) {
+        this.farve = farve;
+    }
+
+    public boolean isAfleveringsforsikring() {
+        return afleveringsforsikring;
+    }
+
+    public void setAfleveringsforsikring(boolean afleveringsforsikring) {
+        this.afleveringsforsikring = afleveringsforsikring;
+    }
+
+    public boolean isSelvrisiko() {
+        return selvrisiko;
+    }
+
+    public void setSelvrisiko(boolean selvrisiko) {
+        this.selvrisiko = selvrisiko;
+    }
+
+    public boolean isDaekpakke() {
+        return daekpakke;
+    }
+
+    public void setDaekpakke(boolean daekpakke) {
+        this.daekpakke = daekpakke;
+    }
+
+    public boolean isVejhjaelp() {
+        return vejhjaelp;
+    }
+
+    public void setVejhjaelp(boolean vejhjaelp) {
+        this.vejhjaelp = vejhjaelp;
+    }
+
+    public boolean isUdleveringVedFDM() {
+        return udleveringVedFDM;
+    }
+
+    public void setUdleveringVedFDM(boolean udleveringVedFDM) {
+        this.udleveringVedFDM = udleveringVedFDM;
+    }
 
     public int getAbonnementslaengde() {
         return abonnementslaengde;
@@ -163,6 +165,64 @@ public class BrugerValgDTO {
         this.kmPrMdr = kmPrMdr;
     }
 
+    //  4. Kunde Info
+    public String getCprNr() {
+        return cprNr;
+    }
+
+    public void setCprNr(String cprNr) {
+        this.cprNr = cprNr;
+    }
+
+    public String getFornavn() {
+        return fornavn;
+    }
+
+    public void setFornavn(String fornavn) {
+        this.fornavn = fornavn;
+    }
+
+    public String getEfternavn() {
+        return efternavn;
+    }
+
+    public void setEfternavn(String efternavn) {
+        this.efternavn = efternavn;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public int getPostNummer() {
+        return postNummer;
+    }
+
+    public void setPostNummer(int postNummer) {
+        this.postNummer = postNummer;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getMobilNummer() {
+        return mobilNummer;
+    }
+
+    public void setMobilNummer(int mobilNummer) {
+        this.mobilNummer = mobilNummer;
+    }
+
+    // 5. afhentningssted
     public String getAfhentningssted() {
         return afhentningssted;
     }
@@ -186,84 +246,22 @@ public class BrugerValgDTO {
         this.selectedPackageDeals = selectedPackageDeals;
     }
 
-    // Getters & Setters
-    public String getCPR_NR() {
-        return CPR_NR;
-    }
-
-    public void setCPR_NR(String CPR_NR) {
-        this.CPR_NR = CPR_NR;
-    }
-
-    public String getFornavn() {
-        return Fornavn;
-    }
-
-    public void setFornavn(String fornavn) {
-        Fornavn = fornavn;
-    }
-
-    public String getEfternavn() {
-        return Efternavn;
-    }
-
-    public void setEfternavn(String efternavn) {
-        Efternavn = efternavn;
-    }
-
-    public String getAdresse() {
-        return Adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        Adresse = adresse;
-    }
-
-    public int getPostNummer() {
-        return PostNummer;
-    }
-
-    public void setPostNummer(int postNummer) {
-        PostNummer = postNummer;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    public int getMobilNummer() {
-        return MobilNummer;
-    }
-
-    public void setMobilNummer(int mobilNummer) {
-        MobilNummer = mobilNummer;
-    }
-
     // ------------------- toString -------------------
 
     @Override
     public String toString() {
         return "BrugerValgDTO{" +
                 "bilModel='" + bilModel + '\'' +
-//                ", farve='" + farve + '\'' +
-//                ", afleveringsforsikring=" + afleveringsforsikring +
-//                ", selvrisiko=" + selvrisiko +
-//                ", daekpakke=" + daekpakke +
-//                ", vejhjaelp=" + vejhjaelp +
-//                ", udleveringVedFDM=" + udleveringVedFDM +
+                ", farve='" + farve + '\'' +
+                ", afleveringsforsikring=" + afleveringsforsikring +
+                ", selvrisiko=" + selvrisiko +
+                ", daekpakke=" + daekpakke +
+                ", vejhjaelp=" + vejhjaelp +
+                ", udleveringVedFDM=" + udleveringVedFDM +
                 ", abonnementslaengde=" + abonnementslaengde +
                 ", kmPrMdr=" + kmPrMdr +
                 ", afhentningssted='" + afhentningssted + '\'' +
                 ", totalPris=" + totalPris +
                 '}';
     }
-
-    // ------------------- test til packagedeals -------------------
-
-
-
 }
