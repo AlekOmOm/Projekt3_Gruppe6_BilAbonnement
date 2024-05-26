@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--                                   CSS files                                                 -->
     <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
@@ -15,65 +15,102 @@
     <title>Login</title>
 </head>
 <body>
+
 <div class="header">
-    <p>BilAbonnement.dk</p>
-</div>
+    <div class="left-header">
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+    </div>
+    <div class="center-header">
+        <p>BilAbonnement A/S</p>
+    </div>
+    <div class="right-header">
 
-    <div class = "content">
-        <div class = "one-container">
+        <div class="show-if-not-loggedIn" th:unless="${session.loggedIn}">
+            <h6 class = "not-logged-in-yet-line"> Not Logged in yet
+            </h6>
 
-            <div class = "login" th:unless="${visRegistrering}">
-                <h1>Login</h1>
+        </div>
 
-                <form action="/login" method="post">
-                    <label for="brugernavn">Brugernavn:</label><br>
-                    <input type="text" id="brugernavn" name="brugerNavn" required><br>
+        <div class="show-if-loggedIn" th:if="${session.loggedIn}">
 
-                    <label for="password">Kodeord:</label><br>
-                    <input type="password" id="password" name="password" required><br>
+            <h7 class="logged-in-as-line">
+                Logged in as:
+            </h7>
 
-                    <!-- bruger typer: DATA_REGISTRERING, SKADE_OG_UDBEDRING, FORRETNINGS_UDVIKLING; -->
-                    <label for="rolle">Brugertype:</label><br>
-
-                    <select id="rolle" name="rolle">
-                        <option value="DATA_REGISTRERING">Data registrering</option>
-                        <option value="SKADE_OG_UDBEDRING">Skade og udbedring</option>
-                        <option value="FORRETNINGS_UDVIKLING">Forretnings udvikling</option>
-                    </select>
-
-                    <input type="submit" value="Login">
-                </form>
-
-                <p>Har du ikke en bruger? <a href="/registrer">Opret en her</a></p>
+            <div class="user-name-line">
+                <h4 th:text="${session.loggedInBruger.brugerNavn}">
+                </h4>
             </div>
-
-            <div class="register" th:if="${visRegistrering}"> <!-- Registrerings form vises kun hvis både at registrer attribute er == 1. tilstede OG 2. true -->
-                <h1>Registrer</h1>
-
-                <form action="/registrer" method="post">
-                    <label for="brugernavnReg">Brugernavn:</label><br>
-                    <input type="text" id="brugernavnReg" name="brugerNavn" required><br>
-
-                    <label for="passwordReg">Kodeord:</label><br>
-                    <input type="password" id="passwordReg" name="password" required><br>
-
-                    <!-- bruger typer: DATA_REGISTRERING, SKADE_OG_UDBEDRING, FORRETNINGS_UDVIKLING; -->
-                    <label for="rolle">Brugertype:</label><br>
-
-                    <select id="rolleReg" name="rolle">
-                        <option value="DATA_REGISTRERING">Data registrering</option>
-                        <option value="SKADE_OG_UDBEDRING">Skade og udbedring</option>
-                        <option value="FORRETNINGS_UDVIKLING">Forretnings udvikling</option>
-                    </select>
-
-                    <input type="submit" value="Opret ny bruger">
-                </form>
-
-                <input type="submit" value="Opret ny bruger">
+            <div class="logout-button-line">
+                <a href="/home" class="small-button">
+                    <button class="button"> Log out </button>
+                </a>
             </div>
 
         </div>
     </div>
+</div>
+
+<div class = "content">
+
+    <div class = "three-containers">
+        <div>
+        </div>
+
+        <div class = "login" th:unless="${visRegistrering}">
+            <h1>Login</h1>
+
+            <form action="/login" method="post" th:object="${brugerDto}">
+                <label for="brugernavn">Brugernavn:</label><br>
+                <input type="text" id="brugernavn" th:name="${'brugerNavn'}" packageName="brugerNavn" required><br>
+
+                <label for="password">Kodeord:</label><br>
+                <input type="password" id="password" th:name="${'password'}" packageName="password" required><br>
+
+                <!-- bruger typer: DATA_REGISTRERING, SKADE_OG_UDBEDRING, FORRETNINGS_UDVIKLING; -->
+                <label for="rolle">Brugertype:</label><br>
+
+                <select id="rolle" th:name="${'rolle'}">
+                    <option value="DATA_REGISTRERING">Data registrering</option>
+                    <option value="SKADE_OG_UDBEDRING">Skade og udbedring</option>
+                    <option value="FORRETNINGS_UDVIKLING">Forretnings udvikling</option>
+                </select>
+
+                <input type="submit" value="Login">
+            </form>
+
+            <p>Har du ikke en bruger? <a href="/registrer">Opret en her</a></p>
+        </div>
+
+        <div class="register" th:if="${visRegistrering}"> <!-- Registrerings form vises kun hvis både at registrer attribute er == 1. tilstede OG 2. true -->
+            <h1>Registrer</h1>
+
+            <form action="/registrer" method="post" th:object="${brugerDto}">
+                <label for="brugernavnReg">Brugernavn:</label><br>
+                <input type="text" id="brugernavnReg" th:name="${'brugerNavn'}" packageName="brugerNavn" required><br>
+
+                <label for="passwordReg">Kodeord:</label><br>
+                <input type="password" id="passwordReg" th:name="${'password'}" packageName="password" required><br>
+
+                <!-- bruger typer: DATA_REGISTRERING, SKADE_OG_UDBEDRING, FORRETNINGS_UDVIKLING; -->
+                <label for="rolleReg" >Brugertype:</label><br>
+
+
+                <select id="rolleReg" th:name="${'rolle'}" packageName="rolle">
+                    <option value="DATA_REGISTRERING">Data registrering</option>
+                    <option value="SKADE_OG_UDBEDRING">Skade og udbedring</option>
+                    <option value="FORRETNINGS_UDVIKLING">Forretnings udvikling</option>
+                </select>
+                <input type="submit" value="Opret ny bruger">
+            </form>
+
+        </div>
+
+        <div></div>
+
+    </div>
+</div>
+
 
 
 <div class="footer">

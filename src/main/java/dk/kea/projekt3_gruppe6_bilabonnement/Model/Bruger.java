@@ -60,6 +60,9 @@ public class Bruger {
     }
 
     public void setRolle(String rolle) {
+        if (rolle == null) {
+            throw new IllegalArgumentException("Rolle ikke gyldig");
+        }
         switch (rolle) {
             case "DATA_REGISTRERING":
                 this.rolle = Rolle.DATA_REGISTRERING;

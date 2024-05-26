@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
+    <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../../static/PrisOverslag.css" th:href="@{/PrisOverslag.css}">
+    <title>Leje Prisoverslag</title>
+</head>
+<body>
+<div class="header">
+    <div class="left-header">
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+    </div>
+    <div class="center-header">
+        <p>BilAbonnement A/S</p>
+    </div>
+    <div class="right-header">
+
+        <div class="show-if-not-loggedIn" th:unless="${session.loggedIn}">
+            <h6 class = "not-logged-in-yet-line"> Not Logged in yet
+            </h6>
+            <div class="login-button-line">
+                <a href="/logout" class="small-button">
+                    <button class="button" id="logOutButton"> Log in </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="show-if-loggedIn" th:if="${session.loggedIn}">
+
+            <h7 class="logged-in-as-line">
+                Logged in as:
+            </h7>
+
+            <div class="user-name-line">
+                <h4 th:text="${session.loggedInBruger.brugerNavn}">
+                </h4>
+            </div>
+            <div class="logout-button-line">
+                <a href="/home" class="small-button">
+                    <button class="button"> Log out </button>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="content">
+
+    <h2>3. Prisoverslag</h2>
+    <div class="drop-downs-pris">
+        <form action="/LejeAftale/KundeInfo" method="get" th:object="${nyBrugerValgDTO}">
+            <label>
+                <select th:name="${'abonnementslaengde'}" class="inputField">
+                    <option value=""> Vælg antal måneder </option>
+
+                    <option th:each="month : ${monthSequence}" th:value="${month}" th:text="${month}">
+                    </option>
+                </select>
+            </label>
+
+            <label>
+                <select th:name="${'kmPrMdr'}" class="inputField">
+                    <option value=""> Vælg km-antal pr. måned </option>
+                    <option th:each="km : ${kmSequence}" th:value="${km}" th:text="${km}">
+                    </option>
+                </select>
+            </label>
+                <!-- hidden input field to bind the form to the DTO -->
+                <input type="hidden" th:field="${nyBrugerValgDTO.abonnementslaengde}">
+                <input type="hidden" th:field="${nyBrugerValgDTO.kmPrMdr}">
+
+            <button type="submit" class="button" id="naesteButton"> Næste </button>
+        </form>
+    </div>
+
+    <div class="info-saved-in-DTO">
+        <p style="font-weight: bold;" >Valgt bil: <span th:text="${nyBrugerValgDTO.bilModel}"></span></p>
+        <p style="font-weight: bold;" >Valgt abonnement: <span th:text="${nyBrugerValgDTO.selectedPackageDeals}"></span></p>
+    </div>
+</div>
+
+<div class="footer">
+    <p>© 2021 Bilabonnement A/S</p>
+</div>
+</body>
+</html>

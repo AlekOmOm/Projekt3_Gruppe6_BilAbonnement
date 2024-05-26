@@ -63,7 +63,7 @@ CREATE TABLE LejeAftale
 (
     ID                    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     BrugerID              INT, -- foreign key
-    KundeInfoID           INT, -- foreign key
+    KundeInfoID           INT, -- foreign key TODO: rækkefølge her byttet rundt, før: 3. BilID 4 KundeInfoID
     BilID                 INT, -- foreign key
     SkadeRapportID        INT, -- foreign key
 

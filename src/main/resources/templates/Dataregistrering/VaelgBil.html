@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
+    <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../../static/VaelgBil.css" th:href="@{/VaelgBil.css}">
+    <title>Leje Input</title>
+</head>
+<body>
+<div class="header">
+    <div class="left-header">
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+    </div>
+    <div class="center-header">
+        <p>BilAbonnement A/S</p>
+    </div>
+    <div class="right-header">
+
+        <div class="show-if-not-loggedIn" th:unless="${session.loggedIn}">
+            <h6 class = "not-logged-in-yet-line"> Not Logged in yet
+            </h6>
+            <div class="login-button-line">
+                <a href="/logout" class="small-button">
+                    <button class="button" id="logOutButton"> Log in </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="show-if-loggedIn" th:if="${session.loggedIn}">
+
+            <h7 class="logged-in-as-line">
+                Logged in as:
+            </h7>
+
+            <div class="user-name-line">
+                <h4 th:text="${session.loggedInBruger.brugerNavn}">
+                </h4>
+            </div>
+            <div class="logout-button-line">
+                <a href="/home" class="small-button">
+                    <button class="button"> Log out </button>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    <div class="content">
+        <h2>1. Vælg Bil</h2>
+
+        <div class="three-containers-column">
+
+            <div class="top-container-column">
+                    <h5>
+                        Her kan du vælge den bil type du ønsker dig
+                    </h5>
+            </div>
+
+            <div class="center-container-column-vaelg-bil">
+
+
+                    <form class="annuller-button-container" action="/LejeAftale/" method="get">
+                        <button class="button" >Anuller</button>
+                    </form>
+
+
+                    <form action="/LejeAftale/Abonnement" method="get" th:object="${nyBrugerValgDTO}" class="inputForm-margin-only">
+                        <label>
+                            <select th:name="${'bilModel'}" class="inputField">
+
+                                <option value=""> Vælg Bil </option>
+                                <option th:each="bil : ${biler}" th:value="${bil.model}" th:text="${bil.model}">
+                                </option>
+                            </select>
+                        </label>
+                        <button type="submit" class="button"> Vælg Bil </button>
+                    </form>
+
+
+            </div>
+
+            <div class="car-container">
+
+                <div class="car-box" th:title="${citroen.model}">
+                    <img src="../../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Citroen" class="citroen-img">
+                    <p id="citroenBilInformation">Bil Information</p>
+                    <div class="text-box">
+                        <p th:text="'Model: ' + ${citroen.model}"></p>
+                        <p>Årgang: 2021</p>
+                        <p>Farve: Hvid</p>
+                        <p>Pris: 1500 kr. pr. måned</p>
+                    </div>
+                </div>
+                <div class="car-box" th:title="${opel.model}">
+                    <img src="../../static/images/cars/citroen.png" th:src="@{/images/cars/citroen.png}" alt="Car Image">
+                    <p id="opelBilInformation">Bil Information</p>
+                    <div class="text-box">
+                        <p th:text="'Model: ' + ${opel.model}"></p>
+                        <p>Årgang: 2021</p>
+                        <p>Farve: Hvid</p>
+                        <p>Pris: 1500 kr. pr. måned</p>
+                    </div>
+                </div>
+                <div class="car-box" th:title="${peugeot.model}">
+                    <img src="../../static/images/cars/peugeot108.png" th:src="@{/images/cars/peugeot108.png}" alt="Peugeot" class="peugeot-img">
+                    <p class="peugeot-text" id="peugeotBilInformation">Bil Information</p>
+                    <div class="text-box">
+                        <p th:text="'Model: ' + ${peugeot.model}"></p>
+                        <p>Årgang: 2021</p>
+                        <p>Farve: Sort</p>
+                        <p>Pris: 2000 kr. pr. måned</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2021 Bilabonnement A/S</p>
+    </div>
+</body>
+</html>

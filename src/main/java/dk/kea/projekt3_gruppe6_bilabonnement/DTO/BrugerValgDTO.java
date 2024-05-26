@@ -1,5 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
 
+import java.util.List;
+
 import java.time.LocalDate;
 
 public class BrugerValgDTO {
@@ -7,6 +9,7 @@ public class BrugerValgDTO {
     // 0. Bruger
     private int brugerID;
 
+    private List<String> selectedPackageDeals;
     // 1. bil valg
     private String bilModel; // bil modeller: CitroenC1, Peugeot108, OpelCorsaCosmo
 
@@ -34,20 +37,35 @@ public class BrugerValgDTO {
     // 5. afhentningssted
     private String afhentningssted;
 
+    int totalPris;
+
+
+
     // ------------------- Constructors -------------------
 
     public BrugerValgDTO() {
     }
 
+//    public BrugerValgDTO(String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, int totalPris) {
+//        this.bilModel = bilModel;
+//        this.farve = farve;
+//        this.afleveringsforsikring = afleveringsforsikring;
+//        this.selvrisiko = selvrisiko;
+//        this.daekpakke = daekpakke;
+//        this.vejhjaelp = vejhjaelp;
+//        this.udleveringVedFDM = udleveringVedFDM;
+//        this.abonnementslaengde = abonnementslaengde;
+//        this.kmPrMdr = kmPrMdr;
+//        this.afhentningssted = afhentningssted;
+//        this.totalPris = totalPris;
+//    }
+
+
+    public BrugerValgDTO(String bilModel, List<String> selectedPackageDeals, int abonnementslaengde, int kmPrMdr, String afhentningssted, int totalPris, String CPR_NR, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer) {
     public BrugerValgDTO(int brugerID, String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String cprNr, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer, String afhentningssted) {
         this.brugerID = brugerID;
         this.bilModel = bilModel;
-        this.farve = farve;
-        this.afleveringsforsikring = afleveringsforsikring;
-        this.selvrisiko = selvrisiko;
-        this.daekpakke = daekpakke;
-        this.vejhjaelp = vejhjaelp;
-        this.udleveringVedFDM = udleveringVedFDM;
+        this.selectedPackageDeals = selectedPackageDeals;
         this.abonnementslaengde = abonnementslaengde;
         this.kmPrMdr = kmPrMdr;
         this.cprNr = cprNr;
@@ -210,6 +228,21 @@ public class BrugerValgDTO {
         this.afhentningssted = afhentningssted;
     }
 
+    public int getTotalPris() {
+        return totalPris;
+    }
+
+    public void setTotalPris(int totalPris) {
+        this.totalPris = totalPris;
+    }
+
+    public List<String> getSelectedPackageDeals() {
+        return selectedPackageDeals;
+    }
+    public void setSelectedPackageDeals(List<String> selectedPackageDeals) {
+        this.selectedPackageDeals = selectedPackageDeals;
+    }
+
     // ------------------- toString -------------------
 
     @Override
@@ -225,7 +258,7 @@ public class BrugerValgDTO {
                 ", abonnementslaengde=" + abonnementslaengde +
                 ", kmPrMdr=" + kmPrMdr +
                 ", afhentningssted='" + afhentningssted + '\'' +
+                ", totalPris=" + totalPris +
                 '}';
     }
-
 }

@@ -17,9 +17,9 @@ public class BrugerController {
 
     // Web sider:
     private static final String HOME_PAGE = "Home";
-    private static final String REDIRECT_DATA_REGISTRERING = "redirect:/dataregistrering";
-    private static final String REDIRECT_SKADE_UDBEDRING = "redirect:/skadeudbedring";
-    private static final String REDIRECT_FORRETNINGS_UDVIKLING = "redirect:/forretningsudvikling";
+    private static final String REDIRECT_DATA_REGISTRERING = "redirect:/LejeAftale/";
+    private static final String REDIRECT_SKADE_UDBEDRING = "redirect:/SkadeRapport/";
+    private static final String REDIRECT_FORRETNINGS_UDVIKLING = "redirect:/Dashboard/";
 
     private final BrugerService brugerService;
 
@@ -32,15 +32,23 @@ public class BrugerController {
     // ------------------- Login -------------------
 
     @GetMapping("")
-    public String index() {
+    public String index(HttpSession session) {
+        session.setAttribute("loggedIn", false);
         return HOME_PAGE;
     }
     @GetMapping("/home")
-    public String home() {
+    public String home(HttpSession session) {
+        session.setAttribute("loggedIn", false);
+        System.out.println("DEBUG - BrugerController - home");
+        System.out.println(" session data: ");
+        System.out.println(" - loggedIn: "+ session.getAttribute("loggedIn"));
+        System.out.println(" - loggedInBruger: "+ session.getAttribute("loggedInBruger"));
+        System.out.println(" - loggedInBrugerNavn: "+ session.getAttribute("loggedInBrugerNavn"));
         return HOME_PAGE;
     }
     @GetMapping("/login")
-    public String login() {
+    public String login(HttpSession session) {
+        session.setAttribute("loggedIn", false);
         return HOME_PAGE;
     }
 
@@ -57,6 +65,8 @@ public class BrugerController {
         }
 
         // -> login
+            System.out.println("DEBUG - BrugerController - loginBruger - brugerDTO: " + brugerDTO.getBrugerNavn());
+            System.out.println(" bruger:"+brugerDTO);
         BrugerDto loginBruger = brugerService.login(brugerDTO); // TODO: Sprint 2 - exception handling for NullPointerException
 
         // login fejlet: (hvis (loginBruger == null) -> return Home)
@@ -76,6 +86,11 @@ public class BrugerController {
 
         // -> set new session state
         session.setAttribute("loggedInBruger", loginBruger);
+        session.setAttribute("loggedInBrugerNavn", loginBruger.getBrugerNavn());
+        session.setAttribute("loggedInBrugerRolle", loginBruger.getRolle());
+            System.out.println("DEBUG - BrugerController - loginBruger - loginBruger: " + loginBruger);
+            System.out.println(" - loggedInBruger: " + session.getAttribute("loggedInBruger"));
+            System.out.println(" - loggedInBrugerNavn: " + session.getAttribute("loggedInBrugerNavn"));
         session.setAttribute("loggedIn", true);
 
         return omdirigerBruger(loginBruger.getRolle());
@@ -113,6 +128,7 @@ public class BrugerController {
     }
 
     // ------------------- Logout -------------------
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
 
@@ -121,7 +137,9 @@ public class BrugerController {
         return HOME_PAGE; // TODO: logout knap på bruger ikon i Header
     }
 
+
     // ------------------- services -------------------
+
     private String omdirigerBruger(String rolle) {
         return switch (rolle) {
             case "DATA_REGISTRERING" -> REDIRECT_DATA_REGISTRERING;

@@ -21,7 +21,7 @@ public class BrugerService {
     // ------------------- Services -------------------
 
     public BrugerDto login(BrugerDto brugerDTO) {
-        if (brugerDTO == null) {
+        if (brugerDTO == null || brugerDTO.getRolle() == null ) {
             return null;
         }
 
@@ -39,7 +39,7 @@ public class BrugerService {
 
 
     public BrugerDto registrer(BrugerDto brugerDTO) {
-        if (brugerDTO == null) {
+        if (brugerDTO == null || brugerDTO.getRolle() == null) {
             return null;
         }
 

@@ -70,11 +70,10 @@ public class LejeAftaleRepository {
     
     public LejeAftale find(LejeAftale lejeAftale) {
         if (lejeAftale.getID()==0) {
-            return jdbcTemplate.queryForObject(SELECT_BY_FOREIGNKEYS, objForeignKeyIDs(lejeAftale), this::mapRow);
+            return jdbcTemplate.queryForObject(SELECT_BY_FOREIGNKEYS, objForeignKeyIDs(lejeAftale), this::mapRow); // her til bruges Object[] metoden
         }
 
         return jdbcTemplate.queryForObject(SELECT_BY_PRIMARYKEY, objPrimaryKey(lejeAftale), this::mapRow);
-        // return (SELECT_BY_PRIMARYKEY, LejeAftale.class, lejeAftale.getID());
     }
 
     public List<LejeAftale> findAll() {
@@ -142,6 +141,7 @@ public class LejeAftaleRepository {
 
     // ------------------- Object[] methods -------------------
 
+    // returnering af Object[] er nødvendig for query metoderne, model klassen kan desværre ikke bruges som parameter i query metoderne
     private Object[] objForeignKeyIDs(LejeAftale lejeAftale) {
         if (lejeAftale.getSkadeRapport() == null) {
             return new Object[]{lejeAftale.getBruger().getId(), lejeAftale.getBil().getId(), lejeAftale.getKundeInfo().getId()};

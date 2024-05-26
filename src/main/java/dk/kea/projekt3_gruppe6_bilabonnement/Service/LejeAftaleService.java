@@ -5,14 +5,18 @@ import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
+import dk.kea.projekt3_gruppe6_bilabonnement.DTO.PackageDeal;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import java.time.LocalDate;
 
-import static java.util.Objects.isNull;
 
 @Service
 public class LejeAftaleService {
@@ -63,7 +67,7 @@ public class LejeAftaleService {
         }
 
         // Save Bil
-        Bil savedBil = bilService.book(nyLejeAftale.getBil());
+        Bil savedBil = bilService.saveBil(nyLejeAftale.getBil()); // TODO: tjek book() metoden, måske bare brug save() i stedet
         if (savedBil == null) {
             throw new RuntimeException("Failed to save Bil");
         }
@@ -96,6 +100,9 @@ public class LejeAftaleService {
         if (savedLejeAftale == null) {
             throw new RuntimeException("Failed to save LejeAftale");
         }
+
+        // book bil
+        bilService.book(savedBil); // TODO: book() ?
 
         return savedLejeAftale;
     }
@@ -191,5 +198,30 @@ public class LejeAftaleService {
         }
 
         return false;
+    }
+
+    public List<PackageDeal> getPackageDeals() {
+        return new ArrayList<>(Arrays.asList(
+                new PackageDeal("Daekpakke", 300, "Daekpakke"),
+                new PackageDeal("Aflveringsforsikring", 119, "Tilvalg af afleveringsforsikring"),
+                new PackageDeal("Lav selvrisiko", 89, ""),
+                new PackageDeal("Vejhjaelp", 49, "I samarbejde med Viking kan du få vejhjaelp til kun 49 kr. pr. maaned. Som Bilabonnement-kunde er du daekket under de vilkaar du finder under spoergsmaal og svar."),
+                new PackageDeal("Udlevering ved FDM", 599, "Udlevering til FDM er et engangsgebyr på 599 kr.")
+        ));
+    }
+
+    public int beregnTotalPris(BrugerValgDTO brugerValgDTO) {
+        // detAlekLaver // TODO: fjern tag
+        List<String> selectedPackageDeals = brugerValgDTO.getSelectedPackageDeals();
+        List<PackageDeal> packageDealTypes = getPackageDeals();
+
+        int totalPris = 0;
+
+        for (PackageDeal packageDealType : packageDealTypes) {
+            if (selectedPackageDeals.contains(packageDealType.getPackageName())) {
+                totalPris += packageDealType.getPackagePrice();
+            }
+        }
+        return totalPris;
     }
 }

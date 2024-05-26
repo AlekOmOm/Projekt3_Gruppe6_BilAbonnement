@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
+    <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../../static/Abonnement.css" th:href="@{/Abonnement.css}">
+    <title>LejeAbonnement</title>
+</head>
+<body>
+<div class="header">
+    <div class="left-header">
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+    </div>
+    <div class="center-header">
+        <p>BilAbonnement A/S</p>
+    </div>
+    <div class="right-header">
+
+        <div class="show-if-not-loggedIn" th:unless="${session.loggedIn}">
+            <h6 class = "not-logged-in-yet-line"> Not Logged in yet
+            </h6>
+            <div class="login-button-line">
+                <a href="/logout" class="small-button">
+                    <button class="button" id="logOutButton"> Log in </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="show-if-loggedIn" th:if="${session.loggedIn}">
+
+            <h7 class="logged-in-as-line">
+                Logged in as:
+            </h7>
+
+            <div class="user-name-line">
+                <h4 th:text="${session.loggedInBruger.brugerNavn}">
+                </h4>
+            </div>
+            <div class="logout-button-line">
+                <a href="/home" class="small-button">
+                    <button class="button"> Log out </button>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <a href="/LejeAftale/VaelgBil" >
+        <button class="button" id="tilbageButton">Tilbage</button>
+    </a>
+    <div class="content">
+        <!-- <h2>2. Vælg Abonnement</h2> -->
+
+
+        <h2>2. Vælg Abonnement</h2>
+        <div class="inputForm">
+            <!--- detAlekLaver -->
+            <form action="/LejeAftale/PrisOverslag" method="get" th:object="${nyBrugerValgDTO}">
+            <div th:each="packageDeal : ${packageDeals}">
+                <label>
+                    <!-- map input packageName to List<String> selectedPackageDeals in nyBrugerValgDTO
+                    -->
+                    <input type="checkbox" th:name="${'selectedPackageDeals'}" th:value="${packageDeal.packageName}">
+                </label>
+                <label class="package-label" th:text="${packageDeal.packageName}"></label>
+                <label class="package-label" th:text="${'Pris: ' + packageDeal.packagePrice + ' kr.'}"></label>
+            </div>
+                <input type="hidden" th:field="${nyBrugerValgDTO.selectedPackageDeals}">   <!-- hidden input field to bind the form to the DTO -->
+            <button class="button" id = "opretAbonnement">Opret Abonnement</button>
+            </form>
+        </div>
+
+
+        <div class="info-saved-in-DTO">
+            <p style="font-weight: bold;" >Valgt bil: <span th:text="${nyBrugerValgDTO.bilModel}"></span></p>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2021 Bilabonnement A/S</p>
+    </div>
+</body>
+</html>

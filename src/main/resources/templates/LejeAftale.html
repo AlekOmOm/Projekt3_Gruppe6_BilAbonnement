@@ -2,33 +2,164 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--                                   CSS files                                                 -->
-    <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
-    <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}">
+    <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../static/LejeAftale.css" th:href="@{/LejeAftale.css}">
 
-    <link rel="stylesheet" href="/LejeAftale.css" th:href="@{/LejeAftale.css}">
     <title>Leje Aftale</title>
+
 </head>
 <body>
 <div class="header">
-    <img src="../static/images/img.png" height="37" width="300"/>
-    <p>BilAbonnement A/S</p>
+    <div class="left-header">
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+    </div>
+    <div class="center-header">
+        <p>BilAbonnement A/S</p>
+    </div>
+    <div class="right-header">
+
+        <div class="show-if-not-loggedIn" th:unless="${session.loggedIn}">
+            <h6 class = "not-logged-in-yet-line"> Not Logged in yet
+            </h6>
+            <div class="login-button-line">
+                <a href="/logout" class="small-button">
+                    <button class="button" id="logOutButton"> Log in </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="show-if-loggedIn" th:if="${session.loggedIn}">
+
+            <h7 class="logged-in-as-line">
+                Logged in as:
+            </h7>
+
+            <div class="user-name-line">
+                <h4 th:text="${session.loggedInBruger.brugerNavn}">
+                </h4>
+            </div>
+            <div class="logout-button-line">
+                <a href="/home" class="small-button">
+                    <button class="button"> Log out </button>
+                </a>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <div class = "content">
+    <div class ="three-containers">
+        <div class = "left-side-container">
+            <form action="/home" method="get">
+                <button class="button" id="tilbageButton">Tilbage</button>
+            </form>
 
 
-    <div class="archive">
-        <input type="text" id="searchInput" placeholder="Søg efter dato...">
-        <button id="searchButton">Search</button>
-        <h2>Arkiv</h2>
-        <ul>
-            <li>Vehicle 1 + Dato<button>View Report</button></li>
-            <li>Vehicle 2 + Dato<button>View Report</button></li>
-            <li>Vehicle 3 + Dato<button>View Report</button></li>
-        </ul>
+        </div>
+        <div class="center-container">
+            <div class="opretLeje">
+                <form action="/LejeAftale/VaelgBil" method="get">
+                    <button type="submit" class="button" id="opretLeje">Opret LejeAftale</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="archive">
+            <input type="text" id="searchInput" placeholder="Søg efter dato...">
+            <button id="searchButton">Search</button>
+            <h2 class="ArkivTitel">Arkiv</h2>
+            <table class="ArkivTabel">
+                <thead>
+                <th>BilNR</th>
+                <th>Dato</th>
+                <th>Se rapport</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+                <tr>
+                    <td>Bil 1</td>
+                    <td>2024-05-16</td>
+                    <td><button>Se rapport</button></td>
+                </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+
     </div>
 </div>
 

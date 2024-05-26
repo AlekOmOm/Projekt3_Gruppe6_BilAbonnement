@@ -1,25 +1,133 @@
 
-
+/* ------------------- header -------------------
+ */
 .header {
-    background-color: #ffffff;
-
-    color: #000000;
-    padding: 10px 0;
-    text-align: center;
-    position: sticky;
+    position: fixed;
+    width: 100%;
+    height: 5vh;
+    padding: 0 20px;
     top: 0;
     z-index: 1000;
-    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+
+    text-align: center;
     font-weight: bold;
     font-size: 18px;
+
+    box-sizing: border-box; /* Includes padding in width calculation */
 }
-.header img {
-    position: absolute; /* position the image absolutely within the header */
-    top: 50%; /* center the image vertically */
-    left: 100px; /* add some space from the left */
-    transform: translateY(-50%); /* vertically center the image */
-    padding-left: 100px;
+
+/* ------------------- header-containers -------------------
+ */
+
+.left-header {
+    left: 5%;
+    width: 30%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }
+/*    .header img is in the left-header container */
+    .left-header img {
+        position: absolute; /* position the image absolutely within the header */
+
+        top: 50%; /* position the image 50% from the top */
+        transform: translateY(-50%);
+    }
+.center-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+.right-header {
+    /*
+    right: 5%;
+
+    height: 5vh;
+
+    justify-content: flex-end;
+     */
+    width: 30%;
+    height: 5vh;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+    .show-if-loggedIn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        height: 5vh;
+    }
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+            .logged-in-as-line {
+                font-size: 70%;
+                width: 150%;
+                padding-right: 1%;
+            }
+            .user-name-line {
+
+                padding-right: 3%;
+            }
+            .logout-button-line {
+                width: 200%;
+            }
+    .show-if-not-loggedIn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        height: 5vh;
+    }
+        .not-logged-in-yet-line {
+            width: 30%;
+        }
+        .login-button-line {
+            width: 40%;
+        }
+        .register-button-line {
+            width: 200%;
+        }
+
+.header-button-line {
+    position: fixed;
+    width: 100%;
+    height: 5vh;
+    top: 0;
+
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    text-align: center;
+    display: flex;
+    box-sizing: border-box; /* Includes padding in width calculation */
+}
+
+
+
+
+/* ------------------- footer -------------------
+ */
 
 .footer {
     background-color: #ffffff;
