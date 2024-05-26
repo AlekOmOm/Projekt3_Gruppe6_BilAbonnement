@@ -120,3 +120,44 @@ small button for the log out button
     justify-content: center;
     align-items: center;
 }
+
+
+/* Archive styles */
+.archive {
+    width: 25%; /* Adjust as needed */
+    max-height: calc(100vh - 95px);
+    background-color: #c4c4c4;
+    padding: 10px;
+
+    left: 20%;
+    top: 10%;
+    overflow-y: auto; /* Add a scrollbar when the content exceeds the box's height */
+}
+.ArkivTabel th,
+.ArkivTabel td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.ArkivTabel th {
+    background-color: #f2f2f2;
+}
+
+.ArkivTabel button {
+    padding: 5px 10px; /* Adjust padding as needed */
+}
+
+.archive h2 {
+    top: 0;
+}
+.archive table {
+    width: 100%; /* Set the width of the table */
+}
+.archive ul {
+    list-style-type: none;
+    padding: 0;
+}
+.archive li {
+    margin-bottom: 5px;
+}

@@ -59,31 +59,31 @@
 
         <div class="center-container">
 
-            <h2>3. Kunde Information </h2>
+            <h2> 4. Kunde Information </h2>
 
             <div class="inputForm">
                 <form action="/LejeAftale/AfhentningsSted" method="get" th:object="${nyBrugerValgDTO}">
                     <label>
                         <!--
                         KundeInfo
-                            String CPR_NR;
-                            String Fornavn;
-                            String Efternavn;
-                            String Adresse;
-                            int PostNummer;
-                            String Email;
-                            int MobilNummer;
+                            String cprNr;
+                            String fornavn;
+                            String efternavn;
+                            String adresse;
+                            String postNummer;
+                            String email;
+                            String mobilNummer;
                         --->
 
 
 
-                        <input type="text" th:name="${'CPR_NR'}" placeholder="CPR nummer" class="inputField">
-                        <input type="text" th:name="${'Fornavn'}" placeholder="Fornavn" class="inputField">
-                        <input type="text" th:name="${'Efternavn'}" placeholder="Efternavn" class="inputField">
-                        <input type="text" th:name="${'Adresse'}" placeholder="Adresse" class="inputField">
-                        <input type="text" th:name="${'PostNummer'}" placeholder="Postnummer" class="inputField">
-                        <input type="text" th:name="${'Email'}" placeholder="Email" class="inputField">
-                        <input type="text" th:name="${'MobilNummer'}" placeholder="Mobilnummer" class="inputField">
+                        <input type="text" th:name="${'cprNr'}" placeholder="CPR nummer" class="inputField">
+                        <input type="text" th:name="${'fornavn'}" placeholder="Fornavn" class="inputField">
+                        <input type="text" th:name="${'efternavn'}" placeholder="Efternavn" class="inputField">
+                        <input type="text" th:name="${'adresse'}" placeholder="Adresse" class="inputField">
+                        <input type="text" th:name="${'postNummer'}" placeholder="Postnummer" class="inputField">
+                        <input type="text" th:name="${'email'}" placeholder="Email" class="inputField">
+                        <input type="text" th:name="${'mobilNummer'}" placeholder="Mobilnummer" class="inputField">
 
                     </label>
                     <button type="submit" class="button"> Vælg Bil </button>
