@@ -23,7 +23,7 @@ public class NavigationController {
     private static final String VAELGBIL_PAGE = "Dataregistrering/VaelgBil"; // url: /LejeAftale/VaelgBil
     private static final String ABONNEMENT_PAGE = "Dataregistrering/Abonnement";
     private static final String PRISOVERSLAG_PAGE = "Dataregistrering/PrisOverslag";
-    private static final String KUNDEINFO_PAGE = "Dataregistrering/Kunde";
+    private static final String KUNDEINFO_PAGE = "KundeInfo";
     private static final String AFHENTNINGSSTED_PAGE = "Dataregistrering/Afhentning";
     private static final String REDIRECT_TO_START = "redirect:/LejeAftale/";
     private final LejeAftaleService lejeAftaleService;
