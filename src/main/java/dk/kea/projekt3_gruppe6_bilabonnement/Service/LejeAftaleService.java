@@ -42,6 +42,9 @@ public class LejeAftaleService {
 
         lejeAftale = integrate(brugerValgDTO, lejeAftale);
 
+        System.out.println("DEBUG - LejeAftaleService - opret - lejeAftale: " + lejeAftale.toString());
+        System.out.println(" - bruger: " + lejeAftale.getBruger().toString());
+
         save(lejeAftale);
     }
 
@@ -153,6 +156,13 @@ public class LejeAftaleService {
         KundeInfo kundeInfo = new KundeInfo(brugerValgDTO.getCprNr(), brugerValgDTO.getFornavn(), brugerValgDTO.getEfternavn(), brugerValgDTO.getAdresse(), brugerValgDTO.getPostNummer(), brugerValgDTO.getEmail(), brugerValgDTO.getMobilNummer());
         SkadeRapport skadeRapport = null;
 
+        lejeAftale.setBruger(loggedInBruger);
+        lejeAftale.setBil(bil);
+        lejeAftale.setKundeInfo(kundeInfo);
+        lejeAftale.setSkadeRapport(skadeRapport);
+
+
+
         return lejeAftale;
     }
 
@@ -170,17 +180,21 @@ public class LejeAftaleService {
     }
 
     public int beregnTotalPris(BrugerValgDTO brugerValgDTO) {
-        // detAlekLaver // TODO: fjern tag
-        List<String> selectedPackageDeals = brugerValgDTO.getSelectedPackageDeals();
+
+        List<String> selectedPackageDeals = brugerValgDTO.getAbonnementsSide();
+
         List<PackageDeal> packageDealTypes = getPackageDeals();
 
         int totalPris = 0;
 
-        for (PackageDeal packageDealType : packageDealTypes) {
-            if (selectedPackageDeals.contains(packageDealType.getPackageName())) {
-                totalPris += packageDealType.getPackagePrice();
+        for (String selectedPackageDeal : selectedPackageDeals) {
+            for (PackageDeal packageDeal : packageDealTypes) {
+                if (packageDeal.getPackageName().equals(selectedPackageDeal)) {
+                    totalPris += packageDeal.getPackagePrice();
+                }
             }
         }
+
         return totalPris;
     }
 }

@@ -129,7 +129,6 @@ public class LejeAftaleRepository {
         }
 
         return new Object[]{lejeAftale.getBruger().getId(), lejeAftale.getBil().getId(), lejeAftale.getKundeInfo().getId(), lejeAftale.getSkadeRapport().getID()};
-
     }
 
 

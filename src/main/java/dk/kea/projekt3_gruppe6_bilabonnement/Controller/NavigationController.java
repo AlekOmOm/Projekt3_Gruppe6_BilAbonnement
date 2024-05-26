@@ -1,8 +1,8 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerValgDTO;
+import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerDto;
 import dk.kea.projekt3_gruppe6_bilabonnement.DTO.PackageDeal;
-import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService;
 import jakarta.servlet.http.HttpSession;
@@ -78,13 +78,7 @@ public class NavigationController {
         // ------------------- data for view -------------------
         List<PackageDeal> packageDeals = lejeAftaleService.getPackageDeals();
 
-        model.addAttribute("packageDeals", packageDeals);
-
-
-
-
-
-
+        setModelAttributes(model, packageDeals);
 
 
         // ------------------- Load, Save and return next -------------------
@@ -96,8 +90,16 @@ public class NavigationController {
 
 
 
+
     @GetMapping("/PrisOverslag")
     public String getPrisoverslagPage(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
+
+        System.out.println();
+        System.out.println("DEBUG: Prisoverslag");
+        System.out.println(" - nyBrugerValgDTO: ");
+        nyBrugerValgDTO.printAbonnementsSide();
+        System.out.println();
+
         // ------------------- data for view -------------------
 
         List<Integer> monthSequence = Arrays.asList(3, 36);
@@ -126,6 +128,10 @@ public class NavigationController {
 
         // ------------------- Load, Save and return -------------------
         System.out.println("KundeInfo Session data:");
+        System.out.println();
+        System.out.println(" - nyBrugerValgDTO: "+ nyBrugerValgDTO);
+        System.out.println(" - session: "+ session.getAttribute("BrugerValgDTO"));
+        System.out.println();
         loadOgSave(nyBrugerValgDTO, session, model);
 
         return KUNDEINFO_PAGE;
@@ -159,7 +165,7 @@ public class NavigationController {
 
         // totalPris beregnes og gemmes i BrugerValgDTO
         int totalPris = lejeAftaleService.beregnTotalPris(fuldBrugerValgDTO);
-        Bruger loggedInBruger = (Bruger) session.getAttribute("loggedInBruger");
+        BrugerDto loggedInBruger = (BrugerDto) session.getAttribute("loggedInBruger");
 
         fuldBrugerValgDTO.setTotalPris(totalPris);
         fuldBrugerValgDTO.setBrugerID(loggedInBruger.getId());
@@ -193,8 +199,9 @@ public class NavigationController {
         if (nyBugerValgDTO.getBilModel() != null){
             oldBrugerValgDTO.setBilModel(nyBugerValgDTO.getBilModel());
         }
-        if (nyBugerValgDTO.getSelectedPackageDeals() != null){
-            oldBrugerValgDTO.setSelectedPackageDeals(nyBugerValgDTO.getSelectedPackageDeals());
+        if (nyBugerValgDTO.getAbonnementsSideBoolean() != null){
+            oldBrugerValgDTO.setAbonnementsSideBoolean(nyBugerValgDTO.getAbonnementsSideBoolean());
+            oldBrugerValgDTO.setAbonnementsSide();
         }
         if (nyBugerValgDTO.getAbonnementslaengde() != 0){
             oldBrugerValgDTO.setAbonnementslaengde(nyBugerValgDTO.getAbonnementslaengde());
@@ -238,5 +245,19 @@ public class NavigationController {
     private void nyLejeAftaleSession(HttpSession session) {
         session.removeAttribute("BrugerValgDTO");
         session.removeAttribute("nyBrugerValgDTO");
+    }
+
+    private void setModelAttributes(Model model, List<PackageDeal> packageDeals) {
+        System.out.println("DEBUG: setModelAttributes");
+        for (PackageDeal packageDeal : packageDeals) {
+            switch (packageDeal.getPackageName()) {
+                case "Daekpakke" -> model.addAttribute("daekpakke", packageDeal);
+                case "Aflveringsforsikring" -> model.addAttribute("vejhjaelp", packageDeal);
+                case "Lav selvrisiko" -> model.addAttribute("selvrisiko", packageDeal); // name: "Lav selvrisiko"
+                case "Vejhjaelp" -> model.addAttribute("afleveringsforsikring", packageDeal); // name: "Afleveringsforsikring"
+                case "Udlevering ved FDM" -> model.addAttribute("udleveringVedFDM", packageDeal);
+            }
+        }
+        System.out.println();
     }
 }
