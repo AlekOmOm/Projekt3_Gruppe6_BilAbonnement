@@ -80,6 +80,11 @@ public class LejeAftaleRepository {
         return jdbcTemplate.query(SELECT_ALL, this::mapRow);
     }
 
+    public LejeAftale findMedID(int id){
+        String sql = "SELECT * FROM LejeAftale WHERE ID = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, this::mapRow);
+    }
+
     public List<LejeAftale> findALlUdenRapport() {
         return jdbcTemplate.query(SELECT_WITHOUT_REPORT, this::mapRow);
     }
@@ -209,7 +214,7 @@ public class LejeAftaleRepository {
         return jdbcTemplate.query(sql, this::mapRow);
     }
 
-}
+
     public List<LejeAftale> getLejeAftaleMedRapport(){
         String sql = "SELECT * FROM lejeAftale WHERE SkadeRapportID IS NOT NULL";
         return jdbcTemplate.query(sql, this::mapRow);
@@ -218,30 +223,6 @@ public class LejeAftaleRepository {
     public LejeAftale updaterSkadeRapportID(int lejeAftaleID, int skadeRapportID) {
         String sql = "UPDATE LejeAftale SET SkadeRapportID = ? WHERE ID = ?";
         jdbcTemplate.update(sql, skadeRapportID, lejeAftaleID);
-        return findMedID(lejeAftaleID);
-    }
-
-    public LejeAftale mapRow(ResultSet rs, int rowNum) throws SQLException {
-        LejeAftale lejeaftale = new LejeAftale();
-        lejeaftale.setID(rs.getInt("ID"));
-        lejeaftale.setBrugerID(rs.getInt("brugerID"));
-        lejeaftale.setBilID(rs.getInt("bilID"));
-        lejeaftale.setKundeInfoID(rs.getInt("kundeInfoID"));
-        lejeaftale.setSkadeRapportID(rs.getInt("skadeRapportID"));
-        lejeaftale.setAbonnementsType(rs.getString("abonnementsType"));
-        lejeaftale.setPrisoverslag(rs.getInt("prisoverslag"));
-        lejeaftale.setAfhentningssted(rs.getString("afhentningssted"));
-        lejeaftale.setAfleveringssted(rs.getString("leveringssted"));
-        lejeaftale.setStartDato(rs.getDate("startDato").toLocalDate());
-        lejeaftale.setSlutDato(rs.getDate("slutDato").toLocalDate());
-        return lejeaftale;
-    }
-
-/*
-
-    public List<LejeAftale> findByVognNummer(List<String> vognNummerList) {
-        String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
-        String joined = String.join(",", vognNummerList);
-        return jdbcTemplate.query(sql, new Object[]{joined}, new LejeaftaleRowMapper());
+        return findMedID(lejeAftaleID); //TODO lav findMedID metode
     }
 }

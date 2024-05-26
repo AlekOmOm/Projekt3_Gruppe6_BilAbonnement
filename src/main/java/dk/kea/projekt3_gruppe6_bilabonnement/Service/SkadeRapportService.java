@@ -3,7 +3,7 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Skade;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport;
-import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepo;
+import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository;
 import dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,12 @@ public class SkadeRapportService {
     private static final double PRIS_PR_KILOMETER_KOERT_OVER = 0.75;
 
 
-    private final SkadeRapportRepo skadeRapportRepo;
+    private final SkadeRapportRepository skadeRapportRepo;
     private final SkadeService skadeService;
     private final LejeAftaleService lejeAftaleService;
 
     @Autowired
-    public SkadeRapportService(SkadeRapportRepo skadeRapportRepo, SkadeService skadeService, LejeAftaleService lejeAftaleService) {
+    public SkadeRapportService(SkadeRapportRepository skadeRapportRepo, SkadeService skadeService, LejeAftaleService lejeAftaleService) {
         this.skadeRapportRepo = skadeRapportRepo;
         this.skadeService = skadeService;
         this.lejeAftaleService = lejeAftaleService;
