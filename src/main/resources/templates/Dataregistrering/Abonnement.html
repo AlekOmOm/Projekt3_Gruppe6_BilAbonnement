@@ -52,25 +52,49 @@
         <button class="button" id="tilbageButton">Tilbage</button>
     </a>
     <div class="content">
-        <!-- <h2>2. Vælg Abonnement</h2> -->
-
 
         <h2>2. Vælg Abonnement</h2>
         <div class="inputForm">
             <!--- detAlekLaver -->
             <form action="/LejeAftale/PrisOverslag" method="get" th:object="${nyBrugerValgDTO}">
-            <div th:each="packageDeal : ${packageDeals}">
-                <label>
-                    <!-- map input packageName to List<String> selectedPackageDeals in nyBrugerValgDTO
-                    -->
-                    <input type="checkbox" th:name="${'selectedPackageDeals'}" th:value="${packageDeal.packageName}">
-                </label>
-                <label class="package-label" th:text="${packageDeal.packageName}"></label>
-                <label class="package-label" th:text="${'Pris: ' + packageDeal.packagePrice + ' kr.'}"></label>
-            </div>
-                <input type="hidden" th:field="${nyBrugerValgDTO.selectedPackageDeals}">   <!-- hidden input field to bind the form to the DTO -->
-            <button class="button" id = "opretAbonnement">Opret Abonnement</button>
+                <div>
+                    <label>
+                        <input type="checkbox" th:name="'daekpakke'" th:value="${true}"> Dækpakke -
+                    </label>
+                    <label class="package-label-pris" th:text="${'Pris: ' + daekpakke.packagePrice + ' kr.'}"></label>
+                </div>
+
+                <div>
+                    <label>
+                        <input type="checkbox" th:name="'vejhjaelp'" th:value="${true}"> Vejhjælp -
+                    </label>
+                    <label class="package-label-pris" th:text="${'Pris: ' + vejhjaelp.packagePrice + ' kr.'}"></label>
+                </div>
+
+                <div>
+                    <label>
+                        <input type="checkbox" th:name="'selvrisiko'" th:value="${true}"> Selvrisiko -
+                    </label>
+                    <label class="package-label-pris" th:text="${'Pris: ' + selvrisiko.packagePrice + ' kr.'}"></label>
+                </div>
+
+                <div>
+                    <label>
+                        <input type="checkbox" th:name="'afleveringsforsikring'" th:value="${true}"> Afleveringsforsikring -
+                    </label>
+                    <label class="package-label-pris" th:text="${'Pris: ' + afleveringsforsikring.packagePrice + ' kr.'}"></label>
+                </div>
+
+                <div>
+                    <label>
+                        <input type="checkbox" th:name="'udleveringVedFDM'" th:value="${true}"> Udv. ved FDM -
+                    </label>
+                    <label class="package-label-pris" th:text="${'Pris: ' + udleveringVedFDM.packagePrice + ' kr.'}"></label>
+                </div>
+
+                <button class="button" id = "opretAbonnement">Opret Abonnement</button>
             </form>
+
         </div>
 
 
