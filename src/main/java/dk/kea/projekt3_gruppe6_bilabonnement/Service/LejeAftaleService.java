@@ -1,6 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Service;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerValgDTO;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
@@ -35,10 +36,10 @@ public class LejeAftaleService {
     // ------------------- Operations (CRUD) -------------------
 
     public void opret(BrugerValgDTO brugerValgDTO) {
-
-
         LejeAftale lejeAftale = new LejeAftale();
+
         lejeAftale = integrate(brugerValgDTO, lejeAftale);
+
         save(lejeAftale);
     }
 
@@ -145,13 +146,12 @@ public class LejeAftaleService {
     // ------------------- Helper methods -------------------
 
     private LejeAftale integrate(BrugerValgDTO brugerValgDTO, LejeAftale lejeAftale) {
+        Bruger loggedInBruger = brugerValgDTO.getLoggedInbruger();
         Bil bil = bilService.create(brugerValgDTO.getBilModel());
-
-
-
+        KundeInfo kundeInfo = new KundeInfo(brugerValgDTO.getCPR_NR(), brugerValgDTO.getFornavn(), brugerValgDTO.getEfternavn(), brugerValgDTO.getAdresse(), brugerValgDTO.getPostNummer(), brugerValgDTO.getEmail(), brugerValgDTO.getMobilNummer());
+        SkadeRapport skadeRapport = null;
 
         return lejeAftale;
-
     }
 
     public List<PackageDeal> getPackageDeals() {

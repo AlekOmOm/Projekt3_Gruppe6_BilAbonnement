@@ -2,6 +2,7 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
 
 import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerValgDTO;
 import dk.kea.projekt3_gruppe6_bilabonnement.DTO.PackageDeal;
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService;
 import dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService;
 import jakarta.servlet.http.HttpSession;
@@ -23,7 +24,7 @@ public class NavigationController {
     private static final String VAELGBIL_PAGE = "Dataregistrering/VaelgBil"; // url: /LejeAftale/VaelgBil
     private static final String ABONNEMENT_PAGE = "Dataregistrering/Abonnement";
     private static final String PRISOVERSLAG_PAGE = "Dataregistrering/PrisOverslag";
-    private static final String KUNDEINFO_PAGE = "KundeInfo";
+    private static final String KUNDEINFO_PAGE = "Dataregistrering/KundeInfo";
     private static final String AFHENTNINGSSTED_PAGE = "Dataregistrering/Afhentning";
     private static final String REDIRECT_TO_START = "redirect:/LejeAftale/";
     private final LejeAftaleService lejeAftaleService;
@@ -123,8 +124,6 @@ public class NavigationController {
 
 
 
-
-
         // ------------------- Load, Save and return -------------------
         System.out.println("KundeInfo Session data:");
         loadOgSave(nyBrugerValgDTO, session, model);
@@ -160,8 +159,10 @@ public class NavigationController {
 
         // totalPris beregnes og gemmes i BrugerValgDTO
         int totalPris = lejeAftaleService.beregnTotalPris(fuldBrugerValgDTO);
-        fuldBrugerValgDTO.setTotalPris(totalPris);
+        Bruger loggedInBruger = (Bruger) session.getAttribute("loggedInBruger");
 
+        fuldBrugerValgDTO.setTotalPris(totalPris);
+        fuldBrugerValgDTO.setLoggedInbruger(loggedInBruger);
 
 
         // ------------------- -> Opret LejeAftale -------------------

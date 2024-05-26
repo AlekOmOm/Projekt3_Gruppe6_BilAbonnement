@@ -1,12 +1,18 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
 
+import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
+
 import java.util.List;
 
 public class BrugerValgDTO {
-    // 0. bil valg
+
+    // 0. Bruger
+    private Bruger loggedInbruger;
+
+    // 1. bil valg
     String bilModel; // bil modeller: CitroenC1, Peugeot108, OpelCorsaCosmo
 
-    // 1. abonnements side
+    // 2. abonnements side
 //    String farve;
 //    boolean afleveringsforsikring = false; // default
 //    boolean selvrisiko = false; // default
@@ -15,21 +21,23 @@ public class BrugerValgDTO {
 //    boolean udleveringVedFDM = false; // default
     private List<String> selectedPackageDeals;
 
-    // 2. Prisoverslag
+    // 3. Prisoverslag
     int abonnementslaengde = 0;
     int kmPrMdr = 0;
 
-    // 3. Kunde Info // instance variables of KundeInfo obj
-    String CPR_NR;
-    String Fornavn;
-    String Efternavn;
-    String Adresse;
-    int PostNummer;
-    String Email;
-    int MobilNummer;
+    // 4. Kunde Info // instance variables of KundeInfo obj
+    private String CPR_NR;
+    private String Fornavn;
+    private String Efternavn;
+    private String Adresse;
+    private int PostNummer;
+    private String Email;
+    private int MobilNummer;
 
 
-    // 4. afhentningssted
+
+
+    // 5. afhentningssted
     String afhentningssted;
 
     int totalPris;
@@ -74,6 +82,14 @@ public class BrugerValgDTO {
 
 
     // ------------------- Getters & Setters -------------------
+
+    public Bruger getLoggedInbruger() {
+        return loggedInbruger;
+    }
+
+    public void setLoggedInbruger(Bruger loggedInbruger) {
+        this.loggedInbruger = loggedInbruger;
+    }
 
     public String getBilModel() {
         return bilModel;
@@ -168,6 +184,63 @@ public class BrugerValgDTO {
     }
     public void setSelectedPackageDeals(List<String> selectedPackageDeals) {
         this.selectedPackageDeals = selectedPackageDeals;
+    }
+
+    // Getters & Setters
+    public String getCPR_NR() {
+        return CPR_NR;
+    }
+
+    public void setCPR_NR(String CPR_NR) {
+        this.CPR_NR = CPR_NR;
+    }
+
+    public String getFornavn() {
+        return Fornavn;
+    }
+
+    public void setFornavn(String fornavn) {
+        Fornavn = fornavn;
+    }
+
+    public String getEfternavn() {
+        return Efternavn;
+    }
+
+    public void setEfternavn(String efternavn) {
+        Efternavn = efternavn;
+    }
+
+    public String getAdresse() {
+        return Adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        Adresse = adresse;
+    }
+
+    public int getPostNummer() {
+        return PostNummer;
+    }
+
+    public void setPostNummer(int postNummer) {
+        PostNummer = postNummer;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public int getMobilNummer() {
+        return MobilNummer;
+    }
+
+    public void setMobilNummer(int mobilNummer) {
+        MobilNummer = mobilNummer;
     }
 
     // ------------------- toString -------------------
