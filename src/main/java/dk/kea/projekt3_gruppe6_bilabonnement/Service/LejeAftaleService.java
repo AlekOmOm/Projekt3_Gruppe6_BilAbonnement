@@ -163,6 +163,9 @@ public class LejeAftaleService {
                 new PackageDeal("Udlevering ved FDM", 599, "Udlevering til FDM er et engangsgebyr på 599 kr.")
         ));
     }
+    public List<String> getAfhentningssteder() {
+        return Arrays.asList("Auto-Huset A/S", "Bilhuset A/S", "Bilcenter A/S");
+    }
 
     public int beregnTotalPris(BrugerValgDTO brugerValgDTO) {
         // detAlekLaver // TODO: fjern tag

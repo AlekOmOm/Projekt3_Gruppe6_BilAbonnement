@@ -49,12 +49,14 @@
 </div>
 
 <div class="content">
-
+    <form action="/LejeAftale/Abonnement" method="get">
+        <button class="button" id="tilbageButton">Tilbage</button>
+    </form>
     <h2>3. Prisoverslag</h2>
     <div class="drop-downs-pris">
         <form action="/LejeAftale/KundeInfo" method="get" th:object="${nyBrugerValgDTO}">
             <label>
-                <select th:name="${'abonnementslaengde'}" class="inputField">
+                <select th:name="${'abonnementslaengde'}" class="inputField" required>
                     <option value=""> Vælg antal måneder </option>
 
                     <option th:each="month : ${monthSequence}" th:value="${month}" th:text="${month}">
@@ -63,7 +65,7 @@
             </label>
 
             <label>
-                <select th:name="${'kmPrMdr'}" class="inputField">
+                <select th:name="${'kmPrMdr'}" class="inputField" required>
                     <option value=""> Vælg km-antal pr. måned </option>
                     <option th:each="km : ${kmSequence}" th:value="${km}" th:text="${km}">
                     </option>

@@ -51,6 +51,7 @@ public class LejeAftaleRepository {
             return update(nyLejeAftale);
         }
 
+
         jdbcTemplate.update(INSERT, nyLejeAftale.getBruger().getId(), nyLejeAftale.getBil().getId(), nyLejeAftale.getKundeInfo().getId(), nyLejeAftale.getAbonnementsType(), nyLejeAftale.getPrisoverslag(), nyLejeAftale.getAfhentningssted(), nyLejeAftale.getAfleveringssted(), nyLejeAftale.getStartDato(), nyLejeAftale.getSlutDato(), nyLejeAftale.getTotalPris());
 
         return find(nyLejeAftale);
@@ -178,6 +179,7 @@ public class LejeAftaleRepository {
         lejeaftale.setTotalPris(rs.getInt("TotalPris"));
         return lejeaftale;
     }
+
 
 
 

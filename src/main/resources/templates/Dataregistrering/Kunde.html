@@ -52,7 +52,7 @@
     <div class = "three-containers">
         <div class = "left-side-container">
             <a href="/LejeAftale/PrisOverslag">
-                <button class="button" >Tilbage</button>
+                <button class="button" id="tilbageButton" >Tilbage</button>
                 <input type="hidden" >
             </a>
         </div>
@@ -77,16 +77,16 @@
 
 
 
-                        <input type="text" th:name="${'CPR_NR'}" placeholder="CPR nummer" class="inputField">
-                        <input type="text" th:name="${'Fornavn'}" placeholder="Fornavn" class="inputField">
-                        <input type="text" th:name="${'Efternavn'}" placeholder="Efternavn" class="inputField">
-                        <input type="text" th:name="${'Adresse'}" placeholder="Adresse" class="inputField">
-                        <input type="text" th:name="${'PostNummer'}" placeholder="Postnummer" class="inputField">
-                        <input type="text" th:name="${'Email'}" placeholder="Email" class="inputField">
-                        <input type="text" th:name="${'MobilNummer'}" placeholder="Mobilnummer" class="inputField">
+                        <input type="text" th:name="${'CPR_NR'}" placeholder="CPR nummer" class="inputField" required>
+                        <input type="text" th:name="${'Fornavn'}" placeholder="Fornavn" class="inputField" required>
+                        <input type="text" th:name="${'Efternavn'}" placeholder="Efternavn" class="inputField" required>
+                        <input type="text" th:name="${'Adresse'}" placeholder="Adresse" class="inputField" required>
+                        <input type="text" th:name="${'PostNummer'}" placeholder="Postnummer" class="inputField" required>
+                        <input type="text" th:name="${'Email'}" placeholder="Email" class="inputField" required>
+                        <input type="text" th:name="${'MobilNummer'}" placeholder="Mobilnummer" class="inputField" required>
 
                     </label>
-                    <button type="submit" class="button"> Vælg Bil </button>
+                    <button type="submit" class="button" id="vaelgBilButton"> Vælg Bil </button>
                 </form>
             </div>
 

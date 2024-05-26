@@ -172,4 +172,5 @@ public class LejeAftale {
                 this.startDato.equals(nyLejeAftale.getStartDato()) &&
                 this.slutDato.equals(nyLejeAftale.getSlutDato());
     }
+
 }

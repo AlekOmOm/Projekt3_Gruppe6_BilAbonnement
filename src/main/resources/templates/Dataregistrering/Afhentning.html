@@ -5,7 +5,8 @@
     <meta packageName="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
     <link rel="stylesheet" href="../../static/headerFooter.css" th:href="@{/headerFooter.css}">
-    <title>LejeAfhentning</title>
+    <link rel="stylesheet" href="../../static/Afhentning.css" th:href="@{/Afhentning.css}">
+    <title>Afhentning</title>
 </head>
 <body>
 <div class="header">
@@ -48,6 +49,18 @@
 </div>
 
 <div class="content">
+    <form action="/LejeAftale/KundeInfo" method="get">
+        <button class="button" id="tilbageButton">Tilbage</button>
+    </form>
+    <select th:name="${'afhentningssted'}" class="inputField" required>
+        <option value=""> Vælg afhentningssted </option>
+        <option th:each="sted : ${afhentningssteder}" th:value="${sted}" th:text="${sted}">
+        </option>
+    </select>
+
+    <form action="/LejeAftale/Opret" method="post">
+        <button type="submit" class="button" id="næsteButton">Opret Leje Aftale</button>
+    </form>
 
 </div>
 

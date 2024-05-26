@@ -134,8 +134,12 @@ public class NavigationController {
 
     @GetMapping("/AfhentningsSted")
     public String getAfhentningsstedPage(HttpSession session, Model model, BrugerValgDTO nyBrugerValgDTO) {
+        // ------------------- data for view -------------------
+        System.out.println("AfhentningsSted Session data:");
+        loadOgSave(nyBrugerValgDTO, session, model);
 
-
+        List<String> afhentningssteder = lejeAftaleService.getAfhentningssteder();
+        model.addAttribute("afhentningssteder", afhentningssteder);
 
 
 
@@ -161,6 +165,7 @@ public class NavigationController {
 
 
         // ------------------- -> Opret LejeAftale -------------------
+
         lejeAftaleService.opret(fuldBrugerValgDTO);
 
         return REDIRECT_TO_START;
@@ -195,6 +200,9 @@ public class NavigationController {
         }
         if (nyBugerValgDTO.getKmPrMdr() != 0){
             oldBrugerValgDTO.setKmPrMdr(nyBugerValgDTO.getKmPrMdr());
+        }
+        if (nyBugerValgDTO.getAfhentningssted() != null){
+            oldBrugerValgDTO.setAfhentningssted(nyBugerValgDTO.getAfhentningssted());
         }
 
 
