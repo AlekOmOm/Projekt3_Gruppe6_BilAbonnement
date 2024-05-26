@@ -30,26 +30,31 @@
                 <button class="redirect-button" type="submit">Generer Rapport</button>
             </form>
         </div>
+
         <div class="archive">
-            <input type="text" id="searchInput" placeholder="Søg efter dato...">
-            <button id="searchButton">Search</button>
+            <h2>Søg efter Rapporter</h2>
+            <h3>Husk at tjekke skrive datoformatet, så det passer til det i boksen</h3>
+            <form th:action="@{/dashboard/search}" method="get">
+                <label for="date">Dato Genereret:</label>
+                <input type="date" id="date" name="date">
+                <button type="submit">Søg</button>
+            </form>
+
             <h2 class="ArkivTitel">Arkiv</h2>
             <table class="ArkivTabel">
                 <thead>
                 <tr>
-                    <th>Rapport ID</th>
-                    <th>Dato</th>
-                    <th>Se rapport</th>
+                    <th>ID</th>
+                    <th>Dato Genereret</th>
+                    <th>Genererede rapporter</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="forretningsRapport : ${AlleRapporter}">
-                    <td th:text="${forretningsRapport.id}">Rapport ID</td>
-                    <td th:text="${#temporals.format(forretningsRapport.datoGenereret, 'yyyy-MM-dd')}">Dato Genereret</td>
+                <tr th:each="rapport : ${alleRapporter}">
+                    <td th:text="${rapport.id}"></td>
+                    <td th:text="${rapport.datoGenereret}"></td>
                     <td>
-                        <a th:href="@{/forretningsrapport/se(id=${forretningsRapport.id})}">
-                            <button>Se rapport</button>
-                        </a>
+                        <a th:href="@{/forretningsrapport/se/{id}(id=${rapport.id})}">Se Rapport</a>
                     </td>
                 </tr>
                 </tbody>
