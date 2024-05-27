@@ -7,8 +7,9 @@ public class ForretningsRapport {
     private int id;
     private LocalDate datoGenereret;
     private int totalBilerUdlejet;
-    private int samletPris;
+    private int samletPris; // Make sure this variable name matches the one you use in your Thymeleaf template
 
+    // Constructor
     public ForretningsRapport(int id, LocalDate datoGenereret, int totalBilerUdlejet, int samletPris) {
         this.id = id;
         this.datoGenereret = datoGenereret;
@@ -16,15 +17,15 @@ public class ForretningsRapport {
         this.samletPris = samletPris;
     }
 
-    //empty constructor
+    // Empty constructor
     public ForretningsRapport() {
     }
 
+    // Getters and setters
     public int getId() {
         return id;
     }
 
-    //getter and setters
     public void setId(int id) {
         this.id = id;
     }
@@ -45,9 +46,10 @@ public class ForretningsRapport {
         this.totalBilerUdlejet = totalBilerUdlejet;
     }
 
-    public int gettotalPris() {
+    public int getSamletPris() { // Make sure this getter is named correctly
         return samletPris;
     }
+
     public void setSamletPris(int samletPris) {
         this.samletPris = samletPris;
     }

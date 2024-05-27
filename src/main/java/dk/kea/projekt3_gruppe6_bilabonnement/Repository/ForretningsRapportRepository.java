@@ -18,7 +18,7 @@ public class ForretningsRapportRepository {
     public ForretningsRapportRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
+    // Mapper data fra databasen til objekter
     private static class ForretningsRapportRowMapper implements RowMapper<ForretningsRapport> {
         @Override
         public ForretningsRapport mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -31,21 +31,23 @@ public class ForretningsRapportRepository {
         }
     }
 
+    // Finder rapport ud fra ID
     public ForretningsRapport VaelgRapportMedId(int id) {
         String sql = "SELECT * FROM Forretningsrapport WHERE ID = ?";
         return jdbcTemplate.queryForObject(sql, new ForretningsRapportRowMapper(), id);
     }
-
+    // Finder alle rapporter
     public List<ForretningsRapport> seAlleRapporter() {
         String sql = "SELECT * FROM Forretningsrapport ORDER BY DatoGenereret DESC";
         return jdbcTemplate.query(sql, new ForretningsRapportRowMapper());
     }
 
+    //Indsætter rapport data i en række i databasen
     public void NyRapport(int totalBilerUdlejet, int samletPris) {
         String sql = "INSERT INTO Forretningsrapport (DatoGenereret, TotalBilerUdlejet, SamletPris) VALUES (CURDATE(), ?, ?)";
         jdbcTemplate.update(sql, totalBilerUdlejet, samletPris);
     }
-
+    // Finder rapporter ud fra dato
     public List<ForretningsRapport> findRapporterByDate(LocalDate date) {
         String sql = "SELECT * FROM Forretningsrapport WHERE DatoGenereret = ?";
         return jdbcTemplate.query(sql, new ForretningsRapportRowMapper(), date);

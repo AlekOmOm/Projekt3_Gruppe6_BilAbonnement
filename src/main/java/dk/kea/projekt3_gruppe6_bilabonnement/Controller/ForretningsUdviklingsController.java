@@ -29,17 +29,17 @@ public class ForretningsUdviklingsController {
         model.addAttribute("SamletIndkomstForBiler", samletIndkomstForBiler);
         model.addAttribute("AlleRapporter", alleRapporter);
     }
-// getmapping til dashboard
-@GetMapping("/dashboard")
-public String seDashboard(Model model) {
-    int antalUdlejedeBiler = dashboardService.seAntalUdlejdeBiler();
-    int samletIndkomstForBiler = dashboardService.seTotalIndkomst();
-    List<ForretningsRapport> alleRapporter = forretningsRapportService.seAlleRapporter();
-    model.addAttribute("AntalUdlejedeBiler", antalUdlejedeBiler);
-    model.addAttribute("SamletIndkomstForBiler", samletIndkomstForBiler);
-    model.addAttribute("alleRapporter", alleRapporter);
-    return "dashboard";
-}
+
+    @GetMapping("/dashboard")
+    public String seDashboard(Model model) {
+        int antalUdlejedeBiler = dashboardService.seAntalUdlejdeBiler();
+        int samletIndkomstForBiler = dashboardService.seTotalIndkomst();
+        List<ForretningsRapport> alleRapporter = forretningsRapportService.seAlleRapporter();
+        model.addAttribute("AntalUdlejedeBiler", antalUdlejedeBiler);
+        model.addAttribute("SamletIndkomstForBiler", samletIndkomstForBiler);
+        model.addAttribute("alleRapporter", alleRapporter);
+        return "dashboard";
+    }
 
     @GetMapping("/forretningsrapport")
     public String seForretningsRapport(Model model) {
@@ -52,7 +52,7 @@ public String seDashboard(Model model) {
     }
 
     @PostMapping("/forretningsrapport")
-    public String genererForretningsRapport(Model model) {
+    public String genererForretningsRapport() {
         int totalBilerUdlejet = dashboardService.seAntalUdlejdeBiler();
         int samletPris = dashboardService.seTotalIndkomst();
         forretningsRapportService.NyRapport(totalBilerUdlejet, samletPris);
@@ -70,7 +70,7 @@ public String seDashboard(Model model) {
     }
 
     @GetMapping("/dashboard/search")
-    public String searchRapporter(@RequestParam("date") String date, Model model) {
+    public String SoegRapporter(@RequestParam("date") String date, Model model) {
         LocalDate searchDate = LocalDate.parse(date);
         List<ForretningsRapport> rapporter = forretningsRapportService.findRapporterByDate(searchDate);
         model.addAttribute("AntalUdlejedeBiler", dashboardService.seAntalUdlejdeBiler());
@@ -78,5 +78,4 @@ public String seDashboard(Model model) {
         model.addAttribute("alleRapporter", rapporter);
         return "dashboard";
     }
-
 }
