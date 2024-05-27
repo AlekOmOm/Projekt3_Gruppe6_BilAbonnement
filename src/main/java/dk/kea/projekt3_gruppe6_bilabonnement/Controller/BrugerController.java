@@ -19,7 +19,7 @@ public class BrugerController {
     private static final String HOME_PAGE = "Home";
     private static final String REDIRECT_DATA_REGISTRERING = "redirect:/LejeAftale/";
     private static final String REDIRECT_SKADE_UDBEDRING = "redirect:/SkadeRapport/";
-    private static final String REDIRECT_FORRETNINGS_UDVIKLING = "redirect:/Dashboard/";
+    private static final String REDIRECT_FORRETNINGS_UDVIKLING = "redirect:/dashboard";
 
     private final BrugerService brugerService;
 

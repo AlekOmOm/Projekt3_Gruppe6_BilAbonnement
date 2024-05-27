@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/headerFooter.css" th:href="@{/headerFooter.css}">
+    <link rel="stylesheet" href="../static/forretningsrapport.css" th:href="@{/forretningsrapport.css}">
+    <title>Forretnings Rapport</title>
+</head>
+<body>
+
+<div class="header">
+    <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300"/>
+    <p>BilAbonnement A/S</p>
+</div>
+
+<div class="content-container">
+    <a href="/dashboard" class="back-button">Tilbage</a>
+    <h1>Forretningsrapport</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Dato Genereret</th>
+            <th>Total Biler Udlejet</th>
+            <th>Samlet Pris</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${rapport != null}">
+            <td th:text="${rapport.id}"></td>
+            <td th:text="${rapport.datoGenereret}"></td>
+            <td th:text="${rapport.totalBilerUdlejet}"></td>
+            <td th:text="${rapport.samletPris}"></td>
+        </tr>
+        <tr th:if="${rapport == null}">
+            <td colspan="4">Ingen rapport fundet</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="footer">
+    <p>© 2021 Bilabonnement A/S</p>
+</div>
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package dk.kea.projekt3_gruppe6_bilabonnement.Model;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class LejeAftale {
 
@@ -51,6 +52,10 @@ public class LejeAftale {
     public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, LocalDate startDato, LocalDate slutDato, int totalPris) {
         setAllInstances(bruger, kundeInfo, bil, skadeRapport);
         setAllInstanceVariables(farve, afleveringsforsikring, selvrisiko, daekpakke, vejhjaelp, udleveringVedFDM, abonnementslaengde, kmPrMdr, afhentningssted, startDato, slutDato, totalPris);
+    }
+
+    public static int getTotalPris(List<Bil> udlejedeBiler) {
+        return 0;
     }
 
 

@@ -11,24 +11,24 @@ public class DashboardService {
 
     public final BilService bilService;
     public final LejeAftaleRepository lejeaftaleRepository;
+    public final BilRepository bilRepository;
 
-    public DashboardService(BilService bilService, LejeAftaleRepository lejeaftaleRepository) {
+    public DashboardService(BilService bilService, LejeAftaleRepository lejeaftaleRepository, BilRepository bilRepository){
         this.bilService = bilService;
         this.lejeaftaleRepository = lejeaftaleRepository;
+        this.bilRepository = bilRepository;
     }
 
     //Antal udlejde biler
-    public long seAntalUdlejdeBiler() {
-
-        return bilService.getBilerByStatus("Udlejet").size();
+    public int seAntalUdlejdeBiler() {
+        return bilRepository.findByStatus("Udlejet").size();
     }
 
     // Samlet indkomst fra udlejede biler
     public int seTotalIndkomst(){
         List<Bil> udlejedeBiler = bilService.getBilerByStatus("Udlejet");
         List<String> vognNummer = udlejedeBiler.stream().map(Bil::getVognNummer).toList();
-        // TODO: LejeAftaleService.getTotalIndkomst(List<Bil> udlejedeBiler)
-        // return lejeaftaleRepository.findByVognNummer(vognNummer).stream().mapToInt(LejeAftale::getPrisoverslag).sum();
-        return 0; // TODO: Implement this
+        int totalIndkomst = lejeaftaleRepository.findByVognNummer(vognNummer).stream().mapToInt(LejeAftale::getTotalPris).sum();
+        return totalIndkomst;
     }
 }
