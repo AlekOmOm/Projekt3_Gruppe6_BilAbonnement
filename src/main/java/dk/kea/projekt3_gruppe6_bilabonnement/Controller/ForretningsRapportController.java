@@ -11,11 +11,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-public class ForretningsUdviklingsController {
+public class ForretningsRapportController {
     private final DashboardService dashboardService;
     private final ForretningsRapportService forretningsRapportService;
 
-    public ForretningsUdviklingsController(DashboardService dashboardService, ForretningsRapportService forretningsRapportService) {
+    public ForretningsRapportController(DashboardService dashboardService, ForretningsRapportService forretningsRapportService) {
         this.dashboardService = dashboardService;
         this.forretningsRapportService = forretningsRapportService;
     }

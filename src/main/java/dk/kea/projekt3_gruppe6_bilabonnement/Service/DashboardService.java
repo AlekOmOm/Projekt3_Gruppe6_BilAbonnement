@@ -28,7 +28,11 @@ public class DashboardService {
     public int seTotalIndkomst(){
         List<Bil> udlejedeBiler = bilService.getBilerByStatus("Udlejet");
         List<String> vognNummer = udlejedeBiler.stream().map(Bil::getVognNummer).toList();
+
         int totalIndkomst = lejeaftaleRepository.findByVognNummer(vognNummer).stream().mapToInt(LejeAftale::getTotalPris).sum();
+
+        System.out.println("DEBUG: DashboardService.seTotalIndkomst");
+        System.out.println(" - totalIndkomst: " + totalIndkomst);
         return totalIndkomst;
     }
 }
