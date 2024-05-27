@@ -20,7 +20,7 @@ public class ForretningsRapportService {
         forretningsRapportRepository.NyRapport(totalBilerUdlejet, samletPris);
     }
 
-    public List<ForretningsRapport> seAlleRapporter() {
+    public List<ForretningsRapport> findAlleRapporter() {
         return forretningsRapportRepository.seAlleRapporter();
     }
 

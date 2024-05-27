@@ -24,7 +24,7 @@ public class ForretningsRapportController {
     public void addAttributes(Model model) {
         int antalUdlejedeBiler = dashboardService.seAntalUdlejdeBiler();
         int samletIndkomstForBiler = dashboardService.seTotalIndkomst();
-        List<ForretningsRapport> alleRapporter = forretningsRapportService.seAlleRapporter();
+        List<ForretningsRapport> alleRapporter = forretningsRapportService.findAlleRapporter();
         model.addAttribute("AntalUdlejedeBiler", antalUdlejedeBiler);
         model.addAttribute("SamletIndkomstForBiler", samletIndkomstForBiler);
         model.addAttribute("AlleRapporter", alleRapporter);
@@ -34,7 +34,7 @@ public class ForretningsRapportController {
     public String seDashboard(Model model) {
         int antalUdlejedeBiler = dashboardService.seAntalUdlejdeBiler();
         int samletIndkomstForBiler = dashboardService.seTotalIndkomst();
-        List<ForretningsRapport> alleRapporter = forretningsRapportService.seAlleRapporter();
+        List<ForretningsRapport> alleRapporter = forretningsRapportService.findAlleRapporter();
         model.addAttribute("AntalUdlejedeBiler", antalUdlejedeBiler);
         model.addAttribute("SamletIndkomstForBiler", samletIndkomstForBiler);
         model.addAttribute("alleRapporter", alleRapporter);
@@ -43,7 +43,7 @@ public class ForretningsRapportController {
 
     @GetMapping("/forretningsrapport")
     public String seForretningsRapport(Model model) {
-        List<ForretningsRapport> alleRapporter = forretningsRapportService.seAlleRapporter();
+        List<ForretningsRapport> alleRapporter = forretningsRapportService.findAlleRapporter();
         ForretningsRapport latestRapport = alleRapporter.get(alleRapporter.size() - 1);
         model.addAttribute("rapport", latestRapport);
         return "forretningsrapport";

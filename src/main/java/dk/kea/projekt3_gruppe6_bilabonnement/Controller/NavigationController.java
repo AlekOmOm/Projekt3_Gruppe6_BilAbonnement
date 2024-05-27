@@ -49,16 +49,12 @@ public class NavigationController {
         // ------------------- Start på ny LejeAftale session -------------------
         nyLejeAftaleSession(session);
 
-
         // ------------------- data for View -------------------
 
         model.addAttribute("biler", bilService.getBilTyper()); // TODO: ændre til getAlleTilgaengeligeBiler senere
         model.addAttribute("citroen", bilService.getBilTyper().get(0));
         model.addAttribute("peugeot", bilService.getBilTyper().get(1));
         model.addAttribute("opel", bilService.getBilTyper().get(2));
-
-
-
 
 
 
@@ -158,7 +154,9 @@ public class NavigationController {
     // ------------------- Helper methods -------------------
 
     private void loadOgSave(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
+
         try {
+
             BrugerValgDTO oldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
             BrugerValgDTO loadedDTO = load(oldBrugerValgDTO, nyBrugerValgDTO);
 
@@ -204,7 +202,6 @@ public class NavigationController {
         if (nyBugerValgDTO.getAfhentningssted() != null){
             oldBrugerValgDTO.setAfhentningssted(nyBugerValgDTO.getAfhentningssted());
         }
-
 
         return oldBrugerValgDTO;
     }
