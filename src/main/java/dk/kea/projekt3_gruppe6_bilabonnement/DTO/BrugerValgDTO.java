@@ -1,14 +1,26 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.DTO;
 
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import java.time.LocalDate;
 
+@Component
 public class BrugerValgDTO {
 
     // 0. Bruger
     private int brugerID;
 
+    // 1. abonnements side
+//    String farve;
+//    boolean afleveringsforsikring = false; // default
+//    boolean selvrisiko = false; // default
+//    boolean daekpakke = false; // default
+//    boolean vejhjaelp = false; // default
+//    boolean udleveringVedFDM = false; // default
+    private List<String> selectedPackageDeals;
 
     // 1. bil valg
     private String bilModel; // bil modeller: CitroenC1, Peugeot108, OpelCorsaCosmo
@@ -20,6 +32,8 @@ public class BrugerValgDTO {
     private boolean daekpakke;
     private boolean vejhjaelp;
     private boolean udleveringVedFDM;
+    private List<String> abonnementsSide;
+
 
     // 3. Prisoverslag
     private int abonnementslaengde;
@@ -38,8 +52,6 @@ public class BrugerValgDTO {
     private String afhentningssted;
 
     int totalPris;
-
-    private List<String> selectedPackageDeals;
 
 
 
@@ -64,7 +76,7 @@ public class BrugerValgDTO {
 
 
 
-    public BrugerValgDTO(int brugerID, String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String cprNr, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer, String afhentningssted, List<String> selectedPackageDeals) {
+    public BrugerValgDTO(int brugerID, String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String cprNr, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer, String afhentningssted) {
         this.brugerID = brugerID;
         this.bilModel = bilModel;
 
@@ -78,7 +90,6 @@ public class BrugerValgDTO {
         this.email = email;
         this.mobilNummer = mobilNummer;
         this.afhentningssted = afhentningssted;
-        this.selectedPackageDeals = selectedPackageDeals;
     }
 
 
@@ -239,11 +250,103 @@ public class BrugerValgDTO {
         this.totalPris = totalPris;
     }
 
-    public List<String> getSelectedPackageDeals() {
-        return selectedPackageDeals;
+    // ------------------- get for each page -------------------
+
+    public String getBilValg(){
+        return bilModel;
     }
-    public void setSelectedPackageDeals(List<String> selectedPackageDeals) {
-        this.selectedPackageDeals = selectedPackageDeals;
+
+    public List<String> getAbonnementsSide(){
+        setAbonnementsSide();
+
+        return abonnementsSide;
+    }
+
+    public void setAbonnementsSide () {
+        abonnementsSide = new ArrayList<>();
+
+        if (afleveringsforsikring){
+            abonnementsSide.add("Afleveringsforsikring");
+        }
+        if (selvrisiko){
+            abonnementsSide.add("Selvrisiko");
+        }
+        if (daekpakke){
+            abonnementsSide.add("Daekpakke");
+        }
+        if (vejhjaelp){
+            abonnementsSide.add("Vejhjaelp");
+        }
+        if (udleveringVedFDM){
+            abonnementsSide.add("Udlevering ved FDM");
+        }
+    }
+
+    public List<Boolean> getAbonnementsSideBoolean(){
+        List<Boolean> abonnementsSide = new ArrayList<>();
+        abonnementsSide.add(afleveringsforsikring);
+        abonnementsSide.add(selvrisiko);
+        abonnementsSide.add(daekpakke);
+        abonnementsSide.add(vejhjaelp);
+        abonnementsSide.add(udleveringVedFDM);
+        return abonnementsSide;
+    }
+
+    public void setAbonnementsSideBoolean(List<Boolean> abonnementsSide){
+        // only set if value is true;
+        if (abonnementsSide.get(0)){
+            this.afleveringsforsikring = true;
+        }
+        if (abonnementsSide.get(1)){
+            this.selvrisiko = true;
+        }
+        if (abonnementsSide.get(2)){
+            this.daekpakke = true;
+        }
+        if (abonnementsSide.get(3)){
+            this.vejhjaelp = true;
+        }
+        if (abonnementsSide.get(4)){
+            this.udleveringVedFDM = true;
+        }
+    }
+
+
+
+
+
+    // ------------------- print for each page -------------------
+
+    public void printBilValg(){
+        System.out.println(" bilModel: " + bilModel);
+    }
+
+    public void printAbonnementsSide(){
+        System.out.println(" farve: " + farve);
+        System.out.println(" afleveringsforsikring: " + afleveringsforsikring);
+        System.out.println(" selvrisiko: " + selvrisiko);
+        System.out.println(" daekpakke: " + daekpakke);
+        System.out.println(" vejhjaelp: " + vejhjaelp);
+        System.out.println(" udleveringVedFDM: " + udleveringVedFDM);
+    }
+
+    public void printPrisoverslag(){
+        System.out.println(" abonnementslaengde: " + abonnementslaengde);
+        System.out.println(" kmPrMdr: " + kmPrMdr);
+    }
+
+    public void printKundeInfo(){
+        System.out.println(" cprNr: " + cprNr);
+        System.out.println(" fornavn: " + fornavn);
+        System.out.println(" efternavn: " + efternavn);
+        System.out.println(" adresse: " + adresse);
+        System.out.println(" postNummer: " + postNummer);
+        System.out.println(" email: " + email);
+        System.out.println(" mobilNummer: " + mobilNummer);
+    }
+
+    public void printAfhentningssted(){
+        System.out.println(" afhentningssted: " + afhentningssted);
     }
 
     // ------------------- toString -------------------

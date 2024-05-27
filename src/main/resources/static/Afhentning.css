@@ -1,8 +1,11 @@
-.content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.inputField {
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 .button {
     cursor: pointer;
@@ -17,4 +20,3 @@
 #tilbageButton:active {
     background-color: #413c3c; /* Adjust as needed */
 }
-

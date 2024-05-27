@@ -52,7 +52,7 @@
     <div class = "three-containers">
         <div class = "left-side-container">
             <a href="/LejeAftale/PrisOverslag">
-                <button class="button" >Tilbage</button>
+                <button class="button" id="tilbageButton" >Tilbage</button>
                 <input type="hidden" >
             </a>
         </div>
@@ -86,7 +86,7 @@
                         <input type="text" th:name="${'mobilNummer'}" placeholder="Mobilnummer" class="inputField">
 
                     </label>
-                    <button type="submit" class="button"> Vælg Bil </button>
+                    <button type="submit" class="button" id="vaelgBilButton"> Bekræft og gå videre </button>
                 </form>
             </div>
 
@@ -97,7 +97,7 @@
 
             <div class="info-saved-in-DTO">
                 <p style="font-weight: bold;" >Valgt bil: <span th:text="${nyBrugerValgDTO.bilModel}"></span></p>
-                <p style="font-weight: bold;" >Valgt abonnement: <span th:text="${nyBrugerValgDTO.selectedPackageDeals}"></span></p>
+                <p style="font-weight: bold;" >Valgt abonnement: <span th:text="${nyBrugerValgDTO.abonnementsSide}"></span></p>
                 <p style="font-weight: bold;" >Valgt antal måneder: <span th:text="${nyBrugerValgDTO.abonnementslaengde}"></span></p>
                 <p style="font-weight: bold;" >Valgt km pr. måned: <span th:text="${nyBrugerValgDTO.kmPrMdr}"></span></p>
             </div>

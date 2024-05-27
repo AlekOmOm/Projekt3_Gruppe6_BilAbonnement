@@ -242,4 +242,5 @@ public class LejeAftale {
                 ", totalPris=" + totalPris +
                 '}';
     }
+
 }
