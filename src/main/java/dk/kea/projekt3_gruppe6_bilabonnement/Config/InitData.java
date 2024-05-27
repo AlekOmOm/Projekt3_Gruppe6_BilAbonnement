@@ -1,6 +1,7 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Config;
 
 
+import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerValgDTO;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo;
@@ -40,10 +41,11 @@ public class InitData implements ApplicationRunner {
     private static List<LejeAftale> lejeAftaler = new ArrayList<>();
     private static List<SkadeRapport> skadeRapporter = new ArrayList<>();
     private final BilService bilService;
+    private final BrugerValgDTO brugerValgDTO;
 //    List<ForretningsRapport> forretningsRapporter = new ArrayList<>();
 
     @Autowired
-    public InitData(BilFactory bilFactory, BilRepository bilRepository, BrugerRepository brugerRepository, LejeAftaleRepository lejeaftaleRepository, SkadeRapportRepository skadeRapportRepository, BilService bilService, BrugerService brugerService, LejeAftaleService lejeAftaleService, KundeInfoService kundeInfoService) {
+    public InitData(BilFactory bilFactory, BilRepository bilRepository, BrugerRepository brugerRepository, LejeAftaleRepository lejeaftaleRepository, SkadeRapportRepository skadeRapportRepository, BilService bilService, BrugerService brugerService, LejeAftaleService lejeAftaleService, KundeInfoService kundeInfoService, BrugerValgDTO brugerValgDTO) {
         this.bilFactory = bilFactory;
         this.bilRepository = bilRepository;
         this.brugerRepository = brugerRepository;
@@ -53,6 +55,7 @@ public class InitData implements ApplicationRunner {
         this.brugerService = brugerService;
         this.lejeAftaleService = lejeAftaleService;
         this.kundeInfoService = kundeInfoService;
+        this.brugerValgDTO = brugerValgDTO;
     }
 
     @Override
@@ -71,7 +74,7 @@ public class InitData implements ApplicationRunner {
 
         // ------------------- LejeAftale test data -------------------
 
-        lejeAftaleTestData();
+        lejeAftaleData();
 
         // ------------------- SkadeRapport test data -------------------
 
@@ -146,17 +149,17 @@ public class InitData implements ApplicationRunner {
         }
     }
 
-    private void lejeAftaleTestData() {
+    private void lejeAftaleData() {
         brugere = brugerRepository.findAll();
-        biler = bilRepository.findAll();
-        kundeInfos = kundeInfoService.findAll();
 
-        lejeAftaler.addAll(Arrays.asList(
-                // LejeAftale fields: Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, LocalDate startDato, LocalDate slutDato
-                new LejeAftale(brugere.get(0), kundeInfos.get(0), biler.get(0), null, "Red", true, true, true, true, true, 12, 10000, "Testvej 1", LocalDate.now(), LocalDate.now().plusMonths(12), 10000),
-                new LejeAftale(brugere.get(1), kundeInfos.get(1), biler.get(1), null, "Blue", true, true, true, true, true, 12, 10000, "Testvej 2", LocalDate.now(), LocalDate.now().plusMonths(12), 10000),
-                new LejeAftale(brugere.get(2), kundeInfos.get(2), biler.get(2), null, "Green", true, true, true, true, true, 12, 10000, "Testvej 3", LocalDate.now(), LocalDate.now().plusMonths(12), 10000)
-        ));
+        kundeInfos = kundeInfoService.findAll();
+        List<BrugerValgDTO> brugerValgDTOer = new ArrayList<>();
+        fillLejeAftalerOgDTOer(brugerValgDTOer);
+
+        System.out.println("InitData.lejeAftaleData() - brugerValgDTOer: " + brugerValgDTOer.toString());
+        // konverter LejeAftaler data til brugerValgDTOer
+        konverter(brugerValgDTOer);
+
 
         // tjek om biler allerede findes i database og fjern dem fra listen
         for (Iterator<LejeAftale> iterator = lejeAftaler.iterator(); iterator.hasNext();) {
@@ -167,16 +170,60 @@ public class InitData implements ApplicationRunner {
             }
         }
 
+        System.out.println("InitData.lejeAftaleData() - lejeAftaler: " + lejeAftaler.toString());
 
         // Save biler (hvis nye) til database
-        for (int i = 0; i<lejeAftaler.size(); i++) {
-            LejeAftale lejeAftale = lejeAftaler.get(i);
-            if (lejeAftale != null) {
-                lejeaftaleRepository.save(lejeAftale);
+        for (int i = 0; i<brugerValgDTOer.size(); i++) {
+            BrugerValgDTO dto = brugerValgDTOer.get(i);
+            if (dto != null) {
+                System.out.println("InitData.lejeAftaleData() - dto: " + dto.toString());
+                lejeAftaleService.opret(dto);
             }
         }
 
     }
+
+    private void fillLejeAftalerOgDTOer(List<BrugerValgDTO> brugerValgDTOer) {
+        biler = bilService.findAllAvailable();
+        List<LejeAftale> tempLejeAftaler = new ArrayList<>();
+        List<BrugerValgDTO> tempBrugere = new ArrayList<>();
+
+        System.out.println("DEBUG: InitData.fillLejeAftalerOgDTOer()");
+        System.out.println(" - biler: " + biler.size());
+        System.out.println(" - tempBrugere: " + tempBrugere.size());
+        System.out.println(" - tempLejeAftaler: " + tempLejeAftaler.size());
+
+        if (biler.size() <= 1) {
+            return;
+        }
+
+
+
+        System.out.println(" - lejeAftaler: " + lejeAftaler.size());
+        System.out.println(" - brugerValgDTOer: " + brugerValgDTOer.size());
+
+
+        tempLejeAftaler.addAll(Arrays.asList(
+                // LejeAftale fields: Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, LocalDate startDato, LocalDate slutDato
+                new LejeAftale(brugere.get(0), kundeInfos.get(0), biler.get(0), null, "Red", true, true, true, true, true, 12, 10000, "Testvej 1", LocalDate.now(), LocalDate.now().plusMonths(12), 10000),
+                new LejeAftale(brugere.get(1), kundeInfos.get(1), biler.get(1), null, "Blue", true, true, true, true, true, 12, 10000, "Testvej 2", LocalDate.now(), LocalDate.now().plusMonths(12), 10000),
+                new LejeAftale(brugere.get(2), kundeInfos.get(2), biler.get(2), null, "Green", true, true, true, true, true, 12, 10000, "Testvej 3", LocalDate.now(), LocalDate.now().plusMonths(12), 10000)
+        ));
+
+
+        tempBrugere.addAll(Arrays.asList( // BrugerValgDTO(brugerID, bilModel,
+                new BrugerValgDTO(),
+                new BrugerValgDTO(),
+                new BrugerValgDTO()
+        ));
+
+
+        Bil bil = biler.get(0);
+        lejeAftaler.add(tempLejeAftaler.get(0));
+        brugerValgDTOer.add(tempBrugere.get(0));
+
+    }
+
 
     // ------------------- get Data objects -------------------
     public static List<Bruger> getBrugere() {
@@ -245,6 +292,28 @@ public class InitData implements ApplicationRunner {
             bil.setSomTilgaengelig();
             if (bil != null) {
                 bilRepository.save(bil);
+            }
+        }
+    }
+
+    // ------------------- LejeAftale Data - Helper methods -------------------
+    private void konverter(List<BrugerValgDTO> brugerValgDTOer) {
+        for (int i = 0; i<lejeAftaler.size(); i++) {
+            LejeAftale lejeAftale = lejeAftaler.get(i);
+            BrugerValgDTO brugerValgDTO = brugerValgDTOer.get(i);
+            if (lejeAftale != null && brugerValgDTO != null) {
+                brugerValgDTO.setKundeInfoID(lejeAftale.getKundeInfo().getId());
+                brugerValgDTO.setBrugerID(lejeAftale.getBruger().getId());
+                brugerValgDTO.setBilModel(lejeAftale.getBil().getModel());
+                brugerValgDTO.setFarve(lejeAftale.getFarve());
+                brugerValgDTO.setAfleveringsforsikring(lejeAftale.isAfleveringsforsikring());
+                brugerValgDTO.setSelvrisiko(lejeAftale.isSelvrisiko());
+                brugerValgDTO.setDaekpakke(lejeAftale.isDaekpakke());
+                brugerValgDTO.setVejhjaelp(lejeAftale.isVejhjaelp());
+                brugerValgDTO.setUdleveringVedFDM(lejeAftale.isUdleveringVedFDM());
+                brugerValgDTO.setAbonnementslaengde(lejeAftale.getAbonnementslaengde());
+                brugerValgDTO.setKmPrMdr(lejeAftale.getKmPrMdr());
+                brugerValgDTO.setAfhentningssted(lejeAftale.getAfhentningssted());
             }
         }
     }

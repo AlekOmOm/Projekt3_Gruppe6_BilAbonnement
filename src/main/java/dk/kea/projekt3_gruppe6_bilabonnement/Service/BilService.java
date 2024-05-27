@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class BilService {
@@ -31,17 +32,10 @@ public class BilService {
 
     // ------------------- Business Operations -------------------
 
-    public Bil book(Bil bilTypeValgt) {
+    public Bil book(Bil bilTypeValgt) throws NoSuchElementException {
         return bilRepository.bookAvailableOfType(bilTypeValgt);
     }
 
-    public Bil setSomTilgaengelig(Bil bil) {
-        return bilRepository.setSomTilgaengelig(bil);
-    }
-
-    public Bil setSomTilService(Bil bil) {
-        return bilRepository.setSomTilService(bil);
-    }
 
 
     // ------------------- DB CRUD -------------------
@@ -103,37 +97,22 @@ public class BilService {
     }
 
 
-    public List<Bil> getBilTestData() {
-        List<Bil> biler = new ArrayList<>();
-
-        biler.addAll(Arrays.asList(
-                bilFactory.createCitroenC1(),
-                bilFactory.createPeugeot108(),
-                bilFactory.createOpelCorsaCosmo()
-        ));
-
-
-        // tilfældige værdier for hver bil
-        for (int i = 0; i<biler.size(); i++) {
-            Bil bil = biler.get(i);
-            if (bil != null) {
-                bil.setVognNummer("VognNummer" + i);
-                bil.setStelNummer("StelNummer" + i);
-                bil.setUdstyrsNiveau("UdstyrsNiveau" + i);
-                bil.setKilometerKoert(1000 * i);
-                bil.setSomTilgaengelig();
-            }
-        }
-
-
-        return biler;
-    }
-
     public List<Bil> getBilTyper() {
         List<Bil> biler = new ArrayList<>();
         biler.add(bilFactory.createCitroenC1());
         biler.add(bilFactory.createPeugeot108());
         biler.add(bilFactory.createOpelCorsaCosmo());
         return biler;
+    }
+
+    public List<Bil> findAllAvailable() {
+        List<Bil> biler = bilRepository.findAll();
+        List<Bil> tilgaengeligeBiler = new ArrayList<>();
+        for (Bil bil : biler) {
+            if (bil.getStatus().equals("Tilgaengelig")) {
+                tilgaengeligeBiler.add(bil);
+            }
+        }
+        return tilgaengeligeBiler;
     }
 }

@@ -46,7 +46,11 @@ public class KundeInfoRepository {
     }
 
     public List<KundeInfo> findAll() {
-        return template.query(SELECT_ALL, this::mapRow);
+        List<KundeInfo> kundeInfoList = template.query(SELECT_ALL, this::mapRow);
+        System.out.println("DEBUG: KundeInfoRepository.findAll()");
+        System.out.println(" - kundeInfoList: " + kundeInfoList.size());
+        System.out.println(" - kundeInfo 0 ID;" + kundeInfoList.get(0).getId());
+        return kundeInfoList;
     }
 
     public KundeInfo update(KundeInfo kundeInfo) {

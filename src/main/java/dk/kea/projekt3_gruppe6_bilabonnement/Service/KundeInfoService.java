@@ -21,7 +21,13 @@ public class KundeInfoService {
 
     // ------------------- Main Operations -------------------
 
-    public KundeInfo getInstance(BrugerValgDTO brugerValgDTO) {
+    public KundeInfo getInstanceIfNew(BrugerValgDTO brugerValgDTO) {
+        if (brugerValgDTO.getKundeInfoID() != 0) {
+            System.out.println("KundeInfoService.getInstanceIfNew() - KundeInfo already exists");
+            System.out.println(" - brugerValgDTO: " + brugerValgDTO.getKundeInfo());
+            System.out.println();
+            return new KundeInfo(brugerValgDTO.getKundeInfoID(), brugerValgDTO.getCprNr(), brugerValgDTO.getFornavn(), brugerValgDTO.getEfternavn(), brugerValgDTO.getAdresse(), brugerValgDTO.getPostNummer(), brugerValgDTO.getEmail(), brugerValgDTO.getMobilNummer());
+        }
         return new KundeInfo(brugerValgDTO.getCprNr(), brugerValgDTO.getFornavn(), brugerValgDTO.getEfternavn(), brugerValgDTO.getAdresse(), brugerValgDTO.getPostNummer(), brugerValgDTO.getEmail(), brugerValgDTO.getMobilNummer());
     }
 
@@ -29,6 +35,11 @@ public class KundeInfoService {
     // ------------------- Operations CRUD -------------------
 
     public KundeInfo save(KundeInfo kundeInfo) {
+
+        if (kundeInfo.getId() != 0) {
+            System.out.println("KundeInfoService.save() - KundeInfo already exists");
+            return update(kundeInfo);
+        }
         if (notHaveNecessaryVariables(kundeInfo)) {
             System.out.println("KundeInfoService.save() - Missing necessary variables");
             System.out.println(kundeInfo);
@@ -55,8 +66,11 @@ public class KundeInfoService {
     public KundeInfo update(KundeInfo kundeInfo) {
         if (notHaveNecessaryVariables(kundeInfo)) {
             System.out.println("KundeInfoService.update() - Missing necessary variables");
-            return null;
+            System.out.println(kundeInfo);
+            System.out.println();
+            return kundeInfoRepository.findByID(kundeInfo.getId());
         }
+
         return kundeInfoRepository.update(kundeInfo);
     }
 

@@ -43,26 +43,6 @@ public class BilRepository {
     }
 
 
-    // ------------------- Business Operations -------------------
-
-    public Bil book(Bil bil) {
-        bil.setSomUdlejet();
-        return update(bil);
-    }
-
-    public Bil setSomTilgaengelig(Bil bil) {
-        bil.setSomTilgaengelig();
-        return update(bil);
-    }
-
-    public Bil setSomTilService(Bil bil) {
-        bil.setSomTilService();
-        return update(bil);
-    }
-
-
-
-
 
     // ------------------- CRUD Operations -------------------
 
@@ -74,17 +54,15 @@ public class BilRepository {
         }
 
         template.update(INSERT, bil.getVognNummer(), bil.getStelNummer(), bil.getModel(), bil.getUdstyrsNiveau(), bil.getKilometerKoert(), bil.getStatus());
-        System.out.println("Bil saved");
+
 
         Bil foundBil = findByVognNummer(bil.getVognNummer());
-        System.out.println("foundBil: " + foundBil);
-        System.out.println();
+
         return foundBil;
     }
 
     public Bil find(Bil bil) {
-        System.out.println("DEBUG: BilRepository.find()");
-        System.out.println(" - bil: " + bil);
+
         if (bil.getId() == 0) {
             System.out.println("bil.getId() == 0");
             return findByVognNummer(bil.getVognNummer());
@@ -120,7 +98,6 @@ public class BilRepository {
     public Bil update (Bil bil) {
         template.update(UPDATE, bil.getVognNummer(), bil.getStelNummer(), bil.getModel(), bil.getUdstyrsNiveau(), bil.getKilometerKoert(), bil.getStatus(), bil.getId());
 
-        System.out.println("Bil updated");
         return find(bil);
     }
 
@@ -167,7 +144,6 @@ public class BilRepository {
         List<Bil> bilList = template.query(SELECT_BY_MODEL, this::mapRow, bilModel);
 
         if (bilList.isEmpty()) {
-            System.out.println("bilList: " + bilList);
             throw new NoSuchElementException("No available car for the given model.");
         }
 
@@ -182,12 +158,19 @@ public class BilRepository {
             }
         }
 
+        if (tilgaengeligeBiler.isEmpty()) {
+
+            throw new NoSuchElementException("No available car for the given model.");
+
+        }
         Bil bilToBook = tilgaengeligeBiler.get(0);
 
         template.update(UPDATE_STATUS_UDLEJET, bilToBook.getId());
 
         return bilToBook;
     }
+
+
 }
 
 /*

@@ -48,7 +48,6 @@ public class LejeAftaleService {
         // ------------------- Initialization -------------------
         LejeAftale lejeAftale = initialize(brugerValgDTO);
 
-        System.out.println(" - lejeAftale: " + lejeAftale.toString());
         // ------------------- Save and Return -------------------
         if (lejeAftale != null) {
 
@@ -70,8 +69,6 @@ public class LejeAftaleService {
     // ------------------- Operations (CRUD) -------------------
 
     public LejeAftale save(LejeAftale nyLejeAftale) {
-        System.out.println("DEBUG: LejeAftaleService.save() called");
-        System.out.println(" - nyLejeAftale: " + nyLejeAftale.toString());
 
         if (nyLejeAftale.getID() != 0) {
             return update(nyLejeAftale);
@@ -191,15 +188,11 @@ public class LejeAftaleService {
             // 1. Bruger 2. Bil 3. KundeInfo 4. SkadeRapport
         Bruger bruger = brugerService.hent(brugerValgDTO.getBrugerID()); // Bruger instance findes allerede i DB, da bruger er logget ind // TODO: tilføj BrugerID til BrugerValgDTO
         Bil bil = bilService.getInstance(brugerValgDTO.getBilModel());
-        KundeInfo kundeInfo = kundeInfoService.getInstance(brugerValgDTO);
+        KundeInfo kundeInfo = kundeInfoService.getInstanceIfNew(brugerValgDTO);
         SkadeRapport nullSkadeRapport = null; // SkadeRapport skabes efter LejeAftale perioden er ovre
 
             // Check for null
         if (isNull(bruger, bil, kundeInfo)) {
-            System.out.println("DEBUG: LejeAftaleService.initialize() failed");
-            System.out.println(" - bruger: " + bruger);
-            System.out.println(" - bil: " + bil);
-            System.out.println(" - kundeInfo: " + kundeInfo);
 
             return null; // return null hvis nogen af Instances er null
         }

@@ -40,6 +40,7 @@ public class BrugerValgDTO {
     private int kmPrMdr;
 
     // 4. Kunde Info
+    private int kundeInfoID;
     private String cprNr;
     private String fornavn;
     private String efternavn;
@@ -163,6 +164,15 @@ public class BrugerValgDTO {
     }
 
     //  4. Kunde Info
+
+    public int getKundeInfoID() {
+        return kundeInfoID;
+    }
+
+    public void setKundeInfoID(int kundeInfoID) {
+        this.kundeInfoID = kundeInfoID;
+    }
+
     public String getCprNr() {
         return cprNr;
     }

@@ -110,10 +110,23 @@ public class LejeAftaleRepository {
 
     // ------------------- special operations -------------------
 
-    public List<LejeAftale> findByVognNummer(List<String> vognNummerList) {
-        String sql = "SELECT * FROM LejeAftale WHERE BilID IN (SELECT ID FROM Bil WHERE VognNummer IN (?))";
-        return jdbcTemplate.query(sql, new Object[]{String.join(",", vognNummerList)}, this::mapRow);
+    public List<LejeAftale> findByBilIdList(List<Integer> bilIdList) {
+        String sql = "SELECT * FROM LejeAftale WHERE BilID IN (?)";
+        return jdbcTemplate.query(sql, new Object[]{bilIdList}, this::mapRow);
+
     }
+
+    public LejeAftale findByBilID(int bilID) {
+        String sql = "SELECT * FROM LejeAftale WHERE BilID = ?";
+        // query instead of queryForObject
+        List<LejeAftale> results = jdbcTemplate.query(sql, new Object[]{bilID}, this::mapRow);
+        if (results.isEmpty()) {
+            return null;
+        }
+        return results.get(0);
+    }
+
+
 
 
     // ------------------- services -------------------

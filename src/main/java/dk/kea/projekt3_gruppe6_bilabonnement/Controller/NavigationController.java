@@ -37,12 +37,9 @@ public class NavigationController {
 
     @GetMapping("/")
     public String index(HttpSession session) {
-        System.out.println("Session data");
-        System.out.println(" - loggedIn: "+ session.getAttribute("loggedIn"));
-        System.out.println(" - loggedInBruger: "+ session.getAttribute("loggedInBruger"));
-        System.out.println(" - loggedInBrugerNavn: "+ session.getAttribute("loggedInBrugerNavn"));
 
         nyLejeAftaleSession(session);
+
         return START_PAGE;
     }
 
@@ -66,7 +63,7 @@ public class NavigationController {
 
 
         // ------------------- Load, Save and return next -------------------
-        System.out.println("VaelgBil Session data:"); // TODO: remove debug
+
         loadOgSave(brugerValgDTO, session, model);
 
         return VAELGBIL_PAGE;
@@ -74,7 +71,7 @@ public class NavigationController {
 
 
     @GetMapping("/Abonnement")
-    public String LejeAbonnement(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
+    public String getAbonnementPage(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
         // ------------------- data for view -------------------
         List<PackageDeal> packageDeals = lejeAftaleService.getPackageDeals();
 
@@ -82,7 +79,7 @@ public class NavigationController {
 
 
         // ------------------- Load, Save and return next -------------------
-        System.out.println("Abonnement Session data:"); // TODO: remove debug
+
         loadOgSave(nyBrugerValgDTO, session, model);
 
         return ABONNEMENT_PAGE;
@@ -93,11 +90,7 @@ public class NavigationController {
     @GetMapping("/PrisOverslag")
     public String getPrisoverslagPage(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
 
-        System.out.println();
-        System.out.println("DEBUG: Prisoverslag");
-        System.out.println(" - nyBrugerValgDTO: ");
         nyBrugerValgDTO.printAbonnementsSide();
-        System.out.println();
 
         // ------------------- data for view -------------------
 
@@ -107,12 +100,7 @@ public class NavigationController {
         model.addAttribute("kmSequence", kmSequnce);
 
 
-
-
-
-
         // ------------------- Load, Save and return -------------------
-        System.out.println("Prisoverslag Session data:"); // TODO: remove debug
         loadOgSave(nyBrugerValgDTO, session, model);
 
         return PRISOVERSLAG_PAGE;
@@ -122,11 +110,7 @@ public class NavigationController {
     public String getKundeinfoPage(HttpSession session, Model model, BrugerValgDTO nyBrugerValgDTO) {
 
 
-
-
-
         // ------------------- Load, Save and return -------------------
-        System.out.println("KundeInfo Session data:"); // TODO: remove debug
         loadOgSave(nyBrugerValgDTO, session, model);
 
         return KUNDEINFO_PAGE;
@@ -134,10 +118,6 @@ public class NavigationController {
 
     @GetMapping("/AfhentningsSted")
     public String getAfhentningsstedPage(HttpSession session, Model model, BrugerValgDTO nyBrugerValgDTO) {
-        System.out.println();
-        System.out.println("DEBUG: KundeInfo");
-        System.out.println(" - KundeInfo: "+ nyBrugerValgDTO.getKundeInfo());
-        System.out.println();
 
         // ------------------- data for view -------------------
 
@@ -149,7 +129,6 @@ public class NavigationController {
 
 
         // ------------------- Load, Save and return -------------------
-        System.out.println("AfhentningsSted Session data:"); // TODO: remove debug
         loadOgSave(nyBrugerValgDTO, session, model);
 
         return AFHENTNINGSSTED_PAGE;
@@ -185,16 +164,6 @@ public class NavigationController {
 
             session.setAttribute("BrugerValgDTO", loadedDTO);
             model.addAttribute("nyBrugerValgDTO", loadedDTO);
-
-
-            // ------------------- Debug ------------------- // TODO: remove debug
-            if (oldBrugerValgDTO != null && nyBrugerValgDTO != null) {
-                System.out.println(" - oldBrugerValgDTO: "+ oldBrugerValgDTO);
-                System.out.println(" - nyBrugerValgDTO: "+ nyBrugerValgDTO);
-                System.out.println(" - loadedDTO: "+ loadedDTO);
-            } else {
-                System.out.println(" -> no session data");
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -246,7 +215,6 @@ public class NavigationController {
     }
 
     private void setModelAttributes(Model model, List<PackageDeal> packageDeals) {
-        System.out.println("DEBUG: setModelAttributes");
         for (PackageDeal packageDeal : packageDeals) {
             switch (packageDeal.getPackageName()) {
                 case "Daekpakke" -> model.addAttribute("daekpakke", packageDeal);
@@ -256,6 +224,5 @@ public class NavigationController {
                 case "Udlevering ved FDM" -> model.addAttribute("udleveringVedFDM", packageDeal);
             }
         }
-        System.out.println();
     }
 }
