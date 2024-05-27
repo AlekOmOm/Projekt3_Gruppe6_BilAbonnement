@@ -90,7 +90,6 @@ public class LejeAftaleRepository {
     }
 
 
-
     public LejeAftale update(LejeAftale lejeAftale) {
         if (lejeAftale.getSkadeRapport() == null) {
             // LejeAftale fields: bruger, bil, kundeInfo, farve, afleveringsforsikring, selvrisiko, daekpakke, vejhjaelp, udleveringVedFDM, abonnementslaengde, kmPrMdr, afhentningssted, startDato, slutDato

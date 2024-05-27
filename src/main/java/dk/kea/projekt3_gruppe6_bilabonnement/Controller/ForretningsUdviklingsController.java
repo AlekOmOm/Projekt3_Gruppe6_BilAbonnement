@@ -44,10 +44,8 @@ public class ForretningsUdviklingsController {
     @GetMapping("/forretningsrapport")
     public String seForretningsRapport(Model model) {
         List<ForretningsRapport> alleRapporter = forretningsRapportService.seAlleRapporter();
-        if (!alleRapporter.isEmpty()) {
-            ForretningsRapport latestRapport = alleRapporter.get(alleRapporter.size() - 1);
-            model.addAttribute("rapport", latestRapport);
-        }
+        ForretningsRapport latestRapport = alleRapporter.get(alleRapporter.size() - 1);
+        model.addAttribute("rapport", latestRapport);
         return "forretningsrapport";
     }
 
@@ -60,11 +58,8 @@ public class ForretningsUdviklingsController {
     }
 
     @GetMapping("/forretningsrapport/se/{id}")
-    public String seForretningsRapport(@PathVariable int id, Model model) {
+    public String seSpecifikForretningsRapport(@PathVariable int id, Model model) {
         ForretningsRapport rapport = forretningsRapportService.findRapportMedID(id);
-        if (rapport == null) {
-            return "Fejl";
-        }
         model.addAttribute("rapport", rapport);
         return "forretningsrapport";
     }
