@@ -331,41 +331,6 @@ public class BrugerValgDTO {
 
 
 
-
-    // ------------------- print for each page -------------------
-
-    public void printBilValg(){
-        System.out.println(" bilModel: " + bilModel);
-    }
-
-    public void printAbonnementsSide(){
-        System.out.println(" farve: " + farve);
-        System.out.println(" afleveringsforsikring: " + afleveringsforsikring);
-        System.out.println(" selvrisiko: " + selvrisiko);
-        System.out.println(" daekpakke: " + daekpakke);
-        System.out.println(" vejhjaelp: " + vejhjaelp);
-        System.out.println(" udleveringVedFDM: " + udleveringVedFDM);
-    }
-
-    public void printPrisoverslag(){
-        System.out.println(" abonnementslaengde: " + abonnementslaengde);
-        System.out.println(" kmPrMdr: " + kmPrMdr);
-    }
-
-    public void printKundeInfo(){
-        System.out.println(" cprNr: " + cprNr);
-        System.out.println(" fornavn: " + fornavn);
-        System.out.println(" efternavn: " + efternavn);
-        System.out.println(" adresse: " + adresse);
-        System.out.println(" postNummer: " + postNummer);
-        System.out.println(" email: " + email);
-        System.out.println(" mobilNummer: " + mobilNummer);
-    }
-
-    public void printAfhentningssted(){
-        System.out.println(" afhentningssted: " + afhentningssted);
-    }
-
     // ------------------- toString -------------------
 
     @Override

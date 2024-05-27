@@ -86,7 +86,6 @@ public class NavigationController {
     @GetMapping("/PrisOverslag")
     public String getPrisoverslagPage(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
 
-        nyBrugerValgDTO.printAbonnementsSide();
 
         // ------------------- data for view -------------------
 
