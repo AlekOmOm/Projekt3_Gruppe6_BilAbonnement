@@ -3,209 +3,50 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="648.5" y="406.5">dk.kea.projekt3_gruppe6_bilabonnement.Repository.KundeInfoRepository</node>
-    <node x="1777.0" y="66.5">dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository</node>
-    <node x="180.5" y="746.5">dk.kea.projekt3_gruppe6_bilabonnement.Model.Skade</node>
-    <node x="2072.5" y="746.5">dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport</node>
-    <node x="2274.5" y="-13.5">dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository</node>
-    <node x="1587.5" y="366.5">dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.CitroenC1</node>
-    <node x="400.5" y="406.5">dk.kea.projekt3_gruppe6_bilabonnement.Service.KundeInfoService</node>
-    <node x="913.0" y="566.5">dk.kea.projekt3_gruppe6_bilabonnement.Service.BrugerService</node>
-    <node x="1159.0" y="466.5">dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger</node>
-    <node x="-85.5" y="646.5">dk.kea.projekt3_gruppe6_bilabonnement.Service.SkadeService</node>
-    <node x="1561.0" y="166.5">dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.OpelCorsaCosmo</node>
-    <node x="1588.0" y="266.5">dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory</node>
-    <node x="1157.5" y="266.5">dk.kea.projekt3_gruppe6_bilabonnement.Service.DashboardService</node>
-    <node x="143.0" y="646.5">dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRepository</node>
-    <node x="1815.0" y="166.5">dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil</node>
-    <node x="889.0" y="-13.5">dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository</node>
-    <node x="901.5" y="466.5">dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository</node>
-    <node x="2087.0" y="166.5">dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale</node>
-    <node x="1409.0" y="266.5">dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService</node>
-    <node x="1906.5" y="406.5">dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo</node>
-    <node x="181.0" y="-13.5">dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService</node>
-    <node x="-113.5" y="-13.5">dk.kea.projekt3_gruppe6_bilabonnement.Service.SkadeRapportService</node>
-    <node x="1780.0" y="266.5">dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Peugeot108</node>
+    <node x="807.0" y="419.0">dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig.OpelCorsaCosmoConfig</node>
+    <node x="410.5" y="139.0">dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory</node>
+    <node x="829.5" y="265.5">dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig</node>
+    <node x="807.0" y="-182.0">dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig.CitroenC1Config</node>
+    <node x="-233.0" y="55.0">dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository</node>
+    <node x="118.5" y="128.5">dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService</node>
+    <node x="1087.0" y="118.0">dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig.Peugeot108Config</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository" relationship="TO_ONE">
-      <point x="99.0" y="8.0" />
-      <point x="1848.0" y="8.0" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService" target="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService" relationship="TO_ONE">
-      <point x="0.0" y="13.5" />
-      <point x="268.0" y="620.0" />
-      <point x="1468.0" y="620.0" />
-      <point x="0.0" y="13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService" target="dk.kea.projekt3_gruppe6_bilabonnement.Service.KundeInfoService" relationship="TO_ONE">
-      <point x="87.0" y="8.0" />
-      <point x="488.0" y="8.0" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.Skade" relationship="CREATE">
-      <point x="0.0" y="13.5" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport" relationship="TO_ONE">
-      <point x="0.0" y="13.5" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Peugeot108" relationship="CREATE">
-      <point x="60.0" y="-0.0" />
-      <point x="-68.0" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale" relationship="CREATE">
-      <point x="99.0" y="4.0" />
-      <point x="2148.0" y="4.0" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Peugeot108" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil" relationship="GENERALIZATION">
-      <point x="0.0" y="-13.5" />
-      <point x="0.0" y="13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository" relationship="TO_ONE">
-      <point x="87.0" y="-0.0" />
-      <point x="-99.0" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.CitroenC1" relationship="CREATE">
-      <point x="0.0" y="13.5" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.KundeInfoRepository" relationship="TO_ONE">
-      <point x="-99.0" y="8.0" />
-      <point x="748.0" y="8.0" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale" relationship="CREATE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
     <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService" target="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory" relationship="TO_ONE">
-      <point x="59.0" y="-0.0" />
-      <point x="-60.0" y="-0.0" />
+      <point x="107.5" y="-0.0" />
+      <point x="-175.5" y="-0.0" />
     </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.SkadeService" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRepository" relationship="TO_ONE">
-      <point x="73.5" y="-0.0" />
-      <point x="-85.0" y="-0.0" />
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig.OpelCorsaCosmoConfig" target="dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig" relationship="INNER_CLASS">
+      <point x="0.0" y="-161.0" />
+      <point x="0.0" y="34.5" />
     </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository" relationship="TO_ONE">
-      <point x="0.0" y="13.5" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.SkadeService" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.Skade" relationship="CREATE">
-      <point x="0.0" y="13.5" />
-      <point x="-12.0" y="760.0" />
-      <point x="-47.5" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.CitroenC1" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil" relationship="GENERALIZATION">
-      <point x="60.5" y="-0.0" />
-      <point x="1948.0" y="380.0" />
-      <point x="1948.0" y="188.0" />
-      <point x="33.0" y="8.0" />
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig.CitroenC1Config" target="dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig" relationship="INNER_CLASS">
+      <point x="0.0" y="182.0" />
+      <point x="0.0" y="-34.5" />
     </edge>
     <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository" relationship="TO_ONE">
-      <point x="0.0" y="-13.5" />
-      <point x="1468.0" y="80.0" />
-      <point x="-71.0" y="-0.0" />
+      <point x="-107.5" y="-0.0" />
+      <point x="139.0" y="-0.0" />
     </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil" relationship="CREATE">
-      <point x="0.0" y="13.5" />
-      <point x="0.0" y="-13.5" />
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig.Peugeot108Config" target="dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig" relationship="INNER_CLASS">
+      <point x="-119.0" y="-0.0" />
+      <point x="96.5" y="-0.0" />
     </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.OpelCorsaCosmo" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil" relationship="GENERALIZATION">
-      <point x="87.0" y="-0.0" />
-      <point x="-33.0" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.SkadeRapportService" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository" relationship="TO_ONE">
-      <point x="0.0" y="-13.5" />
-      <point x="-12.0" y="-60.0" />
-      <point x="2388.0" y="-60.0" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.OpelCorsaCosmo" relationship="CREATE">
-      <point x="0.0" y="-13.5" />
-      <point x="0.0" y="13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.KundeInfoService" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.KundeInfoRepository" relationship="TO_ONE">
-      <point x="87.5" y="-0.0" />
-      <point x="-99.5" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BrugerService" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger" relationship="CREATE">
-      <point x="75.0" y="-0.0" />
-      <point x="1208.0" y="580.0" />
-      <point x="0.0" y="13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService" target="dk.kea.projekt3_gruppe6_bilabonnement.Service.SkadeRapportService" relationship="TO_ONE">
-      <point x="-87.0" y="-0.0" />
-      <point x="101.5" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo" relationship="TO_ONE">
-      <point x="-61.0" y="8.0" />
-      <point x="1968.0" y="188.0" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.LejeAftaleService" target="dk.kea.projekt3_gruppe6_bilabonnement.Service.BrugerService" relationship="TO_ONE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.Skade" relationship="TO_MANY">
-      <point x="-75.5" y="-0.0" />
-      <point x="47.5" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.SkadeRapportService" target="dk.kea.projekt3_gruppe6_bilabonnement.Service.SkadeService" relationship="TO_ONE">
-      <point x="0.0" y="13.5" />
-      <point x="0.0" y="-13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.DashboardService" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository" relationship="TO_ONE">
-      <point x="-90.5" y="-0.0" />
-      <point x="1008.0" y="280.0" />
-      <point x="20.0" y="13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil" relationship="TO_ONE">
-      <point x="-61.0" y="-0.0" />
-      <point x="33.0" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.DashboardService" target="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService" relationship="TO_ONE">
-      <point x="90.5" y="-0.0" />
-      <point x="-59.0" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BrugerService" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository" relationship="TO_ONE">
-      <point x="0.0" y="-13.5" />
-      <point x="0.0" y="13.5" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.BrugerRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger" relationship="CREATE">
-      <point x="86.5" y="-0.0" />
-      <point x="-49.0" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger" relationship="TO_ONE">
-      <point x="-20.0" y="13.5" />
-      <point x="2128.0" y="480.0" />
-      <point x="49.0" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.LejeAftaleRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository" relationship="TO_ONE">
-      <point x="99.0" y="-0.0" />
-      <point x="-113.5" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.SkadeRapportRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.SkadeRapport" relationship="CREATE">
-      <point x="0.0" y="13.5" />
-      <point x="2388.0" y="760.0" />
-      <point x="75.5" y="-0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.KundeInfoService" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo" relationship="CREATE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.KundeInfoRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.KundeInfo" relationship="CREATE">
-      <point x="99.5" y="-0.0" />
-      <point x="-61.5" y="-0.0" />
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory" target="dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig" relationship="TO_ONE">
+      <point x="175.5" y="-0.0" />
+      <point x="-96.5" y="-0.0" />
     </edge>
   </edges>
-  <settings layout="Orthogonal Groups" zoom="0.4290591805766313" showDependencies="true" x="1204.7086648983204" y="484.5397877984085" />
-  <SelectedNodes />
-  <Categories />
+  <settings layout="Orthogonal Groups" zoom="1.002534854245881" showDependencies="true" x="443.2857142857135" y="344.36093552465263" />
+  <SelectedNodes>
+    <node>dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+  </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>

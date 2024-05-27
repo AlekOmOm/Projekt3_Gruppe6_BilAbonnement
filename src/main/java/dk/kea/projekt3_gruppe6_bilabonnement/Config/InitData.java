@@ -252,6 +252,9 @@ public class InitData implements ApplicationRunner {
             biler.addAll(Arrays.asList(
                     bilFactory.createCitroenC1(),
                     bilFactory.createPeugeot108(),
+                    bilFactory.createOpelCorsaCosmo(),
+                    bilFactory.createCitroenC1(),
+                    bilFactory.createPeugeot108(),
                     bilFactory.createOpelCorsaCosmo()
             ));
         }

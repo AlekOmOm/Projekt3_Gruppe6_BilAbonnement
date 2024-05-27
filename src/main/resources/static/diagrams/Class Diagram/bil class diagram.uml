@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="237.5" y="-12.0">dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory</node>
+    <node x="876.5" y="34.5">dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig</node>
+    <node x="274.0" y="344.0">dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository</node>
+    <node x="714.5" y="205.0">dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Peugeot108</node>
+    <node x="697.0" y="285.0">dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.OpelCorsaCosmo</node>
+    <node x="916.0" y="245.0">dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.CitroenC1</node>
+    <node x="1172.0" y="133.5">dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil</node>
+    <node x="-74.5" y="417.5">dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.OpelCorsaCosmo" relationship="CREATE">
+      <point x="175.5" y="80.5" />
+      <point x="613.0" y="229.5" />
+      <point x="613.0" y="229.0" />
+      <point x="633.0" y="229.0" />
+      <point x="633.0" y="309.0" />
+      <point x="-76.0" y="-0.0" />
+    </edge>
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService" target="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory" relationship="TO_ONE">
+      <point x="107.5" y="-0.0" />
+      <point x="173.0" y="589.0" />
+      <point x="173.0" y="149.0" />
+      <point x="-175.5" y="-0.0" />
+    </edge>
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.CitroenC1" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil" relationship="GENERALIZATION">
+      <point x="57.0" y="-0.0" />
+      <point x="1133.0" y="269.0" />
+      <point x="1133.0" y="261.25" />
+      <point x="-101.0" y="-127.75" />
+    </edge>
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilService" target="dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository" relationship="TO_ONE">
+      <point x="107.5" y="-0.0" />
+      <point x="-139.0" y="-0.0" />
+    </edge>
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.OpelCorsaCosmo" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil" relationship="GENERALIZATION">
+      <point x="76.0" y="-0.0" />
+      <point x="1053.0" y="309.0" />
+      <point x="1053.0" y="269.0" />
+      <point x="1133.0" y="269.0" />
+      <point x="1133.0" y="261.25" />
+      <point x="-101.0" y="-127.75" />
+    </edge>
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Repository.BilRepository" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil" relationship="CREATE">
+      <point x="139.0" y="-0.0" />
+      <point x="573.0" y="589.0" />
+      <point x="573.0" y="509.0" />
+      <point x="793.0" y="509.0" />
+      <point x="793.0" y="516.75" />
+      <point x="-101.0" y="127.75" />
+    </edge>
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Peugeot108" relationship="CREATE">
+      <point x="175.5" y="80.5" />
+      <point x="613.0" y="229.5" />
+      <point x="613.0" y="229.0" />
+      <point x="-58.5" y="-0.0" />
+    </edge>
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Peugeot108" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil" relationship="GENERALIZATION">
+      <point x="58.5" y="-0.0" />
+      <point x="1053.0" y="229.0" />
+      <point x="1053.0" y="269.0" />
+      <point x="1133.0" y="269.0" />
+      <point x="1133.0" y="261.25" />
+      <point x="-101.0" y="-127.75" />
+    </edge>
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory" target="dk.kea.projekt3_gruppe6_bilabonnement.Config.BilConfig" relationship="TO_ONE">
+      <point x="175.5" y="-80.5" />
+      <point x="613.0" y="68.5" />
+      <point x="613.0" y="69.0" />
+      <point x="-96.5" y="-0.0" />
+    </edge>
+    <edge source="dk.kea.projekt3_gruppe6_bilabonnement.Service.BilFactory" target="dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.CitroenC1" relationship="CREATE">
+      <point x="175.5" y="80.5" />
+      <point x="613.0" y="229.5" />
+      <point x="613.0" y="229.0" />
+      <point x="633.0" y="229.0" />
+      <point x="633.0" y="269.0" />
+      <point x="-57.0" y="-0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.8933025404157044" showDependencies="true" x="606.7743019648397" y="418.64917269906954" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
