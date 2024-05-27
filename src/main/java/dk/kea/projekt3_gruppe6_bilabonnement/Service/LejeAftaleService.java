@@ -45,30 +45,46 @@ public class LejeAftaleService {
     public LejeAftale opret(BrugerValgDTO brugerValgDTO) { // opret() bliver kaldt ved slutningen af processen for LejeAftale skabelse (View <-> Controller -> nu til -> Service)
         // LejeAftale initialiseres med alle nødvendige informationer og gemmes i databasen
 
+        System.out.println("DEBUG: LejeAftaleService.opret() called");
+        System.out.println(" - brugerValgDTO: " + brugerValgDTO.toString());
         // ------------------- Initialization -------------------
         LejeAftale lejeAftale = initialize(brugerValgDTO);
 
+        System.out.println(" - lejeAftale: " + lejeAftale.toString());
         // ------------------- Save and Return -------------------
         if (lejeAftale != null) {
+            System.out.println(" - lejeAftale initialized successfully");
             return save(lejeAftale); // return gemte LejeAftale instance, hvis den blev initialiseret korrekt og gemt korrekt
         }
         return null; // return null hvis lejeAftale ikke blev initialiseret korrekt
     }
 
 
+    public List<LejeAftale> getLejeAftaleUdenRapport(){
+        return lejeAftaleRepository.getLejeAftalerUdenRapport();
+    }
+
+    public List<LejeAftale> getLejeAftaleMedRapport(){
+        return lejeAftaleRepository.getLejeAftaleMedRapport();
+    }
 
 
     // ------------------- Operations (CRUD) -------------------
 
 
     public LejeAftale save(LejeAftale nyLejeAftale) {
-        if (exists(nyLejeAftale)) {
+        System.out.println("DEBUG: LejeAftaleService.save() called");
+        System.out.println(" - nyLejeAftale: " + nyLejeAftale.toString());
+
+        if (nyLejeAftale.getID() != 0) {
             return update(nyLejeAftale);
         }
 
-        // Save Bil
-        Bil savedBil = bilService.saveBil(nyLejeAftale.getBil()); // TODO: tjek book() metoden, måske bare brug save() i stedet
-        if (savedBil == null) {
+
+        // Kunde valgt Bil type
+        // -> Bil findes allerede og bookes derfor blot
+        Bil bookedBil = bilService.book(nyLejeAftale.getBil());
+        if (bookedBil == null) {
             throw new RuntimeException("Failed to save Bil");
         }
 
@@ -91,7 +107,7 @@ public class LejeAftaleService {
 
         }
 
-        nyLejeAftale.setBil(savedBil);
+        nyLejeAftale.setBil(bookedBil);
         nyLejeAftale.setKundeInfo(savedKundeInfo);
         nyLejeAftale.setSkadeRapport(savedSkadeRapport);
 
@@ -101,14 +117,16 @@ public class LejeAftaleService {
             throw new RuntimeException("Failed to save LejeAftale");
         }
 
-        // book bil
-        bilService.book(savedBil); // TODO: book() ?
 
         return savedLejeAftale;
     }
 
     public LejeAftale find(LejeAftale lejeAftale) {
         return lejeAftaleRepository.find(lejeAftale);
+    }
+
+    public LejeAftale findMedID(int id){
+        return lejeAftaleRepository.findMedID(id);
     }
 
     public LejeAftale update(LejeAftale lejeAftale) {
@@ -141,6 +159,10 @@ public class LejeAftaleService {
         return lejeAftaleRepository.update(lejeAftale);
     }
 
+    public LejeAftale opdaterSkadeRapportID(int lejeAftaleID, int skadeRapportID) {
+        return lejeAftaleRepository.updaterSkadeRapportID(lejeAftaleID, skadeRapportID);
+    }
+
     public boolean delete(LejeAftale lejeAftale) {
         try {
             return lejeAftaleRepository.delete(lejeAftale);
@@ -148,6 +170,11 @@ public class LejeAftaleService {
             return false;
         }
     }
+
+
+
+
+
 
 
     // ------------------- Service -------------------
@@ -172,13 +199,18 @@ public class LejeAftaleService {
 
             // Check for null
         if (isNull(bruger, bil, kundeInfo)) {
+            System.out.println("DEBUG: LejeAftaleService.initialize() failed");
+            System.out.println(" - bruger: " + bruger);
+            System.out.println(" - bil: " + bil);
+            System.out.println(" - kundeInfo: " + kundeInfo);
+
             return null; // return null hvis nogen af Instances er null
         }
 
         // ------------------- Instance variables -------------------
         LocalDate startDato = LocalDate.now();
         LocalDate slutDato = startDato.plusMonths(brugerValgDTO.getAbonnementslaengde());
-        int totalPris = 0; // TODO: implement totalPris udregning
+        int totalPris = beregnTotalPris(brugerValgDTO);
 
         // ------------------- initialize LejeAftale med Instances og Instance variable -------------------
         lejeAftale.setAllInstances(bruger, kundeInfo, bil, nullSkadeRapport);
@@ -213,7 +245,8 @@ public class LejeAftaleService {
         return Arrays.asList("Auto-Huset A/S", "Bilhuset A/S", "Bilcenter A/S");
     }
 
-    public int beregnTotalPris(BrugerValgDTO brugerValgDTO) {
+
+    private int beregnTotalPris(BrugerValgDTO brugerValgDTO) {
 
         List<String> selectedPackageDeals = brugerValgDTO.getAbonnementsSide();
 
@@ -234,19 +267,4 @@ public class LejeAftaleService {
 
 
 
-    public List<LejeAftale> getLejeAftaleUdenRapport(){
-        return lejeAftaleRepository.getLejeAftalerUdenRapport();
-    }
-
-    public List<LejeAftale> getLejeAftaleMedRapport(){
-        return lejeAftaleRepository.getLejeAftaleMedRapport();
-    }
-
-    public LejeAftale findMedID(int id){
-        return lejeAftaleRepository.findMedID(id);
-    }
-
-    public LejeAftale opdaterSkadeRapportID(int lejeAftaleID, int skadeRapportID) {
-        return lejeAftaleRepository.updaterSkadeRapportID(lejeAftaleID, skadeRapportID);
-    }
 }

@@ -25,10 +25,12 @@ public class BilFactory {
     // ------------------- Main Operations - Create and Initialize -------------------
 
     public Bil create(String model) {
+        System.out.println("DEBUG: BilFactory.create() called");
+        System.out.println(" - model: " + model);
         return switch (model) {
-            case "CitroenC1" -> createCitroenC1();
-            case "Peugeot108" -> createPeugeot108();
-            case "OpelCorsaCosmo" -> createOpelCorsaCosmo();
+            case "Citroen C1 Triumph" -> createCitroenC1(); //  "Citroen C1 Triumph";
+            case "Peugeot 108" -> createPeugeot108(); //  "Peugeot 108";
+            case "Opel Corsa Cosmo" -> createOpelCorsaCosmo(); //  "Opel Corsa Cosmo";
             default -> null;
         };
     }
@@ -39,13 +41,11 @@ public class BilFactory {
             return null;
         }
 
-//        System.out.println("DEBUG: BilFactory.initialize");
-//        System.out.println(" bil: "+bil);
         Bil initBil = bilConfig.loadModelConfigData(bil);
-//        System.out.println(" initBil: "+initBil);
+
 
         initBil.setId(bil.getId());
-//        System.out.println(" initBil.getId(): "+initBil.getId());
+
         return initBil;
     }
 

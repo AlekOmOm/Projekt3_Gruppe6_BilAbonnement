@@ -60,20 +60,6 @@ public class BrugerValgDTO {
     public BrugerValgDTO() {
     }
 
-//    public BrugerValgDTO(String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, int totalPris) {
-//        this.bilModel = bilModel;
-//        this.farve = farve;
-//        this.afleveringsforsikring = afleveringsforsikring;
-//        this.selvrisiko = selvrisiko;
-//        this.daekpakke = daekpakke;
-//        this.vejhjaelp = vejhjaelp;
-//        this.udleveringVedFDM = udleveringVedFDM;
-//        this.abonnementslaengde = abonnementslaengde;
-//        this.kmPrMdr = kmPrMdr;
-//        this.afhentningssted = afhentningssted;
-//        this.totalPris = totalPris;
-//    }
-
 
 
     public BrugerValgDTO(int brugerID, String bilModel, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String cprNr, String fornavn, String efternavn, String adresse, int postNummer, String email, int mobilNummer, String afhentningssted) {
@@ -311,6 +297,27 @@ public class BrugerValgDTO {
         }
     }
 
+    public List<String> getKundeInfo() {
+        List<String> kundeInfo = new ArrayList<>();
+        kundeInfo.add(cprNr);
+        kundeInfo.add(fornavn);
+        kundeInfo.add(efternavn);
+        kundeInfo.add(adresse);
+        kundeInfo.add(String.valueOf(postNummer));
+        kundeInfo.add(email);
+        kundeInfo.add(String.valueOf(mobilNummer));
+        return kundeInfo;
+    }
+
+    public void setKundeInfo(List<String> kundeInfo) {
+        this.cprNr = kundeInfo.get(0);
+        this.fornavn = kundeInfo.get(1);
+        this.efternavn = kundeInfo.get(2);
+        this.adresse = kundeInfo.get(3);
+        this.postNummer = Integer.parseInt(kundeInfo.get(4));
+        this.email = kundeInfo.get(5);
+        this.mobilNummer = Integer.parseInt(kundeInfo.get(6));
+    }
 
 
 

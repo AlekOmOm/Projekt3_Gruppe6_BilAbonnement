@@ -48,9 +48,9 @@ public class LejeAftale {
         this.skadeRapport = skadeRapport;
     }
 
-    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String roed, boolean b, boolean b1, boolean b2, boolean b3, boolean b4, int i, int i1, String s, LocalDate now, LocalDate localDate, int totalPris) {
+    public LejeAftale(Bruger bruger, KundeInfo kundeInfo, Bil bil, SkadeRapport skadeRapport, String farve, boolean afleveringsforsikring, boolean selvrisiko, boolean daekpakke, boolean vejhjaelp, boolean udleveringVedFDM, int abonnementslaengde, int kmPrMdr, String afhentningssted, LocalDate startDato, LocalDate slutDato, int totalPris) {
         setAllInstances(bruger, kundeInfo, bil, skadeRapport);
-        setAllInstanceVariables(roed, b, b1, b2, b3, b4, i, i1, s, now, localDate, totalPris);
+        setAllInstanceVariables(farve, afleveringsforsikring, selvrisiko, daekpakke, vejhjaelp, udleveringVedFDM, abonnementslaengde, kmPrMdr, afhentningssted, startDato, slutDato, totalPris);
     }
 
 

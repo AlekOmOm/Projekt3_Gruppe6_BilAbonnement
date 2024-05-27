@@ -13,10 +13,6 @@ public class BilConfig {
 
         String model = bil.getModel();
 
-//        System.out.println("DEBUG: BilConfig.initializeModelConfig");
-//        System.out.println(" modelClass: " + model);
-//        System.out.println(" bil: " + bil);
-//        System.out.println();
         return load(model, bil);
     }
 

@@ -3,26 +3,32 @@ import dk.kea.projekt3_gruppe6_bilabonnement.Model.BilClasses.Bil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Repository
 public class BilRepository {
 
     // ------------------- SQL operations -------------------
-        // SQL scripts --- CRUD operations = instert, select, update, delete
+        // SQL scripts --- CRUD operations = insert, select, update, delete
 
     private static final String INSERT = "INSERT INTO Bil (VognNummer, Stelnummer, Model, UdstyrsNiveau, KilometerKoert, Status) VALUES (?,?,?,?,?,?)";
+    // SELECT * FROM Bil WHERE Model = ? AND Status = 'Tilgængelig' LIMIT 1
+
     private static final String SELECT = "SELECT * FROM Bil WHERE ID = ?";
     private static final String SELECT_ALL = "SELECT * FROM Bil";
     private static final String SELECT_BY_SECONDARY_KEY = "SELECT * FROM Bil WHERE VognNummer = ?";
     private static final String SELECT_BY_STATUS = "SELECT * FROM Bil WHERE Status = ?";
     private static final String SELECT_COUNT_BY_SECONDARY_KEY = "SELECT COUNT(*) FROM Bil WHERE VognNummer = ?";
+    private static final String SELECT_BY_MODEL = "SELECT * FROM Bil WHERE Model = ?";
     private static final String UPDATE = "UPDATE Bil SET VognNummer = ?, StelNummer = ?, Model = ?, UdstyrsNiveau = ?, KilometerKoert = ?, Status = ? WHERE ID = ?";
+    // UPDATE Bil SET Status = 'Udlejet' WHERE ID = ?
+    private static final String UPDATE_STATUS_UDLEJET = "UPDATE Bil SET Status = 'Udlejet' WHERE ID = ?";
     private static final String DELETE = "DELETE FROM Bil WHERE ID = ?";
 
 
@@ -61,7 +67,6 @@ public class BilRepository {
     // ------------------- CRUD Operations -------------------
 
     public Bil save(Bil bil) {
-        bil.setSomUdlejet();
 
         if (exists(bil)) {
             return update(bil);
@@ -148,6 +153,35 @@ public class BilRepository {
         return bil;
     }
 
+    public Bil bookAvailableOfType(Bil bilTypeValgt) {
+        String bilModel = bilTypeValgt.getModel();
+
+        System.out.println("Booking available car of model: " + bilModel);
+
+        List<Bil> bilList = template.query(SELECT_BY_MODEL, this::mapRow, bilModel);
+
+        if (bilList.isEmpty()) {
+            System.out.println("bilList: " + bilList);
+            throw new NoSuchElementException("No available car for the given model.");
+        }
+
+        List<Bil> tilgaengeligeBiler = new ArrayList<>();
+
+        Bil tilgaengeligBil = new Bil();
+        tilgaengeligBil.setSomTilgaengelig();
+
+        for (Bil bil : bilList) {
+            if (bil.getStatus().equals(tilgaengeligBil.getStatus())) {
+                tilgaengeligeBiler.add(bil);
+            }
+        }
+
+        Bil bilToBook = tilgaengeligeBiler.get(0);
+
+        template.update(UPDATE_STATUS_UDLEJET, bilToBook.getId());
+
+        return bilToBook;
+    }
 }
 
 /*

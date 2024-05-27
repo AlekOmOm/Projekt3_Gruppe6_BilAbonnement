@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -32,12 +31,8 @@ public class BilService {
 
     // ------------------- Business Operations -------------------
 
-    public Bil book(Bil bil) {
-        if (exists(bil)) {
-            return bilRepository.book(bil);
-        }
-
-        return saveBil(bil);
+    public Bil book(Bil bilTypeValgt) {
+        return bilRepository.bookAvailableOfType(bilTypeValgt);
     }
 
     public Bil setSomTilgaengelig(Bil bil) {

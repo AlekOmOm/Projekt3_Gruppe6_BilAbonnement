@@ -60,7 +60,7 @@ public class InitData implements ApplicationRunner {
 
         // ------------------- Bil test data -------------------
 
-        bilTestData(); // Bil test data - tre biler: Citroen, Peugeot og Opel
+        bilData(); // Bil test data - tre biler: Citroen, Peugeot og Opel
 
         // ------------------- Bruger test data -------------------
 
@@ -103,46 +103,23 @@ public class InitData implements ApplicationRunner {
         }
     }
 
-    private void bilTestData() {
-        biler.addAll(Arrays.asList(
-                bilFactory.createCitroenC1(),
-                bilFactory.createPeugeot108(),
-                bilFactory.createOpelCorsaCosmo()
-        ));
+    private void bilData() {
+        // 15 biler - 5 af hver type
+        addBilerTilListe();
 
 
         // tilfældige værdier for hver bil
-        for (int i = 0; i<biler.size(); i++) {
-            Bil bil = biler.get(i);
-            if (bil != null) {
-                bil.setVognNummer("VognNummer" + i);
-                bil.setStelNummer("StelNummer" + i);
-                bil.setUdstyrsNiveau("UdstyrsNiveau" + i);
-                bil.setKilometerKoert(1000 * i);
-                bil.setSomTilgaengelig();
-            }
-        }
+        addRandomValues();
 
         // tjek om biler allerede findes i database og fjern dem fra listen
-        for (Iterator<Bil> iterator = biler.iterator(); iterator.hasNext();) {
-            // Iterator bruges på biler for at undgå ConcurrentModificationException, dvs. listen håndteres samtidig med at elementer fjernes
-            // iterator med for loop fungerer her ved at iterator.remove() kaldes, når et element fjernes
-
-            Bil bil = iterator.next();
-            if (bilService.exists(bil)) {
-                iterator.remove();
-            }
-        }
+        checkIfExistsInDB();
 
 
         // Save biler (hvis nye) til database
-        for (int i = 0; i<biler.size(); i++) {
-            Bil bil = biler.get(i);
-            if (bil != null) {
-                bilRepository.save(bil);
-            }
-        }
+        saveAll();
     }
+
+
 
     private void kundeInfoTestData() {
         kundeInfos.addAll(Arrays.asList(
@@ -219,5 +196,57 @@ public class InitData implements ApplicationRunner {
     }
 
 
+
+    // ------------------- Bil Data - Helper methods -------------------
+
+
+    private void addBilerTilListe() {
+        for (int i = 0; i<5; i++) {
+            biler.addAll(Arrays.asList(
+                    bilFactory.createCitroenC1(),
+                    bilFactory.createPeugeot108(),
+                    bilFactory.createOpelCorsaCosmo()
+            ));
+        }
+    }
+
+
+    private void addRandomValues() {
+        for (int i = 0; i<biler.size(); i++) {
+            Bil bil = biler.get(i);
+            if (bil != null) {
+                bil.setVognNummer("VognNummer" + i);
+                bil.setStelNummer("StelNummer" + i);
+                bil.setUdstyrsNiveau("UdstyrsNiveau" + i);
+                bil.setKilometerKoert(1000 * i);
+                bil.setSomTilgaengelig();
+            }
+        }
+    }
+
+
+
+    private void checkIfExistsInDB() {
+        for (Iterator<Bil> iterator = biler.iterator(); iterator.hasNext();) {
+            // Iterator bruges på biler for at undgå ConcurrentModificationException, dvs. listen håndteres samtidig med at elementer fjernes
+            // iterator med for loop fungerer her ved at iterator.remove() kaldes, når et element fjernes
+
+            Bil bil = iterator.next();
+            if (bilService.exists(bil)) {
+                iterator.remove();
+            }
+        }
+    }
+
+
+    private void saveAll() {
+        for (int i = 0; i<biler.size(); i++) {
+            Bil bil = biler.get(i);
+            bil.setSomTilgaengelig();
+            if (bil != null) {
+                bilRepository.save(bil);
+            }
+        }
+    }
 
 }

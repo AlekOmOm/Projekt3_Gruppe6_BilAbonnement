@@ -134,8 +134,12 @@ public class NavigationController {
 
     @GetMapping("/AfhentningsSted")
     public String getAfhentningsstedPage(HttpSession session, Model model, BrugerValgDTO nyBrugerValgDTO) {
-        // ------------------- data for view -------------------
+        System.out.println();
+        System.out.println("DEBUG: KundeInfo");
+        System.out.println(" - KundeInfo: "+ nyBrugerValgDTO.getKundeInfo());
+        System.out.println();
 
+        // ------------------- data for view -------------------
 
 
         List<String> afhentningssteder = lejeAftaleService.getAfhentningssteder();
@@ -157,11 +161,10 @@ public class NavigationController {
     public String opretLejeAftale(HttpSession session) {
         BrugerValgDTO fuldBrugerValgDTO = (BrugerValgDTO) session.getAttribute("BrugerValgDTO");
 
-        // totalPris beregnes og gemmes i BrugerValgDTO
-        int totalPris = lejeAftaleService.beregnTotalPris(fuldBrugerValgDTO);
+        // ------------------- Get loggedInBruger -------------------
+
         BrugerDto loggedInBruger = (BrugerDto) session.getAttribute("loggedInBruger");
 
-        fuldBrugerValgDTO.setTotalPris(totalPris);
         fuldBrugerValgDTO.setBrugerID(loggedInBruger.getId());
 
 
@@ -172,9 +175,8 @@ public class NavigationController {
     }
 
 
+
     // ------------------- Helper methods -------------------
-
-
 
     private void loadOgSave(BrugerValgDTO nyBrugerValgDTO, HttpSession session, Model model) {
         try {
@@ -221,6 +223,9 @@ public class NavigationController {
             oldBrugerValgDTO.setAbonnementsSideBoolean(nyBugerValgDTO.getAbonnementsSideBoolean());
             oldBrugerValgDTO.setAbonnementsSide();
         }
+        if (nyBugerValgDTO.getKundeInfo() != null){
+            oldBrugerValgDTO.setKundeInfo(nyBugerValgDTO.getKundeInfo());
+        }
         if (nyBugerValgDTO.getAbonnementslaengde() != 0){
             oldBrugerValgDTO.setAbonnementslaengde(nyBugerValgDTO.getAbonnementslaengde());
         }
@@ -230,6 +235,7 @@ public class NavigationController {
         if (nyBugerValgDTO.getAfhentningssted() != null){
             oldBrugerValgDTO.setAfhentningssted(nyBugerValgDTO.getAfhentningssted());
         }
+
 
         return oldBrugerValgDTO;
     }

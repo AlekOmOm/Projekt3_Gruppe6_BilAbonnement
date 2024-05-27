@@ -39,7 +39,12 @@ public class BrugerRepository {
     public Bruger findByBrugernavn(String brugerNavn) {
         String sql = "SELECT * FROM bruger WHERE brugerNavn = ?";
 
-        return template.queryForObject(sql, getBrugerRowMapper(), brugerNavn);
+
+        try {
+            return template.queryForObject(sql, getBrugerRowMapper(), brugerNavn);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public List<Bruger> findAll() {

@@ -55,7 +55,10 @@ public class LejeAftaleRepository {
     // ------------------- Operations (CRUD) -------------------
 
     public LejeAftale save(LejeAftale nyLejeAftale) {
-        if (exists(nyLejeAftale)) {
+        System.out.println("LejeAftaleRepository.save() - nyLejeAftale: " + nyLejeAftale);
+        System.out.println();
+
+        if(nyLejeAftale.getID() != 0) {
             return update(nyLejeAftale);
         }
 
@@ -92,8 +95,9 @@ public class LejeAftaleRepository {
 
 
     public LejeAftale update(LejeAftale lejeAftale) {
+        System.out.println(" DEBUG - LejeAftaleRepository.update() - lejeAftale: " + lejeAftale);
         if (lejeAftale.getSkadeRapport() == null) {
-            // LejeAftale fields: bruger, bil, kundeInfo, farve, afleveringsforsikring, selvrisiko, daekpakke, vejhjaelp, udleveringVedFDM, abonnementslaengde, kmPrMdr, afhentningssted, startDato, slutDato
+
             jdbcTemplate.update(UPDATE_WITHOUT_SKADERAPPORT, lejeAftale.getBruger().getId(), lejeAftale.getBil().getId(), lejeAftale.getKundeInfo().getId(), lejeAftale.getFarve(), lejeAftale.isAfleveringsforsikring(), lejeAftale.isSelvrisiko(), lejeAftale.isDaekpakke(), lejeAftale.isVejhjaelp(), lejeAftale.isUdleveringVedFDM(), lejeAftale.getAbonnementslaengde(), lejeAftale.getKmPrMdr(), lejeAftale.getAfhentningssted(), lejeAftale.getStartDato(), lejeAftale.getSlutDato(), lejeAftale.getID());
         } else {
             jdbcTemplate.update(UPDATE, lejeAftale.getBruger().getId(), lejeAftale.getBil().getId(), lejeAftale.getKundeInfo().getId(), lejeAftale.getSkadeRapport().getID(), lejeAftale.getFarve(), lejeAftale.isAfleveringsforsikring(), lejeAftale.isSelvrisiko(), lejeAftale.isDaekpakke(), lejeAftale.isVejhjaelp(), lejeAftale.isUdleveringVedFDM(), lejeAftale.getAbonnementslaengde(), lejeAftale.getKmPrMdr(), lejeAftale.getAfhentningssted(), lejeAftale.getStartDato(), lejeAftale.getSlutDato(), lejeAftale.getID());
