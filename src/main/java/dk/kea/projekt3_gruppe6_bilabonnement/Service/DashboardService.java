@@ -18,9 +18,8 @@ public class DashboardService {
     }
 
     //Antal udlejde biler
-    public long seAntalUdlejdeBiler() {
-
-        return bilService.getBilerByStatus("Udlejet").size();
+    public int seAntalUdlejdeBiler() {
+        return bilRepository.findByStatus("Udlejet").size();
     }
 
     // Samlet indkomst fra udlejede biler
