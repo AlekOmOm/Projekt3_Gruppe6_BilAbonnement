@@ -11,7 +11,7 @@
     <groupId>dk.kea</groupId>
     <artifactId>Projekt3_Gruppe6_BilAbonnement</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packageName>Projekt3_Gruppe6_BilAbonnement</packageName>
+
     <description>Projekt3_Gruppe6_BilAbonnement</description>
     <properties>
         <java.version>17</java.version>
