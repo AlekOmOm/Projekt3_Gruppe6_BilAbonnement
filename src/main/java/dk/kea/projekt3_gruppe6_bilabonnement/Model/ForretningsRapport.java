@@ -45,12 +45,10 @@ public class ForretningsRapport {
         this.totalBilerUdlejet = totalBilerUdlejet;
     }
 
-    public int getSamletPris() {
+    public int gettotalPris() {
         return samletPris;
     }
-
     public void setSamletPris(int samletPris) {
         this.samletPris = samletPris;
     }
-
 }
