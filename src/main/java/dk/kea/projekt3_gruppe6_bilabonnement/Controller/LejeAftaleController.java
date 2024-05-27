@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/LejeAftale")
-public class NavigationController {
+public class LejeAftaleController {
 
     // pages
     private static final String START_PAGE = "LejeAftale";
@@ -30,7 +30,7 @@ public class NavigationController {
     private final LejeAftaleService lejeAftaleService;
     private final BilService bilService;
 
-    public NavigationController(LejeAftaleService lejeAftaleService, BilService bilService) {
+    public LejeAftaleController(LejeAftaleService lejeAftaleService, BilService bilService) {
         this.lejeAftaleService = lejeAftaleService;
         this.bilService = bilService;
     }
