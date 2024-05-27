@@ -108,9 +108,8 @@ public class LejeAftaleRepository {
     // ------------------- special operations -------------------
 
     public List<LejeAftale> findByVognNummer(List<String> vognNummerList) {
-        String sql = "SELECT * FROM Bil WHERE VognNummer = ?";
-        String joined = String.join(",", vognNummerList);
-        return jdbcTemplate.query(sql, new Object[]{joined}, this::mapRow);
+        String sql = "SELECT * FROM LejeAftale WHERE BilID IN (SELECT ID FROM Bil WHERE VognNummer IN (?))";
+        return jdbcTemplate.query(sql, new Object[]{String.join(",", vognNummerList)}, this::mapRow);
     }
 
 
