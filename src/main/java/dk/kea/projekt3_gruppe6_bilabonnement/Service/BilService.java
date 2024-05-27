@@ -47,8 +47,12 @@ public class BilService {
     // ------------------- DB CRUD -------------------
 
     public Bil saveBil(Bil nyBil) {
-
+        System.out.println("DEBUG: BilService.saveBil");
         if (bilRepository.exists(nyBil)) {
+            System.out.println(" - Bil already exists, updating instead");
+            if (bilRepository.findByVognNummer(nyBil.getVognNummer()).getModel() == nyBil.getModel()) {
+                return null;
+            }
             return bilRepository.update(nyBil);
         }
 

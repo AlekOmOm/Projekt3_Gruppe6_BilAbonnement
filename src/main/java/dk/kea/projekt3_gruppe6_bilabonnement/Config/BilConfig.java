@@ -12,8 +12,16 @@ public class BilConfig {
         }
 
         String model = bil.getModel();
+        System.out.println("DEBUG: BilConfig.loadModelConfigData() called");
+        System.out.println(" - model: " + model);
 
-        return load(model, bil);
+        Bil loadedBil = load(model, bil);
+        System.out.println(" - loadedBil: " + loadedBil.getModel());
+        System.out.println();
+        System.out.println(" - bil: " + bil);
+        System.out.println(" - loadedBil: " + loadedBil);
+        System.out.println();
+        return loadedBil;
     }
 
     private Bil load(String model, Bil bil) {

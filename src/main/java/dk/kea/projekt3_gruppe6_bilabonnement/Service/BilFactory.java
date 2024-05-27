@@ -85,11 +85,10 @@ public class BilFactory {
             initialize(bil);
         }
         return all;
-
     }
 
     // ------------------- Create Test Biler -------------------
-    private static int testCounter = 0;
+    private static int testCounter = 15;
 
     public Bil createTestCitroenC1() {
         testCounter++;

@@ -45,15 +45,13 @@ public class LejeAftaleService {
     public LejeAftale opret(BrugerValgDTO brugerValgDTO) { // opret() bliver kaldt ved slutningen af processen for LejeAftale skabelse (View <-> Controller -> nu til -> Service)
         // LejeAftale initialiseres med alle nødvendige informationer og gemmes i databasen
 
-        System.out.println("DEBUG: LejeAftaleService.opret() called");
-        System.out.println(" - brugerValgDTO: " + brugerValgDTO.toString());
         // ------------------- Initialization -------------------
         LejeAftale lejeAftale = initialize(brugerValgDTO);
 
         System.out.println(" - lejeAftale: " + lejeAftale.toString());
         // ------------------- Save and Return -------------------
         if (lejeAftale != null) {
-            System.out.println(" - lejeAftale initialized successfully");
+
             return save(lejeAftale); // return gemte LejeAftale instance, hvis den blev initialiseret korrekt og gemt korrekt
         }
         return null; // return null hvis lejeAftale ikke blev initialiseret korrekt
@@ -70,7 +68,6 @@ public class LejeAftaleService {
 
 
     // ------------------- Operations (CRUD) -------------------
-
 
     public LejeAftale save(LejeAftale nyLejeAftale) {
         System.out.println("DEBUG: LejeAftaleService.save() called");

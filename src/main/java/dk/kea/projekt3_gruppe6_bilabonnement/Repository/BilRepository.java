@@ -69,17 +69,24 @@ public class BilRepository {
     public Bil save(Bil bil) {
 
         if (exists(bil)) {
+            System.out.println("Bil already exists");
             return update(bil);
         }
 
         template.update(INSERT, bil.getVognNummer(), bil.getStelNummer(), bil.getModel(), bil.getUdstyrsNiveau(), bil.getKilometerKoert(), bil.getStatus());
+        System.out.println("Bil saved");
 
-        return findByVognNummer(bil.getVognNummer());
+        Bil foundBil = findByVognNummer(bil.getVognNummer());
+        System.out.println("foundBil: " + foundBil);
+        System.out.println();
+        return foundBil;
     }
 
     public Bil find(Bil bil) {
-
+        System.out.println("DEBUG: BilRepository.find()");
+        System.out.println(" - bil: " + bil);
         if (bil.getId() == 0) {
+            System.out.println("bil.getId() == 0");
             return findByVognNummer(bil.getVognNummer());
         }
 
@@ -113,6 +120,7 @@ public class BilRepository {
     public Bil update (Bil bil) {
         template.update(UPDATE, bil.getVognNummer(), bil.getStelNummer(), bil.getModel(), bil.getUdstyrsNiveau(), bil.getKilometerKoert(), bil.getStatus(), bil.getId());
 
+        System.out.println("Bil updated");
         return find(bil);
     }
 
@@ -155,8 +163,6 @@ public class BilRepository {
 
     public Bil bookAvailableOfType(Bil bilTypeValgt) {
         String bilModel = bilTypeValgt.getModel();
-
-        System.out.println("Booking available car of model: " + bilModel);
 
         List<Bil> bilList = template.query(SELECT_BY_MODEL, this::mapRow, bilModel);
 
