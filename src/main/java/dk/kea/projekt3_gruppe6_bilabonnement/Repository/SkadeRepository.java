@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -38,18 +39,25 @@ public class SkadeRepository {
     public List<Skade> saveAll(List<Skade> skader) {
         System.out.println("DEBUG: SkadeRepository.saveAll()");
         System.out.println(" - skader: " + skader);
+        List<Skade> savedSkader = new ArrayList<>();
         for (Skade skade : skader) {
             System.out.println(" - skade: " + skade);
-            save(skade);
+            savedSkader.add(save(skade));
         }
+        System.out.println(" - savedSkader: " + savedSkader);
         System.out.println();
-        return skader;
+        return savedSkader;
     }
 
     private Skade save(Skade skade) {
+
         if (exists(skade)) {
             return update(skade);
         }
+
+        System.out.println("DEBUG: SkadeRepository.save()");
+        System.out.println(" skade doesn't exist in database");
+        System.out.println(" - skade: " + skade);
 
         jdbcTemplate.update(INSERT, skade.getSkadeRapportID(), skade.getType(), skade.getPris());
 
@@ -82,7 +90,7 @@ public class SkadeRepository {
             // -> query kan returnerer null ved hjælp af list og '? :'-operator (ternary operator)
 
         List<Skade> skader = jdbcTemplate.query(SELECT_WITHOUT_ID, this::MapRowToSkade, skade.getSkadeRapportID(), skade.getType(), skade.getPris());
-
+        System.out.println("DEBUG: SkadeRepository.findNew()");
         System.out.println(" - skader: " + skader);
         return skader.isEmpty() ? null : skader.get(0);
     }

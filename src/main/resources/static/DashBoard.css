@@ -6,11 +6,11 @@ body {
 }
 
 .content-container {
-    padding: 20px;
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 50px); /* Adjust according to your header height */
     box-sizing: border-box;
+    padding: 5vh;
 }
 
 .flex-container {

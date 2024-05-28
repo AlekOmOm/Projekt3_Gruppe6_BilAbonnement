@@ -36,7 +36,7 @@ CREATE TABLE KundeInfo
 CREATE TABLE SkadeRapport
 (
     ID                      INT AUTO_INCREMENT PRIMARY KEY,
-    BrugerID                INT,
+    BrugerID                INT NOT NULL,
     KilometerKoertOver      INT,
     Reparationsomkostninger INT,
     FOREIGN KEY (BrugerID) REFERENCES Bruger (ID)
@@ -62,10 +62,10 @@ CREATE TABLE Forretningsrapport
 CREATE TABLE LejeAftale
 (
     ID                    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    BrugerID              INT, -- foreign key
-    KundeInfoID           INT, -- foreign key TODO: rækkefølge her byttet rundt, før: 3. BilID 4 KundeInfoID
-    BilID                 INT, -- foreign key
-    SkadeRapportID        INT, -- foreign key
+    BrugerID              INT NOT NULL, -- foreign key
+    KundeInfoID           INT NOT NULL, -- foreign key
+    BilID                 INT NOT NULL, -- foreign key
+    SkadeRapportID        INT NULL, -- foreign key (nullable == aggregation)
 
     Farve                 VARCHAR(255),
     Afleveringsforsikring BOOLEAN,
@@ -85,3 +85,4 @@ CREATE TABLE LejeAftale
     FOREIGN KEY (BilID) REFERENCES Bil (ID),
     FOREIGN KEY (SkadeRapportID) REFERENCES SkadeRapport (ID)
 );
+

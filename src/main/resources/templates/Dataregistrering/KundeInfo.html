@@ -77,13 +77,13 @@
 
 
 
-                        <input type="text" th:name="${'cprNr'}" placeholder="CPR nummer" class="inputField">
-                        <input type="text" th:name="${'fornavn'}" placeholder="Fornavn" class="inputField">
-                        <input type="text" th:name="${'efternavn'}" placeholder="Efternavn" class="inputField">
-                        <input type="text" th:name="${'adresse'}" placeholder="Adresse" class="inputField">
-                        <input type="text" th:name="${'postNummer'}" placeholder="Postnummer" class="inputField">
-                        <input type="text" th:name="${'email'}" placeholder="Email" class="inputField">
-                        <input type="text" th:name="${'mobilNummer'}" placeholder="Mobilnummer" class="inputField">
+                        <input type="text" th:name="${'cprNr'}" placeholder="CPR nummer" class="inputField" required >
+                        <input type="text" th:name="${'fornavn'}" placeholder="Fornavn" class="inputField" required >
+                        <input type="text" th:name="${'efternavn'}" placeholder="Efternavn" class="inputField" required >
+                        <input type="text" th:name="${'adresse'}" placeholder="Adresse" class="inputField" required >
+                        <input type="text" th:name="${'postNummer'}" placeholder="Postnummer" class="inputField" required >
+                        <input type="text" th:name="${'email'}" placeholder="Email" class="inputField" required >
+                        <input type="text" th:name="${'mobilNummer'}" placeholder="Mobilnummer" class="inputField" required >
 
                     </label>
                     <button type="submit" class="button" id="vaelgBilButton"> Bekræft og gå videre </button>

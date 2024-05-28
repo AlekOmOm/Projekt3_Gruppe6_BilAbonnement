@@ -1,5 +1,6 @@
 package dk.kea.projekt3_gruppe6_bilabonnement.Controller;
 
+import dk.kea.projekt3_gruppe6_bilabonnement.DTO.BrugerDto;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Bruger;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.LejeAftale;
 import dk.kea.projekt3_gruppe6_bilabonnement.Model.Skade;
@@ -115,16 +116,16 @@ public class SkadeRapportController {
         Integer brugerID = getLoggedInBrugerID(session); // hvis null, så deaktiveres 'Generer SkadeRapport' knap og skriver "Log ind for at oprette SkadeRapport"
 
 
-
         // 3. lejeAftaleID
         Integer lejeAftaleID = (Integer) session.getAttribute("lejeAftaleID");
 
         // 4. & 5 kilometerKørtOver + reparationsomkostninger
         int reparationsomkostionger = skadeService.udregnReparationsomkostninger(kilometerKoertOver, valgteSkader);
 
+        brugerID = 4; // TODO: remove this line when login is implemented
 
         // ------------------- gem Skader og SkadeRapport -------------------
-        SkadeRapport skadeRapport = new SkadeRapport(brugerID, lejeAftaleID, kilometerKoertOver, reparationsomkostionger, valgteSkader);
+        SkadeRapport skadeRapport = new SkadeRapport(brugerID, kilometerKoertOver, reparationsomkostionger, valgteSkader);
         SkadeRapport gemtSkadeRapport = skadeRapportService.gem(skadeRapport); // gemmer også List<Skader>, da de er composed i SkadeRapport
 
         if(gemtSkadeRapport == null){
@@ -211,7 +212,8 @@ public class SkadeRapportController {
     private Integer getLoggedInBrugerID(HttpSession session) {
         int loggedInBrugerID = 0;
         try {
-            loggedInBrugerID = (Integer) session.getAttribute("loggedInBrugerID");
+            BrugerDto loggedInBruger = (BrugerDto) session.getAttribute("loggedInBruger");
+            loggedInBrugerID = loggedInBruger.getId();
         } catch (Exception e) {
             return null;
         }

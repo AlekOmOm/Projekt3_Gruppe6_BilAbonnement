@@ -78,8 +78,6 @@ public class LejeAftaleServiceTest {
 
 }
 
-// input validering GUI, Cotroller og Unit test
-
 /*
 LejeAftale fields:
     private Bruger bruger;      // Composition

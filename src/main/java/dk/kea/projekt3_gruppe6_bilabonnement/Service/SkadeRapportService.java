@@ -36,14 +36,9 @@ public class SkadeRapportService {
 
         List<Skade> valgteSkader = skadeService.getSkader(skadeRapportTom);
 
-
-
         skadeRapportTom.setSkader(valgteSkader);
 
-        System.out.println(" - skadeRapport: " + skadeRapportTom);
-        System.out.println();
         return skadeRapportTom;
-
     }
 
 
@@ -52,7 +47,6 @@ public class SkadeRapportService {
         // - gem() i SkadeRapportService skal OGSÅ gemme Skader, fordi SkadeRapport ikke skal kunne gemmes uden Skader (note: @Transactional mulig løsning)
         // - findVedID() i SkadeRapportService skal OGSÅ finde Skader, fordi SkadeRapport ikke skal kunne findes uden Skader
         // - Skade table: SKAL have not null constraint på SkadeRapportID
-
 
     // @Transactional denne annotation kunne bruges
     public SkadeRapport gem(SkadeRapport skadeRapport){
@@ -67,18 +61,30 @@ public class SkadeRapportService {
         }
 
         SkadeRapport gemtSkadeRapport = skadeRapportRepo.gem(skadeRapport);
+        // gemtSkadeRapport er tom for skader, da de først gemmes efter SkadeRapport er gemt
+        // -> opdateres med skader fra skadeRapport
 
-        if (gemtSkadeRapport == null) {
-            return null;
-        }
+        gemtSkadeRapport.setSkader(skadeRapport.getSkader());
 
-        List<Skade> valgteSkader = skadeService.gemSkader(skadeRapport.getSkader()); // SkadeService bruges i stedet for Repository, da dette er bedre praksis ift. GRASP
+        SkadeRapport opdateretSkadeRapport = setSkadeRapportIDForSkader(gemtSkadeRapport);
+
+        List<Skade> valgteSkader = skadeService.gemSkader(opdateretSkadeRapport.getSkader()); // SkadeService bruges i stedet for Repository, da dette er bedre praksis ift. GRASP
 
         if (valgteSkader == null) {
-            // transactional rollback
-            skadeRapportRepo.sletVedID(gemtSkadeRapport.getID());
+            // dette giver transactional rollback, hvis valgteSkader == null
+            skadeRapportRepo.sletVedID(opdateretSkadeRapport.getID());
         }
 
+        return opdateretSkadeRapport;
+    }
+
+    private SkadeRapport setSkadeRapportIDForSkader(SkadeRapport gemtSkadeRapport) {
+        List<Skade> skader = gemtSkadeRapport.getSkader();
+        if (skader != null) {
+            for (Skade skade : skader) {
+                skade.setSkadeRapportID(gemtSkadeRapport.getID());
+            }
+        }
         return gemtSkadeRapport;
     }
 

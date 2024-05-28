@@ -70,7 +70,7 @@
 
                     <form action="/LejeAftale/Abonnement" method="get" th:object="${nyBrugerValgDTO}" class="inputForm-margin-only">
                         <label>
-                            <select th:name="${'bilModel'}" class="inputField">
+                            <select th:name="${'bilModel'}" class="inputField" required >
 
                                 <option value=""> Vælg Bil </option>
                                 <option th:each="bil : ${biler}" th:value="${bil.model}" th:text="${bil.model}">

@@ -41,6 +41,8 @@ public class SkadeService {
     // ------------------- Operations (CRUD) from Repo -------------------
 
     public List<Skade> gemSkader(List<Skade> skader){
+        System.out.println("DEBUG: SkadeService.gemSkader()");
+        System.out.println(" - skader: " + skader);
         return skadeRepository.saveAll(skader);
     }
 

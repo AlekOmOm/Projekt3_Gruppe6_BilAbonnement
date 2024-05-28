@@ -65,9 +65,7 @@ public class SkadeRapport {
     }
 
     public void setSkader(List<Skade> skader){
-        for (Skade skade : skader) {
-            skade.setSkadeRapportID(ID);
-        }
+
         this.skader =  skader;
     }
 

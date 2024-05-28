@@ -52,13 +52,16 @@
     <form action="/LejeAftale/KundeInfo" method="get">
         <button class="button" id="tilbageButton">Tilbage</button>
     </form>
-    <select th:name="${'afhentningssted'}" class="inputField" required>
-        <option value=""> Vælg afhentningssted </option>
-        <option th:each="sted : ${afhentningssteder}" th:value="${sted}" th:text="${sted}">
-        </option>
-    </select>
 
-    <form action="/LejeAftale/Opret" method="post">
+    <form action="/LejeAftale/Opret" method="post" th:object="${session.nyBrugerValgDTO}">
+
+        <select th:name="${'afhentningssted'}" class="inputFieldWide" required >
+            <option value=""> Vælg afhentningssted </option>
+            <option th:each="sted : ${afhentningssteder}" th:value="${sted}" th:text="${sted}">
+            </option>
+        </select>
+
+
         <button type="submit" class="button" id="næsteButton">Opret Leje Aftale</button>
     </form>
 

@@ -248,8 +248,11 @@ public class InitData implements ApplicationRunner {
 
 
     private void addBilerTilListe() {
-        for (int i = 0; i<5; i++) {
+        for (int i = 0; i<10; i++) {
             biler.addAll(Arrays.asList(
+                    bilFactory.createCitroenC1(),
+                    bilFactory.createPeugeot108(),
+                    bilFactory.createOpelCorsaCosmo(),
                     bilFactory.createCitroenC1(),
                     bilFactory.createPeugeot108(),
                     bilFactory.createOpelCorsaCosmo(),

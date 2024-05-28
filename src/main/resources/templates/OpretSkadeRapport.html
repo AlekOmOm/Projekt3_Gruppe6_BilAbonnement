@@ -5,20 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrer Skade</title>
+    <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
     <link rel="stylesheet" href="/GenererSkadeRapport.css" th:href="@{/GenererSkadeRapport.css}">
     <link rel="stylesheet" href="/headerFooter.css" th:href="@{/headerFooter.css}">
     <link rel="stylesheet">
 </head>
 <body>
 <div class="header">
-    <img src="../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300"/>
-    <p>BilAbonnement A/S</p>
+    <div class="left-header">
+        <img src="../../static/images/img.png" th:src="@{/images/img.png}" height="37" width="300" alt="logo"/>
+    </div>
+    <div class="center-header">
+        <p>BilAbonnement A/S</p>
+    </div>
+    <div class="right-header">
+
+        <div class="show-if-not-loggedIn" th:unless="${session.loggedIn}">
+            <h6 class = "not-logged-in-yet-line"> Not Logged in yet
+            </h6>
+            <div class="login-button-line">
+                <a href="/logout" class="small-button">
+                    <button class="button" id="logOutButton"> Log in </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="show-if-loggedIn" th:if="${session.loggedIn}">
+
+            <h7 class="logged-in-as-line">
+                Logged in as:
+            </h7>
+
+            <div class="user-name-line">
+                <h4 th:text="${session.loggedInBruger.brugerNavn}">
+                </h4>
+            </div>
+            <div class="logout-button-line">
+                <a href="/home" class="small-button">
+                    <button class="button"> Log out </button>
+                </a>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <div class="content">
     <h1>Opret SkadeRapport for <span th:text="${session.lejeAftaleID}"></span></h1>
 
-    <div class="three-container">
+    <div class="three-containers">
         <form action="#" th:action="@{/SkadeRapport/refresh}" method="get">
             <input type="hidden" name="lejeAftaleID" th:value="${session.lejeAftaleID}"/>
             <table>

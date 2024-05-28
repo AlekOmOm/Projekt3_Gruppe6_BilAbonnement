@@ -86,6 +86,7 @@ public class BrugerController {
 
         // -> set new session state
         session.setAttribute("loggedInBruger", loginBruger);
+        System.out.println("DEBUG - BrugerController - loginBruger - loginBruger: " + session.getAttribute("loggedInBruger"));
         session.setAttribute("loggedInBrugerNavn", loginBruger.getBrugerNavn());
         session.setAttribute("loggedInBrugerRolle", loginBruger.getRolle());
             System.out.println("DEBUG - BrugerController - loginBruger - loginBruger: " + loginBruger);

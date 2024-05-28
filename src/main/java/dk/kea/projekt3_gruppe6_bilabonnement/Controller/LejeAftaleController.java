@@ -141,7 +141,8 @@ public class LejeAftaleController {
 
         fuldBrugerValgDTO.setBrugerID(loggedInBruger.getId());
 
-
+        System.out.println("DEBUG: opret()");
+        System.out.println(" - afhentningssted i session: "+fuldBrugerValgDTO.getAfhentningssted());
         // ------------------- -> Opret LejeAftale -------------------
         lejeAftaleService.opret(fuldBrugerValgDTO);
 

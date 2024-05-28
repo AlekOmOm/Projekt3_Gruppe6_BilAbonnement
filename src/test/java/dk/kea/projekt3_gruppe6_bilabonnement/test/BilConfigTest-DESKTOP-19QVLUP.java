@@ -26,9 +26,7 @@ class BilConfigTest {
 
     @Test
     void shouldLoadCitroenC1ModelConfig() {
-        // act
         Bil bil = bilFactory.createCitroenC1();
-        // assert
         assertEquals("Citroen C1 Triumph", bil.getModel());
         assertEquals("Manuelt", bil.getGearType());
         assertEquals("Benzin", bil.getFuelType());

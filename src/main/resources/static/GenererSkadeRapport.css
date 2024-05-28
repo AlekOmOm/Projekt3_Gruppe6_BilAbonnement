@@ -5,11 +5,6 @@ body, h1, p, table, th, td, form, input {
     box-sizing: border-box;
 }
 
-.content {
-    padding: 20px;
-    border-radius: 8px;
-}
-
 h1 {
     margin-bottom: 20px;
     color: black;

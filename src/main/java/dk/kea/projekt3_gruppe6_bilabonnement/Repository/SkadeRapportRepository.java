@@ -31,7 +31,10 @@ public class SkadeRapportRepository {
     private SkadeRapport findVedData(SkadeRapport skadeRapport) {
         String sql = "SELECT * FROM SkadeRapport WHERE brugerID = ? AND kilometerKoertOver = ? AND reparationsomkostninger = ?";
         List<SkadeRapport> skadeRapports = jdbcTemplate.query(sql, new Object[]{skadeRapport.getBrugerID(), skadeRapport.getKilometerKoertOver(), skadeRapport.getReparationsomkostninger()}, this::mapRowToSkadeRapport);
-        return skadeRapports.isEmpty() ? null : skadeRapports.get(0);
+        SkadeRapport fundetSkadeRapport = skadeRapports.isEmpty() ? null : skadeRapports.get(0);
+        System.out.println("DEBUG: SkadeRapportRepository.findVedData()");
+        System.out.println(" - fundetSkadeRapport: " + fundetSkadeRapport);
+        return fundetSkadeRapport;
     }
 
    /* public SkadeRapport findMedLejeAftaleID(int id){
@@ -42,6 +45,8 @@ public class SkadeRapportRepository {
     public SkadeRapport gem(SkadeRapport skadeRapport){
         String sql = "INSERT INTO SkadeRapport (brugerID, kilometerKoertOver, reparationsomkostninger) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, skadeRapport.getBrugerID(), skadeRapport.getKilometerKoertOver(), skadeRapport.getReparationsomkostninger());
+        System.out.println("DEBUG: SkadeRapportRepository.gem()");
+        System.out.println(" - skadeRapport: " + skadeRapport);
         return findVedData(skadeRapport);
     }
 
