@@ -52,7 +52,6 @@ public class SkadeRapportController {
     @GetMapping("/")
     public String visStartSide(HttpSession session, Model model) {
 
-        testSettings(session); // TODO: remove before deploying
 
 
 
@@ -74,7 +73,7 @@ public class SkadeRapportController {
     @GetMapping("/opret")
     public String opretRapport(Model model, HttpSession session, @RequestParam int lejeAftaleID){
 
-        testSettings(session); // TODO: remove before deploying
+
 
         // ------------------- form -> session -------------------
         session.setAttribute("lejeAftaleID", lejeAftaleID);
