@@ -46,3 +46,5 @@
   ##### Hvis der oprettes to brugere med samme brugernavn, men med forskellige roller, vil databasen kun acceptere det første brugernavn. 
 
   ##### Forsøg på at logge ind med det andet brugernavn vil resultere i en redirect til login-siden, men det mislykkede login vil stadig blive registreret i databasen.
+  
+### Der kan forekomme andre uforudsete fejl!
