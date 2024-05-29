@@ -69,7 +69,6 @@ public class LejeAftaleService {
     // ------------------- Operations (CRUD) -------------------
 
     public LejeAftale save(LejeAftale nyLejeAftale) {
-
         if (nyLejeAftale.getID() != 0) {
             return update(nyLejeAftale);
         }
